@@ -1,0 +1,60 @@
+<h1>商品追加</h1>
+
+<%= form_for @product do |f| %>
+	<%= f.label :product_name, "商品名" %>
+	<%= f.text_field :product_name %>
+
+	<!-- 
+		最終的には予測変換で実装。	
+		とりあえずtext_feildにしておく。
+	-->
+	<%= f.label :artist, "アーティスト名" %>
+	<%= f.text_field :artist %>
+
+
+	<!--
+		画像を受け取る予定。
+		Refileのgemが入るまではテキストにしておく。
+	-->
+	<%= f.label :jacket_image, "ジャケット画像" %>
+	<%= f.file_field :jacket_image %>
+
+
+	<!-- 
+		最終的には予測変換で実装。	
+		とりあえずtext_feildにしておく。
+	-->
+	<%= f.label :label, "レーベル名" %>
+	<%= f.text_field :label %>
+
+	<!-- 
+		最終的にはプルダウンで実装。	
+		とりあえずtext_feildにしておく。
+	-->
+	<%= f.label :genre, "ジャンル名" %>
+	<%= f.text_field :genre %>
+
+	<%= f.label :price, "値段（税抜き）" %>
+	<%= f.text_field :price %>
+
+	<!-- 
+		本来は収録曲の表になるべきところ。	
+		実装の仕方がよくわからないので、値段と同じものを記述。
+	-->
+	<%= f.label :price, "値段（税抜き）" %>
+	<%= f.text_feild :price %> 
+
+	<%= f.label :stock, "在庫数" %>
+	<%= f.text_field %>
+
+	<%= f.label :description, "商品説明" %>
+	<%= f.text_area :description %>
+
+	<%= f.label :recommend, "店長のおすすめ" %>
+	<%= f.check_box :recommend %>
+
+	<%= f.submit "商品追加" %>
+
+<% end %>
+
+
