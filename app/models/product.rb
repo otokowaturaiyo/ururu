@@ -5,4 +5,6 @@ class Product < ApplicationRecord
 	has_many :disks, dependent: :destroy
 
 	validates :product_name, uniqueness: true
+
+	attachment :jacket_image
 end
