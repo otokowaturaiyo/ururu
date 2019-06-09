@@ -4,4 +4,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  validates :postal_code, length: { is: 6 }
+  validates :phone_number, length: { is: 11 }
+  validates :encrypted_password, length: { minimum: 6 }
 end

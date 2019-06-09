@@ -1,7 +1,6 @@
 class Admins::UsersController < ApplicationController
 	def index
-		@users = User.all
-		# @user = User.find(params[:id])
+		@users = User.all.page(params[:page]).reverse_order
 	end
 
 	def show
@@ -9,9 +8,14 @@ class Admins::UsersController < ApplicationController
 	end
 
 	def edit
+		@user = User.find(params[:id])
 	end
 
 	def update
+		@user = User.find(users_params)
+		@update.save
+		flash[:notice] = "更新完了！"
+		redirect_to edit_admins_user_path(@user.id)
 	end
 
 	private
