@@ -26,8 +26,9 @@ end
 	product_name  = Faker::Music.unique.album
 	description = Faker::Quote.famous_last_words
 	random = Random.new()
-	
-  	Product.create!(genre_id: random.rand(1..5),
+
+
+　Product.create!(genre_id: random.rand(1..5),
   					artist_id: random.rand(1..5),
   					label_id: random.rand(1..5),
   					product_name: product_name,
@@ -37,4 +38,29 @@ end
   					recommend: Faker::Boolean.boolean(0.1))
 end
 
+
+
+30.times do
+	Faker::Config.locale = :ja
+	kanji_firstname = Faker::Name.first_name
+	kanji_lastname = Faker::Name.last_name
+	kana_firstname = Faker::Name.first_name
+	kana_lastname = Faker::Name.last_name
+	user_name = Faker::Games::Pokemon.name
+	email = Faker::Internet.email
+	postal_address = Faker::Address.name
+	random = Random.new()
+
+	User.create!(kanji_firstname: kanji_firstname,
+				 kanji_lastname: kanji_lastname,
+				 kana_firstname: kana_firstname,
+				 kana_lastname: kana_lastname,
+				 user_name: user_name,
+				 email: email,
+				 phone_number: random.rand(10000000000..99999999999),
+				 postal_code: random.rand(1000000..9999999),
+				 postal_address: postal_address,
+				 password: random.rand(1000000..9999999)
+				 )
+end
 

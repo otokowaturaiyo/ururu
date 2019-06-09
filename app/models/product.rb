@@ -7,4 +7,12 @@ class Product < ApplicationRecord
 	validates :product_name, uniqueness: true
 
 	attachment :jacket_image
+	#検索で入力された情報をモデルに探してもらう
+	def self.search(search)
+      if search
+        Product.where(['content LIKE ?', "%#{search}%"])
+      else
+        Product.all
+      end
+    end
 end
