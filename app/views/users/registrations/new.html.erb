@@ -8,24 +8,22 @@
 
 
 
-
-
   <div class="field">
     <%= f.label :氏名（漢字） %><br />
-    <%= f.text_field :kanji_lastname, autofocus: true, autocomplete: "姓" %>
+    <%= f.text_field :kanji_lastname, autofocus: true, autocomplete: "" %>
   </div>
 
   <div class="field">
-    <%= f.text_field :kanji_firstname, autofocus: true, autocomplete: "名" %>
+    <%= f.text_field :kanji_firstname, autofocus: true, autocomplete: "" %>
   </div>
 
   <div class="field">
     <%= f.label :氏名（カナ） %><br />
-    <%= f.email_field :kana_lastname, autofocus: true, autocomplete: "セイ" %>
+    <%= f.text_field :kana_lastname, autofocus: true, autocomplete: "" %>
   </div>
 
   <div class="field">
-    <%= f.email_field :kana_firstname, autofocus: true, autocomplete: "メイ" %>
+    <%= f.text_field :kana_firstname, autofocus: true, autocomplete: "" %>
   </div>
 
   <div class="field">
@@ -36,7 +34,7 @@
 
   <div class="field">
     <%= f.label :メールアドレス %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
   <div class="field">
@@ -46,12 +44,12 @@
 
   <div class="field">
     <%= f.label :郵便番号　※ハイフンなしで入力してください %><br />
-    <input type="text" name="zip11" size="10" maxlength="8" onKeyUp="AjaxZip3.zip2addr(this,'','addr11','addr11');">
+    <%= f.text_field :postal_code, autofocus: true, autocomplete: "" %>
   </div>
 
   <div class="field">
     <%= f.label :住所 %><br />
-    <input type="text" name="addr11" size="60">
+    <%= f.text_field :postal_address, autofocus: true, autocomplete: "" %>
   </div>
 
   <div class="field">
