@@ -4,6 +4,7 @@
 			<h2>管理ページ</h2>
 				<nav>
 					<li><%= link_to 'ユーザー一覧', admins_users_path %></li>
+					<li><%= link_to '仮ログアウト', destroy_admin_session_path, method: :delete %></li>
 				</nav>
 		</div>
 	</div>
