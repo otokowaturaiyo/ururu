@@ -9,7 +9,24 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+
   <body>
+    <header>
+      <% if %>
+        <h1 class="header-title">Ururu</h1>
+        <#ロゴ>
+        <#nav-bar>
+        <#検索窓>
+      <% else %>
+        <h1 class="header-title">Ururu</h1>
+        <#ロゴ>
+        <#nav-bar>
+        <#検索窓>
+      <% end %>
+    </header>
     <%= yield %>
+    <footer>
+      <p class="footer-text1">全国送料一律¥500</p>
+      <p class="footer-text2">© Ururu.inc</p>
   </body>
 </html>
