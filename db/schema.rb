@@ -86,15 +86,6 @@ ActiveRecord::Schema.define(version: 2019_06_08_115629) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "kanji_lastname", null: false
-    t.string "kanji_firstname", null: false
-    t.string "kana_lastname", null: false
-    t.string "kana_firstname", null: false
-    t.string "user_name", null: false
-    t.string "postal_code", null: false
-    t.string "postal_address", null: false
-    t.string "phone_number", null: false
-    t.text "profile_image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
