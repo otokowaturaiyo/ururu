@@ -1,80 +1,58 @@
 <div class="container-fluid">
-	<div class="row sampleRow">
-		<!-- グリッドに対してモバイルでは横幅いっぱい、デスクトップでは2/3を占める -->
-		<div class="col-xs-12 col-md-8">
-			<div class="background-container">
-				<%= image_tag 'ururu-pic.jpg', :size => '150x100' %>
-			</div>
-			<div class="new-arrivals-container">
-				<!-- 新着画像がグリッドに対しモバイルでは横に2個、デスクトップでは横に3個表示される -->
-				<div class="row">
-					<div class="col-xs-6 col-md-4">
-						<%= link_to @product, class: 'new-arrival-content' %>
-							<% if @product.jacket_images.present? %>
-								<% @product.jacket_images.each do |image| %>
-									<%= attachment_image_tag image, :image, :fill, 50, 50 %>
-								<% end %>
-							<% else %>
-								<%= image_tag 'no_image.jpg', :size => '50x50' %>
-							<% end %>
-							<div class="thumbnail-caption">
-								<% @products.each do |product| %>
-									<%= product.name %>
-									<% @artists.each do |artist| %>
-										<%= artist.name %>
-									<% end %>
-									<%= product.price %>
-									<%= product.stock %>
-									<%= paginate @products %>
-								<% end %>
-							</div>
-						<% end %>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- グリッドに対してモバイルでは横幅いっぱい、デスクトップでは1/3を占める -->
-		<div class="col-xs-12 col-md-4">
-			<div class="sidebar-jenre">
-				<div class="btn-group-vertical" role="group">
-					<button type="button" class="btn btn-default">J-POP</button>
-					<button type="button" class="btn btn-default">洋楽</button>
-					<button type="button" class="btn btn-default">K-POP</button>
-					<button type="button" class="btn btn-default">ロック/オルタナティブ</button>
-					<button type="button" class="btn btn-default">パンク/ハードコア</button>
-					<button type="button" class="btn btn-default">ビジュアル</button>
-					<button type="button" class="btn btn-default">R&B/ソウル</button>
-					<button type="button" class="btn btn-default">ヒップホップ</button>
-					<button type="button" class="btn btn-default">レゲエ/スカ</button>
-				</div>
-			</div>
-			<div class="sidebar-recommend">
-				<!-- おすすめ画像がグリッドに対しモバイルでは横に2個、デスクトップでは横に一個表示される -->
-				<div class="row">
-					<div class="col-xs-6 col-md-4">
-						<%= link_to @product, class: "recommend-content" %>
-							<% if @product.jacket_images.present? %>
-								<% @product.jacket_images.each do |image| %>
-									<%= attachment_image_tag image, :image, :fill, 50, 50 %>
-								<% end %>
-							<% else %>
-									<%= image_tag 'no_image.jpg', :size => '50x50' %>
-							<% end %>
-							<div class="thumbnail-caption">
-								<% @products.each do |product| %>
-									<%= product.name %>
-									<% @artists.each do |artist| %>
-										<%= artist.name %>
-									<% end %>
-									<%= product.price %>
-									<%= product.stock %>
-									<%= paginate @products %>
-								<% end %>
-							</div>
-						<% end %>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="row sampleRow">
+    <!-- グリッドに対してモバイルでは横幅いっぱい、デスクトップでは2/3を占める -->
+    <div class="col-xs-12 col-md-8">
+      <div class="background-container">
+        <%= image_tag 'ururu-pic.jpg', :size => '150x100' %>
+      </div>
+      <div class="new-arrivals-container">
+        <!-- 新着画像がグリッドに対しモバイルでは横に2個、デスクトップでは横に3個表示される -->
+        <div class="row">
+          <div class="col-xs-6 col-md-4">
+            <div class="thumbnail-caption">
+              <% @products.each do |product| %>
+                <%= link_to products_path(product), class: 'new-arrival-content' do %>
+                  <% if product.jacket_image_id.present? %>
+                    <% product.jacket_images.each do |image| %>
+                      <%= attachment_image_tag image, :image, :fill, 50, 50 %>
+                    <% end %>
+                  <% else %>
+                    <%= image_tag 'no_image.jpg', :size => '50x50' %>
+                  <% end %>
+                  <%= product.product_name %>
+                  <%= product.artist.name %>
+                  <% end %>
+                <% end %>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- グリッドに対してモバイルでは横幅いっぱい、デスクトップでは1/3を占める -->
+    <div class="col-xs-12 col-md-4">
+      <div class="sidebar-jenre">
+        <div class="btn-group-vertical" role="group">
+          <button type="button" class="btn btn-default">J-POP</button>
+          <button type="button" class="btn btn-default">洋楽</button>
+          <button type="button" class="btn btn-default">K-POP</button>
+          <button type="button" class="btn btn-default">ロック/オルタナティブ</button>
+          <button type="button" class="btn btn-default">パンク/ハードコア</button>
+          <button type="button" class="btn btn-default">ビジュアル</button>
+          <button type="button" class="btn btn-default">R&B/ソウル</button>
+          <button type="button" class="btn btn-default">ヒップホップ</button>
+          <button type="button" class="btn btn-default">レゲエ/スカ</button>
+        </div>
+      </div>
+      <div class="sidebar-recommend">
+        <!-- おすすめ画像がグリッドに対しモバイルでは横に2個、デスクトップでは横に一個表示される -->
+        <div class="row">
+          <div class="col-xs-6 col-md-4">
+
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
