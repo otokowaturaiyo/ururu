@@ -8,7 +8,9 @@ class Admins::ProductsController < ApplicationController
   end
 
   def index
+
     @products = Product.page(params[:page])
+
   end
 
   def edit
