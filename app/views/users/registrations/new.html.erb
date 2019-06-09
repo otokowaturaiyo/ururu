@@ -1,15 +1,61 @@
-<h2>Sign up</h2>
+<h1>新規登録</h1>
+
+<p>すでに会員登録お済の方</p>
+<%= render "users/shared/links4" %>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
+
+
+
+
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.label :氏名（漢字） %><br />
+    <%= f.text_field :kanji_lastname, autofocus: true, autocomplete: "姓" %>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
+    <%= f.text_field :kanji_firstname, autofocus: true, autocomplete: "名" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :氏名（カナ） %><br />
+    <%= f.email_field :kana_lastname, autofocus: true, autocomplete: "セイ" %>
+  </div>
+
+  <div class="field">
+    <%= f.email_field :kana_firstname, autofocus: true, autocomplete: "メイ" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :ユーザー名 %><br />
+    <%= f.text_field :user_name, autofocus: true, autocomplete: "このサイトでの名前を入力してください" %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :メールアドレス %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :電話番号　※ハイフンなしで入力してください %><br />
+    <%= f.text_field :phone_number, autofocus: true, autocomplete: "" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :郵便番号　※ハイフンなしで入力してください %><br />
+    <input type="text" name="zip11" size="10" maxlength="8" onKeyUp="AjaxZip3.zip2addr(this,'','addr11','addr11');">
+  </div>
+
+  <div class="field">
+    <%= f.label :住所 %><br />
+    <input type="text" name="addr11" size="60">
+  </div>
+
+  <div class="field">
+    <%= f.label :パスワード %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
@@ -17,13 +63,14 @@
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
+    <%= f.label :パスワード確認 %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "登録" %>
   </div>
 <% end %>
 
-<%= render "users/shared/links" %>
+<p>すでに会員登録お済の方</p>
+<%= render "users/shared/links4" %>
