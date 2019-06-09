@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+
+  namespace :admins do
+    resources :products, only:[:new, :create, :index, :show, :edit, :update]
+  end
+
+  namespace :admins do
+    resources :users, only: [:index, :show, :edit,  :update]
+    get '/top' => 'home#top'
+  end
+
   devise_for :admins, controllers: {
   	sessions: 'admins/sessions',
   	passwords: 'admins/passwords',
@@ -9,5 +19,6 @@ Rails.application.routes.draw do
   	passwords: 'users/passwords',
   	registrations: 'users/registrations'
   }
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+
 end
