@@ -1,0 +1,69 @@
+<div class="container">
+	<div class="col-md-offset-2 col-md-8">
+		<br>
+		<h1>商品詳細</h1>	
+		<br>
+		
+		<!-- 商品の概要説明 -->
+		<div class="row">
+			<div class="overview clearfix">
+				<div class="product_image pull-left col-md-6">
+					<% if @product.jacket_image_id.present? %>
+						<%= attachment_image_tag product, :jacket_image, :fill, 300, 300, class:"border" %>
+					<% else %>
+						<%= image_tag 'no_image.jpg', size: '300x300', class:"border" %>
+					<% end %>
+				</div>
+				<div class="product_details pull-right col-md-6">
+					<p>アーティスト：<%= @artist.name %></p>
+					<p>レーベル：<%= @label.label %></p>
+					<p>ジャンル：<%= @genre.genre %></p>
+					<div class="panel panel-success">
+						<div class="panel-heading">
+							商品説明
+						</div>
+						<div class="panel-body">
+							<%= @product.description %>
+							あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 商品ステータス・ -->
+		<div class="row">
+			<div class="product_status clearfix">
+				<p class="stock col-md-2 pull-left" style="margin-top: 10px;">在庫：<%= @product.stock %></p>
+				<p class="price col-md-4 pull-left" style="margin-top: 10px;">価格：<%= @product.price*1.08.round %>（税込）</p>
+				<p class="btn btn-info  col-md-3 pull-left">
+					<i class="glyphicon glyphicon-thumbs-up"></i> 
+					25いいね
+				</p>
+			</div>
+		</div>
+
+		<!-- 編集ボタン -->
+
+		<div class="row" style="margin-top: 20px;">
+			<div>
+				<%= link_to "商品情報の編集",
+							edit_admins_product_path(@product),
+							class:"btn btn-primary col-md-offset-2 col-md-8"
+				%>
+			</div>
+		</div>
+
+		
+
+		<!-- レビュー -->
+		<div>
+			
+		</div>
+
+		<!-- 商品の概要 -->
+
+
+	</div>
+</div>
