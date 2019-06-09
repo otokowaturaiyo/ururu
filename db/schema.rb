@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_08_093246) do
+ActiveRecord::Schema.define(version: 2019_06_08_115629) do
+
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -32,6 +33,18 @@ ActiveRecord::Schema.define(version: 2019_06_08_093246) do
 
   create_table "disks", force: :cascade do |t|
     t.integer "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "genres", force: :cascade do |t|
+    t.string "genre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "labels", force: :cascade do |t|
+    t.string "label"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
