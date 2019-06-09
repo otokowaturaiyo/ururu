@@ -15,3 +15,12 @@
  */
  @import "bootstrap-sprockets";
  @import "bootstrap";
+
+ footer{
+ position: absolute;
+ bottom: 0;
+ width: 100%;
+ }
+.footer-text2{
+	text-align: center;
+}
