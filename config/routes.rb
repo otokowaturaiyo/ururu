@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
 
-  namespace :admins do
-    resources :products, only:[:new, :create, :index, :show, :edit, :update]
-  end
 
+  resources :products, only:[:index, :show] do
+  end
 
   namespace :admins do
     resources :users, only: [:index, :show, :edit,  :update]
+    resources :products, only:[:new, :create, :index, :show, :edit, :update]
     get '/top' => 'home#top'
   end
+
 
 
   devise_for :admins, controllers: {

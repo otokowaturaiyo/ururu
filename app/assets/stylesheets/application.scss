@@ -17,6 +17,16 @@
  @import "bootstrap";
 
 
+ footer{
+ position: absolute;
+ bottom: 0;
+ width: 100%;
+ }
+.footer-text2{
+	text-align: center;
+}
+
+
 .panel-body{
 	height:150px;
 	width:350px;
