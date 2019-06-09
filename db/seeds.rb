@@ -28,7 +28,7 @@ end
 	random = Random.new()
 
 
-　Product.create!(genre_id: random.rand(1..5),
+	Product.create!(genre_id: random.rand(1..5),
   					artist_id: random.rand(1..5),
   					label_id: random.rand(1..5),
   					product_name: product_name,
@@ -48,7 +48,7 @@ end
 	kana_lastname = Faker::Name.last_name
 	user_name = Faker::Games::Pokemon.name
 	email = Faker::Internet.email
-	postal_address = Faker::Address.name
+	postal_address = Faker::Address.full_address
 	random = Random.new()
 
 	User.create!(kanji_firstname: kanji_firstname,
