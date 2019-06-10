@@ -1,9 +1,4 @@
 <div class="container-fluid">
-  <% @products.each do |product| %>
-    <%= link_to product.product_name, product %>
-    <%= product.product_name %>
-    <%= product.artist %>
-  <% end %>
   <div class="row LeftRow">
     <!-- 左要素がグリッドに対してモバイルでは横幅いっぱい、デスクトップでは2/3を占める -->
     <div class="col-xs-12 col-md-8">
@@ -57,7 +52,7 @@
             <div class="thumbnail-caption">
               <h3>店長のおすすめ</h3>
                 <div class="row">
-                  <% @products.each do |product| %>
+                  <% @recommend.each do |product| %>
                     <div class ="col-xs-6 col-md-6">
                       <%= link_to products_path(product), class: 'new-arrival-content' do %>
                         <% if product.jacket_image_id.present? %>

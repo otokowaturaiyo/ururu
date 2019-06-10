@@ -10,7 +10,7 @@ class Product < ApplicationRecord
 	#検索で入力された情報をモデルに探してもらう
 	def self.search(search)
       if search
-        Product.where(['content LIKE ?', "%#{search}%"])
+        Product.where(['product_name LIKE ?', "%#{search}%"])
       else
         Product.all
       end

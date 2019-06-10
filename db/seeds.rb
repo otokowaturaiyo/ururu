@@ -27,7 +27,10 @@ end
 	description = Faker::Quote.famous_last_words
 	random = Random.new()
 
-Product.create!(genre_id: random.rand(1..5),
+
+
+	Product.create!(genre_id: random.rand(1..5),
+
   					artist_id: random.rand(1..5),
   					label_id: random.rand(1..5),
   					product_name: product_name,
