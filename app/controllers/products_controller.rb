@@ -12,6 +12,7 @@ class ProductsController < ApplicationController
 	@artist = Artist.find(@product.artist_id)
 	@genre = Genre.find(@product.genre_id)
 	@label = Label.find(@product.label_id)
+	@disks = @product.disks
   end
 
   def search_list

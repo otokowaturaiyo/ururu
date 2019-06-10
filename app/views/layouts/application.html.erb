@@ -29,9 +29,9 @@
           <div class="collapse navbar-collapse" id="navbar-ururu">
            <% if user_signed_in? %>
             <ul class="nav navbar-nav">
-              <li><a href="#">商品一覧</a></li>
+              <li><%= link_to "商品一覧", products_path %></li>
               <li><a href="#">カート確認</a></li>
-              <li><a href="#">ログアウト</a></li>
+              <li><%= link_to "ログアウト",products_path, method: :post%></li>
             </ul>
             <p class="search-window">
               <%= form_tag(search_list_path, enforce_utf8: false ,:method => 'get') do %>
@@ -42,16 +42,16 @@
             <p class="navbar-text navbar-right">ようこそ<%= @user.user.name %>さん</p>
            <% else %>
             <ul class="nav navbar-nav">
-               <li><a href="#">商品一覧</a></li>
-               <li><a href="#">ログイン</a></li>
-             </ul>
+               <li><%= link_to "商品一覧", products_path %></li>
+               <li><%= link_to "ログイン", new_user_session_path %></li>
+            </ul>
              <p class="search-window">
                <%= form_tag(search_list_path, enforce_utf8: false ,:method => 'get') do %>
                  <%= text_field_tag :search %>
                  <%= submit_tag '検索', :name => nil %>
                <% end %>
              </p>
-             <p class="navbar-text navbar-right">ようこそゲストさん</p>
+             <div class="navbar-text navbar-right">ようこそゲストさん</div>
            <% end %>
           </div>
         </div>
@@ -66,3 +66,5 @@
     </footer>
   </body>
 </html>
+
+
