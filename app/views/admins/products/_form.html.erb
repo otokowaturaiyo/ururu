@@ -1,5 +1,6 @@
 <div class="form-horizontal">
-	<%= form_for @product, :url => {:action => :index} do |f| %>
+	<%= form_for product, url: yield(:url) do |f| %>
+	<%= render 'shared/error_messages', object: f.object %>
 	<div class="form-group">
 		<%= f.label :product_name, "商品名", class:"col-sm-3 control-label" %>
 		<div class="col-sm-9">
@@ -9,16 +10,12 @@
 
 	<!-- 最終的には予測変換で実装。-->
 	<div class="form-group">
-		<%= f.label :artist, "アーティスト名", class:"col-sm-3 control-label" %>
+		<%= f.label :artist_id, "アーティスト名", class:"col-sm-3 control-label" %>
 		<div class="col-sm-9">
-			<%= f.text_field :artist, class:"form-control" %>
+			<%= f.text_field :artist_id, class:"form-control" %>
 		</div>
 	</div>
 
-	<!--
-		画像を受け取る予定。
-		Refileのgemが入るまではテキストにしておく。
-	-->
 	<div class="form-group">
 		<%= f.label :jacket_image, "ジャケット画像" , class:"col-sm-3 control-label" %>
 		<div class="col-sm-9">
@@ -28,20 +25,16 @@
 
 	<!-- 最終的には予測変換で実装。-->
 	<div class="form-group">
-		<%= f.label :label, "レーベル名", class:"col-sm-3 control-label" %>
+		<%= f.label :label_id, "レーベル名", class:"col-sm-3 control-label" %>
 		<div class="col-sm-9">
-			<%= f.text_field :label, class:"form-control" %>
+			<%= f.text_field :label_id, class:"form-control" %>
 		</div>
 	</div>
 
 	<div class="form-group">
-		<%= f.label :genre, "ジャンル名", class:"col-sm-3 control-label" %>
+		<%= f.label :genre_id, "ジャンル名", class:"col-sm-3 control-label" %>
 		<div class="col-sm-9">
-			<%= f.select :genre_id, 
-			[["J-POP", 1], ["洋楽", 2], ["K-POP", 3], 
-			["ロック/オルタナティブ", 4], ["パンク/ハードコア", 5], ["ビジュアル", 6], 
-			["R&B/ソウル", 7], ["ヒップホップ", 8], ["レゲエ/スカ", 9]], 
-			class:"form-control" %>
+			<%= f.select :genre_id, @genres.map{|t| [t.genre, t.id]} ,class:"form-control" %>
 		</div>
 	</div>
 
@@ -56,12 +49,15 @@
 		本来は収録曲の表になるべきところ。	
 		実装の仕方がよくわからないので、とりあえずテキスト入力としておきます。
 	-->
-	<div class="form-group">
+
+	<!-- 
+	<div class="form-group"> 
 		<%= f.label :price, "収録曲", class:"col-sm-3 control-label" %>
 		<div class="col-sm-9">
 			<%= f.text_field :price, class:"form-control" %>
 		</div>
 	</div>
+	-->
 
 	<div class="form-group">
 		<%= f.label :stock, "在庫数", class:"col-sm-3 control-label" %>
@@ -78,9 +74,9 @@
 	</div>
 
 	<div class="form-group">
-		<%= f.label :genre, "ジャンル名", class:"col-sm-3 control-label" %>
+		<%= f.label :status, "商品の状態 ", class:"col-sm-3 control-label" %>
 		<div class="col-sm-9">
-			<%= f.select :genre_id, 
+			<%= f.select :status, 
 			[["予約受付中！", 1], ["好評販売中!", 2], ["取り扱い停止中", 3]],
 			class:"form-control" %>
 		</div>
@@ -89,7 +85,7 @@
 	<div class="form-group">
 		<%= f.label :recommend, "店長のおすすめ", class:"col-sm-3 control-label" %>
 		<div class="col-sm-9">
-			<%= f.check_box :recommend, class:"form-check-input" %>
+			<%= f.check_box :recommend, :as => :boolean, class:"form-check-input" %>
 		</div>
 	</div>
 	

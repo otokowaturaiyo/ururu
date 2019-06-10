@@ -50,9 +50,12 @@
 		<div class="row">
 			<div class="product_status clearfix">
 				<p class="stock col-md-2 pull-left" style="margin-top: 10px;">在庫：<%= @product.stock %></p>
-				<p class="price col-md-4 pull-left" style="margin-top: 10px;">価格：<%= @product.price*1.08.round %>（税込）</p>
+				<p class="price col-md-2 pull-left" style="margin-top: 10px;">価格：<%= @product.price*1.08.round %>（税込）</p>
+				<p class="count col-md-2 pull-left">
+					<%= select_tag :個数, options_for_select((1..@product.stock).to_a) %>
+				</p>
 				<p class="btn btn-info  col-md-3 pull-left">
-					<i class="glyphicon glyphicon-thumbs-up"></i> 
+					<i class="glyphicon glyphicon-thumbs-up"></i>
 					25いいね
 				</p>
 			</div>
@@ -62,10 +65,9 @@
 
 		<div class="row" style="margin-top: 20px; margin-bottom: 20px;">
 			<div>
-				<%= link_to "商品情報の編集",
+				<%= link_to "カートに入れる",
 							edit_admins_product_path(@product),
-							class:"btn btn-primary col-md-offset-2 col-md-8"
-				%>
+							class:"btn btn-primary col-md-offset-2 col-md-8 glyphicon glyphicon-shopping-cart"%>
 			</div>
 		</div>
 

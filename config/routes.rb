@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   get 'search_list' => 'products#search_list'
 
+
+
   namespace :admins do
     resources :users, only: [:index, :show, :edit,  :update]
     resources :products, only:[:new, :create, :index, :show, :edit, :update]
@@ -24,5 +26,8 @@ Rails.application.routes.draw do
   	passwords: 'users/passwords',
   	registrations: 'users/registrations'
   }
+
+  resources :users, only:[:show] do
+  end
 
 end

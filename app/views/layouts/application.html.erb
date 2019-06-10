@@ -7,7 +7,6 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
   </head>
 
 
@@ -25,6 +24,7 @@
             <a class="navbar-brand" href="#">Ururu</a>
           </div>
           <div class="collapse navbar-collapse" id="navbar-ururu">
+           <% if user_signed_in? %>
             <ul class="nav navbar-nav">
               <li><a href="#">商品一覧</a></li>
               <li><a href="#">カート確認</a></li>
@@ -36,7 +36,20 @@
                 <%= submit_tag '検索', :name => nil %>
               <% end %>
             </p>
-            <p class="navbar-text navbar-right">ようこそ <a href="#" class="navbar-link">ゲスト</a> さん。</p>
+            <p class="navbar-text navbar-right">ようこそ<%= @user.user.name %>さん</p>
+           <% else %>
+            <ul class="nav navbar-nav">
+               <li><a href="#">商品一覧</a></li>
+               <li><a href="#">ログイン</a></li>
+             </ul>
+             <p class="search-window">
+               <%= form_tag(search_list_path, enforce_utf8: false ,:method => 'get') do %>
+                 <%= text_field_tag :search %>
+                 <%= submit_tag '検索', :name => nil %>
+               <% end %>
+             </p>
+             <p class="navbar-text navbar-right">ようこそゲストさん</p>
+           <% end %>
           </div>
         </div>
       </nav>

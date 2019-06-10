@@ -27,6 +27,7 @@ end
 	description = Faker::Quote.famous_last_words
 	random = Random.new()
 
+
 	Product.create!(genre_id: random.rand(1..5),
   					artist_id: random.rand(1..5),
   					label_id: random.rand(1..5),
@@ -34,7 +35,7 @@ end
   					price: random.rand(1000..50000),
   					description: description,
   					stock: random.rand(0..500),
-  					recommend: false)
+  					recommend: Faker::Boolean.boolean(0.1))
 end
 
 
@@ -47,7 +48,7 @@ end
 	kana_lastname = Faker::Name.last_name
 	user_name = Faker::Games::Pokemon.name
 	email = Faker::Internet.email
-	postal_address = Faker::Address.name
+	postal_address = Faker::Address.full_address
 	random = Random.new()
 
 	User.create!(kanji_firstname: kanji_firstname,
