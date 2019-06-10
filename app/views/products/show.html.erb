@@ -1,0 +1,136 @@
+<div class="container">
+	<div class="col-md-offset-2 col-md-8">
+		<br>
+		<h1>商品詳細</h1>	
+		<br>
+		
+		<!-- 商品の概要説明 -->
+		<div class="row">
+			<div class="overview clearfix">
+				<div class="product_image pull-left col-md-6">
+					<% if @product.jacket_image_id.present? %>
+						<%= attachment_image_tag product, :jacket_image, :fill, 350, 350, class:"border" %>
+					<% else %>
+						<%= image_tag 'no_image.jpg', size: '350x350', class:"border" %>
+					<% end %>
+				</div>
+				<div class="product_details pull-right col-md-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							商品詳細
+						</div>
+						<table class="table">
+							<thead></thead>
+							<tbody>
+								<tr>
+									<td>アーティスト：<%= @artist.name %></td>
+								</tr>
+								<tr>
+									<td>レーベル：<%= @label.label %></td>
+								</tr>
+								<tr>
+									<td>ジャンル：<%= @genre.genre %></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="panel panel-success">
+						<div class="panel-heading">
+							商品説明
+						</div>
+						<div class="panel-body">
+							<%= @product.description %>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 商品ステータス・ -->
+		<div class="row">
+			<div class="product_status clearfix">
+				<p class="stock col-md-2 pull-left" style="margin-top: 10px;">在庫：<%= @product.stock %></p>
+				<p class="price col-md-2 pull-left" style="margin-top: 10px;">価格：<%= @product.price*1.08.round %>（税込）</p>
+				<p class="count col-md-2 pull-left">
+					<%= select_tag :個数, options_for_select((1..@product.stock).to_a) %>
+				</p>
+				<p class="btn btn-info  col-md-3 pull-left">
+					<i class="glyphicon glyphicon-thumbs-up"></i>
+					25いいね
+				</p>
+			</div>
+		</div>
+
+		<!-- 編集ボタン -->
+
+		<div class="row" style="margin-top: 20px; margin-bottom: 20px;">
+			<div>
+				<%= link_to "カートに入れる",
+							edit_admins_product_path(@product),
+							class:"btn btn-primary col-md-offset-2 col-md-8 glyphicon glyphicon-shopping-cart"%>
+			</div>
+		</div>
+
+		
+
+		<!-- レビュー -->
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				購入者のレビュー
+			</div>
+			<table class="table">
+				<tbody>
+					<tr>
+						<th><%= image_tag 'no_image.jpg', size: '40x40', class:"img-circle" %></th>
+						<td>星の数</td>
+						<td>ユーザー名</td>
+						<td>レビュー内容</td>
+						<td><%= link_to "編集","#",class:"btn btn-primary" %></td>
+					</tr>
+					<tr>
+						<th><%= image_tag 'no_image.jpg', size: '40x40', class:"img-circle" %></th>
+						<td>星の数</td>
+						<td>ユーザー名</td>
+						<td>レビュー内容</td>
+						<td><%= link_to "編集","#",class:"btn btn-primary" %></td>
+					</tr>
+					<tr>
+						<th><%= image_tag 'no_image.jpg', size: '40x40', class:"img-circle" %></th>
+						<td>星の数</td>
+						<td>ユーザー名</td>
+						<td>レビュー内容</td>
+						<td><%= link_to "編集","#",class:"btn btn-primary" %></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<!-- 収録曲 -->
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				収録曲
+			</div>
+			<table class="table">
+				<tbody>
+					<tr>
+						<th>1</th>
+						<td>Bohemian Rapsody</td>
+						<td>3:54</td>
+					</tr>
+					<tr>
+						<th>2</th>
+						<td>Don't stop me now</td>
+						<td>2:55</td>
+					</tr>
+					<tr>
+						<th>3</th>
+						<td>We will rock you</td>
+						<td>1:22</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+
+	</div>
+</div>
