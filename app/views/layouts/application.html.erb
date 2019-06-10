@@ -14,7 +14,7 @@
   <body>
     <header>
       <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
+        <div class="nav-container-fluid">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed"data-toggle="collapse"data-target="#navbar-ururu">
               <span class="sr-only">Toggle navigation</span>
@@ -30,10 +30,10 @@
               <li><a href="#">カート確認</a></li>
               <li><a href="#">ログアウト</a></li>
             </ul>
-            <p class="search_window">
-              <%= form_tag(products_path,:method => 'get') do %>
+            <p class="search-window">
+              <%= form_tag(search_list_path, enforce_utf8: false ,:method => 'get') do %>
                 <%= text_field_tag :search %>
-                <%= submit_tag 'Search', :name => nil %>
+                <%= submit_tag '検索', :name => nil %>
               <% end %>
             </p>
             <p class="navbar-text navbar-right">ようこそ <a href="#" class="navbar-link">ゲスト</a> さん。</p>
