@@ -8,9 +8,8 @@
 				<%= f.search_field :user_name_cont %>
 				<%= f.submit %>
 			<% end %>
-			<!-- ここまでransackです -->
+			<!-- ransack end -->
 			<table class="table table-hover">
-				<!-- テーブル全体を押してリンク -->
 				<tbody>
 					<% @users.each do |user| %>
 					 <tr data-href = <%= admins_user_path(user) %>>
@@ -22,23 +21,26 @@
 				 	<% end %>
 				</tbody>
 			</table>
-			<!-- kaminariのエラー起きるから見直す -->
 		</div>
 		<div class="col-lg-1"></div>
 	</div>
 </div>
-<!--
-<style>
-	<script>
-		jQuery(function ($)){
-			$('tbody tr[data-href]').addClass('clickable').click(function () {
-				window.location = $(this).attr('data-href');
-			}).find('a').hover(function () {
-				$(this).parents('tr').click(function () {
-					window.location = $(this).attr('data-href')
-			}
-		}
-	</style>
-</style> -->
 
+<style>
+
+</style>
+<script>
+  jQuery(function ($) {
+    $('tbody tr[data-href]').addClass('clickable').click(function () {
+      window.location = $(this).attr('data-href');
+    }).find('a').hover(function () {
+      $(this).parents('tr').unbind('click');
+    }, function () {
+      $(this).parents('tr').click(function () {
+        window.location = $(this).attr('data-href');
+      });
+    });
+  });
+</script>
+<%= paginate @users %>
 

@@ -1,10 +1,10 @@
 class Admins::UsersController < ApplicationController
-
+	before_action :authenticate_admin!
 	def index
-		@users = User.all
+		@users = User.page(params[:page]).reverse_order
 		@q = User.ransack(params[:q])
 		if params[:q]
-			@users = @q.result(distinct: true)
+			@users = @q.result(distinct: true).page(params[:page]).reverse_order
 		end
 	end
 	def search
@@ -31,7 +31,12 @@ class Admins::UsersController < ApplicationController
 	end
 	end
 
-	private
+	protected
+	# def admin_user
+ #      redirect_to(root_url) unless current_user.admin?
+ #    end
+
+    private
 	def users_params
 		params.require(:user).permit(:user_id, :user_name, :email, :profile_image)
 	end

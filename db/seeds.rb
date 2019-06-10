@@ -6,6 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# admin = Admin.new(:email => 'hogehoge@hoge.com', :password => 'hugahuga')
+# admin.save!
+
+
+
+
 5.times do
 	name = Faker::Music::RockBand.name
 	Artist.create!(name: name)
