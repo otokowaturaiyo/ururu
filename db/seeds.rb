@@ -29,7 +29,7 @@ end
 
 
 
-	Product.create!(genre_id: random.rand(1..5),
+Product.create!(genre_id: random.rand(1..5),
 
   					artist_id: random.rand(1..5),
   					label_id: random.rand(1..5),
