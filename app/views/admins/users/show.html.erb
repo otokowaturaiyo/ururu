@@ -1,7 +1,8 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-3">
-			<%= attachment_image_tag @user, :profile_image_url, :fill, 200, 200, fallback: "no_image.jpg", size: "200x200" %>
+			<!-- アイコンが丸くならねぇ！ -->
+			<%= attachment_image_tag @user, :profile_image_url, :fill, 200, 200, format: "jpg", class: "img-circle pull-left profile-thumb", fallback: "no_image.jpg", size: "200x200" %>
 		</div>
 		<div class="col-lg-1"></div>
 		<div class="col-lg-7">
