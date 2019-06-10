@@ -8,10 +8,17 @@
 				<tbody>
 					<% @users.each do |user| %>
 					<tr>
+						<%= link_to admins_user_path(user) do %>
+						<div>
 						<td><%= attachment_image_tag user, :profile_image_url, :fill, 60, 60, fallback: "no_image.jpg", size: "60x60" %></td>
 						<td><%= user.id %></td>
 						<td><%= user.user_name %></td>
-						<td><%= user.email %></td>
+
+							<td><%= user.email %></td>
+						</div>
+
+						<% end %>
+
 					</tr>
 					<% end %>
 				</tbody>

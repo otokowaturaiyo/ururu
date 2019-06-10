@@ -12,10 +12,10 @@ class Admins::UsersController < ApplicationController
 	end
 
 	def update
-		@user = User.find(users_params)
-		@update.save
+		@user = User.find(params[:id])
+		@user.update(users_params)
 		flash[:notice] = "更新完了！"
-		redirect_to edit_admins_user_path(@user.id)
+		redirect_to admins_user_path(@user.id)
 	end
 
 	private
