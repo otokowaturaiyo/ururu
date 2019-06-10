@@ -6,6 +6,8 @@
 				<nav>
 					<li><%= link_to 'ユーザー一覧', admins_users_path %></li>
 					<li><%= link_to '商品一覧', products_path %></li>
+					<li><%= link_to '仮商品の追加', products_path %></li>
+					<li><%= link_to, '仮購入履歴', products_path  %></li>
 					<li><%= link_to '仮ログアウト', destroy_admin_session_path, method: :delete %></li>
 			</div>
 			<div class="col-lg-3"></div>

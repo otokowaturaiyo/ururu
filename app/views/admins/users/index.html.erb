@@ -2,30 +2,42 @@
 	<div class="row">
 		<div class="col-lg-1"></div>
 		<div class="col-lg-10">
-			<!-- サーチメソッドをここに入れたい -->
+			<!-- ransackでエンドユーザーを検索できます -->
+			<%= search_form_for @q,url: admins_users_path do |f| %>
+				<%= f.label :user_nam_cont %>
+				<%= f.search_field :user_name_cont %>
+				<%= f.submit %>
+			<% end %>
+			<!-- ここまでransackです -->
 			<table class="table table-hover">
-				<!-- テーブル全体を押してリンクに飛ばしたい -->
+				<!-- テーブル全体を押してリンク -->
 				<tbody>
 					<% @users.each do |user| %>
-					<tr>
-						<%= link_to admins_user_path(user) do %>
-						<div>
-						<td><%= attachment_image_tag user, :profile_image_url, :fill, 60, 60, fallback: "no_image.jpg", size: "60x60" %></td>
-						<td><%= user.id %></td>
-						<td><%= user.user_name %></td>
-
+					<!-- <tr data-href = <%= admins_user_path(user) %>> -->
+						<td><%= attachment_image_tag user, :profile_image, profile_image, :fill, 60, 60, fallback: "no_image.jpg", size: "60x60" %></td>
+							<td><%= user.id %></td>
+							<td><%= user.user_name %></td>
 							<td><%= user.email %></td>
-						</div>
-
-						<% end %>
-
 					</tr>
-					<% end %>
+				 	<% end %>
 				</tbody>
 			</table>
-			<%= paginate @users %>
+			<%#= paginate @users %>
 		</div>
 		<div class="col-lg-1"></div>
 	</div>
 </div>
+<!-- 
+<style>
+	<script>
+		jQuery(function ($)){
+			$('tbody tr[data-href]').addClass('clickable').click(function () {
+				window.location = $(this).attr('data-href');
+			}).find('a').hover(function () {
+				$(this).parents('tr').click(function () {
+					window.location = $(this).attr('data-href')
+			}
+		}
+	</style>
+</style> -->
 

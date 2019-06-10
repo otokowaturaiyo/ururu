@@ -40,7 +40,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.string :postal_code, null: false
       t.string :postal_address, null: false
       t.string :phone_number, null: false
-      t.text :profile_image_url
+      t.text :profile_image_id
       t.timestamps null: false
     end
 
