@@ -24,8 +24,11 @@ class Admins::UsersController < ApplicationController
 	def update
 		@user = User.find(params[:id])
 		@user.update(users_params)
-		flash[:notice] = "更新完了！"
+		if flash[:notice] = "更新完了！"
 		redirect_to admins_user_path(@user.id)
+	else
+		render :edit
+	end
 	end
 
 	private
