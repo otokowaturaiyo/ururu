@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="col-md-offset-2 col-md-8">
 		<br>
-		<h1>商品詳細</h1>	
+		<h1>商品詳細</h1>
 		<br>
 		
 		<!-- 商品の概要説明 -->
@@ -62,7 +62,7 @@
 			</div>
 		</div>
 
-		<!-- 編集ボタン -->
+		<!-- カート機能 -->
 
 		<div class="row" style="margin-top: 20px; margin-bottom: 20px;">
 			<div>
@@ -112,26 +112,27 @@
 				収録曲
 			</div>
 			<table class="table">
-				<tbody>
+				<thead>
 					<tr>
-						<th>1</th>
-						<td>Bohemian Rapsody</td>
-						<td>3:54</td>
+						<th>ディスク</th>
+						<th>曲番</th>
+						<th>収録曲</th>
+						<th>秒数</th>
 					</tr>
-					<tr>
-						<th>2</th>
-						<td>Don't stop me now</td>
-						<td>2:55</td>
-					</tr>
-					<tr>
-						<th>3</th>
-						<td>We will rock you</td>
-						<td>1:22</td>
-					</tr>
-				</tbody>
+				</thead>
+				<% @disks.each_with_index do |disk,j| %>
+					<tbody>
+						<% disk.songs.each_with_index do |song,i| %>
+						<tr>
+							<td><%= j +1 %></td>
+							<td><%= i + 1 %></td>
+							<td><%= song.song%></td>
+							<td><%= song.second %></td>
+						</tr>
+						<% end %>
+					</tbody>
+				<% end %>
 			</table>
 		</div>
-
-
 	</div>
 </div>
