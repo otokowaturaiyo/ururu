@@ -25,22 +25,37 @@ end
 end
 
 
-80.times do
+20.times do
 	product_name  = Faker::Music.unique.album
 	description = Faker::Quote.famous_last_words
 	random = Random.new()
 
 
-
 Product.create!(genre_id: random.rand(1..5),
+				artist_id: random.rand(1..5),
+				label_id: random.rand(1..5),
+				product_name: product_name,
+				price: random.rand(1000..50000),
+				description: description,
+				stock: random.rand(0..500),
+				recommend: Faker::Boolean.boolean(0.1))
+end
 
-  					artist_id: random.rand(1..5),
-  					label_id: random.rand(1..5),
-  					product_name: product_name,
-  					price: random.rand(1000..50000),
-  					description: description,
-  					stock: random.rand(0..500),
-  					recommend: Faker::Boolean.boolean(0.1))
+40.times do |time|
+	random = Random.new()
+	Disk.create!(product_id: random.rand(1..20),
+				number: time + 1
+		)
+end
+
+80.times do
+	random = Random.new()
+	name = Faker::Music::UmphreysMcgee.song
+	number = Faker::Number.decimal(2)
+	Song.create!(disk_id: random.rand(1..40),
+				song: name,
+				second: number
+		)
 end
 
 
@@ -67,4 +82,6 @@ end
 				 password: random.rand(1000000..9999999)
 				 )
 end
+
+
 

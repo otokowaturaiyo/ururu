@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_09_072233) do
+ActiveRecord::Schema.define(version: 2019_06_10_115251) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2019_06_09_072233) do
     t.integer "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "number"
   end
 
   create_table "genres", force: :cascade do |t|
@@ -91,6 +92,7 @@ ActiveRecord::Schema.define(version: 2019_06_09_072233) do
     t.string "song"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "second"
   end
 
   create_table "users", force: :cascade do |t|
