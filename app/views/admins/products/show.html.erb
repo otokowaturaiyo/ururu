@@ -49,8 +49,13 @@
 		<!-- 商品ステータス・ -->
 		<div class="row">
 			<div class="product_status clearfix">
-				<p class="stock col-md-2 pull-left" style="margin-top: 10px;">在庫：<%= @product.stock %></p>
-				<p class="price col-md-4 pull-left" style="margin-top: 10px;">価格：<%= @product.price*1.08.round %>（税込）</p>
+				<p class="stock col-md-2 pull-left" style="margin-top: 10px;">
+					在庫：<%= @product.stock %>
+				</p>
+				<p class="price col-md-4 pull-left" style="margin-top: 10px;">
+					価格：<%= @product.price*1.08.round %>（税込）
+				</p>
+
 				<p class="btn btn-info  col-md-3 pull-left">
 					<i class="glyphicon glyphicon-thumbs-up"></i> 
 					25いいね
@@ -59,7 +64,6 @@
 		</div>
 
 		<!-- 編集ボタン -->
-
 		<div class="row" style="margin-top: 20px; margin-bottom: 20px;">
 			<div>
 				<%= link_to "商品情報の編集",

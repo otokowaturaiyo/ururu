@@ -14,19 +14,27 @@ admin.save!
 	Artist.create!(name: name)
 end
 
-5.times do
-	genre = Faker::Music.genre
-	Genre.create!(genre: genre)
-end
+
+Genre.create!(genre: "JPOP")
+Genre.create!(genre: "洋楽")
+Genre.create!(genre: "KPOP")
+Genre.create!(genre: "ロック/オルタナティブ")
+Genre.create!(genre: "パンク/ハードコア")
+Genre.create!(genre: "ビジュアル")
+Genre.create!(genre: "R&B/ソウル")
+Genre.create!(genre: "ヒップホップ")
+Genre.create!(genre: "レゲエ/スカ")
+
+
 
 5.times do
 	label = Faker::Creature::Dog.breed
 	Label.create!(label: label)
 end
 
-
-20.times do
+80.times do
 	product_name  = Faker::Music.unique.album
+	product_name  = Faker::Music.instrument
 	description = Faker::Quote.famous_last_words
 	random = Random.new()
 
@@ -41,14 +49,14 @@ Product.create!(genre_id: random.rand(1..5),
 				recommend: Faker::Boolean.boolean(0.1))
 end
 
-40.times do |time|
+160.times do |time|
 	random = Random.new()
 	Disk.create!(product_id: random.rand(1..20),
 				number: time + 1
 		)
 end
 
-80.times do
+320.times do
 	random = Random.new()
 	name = Faker::Music::UmphreysMcgee.song
 	number = Faker::Number.decimal(2)
@@ -64,7 +72,7 @@ end
 	kanji_firstname = Faker::Name.first_name
 	kanji_lastname = Faker::Name.last_name
 	kana_firstname = Faker::Name.first_name
-	kana_lastname = Faker::Name.last_name
+	# kana_lastname = Faker::Name.last_name
 	user_name = Faker::Games::Pokemon.name
 	email = Faker::Internet.email
 	postal_address = Faker::Address.full_address
@@ -73,7 +81,7 @@ end
 	User.create!(kanji_firstname: kanji_firstname,
 				 kanji_lastname: kanji_lastname,
 				 kana_firstname: kana_firstname,
-				 kana_lastname: kana_lastname,
+				 kana_lastname: "サノ",
 				 user_name: user_name,
 				 email: email,
 				 phone_number: random.rand(10000000000..99999999999),

@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
 
-
+  get '/products/feature' => 'products#feature'
   resources :products, only:[:index, :show] do
   resource :favorites, only: [:create, :destroy]
   end
 
   get 'search_list' => 'products#search_list'
-
-
+  get 'genres/:id' => 'genres#show'
 
   namespace :admins do
     resources :users, only: [:index, :show, :edit, :update]
@@ -28,7 +27,9 @@ Rails.application.routes.draw do
   	registrations: 'users/registrations'
   }
 
-  resources :users, only:[:show] do
+  resources :users, only:[:show, :edit, :update] do
   end
 
+
 end
+
