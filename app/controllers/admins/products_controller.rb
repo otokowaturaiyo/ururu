@@ -72,6 +72,7 @@ class Admins::ProductsController < ApplicationController
                                                           songs_attributes: [:id, 
                                                                              :disks_id,
                                                                              :song,
+                                                                             :second,
                                                                              :_destroy]])
     end
 

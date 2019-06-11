@@ -4,9 +4,12 @@ Rails.application.routes.draw do
   resources :products, only:[:index, :show] do
   end
 
+  get 'search_list' => 'products#search_list'
+
+
 
   namespace :admins do
-    resources :users, only: [:index, :show, :edit,  :update]
+    resources :users, only: [:index, :show, :edit, :update]
     resources :products, only:[:new, :create, :index, :show, :edit, :update]
     get '/top' => 'home#top'
   end
@@ -24,7 +27,8 @@ Rails.application.routes.draw do
   	registrations: 'users/registrations'
   }
 
-  resources :users, only:[:show] do
+  resources :users, only:[:show, :edit, :update] do
   end
 
 end
+

@@ -1,74 +1,139 @@
-<h1>新規登録</h1>
+<div class="row sampleRow">
+    <div class="col-xs-2">2</div>
+    <div class="col-xs-8">
+      <div class="circle">
 
-<p>すでに会員登録お済の方</p>
-<%= render "users/shared/links4" %>
+    <div class="row field">
+        <div class="col-xs-1"></div>
+            <div class="col-xs-4">
+              <h1>新規登録</h1>
+            </div>
+            <div class="col-xs-2"></div>
+            <div class="col-xs-4">
+              <p>すでに会員登録お済の方</p><%= render "users/shared/links4" %>
+            </div>
+            <div class="col-xs-1"></div>
+    </div>
+    <div class="circle2"></div>
+
+
+
+
+
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
 
 
-  <div class="field">
-    <%= f.label :氏名（漢字） %><br />
-    <%= f.text_field :kanji_lastname, autofocus: true, autocomplete: "" %>
-  </div>
-
-  <div class="field">
-    <%= f.text_field :kanji_firstname, autofocus: true, autocomplete: "" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :氏名（カナ） %><br />
-    <%= f.text_field :kana_lastname, autofocus: true, autocomplete: "" %>
-  </div>
-
-  <div class="field">
-    <%= f.text_field :kana_firstname, autofocus: true, autocomplete: "" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :ユーザー名 %><br />
-    <%= f.text_field :user_name, autofocus: true, autocomplete: "このサイトでの名前を入力してください" %>
+  <div class="row field">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-3">
+      <%= f.label :氏名（漢字） %><br />
+        <%= f.text_field :kanji_lastname, autofocus: true, autocomplete: "" %>
+    </div>
+    <div class="col-xs-2"></div>
+    <div class="col-xs-3">
+      <br><%= f.text_field :kanji_firstname, autofocus: true, autocomplete: "" %></br>
+    </div>
+    <div class="col-xs-2"></div>
   </div>
 
 
-  <div class="field">
-    <%= f.label :メールアドレス %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+
+
+  <div class="row field">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-3">
+      <%= f.label :氏名（カナ） %><br />
+        <%= f.text_field :kana_lastname, autofocus: true, autocomplete: "" %>
+    </div>
+    <div class="col-xs-2"></div>
+    <div class="col-xs-3">
+      <br><%= f.text_field :kana_firstname, autofocus: true, autocomplete: "" %></br>
+    </div>
+    <div class="col-xs-2"></div>
   </div>
 
-  <div class="field">
-    <%= f.label :電話番号　※ハイフンなしで入力してください %><br />
-    <%= f.text_field :phone_number, autofocus: true, autocomplete: "" %>
+  <div class="row field">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-8">
+      <%= f.label :ユーザー名 %><br />
+        <%= f.text_field :user_name, autofocus: true, autocomplete: "このサイトでの名前を入力してください" %>
+    </div>
+    <div class="col-xs-2"></div>
   </div>
 
-  <div class="field">
-    <%= f.label :郵便番号　※ハイフンなしで入力してください %><br />
-    <%= f.text_field :postal_code, autofocus: true, autocomplete: "" %>
+
+  <div class="row field">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-8">
+      <%= f.label :メールアドレス %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
+    <div class="col-xs-2"></div>
   </div>
 
-  <div class="field">
-    <%= f.label :住所 %><br />
-    <%= f.text_field :postal_address, autofocus: true, autocomplete: "" %>
+  <div class="row field">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-8">
+      <%= f.label :電話番号　※ハイフンなしで入力してください %><br />
+        <%= f.text_field :phone_number, autofocus: true, autocomplete: "" %>
+    </div>
+    <div class="col-xs-2"></div>
   </div>
 
-  <div class="field">
-    <%= f.label :パスワード %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+  <div class="row field">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-8">
+      <%= f.label :郵便番号　※ハイフンなしで入力してください %><br />
+        <input type="text" name="user[postal_code]" size="10" maxlength="8" onKeyUp="AjaxZip3.zip2addr(this,'','user[postal_address]','user[postal_address]');">
+    </div>
+    <div class="col-xs-2"></div>
   </div>
 
-  <div class="field">
-    <%= f.label :パスワード確認 %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+
+
+  <div class="row field">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-8">
+      <%= f.label :住所 %><br />
+        <input type="text" name="user[postal_address]" size="60">
+    </div>
+    <div class="col-xs-2"></div>
   </div>
 
-  <div class="actions">
+  <div class="row field">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-8">
+      <%= f.label :パスワード %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "new-password" %>
+    </div>
+    <div class="col-xs-2"></div>
+  </div>
+
+  <div class="row field">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-8">
+      <%= f.label :パスワード確認 %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    </div>
+    <div class="col-xs-2"></div>
+  </div>
+
+<div class="touroku-field">
     <%= f.submit "登録" %>
-  </div>
+</div>
 <% end %>
 
-<p>すでに会員登録お済の方</p>
-<%= render "users/shared/links4" %>
+<div class="touroku-field">
+      <p>すでに会員登録お済の方</p>
+      <br><%= render "users/shared/links4" %></br>
+</div>
+</div>
+
+
+<%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
