@@ -15,8 +15,15 @@ admin.save!
 end
 
 5.times do
-	genre = Faker::Music.genre
-	Genre.create!(genre: genre)
+	Genre.create!(genre: "JPOP")
+	Genre.create!(genre: "洋楽")
+	Genre.create!(genre: "KPOP")
+	Genre.create!(genre: "ロック/オルタナティブ")
+	Genre.create!(genre: "パンク/ハードコア")
+	Genre.create!(genre: "ビジュアル")
+	Genre.create!(genre: "R&B/ソウル")
+	Genre.create!(genre: "ヒップホップ")
+	Genre.create!(genre: "レゲエ/スカ")
 end
 
 5.times do
@@ -26,7 +33,7 @@ end
 
 
 20.times do
-	product_name  = Faker::Music.unique.album
+	product_name  = Faker::Music.instrument
 	description = Faker::Quote.famous_last_words
 	random = Random.new()
 
