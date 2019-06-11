@@ -1,10 +1,10 @@
 class Admins::UsersController < ApplicationController
-
+	before_action :authenticate_admin!
 	def index
-		@users = User.all
+		@users = User.page(params[:page]).reverse_order
 		@q = User.ransack(params[:q])
 		if params[:q]
-			@users = @q.result(distinct: true)
+			@users = @q.result(distinct: true).page(params[:page]).reverse_order
 		end
 	end
 	def search
@@ -24,11 +24,14 @@ class Admins::UsersController < ApplicationController
 	def update
 		@user = User.find(params[:id])
 		@user.update(users_params)
-		flash[:notice] = "更新完了！"
+		if flash[:notice] = "更新完了！"
 		redirect_to admins_user_path(@user.id)
+	else
+		render :edit
+	end
 	end
 
-	private
+    private
 	def users_params
 		params.require(:user).permit(:user_id, :user_name, :email, :profile_image)
 	end
