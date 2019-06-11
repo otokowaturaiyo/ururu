@@ -12,6 +12,7 @@
 			<table class="table table-hover">
 				<tbody>
 					<% @users.each do |user| %>
+				<tr>
 					<%= admins_user_path(user) %>
 					 	<td><%= attachment_image_tag user, :profile_image_id, :fill, 60, 60, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb", size: "60x60" %></td>
 							<td><%= user.id %></td>
