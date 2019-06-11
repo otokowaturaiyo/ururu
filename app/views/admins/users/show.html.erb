@@ -1,10 +1,24 @@
 <div class="container">
 	<div class="row">
-		<div class="col">
+		<div class="col-lg-3">
+			<div class="flash">
+				<%= flash[:notice] %>
+			</div>
+			<%= attachment_image_tag @user, :profile_image_id, :fill, 200, 200, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb", size: "200x200" %>
+		</div>
+		<div class="col-lg-1"></div>
+		<div class="col-lg-7">
 			<h2>ユーザー詳細</h2>
-			<%= @user.kanji_firstname %>
-			<%= @user.kanji_lastname %>
-			<%= @user.user_name %>
+				<p><%= @user.kanji_firstname %></p>
+				<p><%= @user.kanji_lastname %></p>
+				<p><%= @user.user_name %></p>
+				<p><%= @user.email %></p>
+				<p><%= @user.phone_number %></p>
+				<p><%= @user.postal_code %></p>
+				<p><%= @user.postal_address %></p>
+			<%= link_to "編集", edit_admins_user_path(@user.id), class: "btn btn-info" %>
+		</div>
+		<div class="col-lg-1"></div>
 		</div>
 	</div>
 </div>

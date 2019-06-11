@@ -18,8 +18,32 @@
 
 
 header{
-	padding-bottom: 60px;
+	padding-bottom: 100px;
 }
+
+.search-window{
+	display: inline-block;
+	padding-top: 20px;
+}
+.navbar-brand{
+	font-size: 50px;
+	padding-top: 20px;
+}
+.navbar-right{
+	font-size: 20px;
+	display: inline-block;
+	position: absolute;
+	top: 8%;
+	right: 8%;
+}
+.navbar-header{
+	font-size: 20px;
+}
+.navbar-nav{
+	font-size: 16px;
+	padding-top: 20px;
+}
+
 
  footer{
  width: 100%;
@@ -73,3 +97,13 @@ header{
 .field{
 	padding-bottom: 20px;
 }
+
+.flash {
+	color: #3cb371;
+}
+
+li {
+	list-style: none;
+}
+
+
