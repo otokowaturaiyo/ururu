@@ -1,0 +1,15 @@
+<div class="nested-fields row">
+	<div class="form-group">
+		<%= link_to_remove_association "CDを削除する", f, class: 'btn btn-danger btn-xs' %>
+	</div>
+	<div class="songs">
+		<%= f.fields_for :songs do |song| %>
+			<%= render 'song_fields', f: song %>
+		<% end %>
+		<div class="links">
+			<%= link_to_add_association '曲を追加する', f, :songs, class: 'btn btn-primary btn-xs' %>
+		</div>
+	</div>
+</div>
+
+

@@ -39,25 +39,21 @@
 	</div>
 
 	<div class="form-group">
-		<%= f.label :price, "値段（税抜き）", class:"col-sm-3 control-label" %>
+		<%= f.label :price, "値段（税抜）", class:"col-sm-3 control-label" %>
 		<div class="col-sm-9">
 			<%= f.text_field :price, class:"form-control" %>
 		</div>
 	</div>
 
-	<!-- 
-		本来は収録曲の表になるべきところ。	
-		実装の仕方がよくわからないので、とりあえずテキスト入力としておきます。
-	-->
-
-	<!-- 
-	<div class="form-group"> 
-		<%= f.label :price, "収録曲", class:"col-sm-3 control-label" %>
-		<div class="col-sm-9">
-			<%= f.text_field :price, class:"form-control" %>
-		</div>
+	<!-- 収録曲の表。-->
+	<div class="form-group disks">
+			<%= f.fields_for :disks do |disk| %>
+				<%= render 'disk_fields', f: disk %>
+			<% end %>
+			<div class="links">
+				<%= link_to_add_association 'CDを追加', f, :disks, class: 'btn btn-primary btn-xs' %>
+			</div>
 	</div>
-	-->
 
 	<div class="form-group">
 		<%= f.label :stock, "在庫数", class:"col-sm-3 control-label" %>
@@ -92,10 +88,7 @@
 	<%= f.submit "商品追加", class:"btn btn-primary center-block" %>
 
 	<% end %>
+
+	<script>
+	</script>
 </div>
-
-
-
-
-
-
