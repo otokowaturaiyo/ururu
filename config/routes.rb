@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
 
   get '/products/feature' => 'products#feature'
+  get 'genres/:id' => 'genres#show', as: 'genre'
   resources :products, only:[:index, :show] do
   end
 
   get 'search_list' => 'products#search_list'
-  get 'genres/:id' => 'genres#show'
 
   namespace :admins do
     resources :users, only: [:index, :show, :edit, :update]

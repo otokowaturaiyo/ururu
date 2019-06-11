@@ -4,7 +4,8 @@ class ProductsController < ApplicationController
 
   def index
   	@products = Product.page(params[:page]).per(PER).order(created_at: :desc)
-  	@recommend = Product.where(recommend: true)
+  	@recommends = Product.where(recommend: true).page(params[:page]).per(PER).order(created_at: :desc)
+  	@genres = Genre.all
   end
 
   def show

@@ -39,28 +39,22 @@
       </div>
     </div>
     <!-- グリッドに対してモバイルでは横幅いっぱい、デスクトップでは1/3を占める -->
-      <div class="col-xs-12 col-md-4">
-        <div class="btn-group-vertical" role="group">
-          <button type="button" class="btn btn-default"><%= link_to "JPOP", genres_path(@genre) %></button>
-          <button type="button" class="btn btn-default"><%= link_to "洋楽", genres_path(@genre) %></button>
-          <button type="button" class="btn btn-default"><%= link_to "KPOP", genres_path(@genre) %></button>
-          <button type="button" class="btn btn-default"><%= link_to "ロック/オルタナティブ", genres_path(@genre) %></button>
-          <button type="button" class="btn btn-default"><%= link_to "パンク/ハードコア", genres_path(@genre) %></button>
-          <button type="button" class="btn btn-default"><%= link_to "ビジュアル", genres_path(@genre) %></button>
-          <button type="button" class="btn btn-default"><%= link_to "R&B/ソウル", genres_path(@genre) %></button>
-          <button type="button" class="btn btn-default"><%= link_to "ヒップホップ", genres_path(@genre) %></button>
-          <button type="button" class="btn btn-default"><%= link_to "レゲエ/スカ", genres_path(@genre) %></button>
+      <div class="col-xs-12 col-md-4 genre-button">
+        <div class="row">
+        <% @genres.each do |genre| %>
+          <div class="btn-group-vertical col-md-offset-2 col-md-8" role="group">
+            <button type="button" class="btn btn-default"><%= link_to genre.genre, genre_path(genre.id) %></button>
+          </div>
+        <% end %>
         </div>
       </div>
       <div class="sidebar-recommend">
         <!-- おすすめ画像がグリッドに対しモバイルでは横に2個、デスクトップでは横に一個表示される -->
-        <div class="row">
-          <div class="col-xs-12 col-md-6">
             <div class="thumbnail-caption">
               <h3>店長のおすすめ</h3>
                 <div class="row">
-                  <% @recommend.each do |product| %>
-                    <div class ="col-xs-6 col-md-6">
+                  <% @recommends.each do |product| %>
+                    <div class ="col-xs-2 col-md-2">
                       <%= link_to product_path(product), class: 'new-arrival-content' do %>
                         <% if product.jacket_image_id.present? %>
                             <% product.jacket_images.each do |image| %>
@@ -74,7 +68,7 @@
                       <% end %>
                     </div>
                   <% end %>
-                  <%= paginate @products %>
+                  <%= paginate @recommends %>
                 </div>
             </div>
           </div>
