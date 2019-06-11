@@ -14,7 +14,7 @@ admin.save!
 	Artist.create!(name: name)
 end
 
-5.times do
+
 	Genre.create!(genre: "JPOP")
 	Genre.create!(genre: "洋楽")
 	Genre.create!(genre: "KPOP")
@@ -24,7 +24,7 @@ end
 	Genre.create!(genre: "R&B/ソウル")
 	Genre.create!(genre: "ヒップホップ")
 	Genre.create!(genre: "レゲエ/スカ")
-end
+
 
 5.times do
 	label = Faker::Creature::Dog.breed

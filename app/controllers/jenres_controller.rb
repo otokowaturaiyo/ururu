@@ -3,8 +3,8 @@ class JenresController < ApplicationController
 
 
 	def show
-		@jenre = Jenre.find(params[:id])
-		@products = @jenre.products.page(params[:page]).per(PER).order(created_at: :desc)
+		@genre = Genre.find(params[:id])
+		@products = @genre.products.page(params[:page]).per(PER).order(created_at: :desc)
 	end
 
 
@@ -12,7 +12,7 @@ class JenresController < ApplicationController
 
 
 	def jenre_params
-		params.require(:jenre).permit(:jenre)
+		params.require(:genre).permit(:genre)
 	end
 
 	def product_params
