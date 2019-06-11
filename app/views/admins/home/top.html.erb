@@ -1,5 +1,8 @@
 <div class="container">
+
 	<div class="row">
+		<div class="background">
+			<!-- あとで透過する -->
 		<div class="col-lg-3"></div>
 			<div class="col-lg-7">
 			<h2>管理ページ</h2>
@@ -7,10 +10,12 @@
 					<li><%= link_to 'ユーザー一覧', admins_users_path %></li>
 					<li><%= link_to '商品一覧', products_path %></li>
 					<li><%= link_to '仮商品の追加', products_path %></li>
-					<li><%= link_to, '仮購入履歴', products_path  %></li>
+					<li><%= link_to '仮購入履歴', products_path  %></li>
 					<li><%= link_to '仮ログアウト', destroy_admin_session_path, method: :delete %></li>
+				</div>
 			</div>
 			<div class="col-lg-3"></div>
 		</div>
 	</div>
 </div>
+

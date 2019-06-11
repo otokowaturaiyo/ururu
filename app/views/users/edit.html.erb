@@ -1,0 +1,107 @@
+<div class="row field">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-8"><h1>登録情報編集</h1></div>
+    <div class="col-xs-2"></div>
+</div>
+
+<%= form_for(@user) do |f| %>
+
+
+
+  <div class="row sampleRow">
+    <div class="col-xs-6">
+      <div class="row sampleRow">
+        <div class="col-xs-3"></div>
+        <div class="col-xs-6">
+          <%= attachment_image_tag @user, :profile_image_url, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg" %>
+        </div>
+        <div class="col-xs-3"></div>
+      </div>
+      <div class="row sampleRow">
+        <div class="col-xs-3"></div>
+        <div class="col-xs-6">
+          <%= f.attachment_field :profile_image_url %>
+        </div>
+        <div class="col-xs-3"></div>
+      </div>
+
+    </div>
+    <div class="col-xs-6">
+      <div class="row field">
+        <div class="col-xs-4">
+          <div class="field">
+              <%= f.label :氏名（漢字） %><br />
+              <%= f.text_field :kanji_lastname, autofocus: true, autocomplete: "" %>
+          </div>
+        </div>
+        <div class="col-xs-2"></div>
+        <div class="col-xs-4">
+          <div class="field">
+            <br><%= f.text_field :kanji_firstname, autofocus: true, autocomplete: "" %></br>
+          </div>
+        </div>
+        <div class="col-xs-2"></div>
+      </div>
+
+      <div class="row field">
+        <div class="col-xs-4">
+          <div class="field">
+            <%= f.label :氏名（カナ） %><br />
+            <%= f.text_field :kana_lastname, autofocus: true, autocomplete: "" %>
+          </div>
+        </div>
+        <div class="col-xs-2"></div>
+        <div class="col-xs-4">
+          <div class="field">
+            <br><%= f.text_field :kana_firstname, autofocus: true, autocomplete: "" %></br>
+          </div>
+        </div>
+        <div class="col-xs-2"></div>
+      </div>
+
+
+      <div class="field">
+        <%= f.label :メールアドレス %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :電話番号　※ハイフンなしで入力してください %><br />
+        <%= f.text_field :phone_number, autofocus: true, autocomplete: "" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :郵便番号　※ハイフンなしで入力してください %><br />
+        <%= f.text_field :postal_code, autofocus: true, autocomplete: "" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :住所 %><br />
+        <%= f.text_field :postal_address, autofocus: true, autocomplete: "" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :パスワード %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "new-password" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :パスワード確認 %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      </div>
+
+      <div class="row sampleRow">
+        <div class="col-xs-5"></div>
+        <div class="col-xs-2">
+          <div class="actions">
+            <%= f.submit "編集完了" %>
+          </div>
+        </div>
+        <div class="col-xs-5"></div>
+      </div>
+<% end %>
+  </div>
+</div>

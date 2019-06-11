@@ -1,21 +1,54 @@
 <h1>マイページ</h1>
-<p>氏名（漢字）</p>
-<p><%= @user.kanji_lastname %><%= @user.kanji_firstname %></p>
 
-<p>氏名（カナ）</p>
-<p><%= @user.kana_lastname %><%= @user.kana_firstname %></p>
 
-<p>ユーザー名</p>
-<p><%= @user.user_name %></p>
+	<div class="row sampleRow">
+		<div class="col-xs-6">
+			<div class="row sampleRow">
+				<div class="col-xs-3"></div>
+				<div class="col-xs-6">
+					<%= attachment_image_tag @user, :profile_image_url, :fill, 250, 250, format: 'jpeg', fallback: "no_image.jpg" %>
+				</div>
+				<div class="col-xs-3"></div>
+			</div>
+			<div class="row sampleRow">
+				<div class="col-xs-3"></div>
+				<div class="col-xs-6">
+					<div class="mypage-touroku">
+						<%= link_to edit_user_path(@user.id) do %>
+							<button class="btn btn-info btn-lg">登録情報編集</button>
+						<% end %>
+					</div>
+				</div>
+				<div class="col-xs-3"></div>
+			</div>
+			<div class="row sampleRow">
+				<div class="col-xs-3"></div>
+				<div class="col-xs-6">
+					<div class="mypage-touroku">
+						<%= link_to edit_user_path(@user.id) do %>
+							<button class="btn btn-info btn-lg">購入履歴（後でパス編集）</button>
+						<% end %>
+					</div>
+				</div>
+				<div class="col-xs-3"></div>
+			</div>
+		</div>
+	<div class="mypage">
+		<div class="col-xs-6">
+			<p class ="form">氏名（漢字） : <%= @user.kanji_lastname %><%= @user.kanji_firstname %></p>
 
-<p>メールアドレス</p>
-<p><%= @user.email %></p>
+			<p class ="form">氏名（カナ） : <%= @user.kana_lastname %><%= @user.kana_firstname %></p>
 
-<p>電話番号</p>
-<p><%= @user.phone_number %></p>
+			<p class ="form">ユーザー名 : <%= @user.user_name %></p>
 
-<p>郵便番号</p>
-<p><%= @user.postal_code %></p>
+			<p class ="form">メールアドレス : <%= @user.email %></p>
 
-<p>住所</p>
-<p><%= @user.postal_address %></p>
+			<p class ="form">電話番号 : <%= @user.phone_number %></p>
+
+			<p class ="form">郵便番号 : <%= @user.postal_code %></p>
+
+			<p class ="form">住所 : <%= @user.postal_address %></p></div>
+		</div>
+	</div>
+
+<li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
