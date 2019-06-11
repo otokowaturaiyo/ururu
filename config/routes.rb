@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
 
   resources :products, only:[:index, :show] do
+  resource :favorites, only: [:create, :destroy]
   end
 
   get 'search_list' => 'products#search_list'
