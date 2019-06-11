@@ -31,11 +31,6 @@ class Admins::UsersController < ApplicationController
 	end
 	end
 
-	protected
-	# def admin_user
- #      redirect_to(root_url) unless current_user.admin?
- #    end
-
     private
 	def users_params
 		params.require(:user).permit(:user_id, :user_name, :email, :profile_image)
