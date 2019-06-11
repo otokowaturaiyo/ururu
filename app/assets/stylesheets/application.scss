@@ -16,9 +16,8 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
-
 header{
-	padding-bottom: 100px;
+	padding-bottom: 72px;
 }
 
 .search-window{
@@ -53,9 +52,7 @@ header{
 	text-align: center;
 }
 
-.sampleRow{
-	padding-bottom: 100px;
-}
+
 
 
 
@@ -71,6 +68,67 @@ header{
 	border:thin solid black;
 }
 
+.background-color1{
+	background-color: #FFCC00;
+}
+.background-color2{
+	background-color: #EEFFFF;
+}
+.LeftRow{
+	margin-top: 30px;
+}
+.ururu-back{
+	vertical-align: bottom;
+}
+.sale-title{
+	font-size: 150px;
+	font-family: "Impact";
+}
+.sale-body{
+	font-size: 50px;
+	font-family: "Impact";
+}
+.sale-info{
+	font-size: 30px;
+	font-family: YuMincho;
+}
+.summer-image{
+	text-align: center;
+}
+.summer-image-1{
+	border: inset;
+}
+.toyama-ima{
+	margin: auto 0;
+	border: inset;
+}
+.glyphicon-home{
+	font-size: 40px;
+}
+.glyphicon-text{
+	font-size: 30px;
+}
+.return-index{
+	display: inline-block;
+	vertical-align: top;
+}
+.sale1{
+	color: #800000;
+}
+.sale2{
+	color: #800000;
+}
+.ururu-feature{
+	border: double;
+	text-align: center
+}
+.genre-name{
+	text-align: center;
+}
+.genre-table{
+	margin: 0 auto;
+}
+=======
 
 .form{
 	padding: 20px;

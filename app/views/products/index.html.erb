@@ -1,9 +1,17 @@
-<div class="container-fluid">
+<div class="container-fluid background-color2">
   <div class="row LeftRow">
     <!-- 左要素がグリッドに対してモバイルでは横幅いっぱい、デスクトップでは2/3を占める -->
     <div class="col-xs-12 col-md-8">
-      <div class="background-container">
-        <%= image_tag 'ururu-pic.jpg', :size => '400x300' %>
+      <div class="row">
+        <div class="col-xs-6 col-md-6">
+          <%= image_tag 'ururu-pic.jpg', class: 'ururu-back', :size => '450x350' %>
+        </div>
+        <section class="col-xs-6 col-md-6 ururu-feature">
+          <%= link_to  products_feature_path do|feature| %>
+            <h2 class="feature-header">特集ページへ！！</h2>
+            <%= image_tag "特集遷移.png", :size => '300x300' %>
+          <% end %>
+        </section>
       </div>
       <div class="new-arrivals-container">
         <!-- 新着画像がグリッドに対しモバイルでは横に2個、デスクトップでは横に3個表示される -->
@@ -12,7 +20,7 @@
           <div class="row">
             <% @products.each do |product| %>
               <div class ="col-xs-6 col-md-4">
-                <%= link_to products_path(product), class: 'new-arrival-content' do %>
+                <%= link_to product_path(product), class: 'new-arrival-content' do %>
                   <% if product.jacket_image_id.present? %>
                       <% product.jacket_images.each do |image| %>
                         <%= attachment_image_tag image, :image, :fill, 80, 80 %>
@@ -32,17 +40,16 @@
     </div>
     <!-- グリッドに対してモバイルでは横幅いっぱい、デスクトップでは1/3を占める -->
     <div class="col-xs-12 col-md-4">
-      <div class="sidebar-jenre">
-        <div class="btn-group-vertical" role="group">
-          <button type="button" class="btn btn-default">J-POP</button>
-          <button type="button" class="btn btn-default">洋楽</button>
-          <button type="button" class="btn btn-default">K-POP</button>
-          <button type="button" class="btn btn-default">ロック/オルタナティブ</button>
-          <button type="button" class="btn btn-default">パンク/ハードコア</button>
-          <button type="button" class="btn btn-default">ビジュアル</button>
-          <button type="button" class="btn btn-default">R&B/ソウル</button>
-          <button type="button" class="btn btn-default">ヒップホップ</button>
-          <button type="button" class="btn btn-default">レゲエ/スカ</button>
+s        <div class="btn-group-vertical" role="group">
+          <button type="button" class="btn btn-default"><%= link_to "JPOP", genres_path(@jenre) %></button>
+          <button type="button" class="btn btn-default"><%= link_to "洋楽", genres_path(@jenre) %></button>
+          <button type="button" class="btn btn-default"><%= link_to "KPOP", genres_path(@jenre) %></button>
+          <button type="button" class="btn btn-default"><%= link_to "ロック/オルタナティブ", genres_path(@jenre) %></button>
+          <button type="button" class="btn btn-default"><%= link_to "パンク/ハードコア", genres_path(@jenre) %></button>
+          <button type="button" class="btn btn-default"><%= link_to "ビジュアル", genres_path(@jenre) %></button>
+          <button type="button" class="btn btn-default"><%= link_to "R&B/ソウル", genres_path(@jenre) %></button>
+          <button type="button" class="btn btn-default"><%= link_to "ヒップホップ", genres_path(@jenre) %></button>
+          <button type="button" class="btn btn-default"><%= link_to "レゲエ/スカ", genres_path(@jenre) %></button>
         </div>
       </div>
       <div class="sidebar-recommend">
@@ -54,7 +61,7 @@
                 <div class="row">
                   <% @recommend.each do |product| %>
                     <div class ="col-xs-6 col-md-6">
-                      <%= link_to products_path(product), class: 'new-arrival-content' do %>
+                      <%= link_to product_path(product), class: 'new-arrival-content' do %>
                         <% if product.jacket_image_id.present? %>
                             <% product.jacket_images.each do |image| %>
                               <%= attachment_image_tag image, :image, :fill, 80, 80 %>
@@ -70,10 +77,6 @@
                   <%= paginate @products %>
                 </div>
             </div>
-          </div>
-        </div>
-
-              </div>
           </div>
         </div>
       </div>
