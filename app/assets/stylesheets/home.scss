@@ -4,17 +4,42 @@
 
 .background {
 	background-image: url("owner.png");
-	background-position: right;
 	position: absolute;
-	height: 800px;
+	height: 780px;
 	width: 100%;
-	opacity: 0.3;
+	opacity: 0.2;
 
 }
 
 
 .bg{
  	width: 100%;
-	z-index:  100;
-	top: 0;
+ 	z-index:  100;
 }
+
+li {
+	font-size: 18px;
+	color: pink;
+	padding-bottom: 20px;
+	padding-left: 40px;
+	text-align: center;
+}
+
+
+nav li a{
+	color: #000000;
+}
+
+nav li a:hover {
+	color: #2e8b57;
+}
+
+
+h1 {
+	padding: 10px 0 10px 40px;
+	text-align: center;
+}
+.yield-container {
+	height: 90vh;
+}
+

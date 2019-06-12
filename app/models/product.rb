@@ -4,9 +4,8 @@ class Product < ApplicationRecord
 	belongs_to :label
 	has_many :disks, dependent: :destroy
 	has_many :likes, dependent: :destroy
-	accepts_nested_attributes_for :disks, allow_destroy: true
 
-	
+	accepts_nested_attributes_for :disks, allow_destroy: true
 
 	attachment :jacket_image
 

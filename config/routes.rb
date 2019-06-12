@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       end
     end
     get '/top' => 'home#top'
+    patch 'users/:id/resign' => 'users#resign', as:'admins_user_resign'
   end
 
 
