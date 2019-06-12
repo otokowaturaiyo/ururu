@@ -47,6 +47,7 @@ header{
  footer{
  width: 100%;
  height: 50px;
+ background-color: #E6FFE9;
  }
 .footer-text2{
 	text-align: center;
@@ -121,7 +122,8 @@ header{
 }
 .ururu-feature{
 	border: double;
-	text-align: center
+	text-align: center;
+	background-color: #FFCC00;
 }
 .genre-name{
 	text-align: center;
@@ -166,7 +168,14 @@ li {
 }
 .genre-button{
 	text-align: center;
-	margin-bottom: 60px;
+	margin-bottom: 80px;
 }
-
+.product-show{
+	background-color: #FFFFDD;
+	width: 100%;
+}
+.genre-container{
+	background-color: #FFFFDD;
+	width: 100%;
+}
 

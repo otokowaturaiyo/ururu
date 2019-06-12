@@ -4,7 +4,7 @@
     <div class="col-xs-12 col-md-8">
       <div class="row">
         <div class="col-xs-6 col-md-6">
-          <%= image_tag 'ururu-pic.jpg', class: 'ururu-back', :size => '450x350' %>
+          <%= image_tag 'ururu-pic.jpg', class: 'ururu-back', :size => '450x368' %>
         </div>
         <section class="col-xs-6 col-md-6 ururu-feature">
           <%= link_to  products_feature_path do|feature| %>
@@ -33,12 +33,14 @@
                 <% end %>
               </div>
             <% end %>
-            <%= paginate @products %>
+            <div class="col-md-3 col-md-offset-4">
+              <%= paginate @products %>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- グリッドに対してモバイルでは横幅いっぱい、デスクトップでは1/3を占める -->
+    <!-- 右要素がグリッドに対してモバイルでは横幅いっぱい、デスクトップでは1/3を占める -->
       <div class="col-xs-12 col-md-4 genre-button">
         <div class="row">
         <% @genres.each do |genre| %>
@@ -49,7 +51,7 @@
         </div>
       </div>
       <div class="sidebar-recommend">
-        <!-- おすすめ画像がグリッドに対しモバイルでは横に2個、デスクトップでは横に一個表示される -->
+        <!-- おすすめ画像がグリッドに対しモバイルでは横に2個、デスクトップでは横に2個表示される -->
             <div class="thumbnail-caption">
               <h3>店長のおすすめ</h3>
                 <div class="row">
