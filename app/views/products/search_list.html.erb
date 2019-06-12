@@ -11,7 +11,7 @@
 				<tbody>
 					<% @products.each do |product| %>
 						<tr>
-							<th class="danger"><code><%= link_to product.product_name, product %></code></th>
+							<th class="danger"><%= link_to product.product_name, product %></th>
 							<td><%= product.artist %></td>
 						</tr>
 					<% end %>

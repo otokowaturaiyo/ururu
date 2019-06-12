@@ -9,10 +9,7 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find(params[:id])
-	@artist = Artist.find(@product.artist_id)
-	@genre = Genre.find(@product.genre_id)
-	@label = Label.find(@product.label_id)
+    find_product
 	@disks = @product.disks
   end
 
