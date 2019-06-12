@@ -9,11 +9,6 @@ class Admins::UsersController < ApplicationController
 			@users = q.result(distinct: true).page(params[:page]).reverse_order
 		end
 	end
-	# def search
-	# 	@q = User.search(search_params)
-	# 	@user= @q.result(distinct: true)
-	# end
-
 
 	def show
 		@user = User.find(params[:id])
@@ -43,7 +38,5 @@ class Admins::UsersController < ApplicationController
 	def users_params
 		params.require(:user).permit(:user_id, :user_name, :email, :profile_image)
 	end
-	# def search_params
-	# 	params.require(:q).permit!
-	# end
+
 end

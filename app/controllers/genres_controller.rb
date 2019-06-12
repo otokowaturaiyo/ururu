@@ -12,7 +12,7 @@ class GenresController < ApplicationController
 
 
 	def genre_params
-		params.require(:jenre).permit(:jenre)
+		params.require(:genre).permit(:genre)
 	end
 
 	def product_params
