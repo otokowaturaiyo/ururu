@@ -4,7 +4,7 @@
     <div class="col-xs-12 col-md-8">
       <div class="row">
         <div class="col-xs-6 col-md-6">
-          <%= image_tag 'ururu-pic.jpg', class: 'ururu-back', :size => '450x350' %>
+          <%= image_tag 'ururu-pic.jpg', class: 'ururu-back', :size => '450x368' %>
         </div>
         <section class="col-xs-6 col-md-6 ururu-feature">
           <%= link_to  products_feature_path do|feature| %>
@@ -33,51 +33,44 @@
                 <% end %>
               </div>
             <% end %>
-            <%= paginate @products %>
+            <div class="col-md-3 col-md-offset-4">
+              <%= paginate @products %>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- グリッドに対してモバイルでは横幅いっぱい、デスクトップでは1/3を占める -->
-    <div class="col-xs-12 col-md-4">
-s        <div class="btn-group-vertical" role="group">
-          <button type="button" class="btn btn-default"><%= link_to "JPOP", genres_path(@jenre) %></button>
-          <button type="button" class="btn btn-default"><%= link_to "洋楽", genres_path(@jenre) %></button>
-          <button type="button" class="btn btn-default"><%= link_to "KPOP", genres_path(@jenre) %></button>
-          <button type="button" class="btn btn-default"><%= link_to "ロック/オルタナティブ", genres_path(@jenre) %></button>
-          <button type="button" class="btn btn-default"><%= link_to "パンク/ハードコア", genres_path(@jenre) %></button>
-          <button type="button" class="btn btn-default"><%= link_to "ビジュアル", genres_path(@jenre) %></button>
-          <button type="button" class="btn btn-default"><%= link_to "R&B/ソウル", genres_path(@jenre) %></button>
-          <button type="button" class="btn btn-default"><%= link_to "ヒップホップ", genres_path(@jenre) %></button>
-          <button type="button" class="btn btn-default"><%= link_to "レゲエ/スカ", genres_path(@jenre) %></button>
+    <!-- 右要素がグリッドに対してモバイルでは横幅いっぱい、デスクトップでは1/3を占める -->
+      <div class="col-xs-12 col-md-4 genre-button">
+        <div class="row">
+        <% @genres.each do |genre| %>
+          <div class="btn-group-vertical col-md-offset-2 col-md-8" role="group">
+            <button type="button" class="btn btn-default"><%= link_to genre.genre, genre_path(genre.id) %></button>
+          </div>
+        <% end %>
         </div>
       </div>
       <div class="sidebar-recommend">
-        <!-- おすすめ画像がグリッドに対しモバイルでは横に2個、デスクトップでは横に一個表示される -->
-        <div class="row">
-          <div class="col-xs-12 col-md-6">
-            <div class="thumbnail-caption">
-              <h3>店長のおすすめ</h3>
-                <div class="row">
-                  <% @recommend.each do |product| %>
-                    <div class ="col-xs-6 col-md-6">
-                      <%= link_to product_path(product), class: 'new-arrival-content' do %>
-                        <% if product.jacket_image_id.present? %>
-                            <% product.jacket_images.each do |image| %>
-                              <%= attachment_image_tag image, :image, :fill, 80, 80 %>
-                            <% end %>
-                        <% else %>
-                          <%= image_tag 'no_image.jpg', :size => '80x80' %>
+        <!-- おすすめ画像がグリッドに対しモバイルでは横に2個、デスクトップでは横に2個表示される -->
+        <div class="thumbnail-caption">
+          <h3>店長のおすすめ</h3>
+            <div class="row">
+              <% @recommends.each do |product| %>
+                <div class ="col-xs-2 col-md-2">
+                  <%= link_to product_path(product), class: 'new-arrival-content' do %>
+                    <% if product.jacket_image_id.present? %>
+                        <% product.jacket_images.each do |image| %>
+                          <%= attachment_image_tag image, :image, :fill, 80, 80 %>
                         <% end %>
-                        <p><%= product.product_name %></p>
-                        <p><%= product.artist.name %></p>
-                      <% end %>
-                    </div>
+                    <% else %>
+                      <%= image_tag 'no_image.jpg', :size => '80x80' %>
+                    <% end %>
+                    <p><%= product.product_name %></p>
+                    <p><%= product.artist.name %></p>
                   <% end %>
-                  <%= paginate @products %>
                 </div>
+              <% end %>
             </div>
-          </div>
         </div>
       </div>
     </div>

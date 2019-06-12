@@ -47,6 +47,7 @@ end
 
 
 # ジャンルシード
+
 Genre.create!(genre: "JPOP")
 Genre.create!(genre: "洋楽")
 Genre.create!(genre: "KPOP")

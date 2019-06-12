@@ -47,6 +47,7 @@ header{
  footer{
  width: 100%;
  height: 50px;
+ background-color: #E6FFE9;
  }
 .footer-text2{
 	text-align: center;
@@ -68,6 +69,7 @@ header{
 	border:thin solid black;
 }
 
+
 .background-color1{
 	background-color: #FFCC00;
 }
@@ -79,6 +81,7 @@ header{
 }
 .ururu-back{
 	vertical-align: bottom;
+	border: inset 10px #FFF5EE;
 }
 .sale-title{
 	font-size: 150px;
@@ -120,7 +123,8 @@ header{
 }
 .ururu-feature{
 	border: double;
-	text-align: center
+	text-align: center;
+	background-color: #FFCC00;
 }
 .genre-name{
 	text-align: center;
@@ -128,6 +132,7 @@ header{
 .genre-table{
 	margin: 0 auto;
 }
+
 
 .form{
 	padding: 20px;
@@ -162,8 +167,23 @@ header{
 li {
 	list-style: none;
 }
+.genre-button{
+	text-align: center;
+	margin-bottom: 80px;
+}
+.product-show{
+	background-color: #FFFFDD;
+	width: 100%;
+}
+.genre-container{
+	background-color: #FFFFDD;
+	width: 100%;
+}
 
-
-
-
-
+.search-list-container{
+	width: 100%;
+	background-color: #FFFFDD;
+}
+.search-table{
+	margin: 40px;
+}

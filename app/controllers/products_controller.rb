@@ -1,10 +1,11 @@
 class ProductsController < ApplicationController
   PER = 6
-  PER2 =15
+  PER2 =30
 
   def index
   	@products = Product.page(params[:page]).per(PER).order(created_at: :desc)
-  	@recommend = Product.where(recommend: true)
+  	@recommends = Product.where(recommend: true).order(created_at: :desc).limit(PER)
+  	@genres = Genre.all
   end
 
   def show
