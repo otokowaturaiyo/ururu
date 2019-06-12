@@ -81,6 +81,7 @@ header{
 }
 .ururu-back{
 	vertical-align: bottom;
+	border: inset 10px #FFF5EE;
 }
 .sale-title{
 	font-size: 150px;
@@ -179,3 +180,10 @@ li {
 	width: 100%;
 }
 
+.search-list-container{
+	width: 100%;
+	background-color: #FFFFDD;
+}
+.search-table{
+	margin: 40px;
+}

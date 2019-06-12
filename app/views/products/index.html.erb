@@ -52,30 +52,25 @@
       </div>
       <div class="sidebar-recommend">
         <!-- おすすめ画像がグリッドに対しモバイルでは横に2個、デスクトップでは横に2個表示される -->
-            <div class="thumbnail-caption">
-              <h3>店長のおすすめ</h3>
-                <div class="row">
-                  <% @recommends.each do |product| %>
-                    <div class ="col-xs-2 col-md-2">
-                      <%= link_to product_path(product), class: 'new-arrival-content' do %>
-                        <% if product.jacket_image_id.present? %>
-                            <% product.jacket_images.each do |image| %>
-                              <%= attachment_image_tag image, :image, :fill, 80, 80 %>
-                            <% end %>
-                        <% else %>
-                          <%= image_tag 'no_image.jpg', :size => '80x80' %>
+        <div class="thumbnail-caption">
+          <h3>店長のおすすめ</h3>
+            <div class="row">
+              <% @recommends.each do |product| %>
+                <div class ="col-xs-2 col-md-2">
+                  <%= link_to product_path(product), class: 'new-arrival-content' do %>
+                    <% if product.jacket_image_id.present? %>
+                        <% product.jacket_images.each do |image| %>
+                          <%= attachment_image_tag image, :image, :fill, 80, 80 %>
                         <% end %>
-                        <p><%= product.product_name %></p>
-                        <p><%= product.artist.name %></p>
-                      <% end %>
-                    </div>
+                    <% else %>
+                      <%= image_tag 'no_image.jpg', :size => '80x80' %>
+                    <% end %>
+                    <p><%= product.product_name %></p>
+                    <p><%= product.artist.name %></p>
                   <% end %>
-                  <div class="col-md-3 col-md-offset-9">
-                    <%= paginate @recommends %>
-                  </div>
                 </div>
+              <% end %>
             </div>
-          </div>
         </div>
       </div>
     </div>
