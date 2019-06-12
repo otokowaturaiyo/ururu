@@ -9,7 +9,11 @@ Rails.application.routes.draw do
 
   namespace :admins do
     resources :users, only: [:index, :show, :edit, :update]
-    resources :products, only:[:new, :create, :index, :show, :edit, :update]
+    resources :products, only:[:new, :create, :index, :show, :edit, :update] do
+      collection do
+        post 'create_confirm'
+      end
+    end
     get '/top' => 'home#top'
   end
 
@@ -31,4 +35,3 @@ Rails.application.routes.draw do
 
 
 end
-

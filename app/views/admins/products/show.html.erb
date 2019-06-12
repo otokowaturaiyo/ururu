@@ -1,9 +1,9 @@
 <div class="container">
 	<div class="col-md-offset-2 col-md-8">
 		<br>
-		<h1>商品詳細</h1>	
+		<h1>商品詳細</h1>
 		<br>
-		
+
 		<!-- 商品の概要説明 -->
 		<div class="row">
 			<div class="overview clearfix">
@@ -45,7 +45,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<!-- 商品ステータス・ -->
 		<div class="row">
 			<div class="product_status clearfix">
@@ -57,7 +57,7 @@
 				</p>
 
 				<p class="btn btn-info  col-md-3 pull-left">
-					<i class="glyphicon glyphicon-thumbs-up"></i> 
+					<i class="glyphicon glyphicon-thumbs-up"></i>
 					25いいね
 				</p>
 			</div>
@@ -73,7 +73,7 @@
 			</div>
 		</div>
 
-		
+
 
 		<!-- レビュー -->
 		<div class="panel panel-default">
@@ -109,28 +109,23 @@
 
 		<!-- 収録曲 -->
 		<div class="panel panel-default">
-			<div class="panel-heading">
-				収録曲
-			</div>
-			<table class="table">
-				<tbody>
-					<tr>
-						<th>1</th>
-						<td>Bohemian Rapsody</td>
-						<td>3:54</td>
-					</tr>
-					<tr>
-						<th>2</th>
-						<td>Don't stop me now</td>
-						<td>2:55</td>
-					</tr>
-					<tr>
-						<th>3</th>
-						<td>We will rock you</td>
-						<td>1:22</td>
-					</tr>
-				</tbody>
-			</table>
+			<% @disks.each.with_index(1) do |disk, d| %>
+				<div class="panel-heading">
+					収録曲 - Disc<%= d %>
+				</div>
+				<table class="table songs-table">
+					<% songs = Song.where(disk_id: disk.id) %>
+					<% songs.each.with_index(1) do|song, s| %>
+						<tbody>
+							<tr class="row">
+								<td class="song-index col-md-2"><%= s %></td>
+								<td class="song-name col-md-8"><%= song.song %></td>
+								<td class="song-length col-md-2"><%= song.second %></td>
+							</tr>
+						</tbody>
+					<% end %>
+				</table>
+			<% end %>
 		</div>
 
 
