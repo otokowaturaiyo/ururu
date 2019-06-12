@@ -1,5 +1,6 @@
 class Admins::UsersController < ApplicationController
 	before_action :authenticate_admin!
+	# before_action
 	def index
 		query = { user_name_cont: params[:q] }
 		@users = User.page(params[:page]).reverse_order
@@ -24,12 +25,18 @@ class Admins::UsersController < ApplicationController
 
 	def update
 		@user = User.find(params[:id])
-		@user.update(users_params)
-		if flash[:notice] = "更新完了！"
+		if @user.update(users_params)
+		 	flash[:notice] = "更新完了！"
 		redirect_to admins_user_path(@user.id)
 	else
 		render :edit
 	end
+	end
+	def resign
+		@user = User.find(params[:id])
+		@user.update(resignation: false)
+		flash[:notice] = "アクセスできません！"
+		redirect_to products_path
 	end
 
     private
