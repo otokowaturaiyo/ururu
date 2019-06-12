@@ -3,13 +3,18 @@ Rails.application.routes.draw do
   get '/products/feature' => 'products#feature'
   get 'genres/:id' => 'genres#show', as: 'genre'
   resources :products, only:[:index, :show] do
+  resource :favorites, only: [:create, :destroy]
   end
 
   get 'search_list' => 'products#search_list'
 
   namespace :admins do
     resources :users, only: [:index, :show, :edit, :update]
-    resources :products, only:[:new, :create, :index, :show, :edit, :update]
+    resources :products, only:[:new, :create, :index, :show, :edit, :update] do
+      collection do
+        post 'create_confirm'
+      end
+    end
     get '/top' => 'home#top'
   end
 
@@ -31,4 +36,3 @@ Rails.application.routes.draw do
 
 
 end
-
