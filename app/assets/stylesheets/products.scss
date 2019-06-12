@@ -1,3 +1,41 @@
 // Place all the styles related to the Products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.song-field {
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding: 0.5em 1em;
+    border: solid 3px #95ccff;
+    border-radius: 8px;
+}
+.song-field .box-title {
+    position: absolute;
+    display: inline-block;
+    top: -13px;
+    left: 10px;
+    padding: 0 9px;
+    line-height: 1;
+    font-size: 19px;
+    background: #FFF;
+    color: #95ccff;
+    font-weight: bold;
+}
+
+.song-field p {
+    margin-bottom: 0; 
+}
+
+.song{
+	margin-bottom: 3px;
+}
+
+.s-delete{
+	height:34px;
+	line-height:34px;
+}
+
+.add-disk{
+	margin-top:10px;
+}
