@@ -1,21 +1,27 @@
-<div class="container">
+<div class="yield-container">
 
-	<div class="row">
-		<div class="background">
-			<!-- あとで透過する -->
-		<div class="col-lg-3"></div>
-			<div class="col-lg-7">
-			<h2>管理ページ</h2>
-				<nav>
-					<li><%= link_to 'ユーザー一覧', admins_users_path %></li>
-					<li><%= link_to '商品一覧', products_path %></li>
-					<li><%= link_to '仮商品の追加', products_path %></li>
-					<li><%= link_to '仮購入履歴', products_path  %></li>
-					<li><%= link_to '仮ログアウト', destroy_admin_session_path, method: :delete %></li>
-				</div>
+	<div class="background"></div>
+
+	<div class="container">
+
+		<div class="row">
+
+			<div class="bg">
+				<br>
+				<br>
+					<div class="col-lg-4"></div>
+					<div class="col-lg-4">
+						<h1>管理ページ</h1>
+						<nav>
+							<li><%= link_to 'ユーザー一覧', admins_users_path %></li>
+							<li><%= link_to '商品一覧', products_path %></li>
+							<li><%= link_to '商品の追加', new_admins_product_path %></li>
+							<!-- <li> --><%#= link_to '購入履歴', %><!-- </li> -->
+							<li><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
+						</nav>
+					</div>
+					<div class="col-lg-4"></div>
 			</div>
-			<div class="col-lg-3"></div>
 		</div>
 	</div>
 </div>
-

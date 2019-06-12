@@ -3,9 +3,9 @@ class Product < ApplicationRecord
 	belongs_to :artist
 	belongs_to :label
 	has_many :disks, dependent: :destroy
-	accepts_nested_attributes_for :disks, allow_destroy: true
+	has_many :likes, dependent: :destroy
 
-	
+	accepts_nested_attributes_for :disks, allow_destroy: true
 
 	attachment :jacket_image
 
