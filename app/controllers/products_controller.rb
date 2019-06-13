@@ -30,4 +30,11 @@ class ProductsController < ApplicationController
   	params.require(:product).permit(:jacket_image_id, :product_name, :artist_id)
   end
 
+  def find_product
+      @product = Product.find(params[:id])
+      @artist = Artist.find(@product.artist_id)
+      @genre = Genre.find(@product.genre_id)
+      @label = Label.find(@product.label_id)
+  end
+
 end
