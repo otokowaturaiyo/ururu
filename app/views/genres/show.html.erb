@@ -1,0 +1,24 @@
+<div class="container genre-container">
+	<h1 class="genre-name"><%= @genre.genre %></h1>
+	<table class="genre-table" border="2">
+		<thead>
+			<tr>
+				<th>商品名</th>
+				<th>アーティスト名</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @products.each do |product| %>
+				<tr>
+					<th class="danger"><code><%= link_to product.product_name, product %></code></th>
+					<td><%= product.artist %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+	<div class="row">
+		<div class="col-md-2 col-md-offset-5">
+			<%= paginate @products %>
+		</div>
+	</div>
+</div>

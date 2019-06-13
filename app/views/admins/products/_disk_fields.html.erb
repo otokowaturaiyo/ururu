@@ -1,0 +1,16 @@
+<div class="nested-fields row song-field col-sm-offset-2">
+	<span class="box-title">Disc</span>
+	<div class="row">
+		<p class="col-sm-7">曲名</p>
+		<p class="col-sm-3">再生時間</p>
+	</div>
+	<div class="songs">
+		<%= f.fields_for :songs do |song| %>
+			<%= render 'song_fields', f: song %>
+		<% end %>
+		<div class="links">
+			<%= link_to_add_association '曲を追加する', f, :songs, class: 'btn btn-primary btn-xs' %>
+			<%= link_to_remove_association "このCDを削除する", f, class: 'btn btn-danger btn-xs' %>
+		</div>
+	</div>
+</div>

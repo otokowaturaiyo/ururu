@@ -1,7 +1,6 @@
 <div class="container">
 	<div class="row">
-		<div class="col-lg-3"></div>
-			<div class="col-lg-9">
+			<div class="col-lg-offset-3 col-lg-9">
 				<h2>ユーザー情報編集</h2>
 					<%= form_for @user, url: admins_user_path(@user.id) do |f| %>
 						<h5>氏名(漢字)</h5>
@@ -60,10 +59,11 @@
 									</div>
 									<div class="col-xs-2">
 										<br>
-											<%= f.submit  "削除", class: "btn btn-danger" %>
+											<%= link_to "削除", admins_admins_user_resign_path(@user.id), method: :patch, "data-confirm" => "本当にユーザーをブロックする？", class: "btn btn-danger" %>
 									</div>
 							</div>
 					<%end%>
+				<br>
 			</div>
 	</div>
 </div>

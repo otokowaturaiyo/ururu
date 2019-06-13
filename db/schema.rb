@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 2019_06_13_054758) do
+
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -55,6 +57,13 @@ ActiveRecord::Schema.define(version: 2019_06_13_054758) do
 
   create_table "labels", force: :cascade do |t|
     t.string "label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "product_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -121,6 +130,8 @@ ActiveRecord::Schema.define(version: 2019_06_13_054758) do
     t.string "phone_number", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "resignation"
+    t.datetime "resigned_at"
     t.text "profile_image_url_id"
     t.boolean "resignation"
     t.datetime "resigned_at"

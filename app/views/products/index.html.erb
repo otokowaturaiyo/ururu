@@ -1,9 +1,17 @@
-<div class="container-fluid">
+<div class="container-fluid background-color2">
   <div class="row LeftRow">
     <!-- 左要素がグリッドに対してモバイルでは横幅いっぱい、デスクトップでは2/3を占める -->
     <div class="col-xs-12 col-md-8">
-      <div class="background-container">
-        <%= image_tag 'ururu-pic.jpg', :size => '400x300' %>
+      <div class="row">
+        <div class="col-xs-6 col-md-6">
+          <%= image_tag 'ururu-pic.jpg', class: 'ururu-back', :size => '450x368' %>
+        </div>
+        <section class="col-xs-6 col-md-6 ururu-feature">
+          <%= link_to  products_feature_path do|feature| %>
+            <h2 class="feature-header">特集ページへ！！</h2>
+            <%= image_tag "特集遷移.png", :size => '300x300' %>
+          <% end %>
+        </section>
       </div>
       <div class="new-arrivals-container">
         <!-- 新着画像がグリッドに対しモバイルでは横に2個、デスクトップでは横に3個表示される -->
@@ -12,7 +20,7 @@
           <div class="row">
             <% @products.each do |product| %>
               <div class ="col-xs-6 col-md-4">
-                <%= link_to products_path(product), class: 'new-arrival-content' do %>
+                <%= link_to product_path(product), class: 'new-arrival-content' do %>
                   <% if product.jacket_image_id.present? %>
                       <% product.jacket_images.each do |image| %>
                         <%= attachment_image_tag image, :image, :fill, 80, 80 %>
@@ -25,56 +33,44 @@
                 <% end %>
               </div>
             <% end %>
-            <%= paginate @products %>
+            <div class="col-md-3 col-md-offset-4">
+              <%= paginate @products %>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- グリッドに対してモバイルでは横幅いっぱい、デスクトップでは1/3を占める -->
-    <div class="col-xs-12 col-md-4">
-      <div class="sidebar-jenre">
-        <div class="btn-group-vertical" role="group">
-          <button type="button" class="btn btn-default">J-POP</button>
-          <button type="button" class="btn btn-default">洋楽</button>
-          <button type="button" class="btn btn-default">K-POP</button>
-          <button type="button" class="btn btn-default">ロック/オルタナティブ</button>
-          <button type="button" class="btn btn-default">パンク/ハードコア</button>
-          <button type="button" class="btn btn-default">ビジュアル</button>
-          <button type="button" class="btn btn-default">R&B/ソウル</button>
-          <button type="button" class="btn btn-default">ヒップホップ</button>
-          <button type="button" class="btn btn-default">レゲエ/スカ</button>
+    <!-- 右要素がグリッドに対してモバイルでは横幅いっぱい、デスクトップでは1/3を占める -->
+      <div class="col-xs-12 col-md-4 genre-button">
+        <div class="row">
+        <% @genres.each do |genre| %>
+          <div class="btn-group-vertical col-md-offset-2 col-md-8" role="group">
+            <button type="button" class="btn btn-default"><%= link_to genre.genre, genre_path(genre.id) %></button>
+          </div>
+        <% end %>
         </div>
       </div>
       <div class="sidebar-recommend">
-        <!-- おすすめ画像がグリッドに対しモバイルでは横に2個、デスクトップでは横に一個表示される -->
-        <div class="row">
-          <div class="col-xs-12 col-md-6">
-            <div class="thumbnail-caption">
-              <h3>店長のおすすめ</h3>
-                <div class="row">
-                  <% @recommend.each do |product| %>
-                    <div class ="col-xs-6 col-md-6">
-                      <%= link_to products_path(product), class: 'new-arrival-content' do %>
-                        <% if product.jacket_image_id.present? %>
-                            <% product.jacket_images.each do |image| %>
-                              <%= attachment_image_tag image, :image, :fill, 80, 80 %>
-                            <% end %>
-                        <% else %>
-                          <%= image_tag 'no_image.jpg', :size => '80x80' %>
+        <!-- おすすめ画像がグリッドに対しモバイルでは横に2個、デスクトップでは横に2個表示される -->
+        <div class="thumbnail-caption">
+          <h3>店長のおすすめ</h3>
+            <div class="row">
+              <% @recommends.each do |product| %>
+                <div class ="col-xs-2 col-md-2">
+                  <%= link_to product_path(product), class: 'new-arrival-content' do %>
+                    <% if product.jacket_image_id.present? %>
+                        <% product.jacket_images.each do |image| %>
+                          <%= attachment_image_tag image, :image, :fill, 80, 80 %>
                         <% end %>
-                        <p><%= product.product_name %></p>
-                        <p><%= product.artist.name %></p>
-                      <% end %>
-                    </div>
+                    <% else %>
+                      <%= image_tag 'no_image.jpg', :size => '80x80' %>
+                    <% end %>
+                    <p><%= product.product_name %></p>
+                    <p><%= product.artist.name %></p>
                   <% end %>
-                  <%= paginate @products %>
                 </div>
+              <% end %>
             </div>
-          </div>
-        </div>
-
-              </div>
-          </div>
         </div>
       </div>
     </div>

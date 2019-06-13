@@ -1,13 +1,25 @@
 class Admins::ProductsController < ApplicationController
+
   def new
     @product = Product.new
+    @disk = @product.disks.build
+    @song = @disk.songs.build
     @genres = Genre.all
   end
 
-  def create
+  def create_confirm
     @product = Product.new(product_params)
-    @genres = Genre.all
-    if @product.save
+    binding.pry
+    # render 'new' if @product.invalid?
+  end
+
+  def create
+
+    @product = Product.new(product_params)
+
+    if params[:back]
+      render 'new'
+    elsif @product.save
       flash[:notice] = "新規商品の登録完了しました。"
       redirect_to admins_product_path(@product)
     else
@@ -46,16 +58,32 @@ class Admins::ProductsController < ApplicationController
     # ジャンル等まとめて商品情報を引っ張ってくる
     def find_product
       @product = Product.find(params[:id])
+      @disks = Disk.where(product_id: @product.id)
       @artist = Artist.find(@product.artist_id)
       @genre = Genre.find(@product.genre_id)
       @label = Label.find(@product.label_id)
     end
 
     def product_params
-      params.require(:product).permit(:genre_id, :artist_id, :label_id, 
-                                      :product_name, :price, :description,
-                                      :jacket_image, 
-                                      :stock, :recommend, :status)
+      params.require(:product).permit(:id,
+                                      :genre_id,
+                                      :artist_id,
+                                      :label_id,
+                                      :product_name,
+                                      :price,
+                                      :description,
+                                      :jacket_image,
+                                      :stock,
+                                      :recommend,
+                                      :status,
+                                      disks_attributes:  [:id,
+                                                          :product_id,
+                                                          :_destroy,
+                                                          songs_attributes: [:id,
+                                                                             :disks_id,
+                                                                             :song,
+                                                                             :second,
+                                                                             :_destroy]])
     end
 
 end

@@ -70,3 +70,6 @@ gem "refile-mini_magick"
 gem 'ransack'
 gem 'faker'
 gem 'pry-rails'
+gem 'cocoon'
+gem 'jquery-ui-rails'
+

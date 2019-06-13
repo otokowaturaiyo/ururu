@@ -1,20 +1,27 @@
 Rails.application.routes.draw do
 
-  resources :destinations, only:[:new, :create, :edit, :update] do
-  end
+
+  resources :destinations, only:[:new, :create, :edit, :update]
+
+  get '/products/feature' => 'products#feature'
+  get 'genres/:id' => 'genres#show', as: 'genre'
 
   resources :products, only:[:index, :show] do
+  resource :favorites, only: [:create, :destroy]
   end
 
 
   get 'search_list' => 'products#search_list'
 
-
-
   namespace :admins do
     resources :users, only: [:index, :show, :edit, :update]
-    resources :products, only:[:new, :create, :index, :show, :edit, :update]
+    resources :products, only:[:new, :create, :index, :show, :edit, :update] do
+      collection do
+        post 'create_confirm'
+      end
+    end
     get '/top' => 'home#top'
+    patch 'users/:id/resign' => 'users#resign', as:'admins_user_resign'
   end
 
 
@@ -33,7 +40,9 @@ Rails.application.routes.draw do
   resources :users, only:[:show, :edit, :update] do
   end
 
+
   get 'users/:id/resign' => 'users#resign', as: 'user_resign'
   patch 'users/:id/resign_confirm' => 'users#resign_confirm', as: 'resign_confirm'
+
 
 end

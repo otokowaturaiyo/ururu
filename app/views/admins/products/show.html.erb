@@ -1,65 +1,52 @@
 <div class="container">
 	<div class="col-md-offset-2 col-md-8">
 		<br>
-		<h1>商品詳細</h1>	
+		<h1>商品詳細</h1>
 		<br>
-		
+
 		<!-- 商品の概要説明 -->
 		<div class="row">
 			<div class="overview clearfix">
 				<div class="product_image pull-left col-md-6">
 					<% if @product.jacket_image_id.present? %>
-						<%= attachment_image_tag product, :jacket_image, :fill, 350, 350, class:"border" %>
+						<%= attachment_image_tag  @product, :jacket_image, :fill, 350, 350, class:"border" %>
 					<% else %>
 						<%= image_tag 'no_image.jpg', size: '350x350', class:"border" %>
 					<% end %>
 				</div>
 				<div class="product_details pull-right col-md-6">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							商品詳細
-						</div>
-						<table class="table">
-							<thead></thead>
-							<tbody>
-								<tr>
-									<td>アーティスト：<%= @artist.name %></td>
-								</tr>
-								<tr>
-									<td>レーベル：<%= @label.label %></td>
-								</tr>
-								<tr>
-									<td>ジャンル：<%= @genre.genre %></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<div class="panel panel-success">
-						<div class="panel-heading">
-							商品説明
-						</div>
-						<div class="panel-body">
-							<%= @product.description %>
-						</div>
+					<ul>
+						<li><i class="fas fa-music"></i>商品名：<%= @product.product_name %></li>
+						<li><i class="fas fa-music"></i>アーティスト：<%= @artist.name %></li>
+						<li><i class="fas fa-music"></i>レーベル：<%= @label.label %></li>
+						<li><i class="fas fa-music"></i>ジャンル：<%= @genre.genre %></li>
+					</ul>
+					<div class="blockquote">
+						<p><span><i class="fas fa-headphones fa-spin"></i></span>　商品の紹介</p>
+						<p><%= @product.description %></p>
 					</div>
 				</div>
 			</div>
 		</div>
-		
+
 		<!-- 商品ステータス・ -->
 		<div class="row">
 			<div class="product_status clearfix">
-				<p class="stock col-md-2 pull-left" style="margin-top: 10px;">在庫：<%= @product.stock %></p>
-				<p class="price col-md-4 pull-left" style="margin-top: 10px;">価格：<%= @product.price*1.08.round %>（税込）</p>
+				<p class="stock col-md-2 pull-left" style="margin-top: 10px;">
+					在庫：<%= @product.stock %>
+				</p>
+				<p class="price col-md-4 pull-left" style="margin-top: 10px;">
+					価格：<%= @product.price*1.08.round %>（税込）
+				</p>
+
 				<p class="btn btn-info  col-md-3 pull-left">
-					<i class="glyphicon glyphicon-thumbs-up"></i> 
+					<i class="glyphicon glyphicon-thumbs-up"></i>
 					25いいね
 				</p>
 			</div>
 		</div>
 
 		<!-- 編集ボタン -->
-
 		<div class="row" style="margin-top: 20px; margin-bottom: 20px;">
 			<div>
 				<%= link_to "商品情報の編集",
@@ -69,7 +56,7 @@
 			</div>
 		</div>
 
-		
+
 
 		<!-- レビュー -->
 		<div class="panel panel-default">
@@ -105,28 +92,23 @@
 
 		<!-- 収録曲 -->
 		<div class="panel panel-default">
-			<div class="panel-heading">
-				収録曲
-			</div>
-			<table class="table">
-				<tbody>
-					<tr>
-						<th>1</th>
-						<td>Bohemian Rapsody</td>
-						<td>3:54</td>
-					</tr>
-					<tr>
-						<th>2</th>
-						<td>Don't stop me now</td>
-						<td>2:55</td>
-					</tr>
-					<tr>
-						<th>3</th>
-						<td>We will rock you</td>
-						<td>1:22</td>
-					</tr>
-				</tbody>
-			</table>
+			<% @disks.each.with_index(1) do |disk, d| %>
+				<div class="panel-heading">
+					収録曲 - Disc<%= d %>
+				</div>
+				<table class="table songs-table">
+					<% songs = Song.where(disk_id: disk.id) %>
+					<% songs.each.with_index(1) do|song, s| %>
+						<tbody>
+							<tr class="row">
+								<td class="song-index col-md-2"><%= s %></td>
+								<td class="song-name col-md-8"><%= song.song %></td>
+								<td class="song-length col-md-2"><%= song.second %></td>
+							</tr>
+						</tbody>
+					<% end %>
+				</table>
+			<% end %>
 		</div>
 
 

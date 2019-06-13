@@ -1,30 +1,41 @@
 <div class="container">
 	<div class="row">
-		<div class="col-lg-1"></div>
-		<div class="col-lg-10">
+		<div class="col-lg-offset-1 col-lg-10">
+			<br>
+			<br>
+				<% if flash[:notice] %>
+					<div class="flash">
+						<%= flash[:notice] %>
+					</div>
+				<% end %>
 			<!-- ransackでエンドユーザーを検索できます -->
-			<%= search_form_for @q,url: admins_users_path do |f| %>
-				<%= f.label :user_nam_cont %>
-				<%= f.search_field :user_name_cont %>
-				<%= f.submit %>
+			<%= form_tag(admins_users_path, method: :get, enforce_utf8: false) do %>
+				<div>
+				<%#= label :user_nam_cont %>
+				<%= text_field_tag :q, params[:q], placeholder: "検索" %>
+				<%= submit_tag "🔍", class: " btn glyphicon glyphicon-search" %>
+				</div>
 			<% end %>
 			<!-- ransack end -->
+				<div class="space-bottom"></div>
 			<table class="table table-hover">
 				<tbody>
 					<% @users.each do |user| %>
 				<tr>
-					<%= admins_user_path(user) %>
-					 	<td><%= attachment_image_tag user, :profile_image_id, :fill, 60, 60, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb", size: "60x60" %></td>
+					<% admins_user_path(user) %>
+					 	<td><%= attachment_image_tag user, :profile_image_id, :fill, 45, 45, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb", size: "45x45" %></td>
 							<td><%= user.id %></td>
+							<td></td>
+							<td></td>
 							<td><%= user.user_name %></td>
 							<td><%= user.email %></td>
-							<td><%= submit '', %></td>
+							<!-- ↓私の学習が追いついたらあとで変更する -->
+							<td><%= link_to "編集", admins_user_path(user.id), class: "btn btn-info" %></td>
 					</tr>
 				 	<% end %>
 				</tbody>
 			</table>
 		</div>
-		<div class="col-lg-1"></div>
 	</div>
 </div>
 
