@@ -9,10 +9,9 @@
 			<div class="bg">
 				<br>
 				<br>
-					<div class="col-lg-4"></div>
-					<div class="col-lg-4">
+					<div class="col-lg-offset-4 col-lg-4">
 						<h1>管理ページ</h1>
-						<nav>
+						<nav class="home-nav">
 							<li><%= link_to 'ユーザー一覧', admins_users_path %></li>
 							<li><%= link_to '商品一覧', products_path %></li>
 							<li><%= link_to '商品の追加', new_admins_product_path %></li>
@@ -20,7 +19,6 @@
 							<li><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
 						</nav>
 					</div>
-					<div class="col-lg-4"></div>
 			</div>
 		</div>
 	</div>
