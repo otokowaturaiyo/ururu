@@ -59,7 +59,7 @@
 									</div>
 									<div class="col-xs-2">
 										<br>
-											<%= link_to "削除", admins_admins_user_resign_path(@user.id), method: :patch, class: "btn btn-danger" %>
+											<%= link_to "削除", admins_admins_user_resign_path(@user.id), method: :patch, "data-confirm" => "本当にユーザーをブロックする？", class: "btn btn-danger" %>
 									</div>
 							</div>
 					<%end%>
