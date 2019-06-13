@@ -1,0 +1,27 @@
+<h1>宛先を追加</h1>
+
+<h3>新しいお届け先の情報を入力してください。</h3>
+
+<div class="row sampleRow">
+		<div class="col-xs-3"></div>
+		<div class="col-xs-6">
+			<%= form_for(@destination) do |f|%>
+				<%= f.label :氏名（漢字） %><br />
+				<br><%= f.text_field :name, autofocus: true, autocomplete: "" %></br>
+
+				<%= f.label :電話番号　※ハイフンなしで入力してください %><br />
+    			<br><%= f.text_field :phone_number, autofocus: true, autocomplete: "" %></br>
+
+				<%= f.label :郵便番号　※ハイフンなしで入力してください %><br />
+    			<br><input type="text" name="user[postal_code]" size="10" maxlength="8" onKeyUp="AjaxZip3.zip2addr(this,'','user[postal_address]','user[postal_address]');"></br>
+
+				<%= f.label :住所 %><br />
+    			<br><input type="text" name="user[postal_address]" size="60"><br>
+
+    			<%= f.submit '宛先登録'%>
+			<% end %>
+		</div>
+		<div class="col-xs-3"></div>
+	</div>
+
+
