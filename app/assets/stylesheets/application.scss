@@ -53,17 +53,6 @@ header{
 }
 
 
-
-
-
-
-
-.panel-body{
-	height:150px;
-	width:350px;
-	overflow: scroll;
-}
-
 .border{
 	border:thin solid black;
 }
@@ -150,7 +139,7 @@ header{
 }
 
 .circle2{
-	width: 90%;
+	width: 100%;
 	border-bottom: 2px solid #00ffff;
 	margin: 0 auto;
 }
@@ -185,6 +174,10 @@ li {
 }
 .space-bottom{
 	padding-bottom: 5px;
+}
+
+.img{
+	text-align: center;
 }
 
 .search-list-container{

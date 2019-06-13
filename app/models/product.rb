@@ -16,4 +16,5 @@ class Product < ApplicationRecord
       else
         Product.all
       end
+    end
 end

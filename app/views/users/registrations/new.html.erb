@@ -1,5 +1,5 @@
 <div class="row sampleRow">
-    <div class="col-xs-2">2</div>
+    <div class="col-xs-2"></div>
     <div class="col-xs-8">
       <div class="circle">
 
@@ -10,14 +10,14 @@
             </div>
             <div class="col-xs-2"></div>
             <div class="col-xs-4">
-              <p>すでに会員登録お済の方</p><%= render "users/shared/links4" %>
+              <p>すでに会員登録お済の方</p>
+              <%= link_to new_session_path(resource_name) do %>
+                <button class="btn btn-info btn-lg">ログイン</button>
+              <% end %>
             </div>
             <div class="col-xs-1"></div>
     </div>
     <div class="circle2"></div>
-
-
-
 
 
 
@@ -32,11 +32,11 @@
       <%= f.label :氏名（漢字） %><br />
         <%= f.text_field :kanji_lastname, autofocus: true, autocomplete: "" %>
     </div>
-    <div class="col-xs-2"></div>
+    <div class="col-xs-1"></div>
     <div class="col-xs-3">
       <br><%= f.text_field :kanji_firstname, autofocus: true, autocomplete: "" %></br>
     </div>
-    <div class="col-xs-2"></div>
+    <div class="col-xs-3"></div>
   </div>
 
 
@@ -48,11 +48,11 @@
       <%= f.label :氏名（カナ） %><br />
         <%= f.text_field :kana_lastname, autofocus: true, autocomplete: "" %>
     </div>
-    <div class="col-xs-2"></div>
+    <div class="col-xs-1"></div>
     <div class="col-xs-3">
       <br><%= f.text_field :kana_firstname, autofocus: true, autocomplete: "" %></br>
     </div>
-    <div class="col-xs-2"></div>
+    <div class="col-xs-3"></div>
   </div>
 
   <div class="row field">
@@ -69,7 +69,7 @@
     <div class="col-xs-2"></div>
     <div class="col-xs-8">
       <%= f.label :メールアドレス %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <%= f.email_field :email, :size=>"92", autofocus: true, autocomplete: "email" %>
     </div>
     <div class="col-xs-2"></div>
   </div>
@@ -78,7 +78,7 @@
     <div class="col-xs-2"></div>
     <div class="col-xs-8">
       <%= f.label :電話番号　※ハイフンなしで入力してください %><br />
-        <%= f.text_field :phone_number, autofocus: true, autocomplete: "" %>
+        <%= f.text_field :phone_number, :size=>"92", autofocus: true, autocomplete: "" %>
     </div>
     <div class="col-xs-2"></div>
   </div>
@@ -98,7 +98,7 @@
     <div class="col-xs-2"></div>
     <div class="col-xs-8">
       <%= f.label :住所 %><br />
-        <input type="text" name="user[postal_address]" size="60">
+        <input type="text" name="user[postal_address]" size="92">
     </div>
     <div class="col-xs-2"></div>
   </div>
@@ -110,7 +110,7 @@
         <% if @minimum_password_length %>
         <em>(<%= @minimum_password_length %> characters minimum)</em>
         <% end %><br />
-        <%= f.password_field :password, autocomplete: "new-password" %>
+        <%= f.password_field :password, :size=>"92", autocomplete: "new-password" %>
     </div>
     <div class="col-xs-2"></div>
   </div>
@@ -119,21 +119,32 @@
     <div class="col-xs-2"></div>
     <div class="col-xs-8">
       <%= f.label :パスワード確認 %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+        <%= f.password_field :password_confirmation, :size=>"92", autocomplete: "new-password" %>
     </div>
     <div class="col-xs-2"></div>
   </div>
 
-<div class="touroku-field">
-    <%= f.submit "登録" %>
+<div class="row field">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-5">
+      <div class="touroku-field">
+        <%= f.submit "登録", class: "btn btn-info btn-lg" %>
+      </div>
+    </div>
+    <div class="col-xs-5"></div>
 </div>
 <% end %>
 
-<div class="touroku-field">
-      <p>すでに会員登録お済の方</p>
-      <br><%= render "users/shared/links4" %></br>
+<div class="row field">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-5">
+      <div class="touroku-field">
+        <p>すでに会員登録お済の方</p>
+        <%= link_to new_session_path(resource_name) do %>
+            <button class="btn btn-info btn-lg">ログイン</button>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-xs-5"></div>
 </div>
 </div>
-
-
-<%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
