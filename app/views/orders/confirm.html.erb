@@ -1,0 +1,63 @@
+<div class="confirm-container">
+	<h1>注文内容を確認</h1>
+		<h3>お届け先</h3>
+			<div class="row">
+				<div class="col-md-4">
+					<!--目的地表示-->
+					<%= @destination.destination_address %>
+				</div>
+				<div class="col-md-4">
+					<p>※宛先を変更できます</p>
+					<!--新しい宛先の指定-->
+					<%= link_to @destination, new_destination_path %>
+				</div>
+				<div class="col-md-4">
+					<!--お支払い方法の選択-->
+					<p>お支払い方法</p>
+				</div>
+			<div class="row">
+				<div class="col-md-4">
+					<!--予備住所1-->
+					<% @destination.each do |destination| %>
+						<%= destination.name %>
+						<%= destination.postal_code %>
+						<%= destination.destination_address %>
+
+				</div>
+				<!--<%= paginate @orders %>-->
+			</div>
+			<div class="order-items">
+				<div class="row">
+					<caption>ご注文内容</caption>
+					<table>
+						<thead>
+							<tr>
+								<th class="col-md-7 col-md-offset-1">商品名</th>
+								<th class="col-md-1">注文数</th>
+								<th class="col-md-2">金額(税込)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><%= @product.product_name %></td>
+								<td><%= @cart.product_count %></td>
+								<td><%= @products.price * @cart.product_count %></td>
+							</tr>
+						</tbody>
+					</table>
+					<p>送料 ¥500</p>
+					<p><%= @product.product_count%>点　合計　¥</p>
+				</div>
+			</div>
+			<div class="link-bottun">
+				<div class="row">
+					<div class="col-md-6">
+						<%= link_to %>
+					</div>
+					<div class="col-md-6">
+						<%= link_to %>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
