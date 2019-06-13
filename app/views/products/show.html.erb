@@ -62,7 +62,7 @@
 			</div>
 		</div>
 
-		<!-- カート機能 -->
+		<!-- カート機能の実装はイッシーがやります -->
 
 		<div class="row" style="margin-top: 20px; margin-bottom: 20px;">
 			<div>
@@ -108,31 +108,23 @@
 
 		<!-- 収録曲 -->
 		<div class="panel panel-default">
-			<div class="panel-heading">
-				収録曲
-			</div>
-			<table class="table">
-				<thead>
-					<tr>
-						<th>ディスク</th>
-						<th>曲番</th>
-						<th>収録曲</th>
-						<th>再生時間</th>
-					</tr>
-				</thead>
-				<% @disks.each_with_index do |disk,j| %>
-					<tbody>
-						<% disk.songs.each_with_index do |song,i| %>
-						<tr>
-							<td><%= j +1 %></td>
-							<td><%= i + 1 %></td>
-							<td><%= song.song%></td>
-							<td><%= song.second %></td>
-						</tr>
-						<% end %>
-					</tbody>
-				<% end %>
-			</table>
+			<% @disks.each.with_index(1) do |disk, d|%>
+				<div class="panel-heading">
+					収録曲 - disc<%= d %>
+				</div>
+				<table class="table songs-table">
+					<% songs = Song.where(disk_id: disk.id) %>
+					<% songs.each.with_index(1) do |song, s| %>
+						<tbody>
+							<tr class="row">
+								<td class="song-index col-md-2"><%= s %></td>
+						        <td class="song-name col-md-8"><%= song.song %></td>
+						        <td class="song-length col-md-2"><%= song.second %></td>
+							</tr>
+						</tbody>
+					<% end %>
+				</table>
+			<% end %>
 		</div>
 	</div>
 </div>
