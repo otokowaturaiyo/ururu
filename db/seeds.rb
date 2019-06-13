@@ -58,7 +58,7 @@ Genre.create!(genre: "R&B/ソウル")
 Genre.create!(genre: "ヒップホップ")
 Genre.create!(genre: "レゲエ/スカ")
 
-# アーティスト名シード	
+# アーティスト名シード
 5.times do
 	name = Faker::Music::RockBand.name
 	Artist.create!(name: name)

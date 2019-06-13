@@ -55,15 +55,9 @@
                 <%= submit_tag '検索', :name => nil %>
               <% end %>
             </p>
-<<<<<<< HEAD
             <p class="navbar-text navbar-right">ようこそ<%= current_user.user_name %>さん</p>
           <% else %>
-=======
 
-            <p class="navbar-text navbar-right">ようこそ<%= current_user.user_name %>さん</p>
-           <% else %>
-
->>>>>>> bffe9836312a198cdb1a015d72058e898b248e17
             <ul class="nav navbar-nav">
                <li><%= link_to "商品一覧", products_path %></li>
                <li><%= link_to "ログイン", new_user_session_path %></li>

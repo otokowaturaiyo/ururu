@@ -3,7 +3,7 @@ class Admins::UsersController < ApplicationController
 	# before_action
 	def index
 		query = { user_name_cont: params[:q] }
-		@users = User.page(params[:page]).reverse_order
+		@users = User.where(resignation: false).page(params[:page]).reverse_order
 		q = User.ransack(query)
 		if params[:q]
 			@users = q.result(distinct: true).page(params[:page]).reverse_order
@@ -29,7 +29,10 @@ class Admins::UsersController < ApplicationController
 	end
 	def resign
 		@user = User.find(params[:id])
-		@user.update(resignation: true)
+		@user.update!(
+			resignation: true,
+			resigned_at: Time.current
+			)
 		flash[:notice] = "ユーザーをブロックしました！"
 		redirect_to admins_users_path
 	end

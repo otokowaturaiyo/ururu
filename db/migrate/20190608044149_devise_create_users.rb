@@ -41,7 +41,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.string :phone_number, null: false
       t.text :profile_image_id
       t.timestamps null: false
-      t.boolean :resignation
+      t.boolean :resignation, null: false, default: false
       t.datetime :resigned_at
     end
 
