@@ -30,8 +30,8 @@ class Admins::UsersController < ApplicationController
 	def resign
 		@user = User.find(params[:id])
 		@user.update(resignation: false)
-		flash[:notice] = "アクセスできません！"
-		redirect_to products_path
+		flash[:notice] = "ユーザーをブロックしました！"
+		redirect_to admins_users_path
 	end
 
     private
