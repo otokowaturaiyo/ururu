@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
 
+  resources :destinations, only:[:new, :create, :edit, :update] do
+  end
 
   resources :products, only:[:index, :show] do
   end
+
 
   get 'search_list' => 'products#search_list'
 
@@ -30,5 +33,7 @@ Rails.application.routes.draw do
   resources :users, only:[:show, :edit, :update] do
   end
 
-end
+  get 'users/:id/resign' => 'users#resign', as: 'user_resign'
+  patch 'users/:id/resign_confirm' => 'users#resign_confirm', as: 'resign_confirm'
 
+end

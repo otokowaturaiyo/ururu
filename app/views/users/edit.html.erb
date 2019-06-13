@@ -6,6 +6,13 @@
 
 <%= form_for(@user) do |f| %>
 
+<% if @user.errors.any? %>
+  <h2><%= @user.errors.count %>error prohibited this obj from being saved:</h2>
+  <ul><% @user.errors.full_messages.each do |messages| %></ul>
+    <li><%= messages %></li>
+  <% end %>
+<% end %>
+
 
 
   <div class="row sampleRow">
@@ -13,7 +20,7 @@
       <div class="row sampleRow">
         <div class="col-xs-3"></div>
         <div class="col-xs-6">
-          <%= attachment_image_tag @user, :profile_image_url, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg" %>
+          <%= attachment_image_tag @user, :profile_image_url, :fill, 350, 350, format: 'jpeg', fallback: "no_image.jpg", size:'350x350' %>
         </div>
         <div class="col-xs-3"></div>
       </div>
@@ -59,10 +66,15 @@
         <div class="col-xs-2"></div>
       </div>
 
+      <div class="field">
+        <%= f.label :ユーザー名 %><br />
+        <%= f.text_field :user_name, autofocus: true, autocomplete: "" %>
+      </div>
+
 
       <div class="field">
         <%= f.label :メールアドレス %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "" %>
       </div>
 
       <div class="field">
@@ -99,9 +111,15 @@
           <div class="actions">
             <%= f.submit "編集完了" %>
           </div>
+
+          <%= link_to user_resign_path(@user.id) do %>
+              <button class="btn btn-info btn-lg">退会する</button>
+            <% end %>
+
         </div>
         <div class="col-xs-5"></div>
       </div>
 <% end %>
   </div>
 </div>
+

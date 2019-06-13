@@ -5,6 +5,7 @@ class ProductsController < ApplicationController
   def index
   	@products = Product.page(params[:page]).per(PER).order(created_at: :desc)
   	@recommend = Product.where(recommend: true)
+    @user = current_user
   end
 
   def show
