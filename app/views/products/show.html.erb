@@ -3,13 +3,13 @@
 		<br>
 		<h1>商品詳細</h1>
 		<br>
-		
+
 		<!-- 商品の概要説明 -->
 		<div class="row">
 			<div class="overview clearfix">
 				<div class="product_image pull-left col-md-6">
 					<% if @product.jacket_image_id.present? %>
-						<%= attachment_image_tag product, :jacket_image, :fill, 350, 350, class:"border" %>
+						<%= attachment_image_tag @product, :jacket_image, :fill, 350, 350, class:"border" %>
 					<% else %>
 						<%= image_tag 'no_image.jpg', size: '350x350', class:"border" %>
 					<% end %>
@@ -49,21 +49,25 @@
 		<!-- 商品ステータス・ -->
 		<div class="row">
 			<div class="product_status clearfix">
-				<p class="stock col-md-2 pull-left" style="margin-top: 10px;">在庫：<%= @product.stock %></p>
-				<p class="price col-md-2 pull-left" style="margin-top: 10px;">価格：<%= @product.price*1.08.round %>（税込）</p>
+				<p class="stock col-md-2 pull-left" style="margin-top: 10px;">
+					在庫：<%= @product.stock %>
+				</p>
+				<p class="price col-md-2 pull-left" style="margin-top: 10px;">
+					<% tax_included = @product.price*1.08 %>
+					価格：<%= tax_included.to_i %>（税込）
+				</p>
 				<p class="count col-md-2 pull-left">
-					<%= select_tag :個数, options_for_select((1..@product.stock).to_a) %>
+					<%= form_for @cart do |f| %>
+					:個数
+					<%= f.number_field :product_count %>
 				</p>
 				 <!--いいね機能の実装は千綾ちゃんがやります-->
 				<p class="btn btn-info  col-md-3 pull-left">
 					<i class="glyphicon glyphicon-thumbs-up"></i>
 					25いいね
 				</p>
-
-					<div class="like">
-					</div>
-
-
+				<div class="like">
+				</div>
 			</div>
 		</div>
 
@@ -71,11 +75,14 @@
 
 		<div class="row" style="margin-top: 20px; margin-bottom: 20px;">
 			<div>
-				<%= link_to "カートに入れる",
-							edit_admins_product_path(@product),
-							class:"btn btn-primary col-md-offset-2 col-md-8 glyphicon glyphicon-shopping-cart"%>
+				<!-- カートに商品情報およびユーザーIDをhidden fieldで送る -->
+				<%= f.hidden_field :product_id, value: @product.id %>
+				<%= f.hidden_field :user_id, value: current_user.id %>
+				<%= f.hidden_field :product_price, value: @product.price %>
+				<%= f.submit "カートに追加する" %>
 			</div>
 		</div>
+		<% end %>
 
 
 		<!-- レビュー --><!--レビュー機能はトラが作ります-->
