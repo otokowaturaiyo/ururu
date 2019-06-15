@@ -4,6 +4,7 @@ class Product < ApplicationRecord
 	belongs_to :label
 	has_many :disks, dependent: :destroy
 	has_many :likes, dependent: :destroy
+	has_many :reviews, dependent: :destroy
 
 	accepts_nested_attributes_for :disks, allow_destroy: true
 

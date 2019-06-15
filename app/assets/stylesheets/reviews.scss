@@ -1,0 +1,16 @@
+// Place all the styles related to the Reviews controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.scroller {
+  width: 300px;
+  height: 200px;
+  overflow-y: scroll;
+  scrollbar-color: rebeccapurple green;
+  scrollbar-width: thin;
+  background-color: white;
+  border: solid 1px #000000;
+}
+.review-record{
+	 word-break:break-all;
+}

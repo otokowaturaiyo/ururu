@@ -10,7 +10,9 @@ class ProductsController < ApplicationController
 
   def show
     find_product
-	@disks = Disk.where(product_id: @product.id)
+    @disks = Disk.where(product_id: @product.id)
+    @review =Review.new
+    @reviews = @product.reviews
   end
 
   def feature

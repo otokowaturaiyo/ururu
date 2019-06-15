@@ -14,4 +14,5 @@ class User < ApplicationRecord
   validates :phone_number, length: { is: 11 }
   validates :encrypted_password, length: { minimum: 6 }
   has_many :likes, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 end
