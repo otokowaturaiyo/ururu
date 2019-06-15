@@ -10,10 +10,10 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
-	@artist = Artist.find(@product.artist_id)
-	@genre = Genre.find(@product.genre_id)
-	@label = Label.find(@product.label_id)
-	@disks = @product.disks
+  	@artist = Artist.find(@product.artist_id)
+  	@genre = Genre.find(@product.genre_id)
+  	@label = Label.find(@product.label_id)
+  	@disks = @product.disks
   end
 
   def feature

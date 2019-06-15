@@ -17,4 +17,12 @@ class Product < ApplicationRecord
         Product.all
       end
     end
+
+      def likes?(user)
+        ret = false
+        if user.present?
+          ret = likes.where(user_id: user.id).exists?
+        end
+        return ret
+      end
 end

@@ -1,6 +1,5 @@
 class Admins::UsersController < ApplicationController
 	before_action :authenticate_admin!
-	# before_action
 	def index
 		query = { user_name_cont: params[:q] }
 		@users = User.where(resignation: false).page(params[:page]).reverse_order

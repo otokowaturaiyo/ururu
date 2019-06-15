@@ -3,7 +3,6 @@
 		<br>
 		<h1>商品詳細</h1>
 		<br>
-		
 		<!-- 商品の概要説明 -->
 		<div class="row">
 			<div class="overview clearfix">
@@ -54,15 +53,33 @@
 				<p class="count col-md-2 pull-left">
 					<%= select_tag :個数, options_for_select((1..@product.stock).to_a) %>
 				</p>
-				 <!--いいね機能の実装は千綾ちゃんがやります-->
-				<p class="btn btn-info  col-md-3 pull-left">
-					<i class="glyphicon glyphicon-thumbs-up"></i>
-					25いいね
-				</p>
 
-					<div class="like">
-					</div>
+			<!-- いいね機能 -->
+				<% if current_user.present? %>
+					<% if @product.likes?(current_user) %>
+						<li>
+							<%= link_to product_like_path(@product), method: :delete, class: 'bounce like-btn-off' do %>
+							<div class="box animated bounce">
+								<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+							</div>
+								<%= @product.likes.count %> いいね
+							<% end %>
+						</li>
+							<% else %>
+						<li>
+							<%= link_to  product_likes_path(@product), method: :post, class: ' like-btn-on' do %>
+							<div class="box-off bounceOut">
+								<i class="fa fa-heart fa-h" aria-hidden="true" style="color: pink;"></i>
+							</div>
+							<%= @product.likes.count %> いいね
+							<% end %>
+						</li>
+					<% end %>
 
+				<% else %>
+					<%= @product.likes.count %> いいね
+				<% end %>
+			<!-- いいね -->
 
 			</div>
 		</div>
