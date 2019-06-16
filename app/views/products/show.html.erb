@@ -97,10 +97,14 @@
 		<div class="row" style="margin-top: 20px; margin-bottom: 20px;">
 			<div>
 				<!-- カートに商品情報およびユーザーIDをhidden fieldで送る -->
-				<%= f.hidden_field :product_id, value: @product.id %>
-				<%= f.hidden_field :user_id, value: current_user.id %>
-				<%= f.hidden_field :product_price, value: @product.price %>
-				<%= f.submit "カートに追加する" %>
+				<% if user_signed_in? %>
+					<%= f.hidden_field :product_id, value: @product.id %>
+					<%= f.hidden_field :user_id, value: current_user.id %>
+					<%= f.hidden_field :product_price, value: @product.price %>
+					<%= f.submit "カートに追加する" %>
+				<% else %>
+					<%= link_to "カートに追加する", "#"  %>
+				<% end %>
 			</div>
 		</div>
 		<% end %>
