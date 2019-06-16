@@ -17,13 +17,13 @@ class ReviewsController < ApplicationController
 	def update
 		product = Product.find(params[:id])
 		product.review.update(review_params)
-		redirect_to product_path(product)
+		redirect_to product_path(product.id)
 	end
 
 	def destroy
-		@comment = Comment.find(params[:id])
-		@comment.destroy
-		render :index
+		@review = Review.find(params[:id])
+		@review.destroy
+		redirect_to product_path(params[:product_id])
 
 	end
 

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'genres/:id' => 'genres#show', as: 'genre'
   resources :products, only:[:index, :show] do
     resource :favorites, only: [:create, :destroy]
-    resource :reviews, only: [:index, :create, :edit, :update, :destroy]
+    resources :reviews, only: [:index, :create, :edit, :update, :destroy]
   end
   get 'search_list' => 'products#search_list'
 
