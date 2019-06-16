@@ -143,7 +143,7 @@ ActiveRecord::Schema.define(version: 2019_06_13_121418) do
     t.text "profile_image_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "resignation", default: false, null: false
+    t.boolean "resignation"
     t.datetime "resigned_at"
     t.text "profile_image_url_id"
     t.index ["email"], name: "index_users_on_email", unique: true
