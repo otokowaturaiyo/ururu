@@ -6,8 +6,6 @@ class Product < ApplicationRecord
 	has_many :disks, dependent: :destroy
 	has_many :likes, dependent: :destroy
 
-	accepts_nested_attributes_for :disks, allow_destroy: true
-
 	attachment :jacket_image
 
 	#検索で入力された情報をモデルに探してもらう
