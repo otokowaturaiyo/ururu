@@ -57,7 +57,7 @@
 				</p>
 				<p class="count col-md-2 pull-left">
 					<%= form_for @cart do |f| %>
-					:個数
+					個数:
 					<%= f.number_field :product_count %>
 				</p>
 
@@ -92,22 +92,22 @@
 			</div>
 		</div>
 
+<<<<<<< HEAD
+		<!-- カート機能 -->
+=======
 		<!-- カート機能の実装はイッシーがやります -->
 
+>>>>>>> 53a5729b33ffe296bdbb31598b2f22db1ceb968c
 		<div class="row" style="margin-top: 20px; margin-bottom: 20px;">
 			<div>
 				<!-- カートに商品情報およびユーザーIDをhidden fieldで送る -->
-				<% if user_signed_in? %>
-					<%= f.hidden_field :product_id, value: @product.id %>
-					<%= f.hidden_field :user_id, value: current_user.id %>
-					<%= f.hidden_field :product_price, value: @product.price %>
-					<%= f.submit "カートに追加する" %>
-				<% else %>
-					<%= link_to "カートに追加する", "#"  %>
+				<%= f.hidden_field :product_id, value: @product.id %>
+				<%= f.hidden_field :product_price, value: @product.price %>
+				<%= f.submit "カートに追加する" %>
 				<% end %>
 			</div>
 		</div>
-		<% end %>
+
 
 
 		<!-- レビュー --><!--レビュー機能はトラが作ります-->

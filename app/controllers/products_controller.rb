@@ -9,20 +9,11 @@ class ProductsController < ApplicationController
   end
 
   def show
-<<<<<<< HEAD
     find_product
-    @disks = Disk.where(product_id: @product.id)
+    @disks = @product.disks
     @review =Review.new
     @reviews = @product.reviews
-=======
-    @product = Product.find(params[:id])
-  	@artist = Artist.find(@product.artist_id)
-  	@genre = Genre.find(@product.genre_id)
-  	@label = Label.find(@product.label_id)
-  	@disks = @product.disks
     @cart = Cart.new
-
->>>>>>> aff74c13379a9c71c29f1d89033cf3492a941fd3
   end
 
   def feature

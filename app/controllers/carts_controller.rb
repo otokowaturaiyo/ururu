@@ -1,9 +1,14 @@
 class CartsController < ApplicationController
 
   def create
-    @cart = Cart.new(cart_params)
-    @cart.save
-    redirect_to cart_path(@cart.user_id)
+    if user_signed_in?
+      @cart = Cart.new(cart_params)
+      @cart.user_id = current_user.id
+      @cart.save
+      redirect_to cart_path(@cart.user_id)
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def show
