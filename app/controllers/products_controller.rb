@@ -10,9 +10,9 @@ class ProductsController < ApplicationController
 
   def show
     find_product
+    @disks = @product.disks
     @review =Review.new
     @reviews = @product.reviews
-  	@disks = @product.disks
     @cart = Cart.new
   end
 
