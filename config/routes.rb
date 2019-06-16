@@ -3,11 +3,13 @@ Rails.application.routes.draw do
   get '/products/feature' => 'products#feature'
   get 'genres/:id' => 'genres#show', as: 'genre'
 
-  resources :products, only:[:index, :show]
-  resource :favorites, only: [:create, :destroy]
+
+  resources :products, only:[:index, :show] do
+  resources :likes, only: [:create, :destroy]
+  end
+
   resources :destinations, only:[:new, :create, :edit, :update]
   resources :carts, only:[:create, :show, :update, :destroy]
-
 
   get 'search_list' => 'products#search_list'
 

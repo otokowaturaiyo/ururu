@@ -15,6 +15,7 @@ class ProductsController < ApplicationController
   	@label = Label.find(@product.label_id)
   	@disks = @product.disks
     @cart = Cart.new
+
   end
 
   def feature
