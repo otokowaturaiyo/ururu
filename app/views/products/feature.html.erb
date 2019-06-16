@@ -1,7 +1,9 @@
 <div class="container-fluid background-color1">
+	<!--タイトル小さめ-->
 	<div class="Title">
 		Ururuへようこそ
 	</div>
+	<!--セール見出し-->
 	<div class="row summer-sale">
 		<div class="col-xs-6 col-md-6">
 			<h1 class="sale-title">SUMMER<br>SALE</h1>
@@ -17,27 +19,26 @@
 			</div>
 		</div>
 	</div>
-	
-	
+	<!--セール内容-->
 	<div class="sale-info">
 		<div class="sale-text">
 			お得なセール開催中<br>
 			なんと、2019年6月25日からスタート！
 		</div>
-		<ul>
+		<ul class="sale-list">
 			<li>まとめ買い3枚で<span class="sale1">10%OFF</span></li>
 			<li>10000円以上お買い上げで<span class="sale2">1000円引き</span></li>
 			<li>上記の値引きは併用可能です</li>
 		</ul>
 	</div>
-	
+	<!--センター画像-->
 	<div class="summer-image">
 		<%= image_tag 'summer1.jpg', class: "summer-image-1", :size => '1000x500' %>
 	</div>
-	
+	<!--プロフィール紹介-->
 	<div class="ururu-intro">
 		<div class="row intro">
-			<div class="col-xs-4 col-md-2">
+			<div class="col-xs-4 col-md-2 intro-image">
 				<%= image_tag '外山春風.jpg', class: "toyama-ima", :size => '200x200'%>
 			</div>
 			<div class="col-xs-8 col-md-10">
@@ -58,6 +59,7 @@
 			</div>
 		</div>
 	</div>
+    <!--店長のおすすめ-->
     <section class="row recommend-container">
       <h3>店長のおすすめ</h3>
           <% @recommend.each do |product| %>

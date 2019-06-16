@@ -1,0 +1,34 @@
+<div class="row">
+	<% reviews.each do |review| %>
+		<div class="review-record clearfix">
+			<% unless review.id.nil? %>
+			<div class="col-md-2">
+				<p><%= review.user.user_name %></p>
+			</div>
+			<div class="col-md-2 review-image">
+				<% if review.product.jacket_image_id.present? %>
+					<%= attachment_image_tag product, :jacket_image, :fill, 30, 30, class:"border"%>
+				<% else %>
+					<%= image_tag 'no_image.jpg', size: '30x30', class:"border" %>
+				<% end %>
+			</div>
+			<div class="col-md-5">
+				<%= review.body %>
+			</div>
+			<div class="col-md-3">
+				<div class="row">
+	 			<% if review.user == current_user %>
+	 				<div class="col-md-6">
+						<p class="btn btn-warning"><%= link_to '編集', edit_product_review_path(product_id: review.product_id,id: review.id) %></p>
+					</div>
+					<div class="col-md-6">
+						<p class="btn btn-danger"><%= link_to '削除', product_review_path(product_id: review.product_id,id: review.id), method: :delete %>
+						</p>
+					</div>
+				<% end %>
+				</div>
+			</div>
+			<% end %>
+		</div>
+	<% end %>
+</div>

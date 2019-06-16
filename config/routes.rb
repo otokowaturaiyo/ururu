@@ -5,7 +5,8 @@ Rails.application.routes.draw do
 
 
   resources :products, only:[:index, :show] do
-  resources :likes, only: [:create, :destroy]
+    resources :reviews, only: [:index, :create, :edit, :update, :destroy]
+    resources :likes, only: [:create, :destroy]
   end
 
   resources :destinations, only:[:new, :create, :edit, :update]
@@ -34,6 +35,10 @@ Rails.application.routes.draw do
   }
 
   resources :users, only:[:show, :edit, :update]
+
+  resources :orders, only:[:index, :show, :create]
+  get '/orders/:id/confirm' => 'orders#confirm', as:'order_confirm'
+  get '/orders/:id/complete' => 'orders#complete', as:'order_complete'
 
 
   get 'users/:id/resign' => 'users#resign', as: 'user_resign'

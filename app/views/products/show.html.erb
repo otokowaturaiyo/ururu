@@ -92,7 +92,7 @@
 			</div>
 		</div>
 
-		<!-- カート機能 -->
+		<!-- カート機能の実装はイッシーがやります -->
 
 		<div class="row" style="margin-top: 20px; margin-bottom: 20px;">
 			<div>
@@ -111,73 +111,42 @@
 
 
 		<!-- レビュー --><!--レビュー機能はトラが作ります-->
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				購入者のレビュー
+		<div class="row">
+			<div class="col-md-5">
+				<h3>レビュー投稿</h3>
+				<% if user_signed_in? %>
+					<!-- コメント入力欄を商品の詳細ページに表示するためのrender -->
+					<%= render partial: 'reviews/form', locals: { reviews: @reviews, products: @products }%>
+				<% end %>
 			</div>
-			<table class="table">
-				<tbody>
-					<tr>
-						<th><%= image_tag 'no_image.jpg', size: '40x40', class:"img-circle" %></th>
-						<td>星の数</td>
-						<td>ユーザー名</td>
-						<td>レビュー内容</td>
-						<td><%= link_to "編集","#",class:"btn btn-primary" %></td>
-					</tr>
-					<tr>
-						<th><%= image_tag 'no_image.jpg', size: '40x40', class:"img-circle" %></th>
-						<td>星の数</td>
-						<td>ユーザー名</td>
-						<td>レビュー内容</td>
-						<td><%= link_to "編集","#",class:"btn btn-primary" %></td>
-					</tr>
-					<tr>
-						<th><%= image_tag 'no_image.jpg', size: '40x40', class:"img-circle" %></th>
-						<td>星の数</td>
-						<td>ユーザー名</td>
-						<td>レビュー内容</td>
-						<td><%= link_to "編集","#",class:"btn btn-primary" %></td>
-					</tr>
-				</tbody>
-			</table>
+			<h3>レビュー一覧</h3>
+			<div class="col-md-7 scroller">
+				<div id="reviews_area"><!--ここのidを目印にdiv内をAjaxで書き換え-->
+					<!-- 投稿されたコメント一覧を商品の詳細ページに表示するためのrender -->
+					<%= render partial: 'reviews/index', locals: { reviews: @reviews }%>
+				</div>
+			</div>
 		</div>
 
 		<!-- 収録曲 -->
 		<div class="panel panel-default">
-			<div class="panel-heading">
-				収録曲
-			</div>
-			<table class="table">
-				<thead>
-					<tr>
-						<th>ディスク</th>
-						<th>曲番</th>
-						<th>収録曲</th>
-						<th>秒数</th>
-					</tr>
-				</thead>
-				<% @disks.each_with_index do |disk,j| %>
-					<tbody>
-						<% disk.songs.each_with_index do |song,i| %>
-						<tr>
-							<td><%= j +1 %></td>
-							<td><%= i + 1 %></td>
-							<td><%= song.song%></td>
-							<td><%= song.second %></td>
-						</tr>
-						<% end %>
-					</tbody>
-				<% end %>
-			</table>
+			<% @disks.each.with_index(1) do |disk, d|%>
+				<div class="panel-heading">
+					収録曲 - disc<%= d %>
+				</div>
+				<table class="table songs-table">
+					<% songs = Song.where(disk_id: disk.id) %>
+					<% songs.each.with_index(1) do |song, s| %>
+						<tbody>
+							<tr class="row">
+								<td class="song-index col-md-2"><%= s %></td>
+						        <td class="song-name col-md-8"><%= song.song %></td>
+						        <td class="song-length col-md-2"><%= song.second %></td>
+							</tr>
+						</tbody>
+					<% end %>
+				</table>
+			<% end %>
 		</div>
 	</div>
 </div>
-
-<!-- <script>
-$(function(){
-	$('.like-box').click(function(){
-		$(this).addClass('animated bounce');
-		}
-    });
-
-</script> -->

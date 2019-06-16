@@ -9,6 +9,12 @@ class ProductsController < ApplicationController
   end
 
   def show
+<<<<<<< HEAD
+    find_product
+    @disks = Disk.where(product_id: @product.id)
+    @review =Review.new
+    @reviews = @product.reviews
+=======
     @product = Product.find(params[:id])
   	@artist = Artist.find(@product.artist_id)
   	@genre = Genre.find(@product.genre_id)
@@ -16,6 +22,7 @@ class ProductsController < ApplicationController
   	@disks = @product.disks
     @cart = Cart.new
 
+>>>>>>> aff74c13379a9c71c29f1d89033cf3492a941fd3
   end
 
   def feature
@@ -33,6 +40,13 @@ class ProductsController < ApplicationController
 
   def product_params
   	params.require(:product).permit(:jacket_image_id, :product_name, :artist_id)
+  end
+
+  def find_product
+      @product = Product.find(params[:id])
+      @artist = Artist.find(@product.artist_id)
+      @genre = Genre.find(@product.genre_id)
+      @label = Label.find(@product.label_id)
   end
 
 end
