@@ -7,19 +7,10 @@ class Admins::ProductsController < ApplicationController
     @genres = Genre.all
   end
 
-  def create_confirm
-    @product = Product.new(product_params)
-    binding.pry
-    # render 'new' if @product.invalid?
-  end
-
   def create
-
     @product = Product.new(product_params)
 
-    if params[:back]
-      render 'new'
-    elsif @product.save
+    if @product.save
       flash[:notice] = "新規商品の登録完了しました。"
       redirect_to admins_product_path(@product)
     else
