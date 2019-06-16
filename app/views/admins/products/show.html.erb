@@ -9,38 +9,21 @@
 			<div class="overview clearfix">
 				<div class="product_image pull-left col-md-6">
 					<% if @product.jacket_image_id.present? %>
-						<%= attachment_image_tag product, :jacket_image, :fill, 350, 350, class:"border" %>
+						<%= attachment_image_tag  @product, :jacket_image, :fill, 350, 350, class:"border" %>
 					<% else %>
 						<%= image_tag 'no_image.jpg', size: '350x350', class:"border" %>
 					<% end %>
 				</div>
 				<div class="product_details pull-right col-md-6">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							商品詳細
-						</div>
-						<table class="table">
-							<thead></thead>
-							<tbody>
-								<tr>
-									<td>アーティスト：<%= @artist.name %></td>
-								</tr>
-								<tr>
-									<td>レーベル：<%= @label.label %></td>
-								</tr>
-								<tr>
-									<td>ジャンル：<%= @genre.genre %></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<div class="panel panel-success">
-						<div class="panel-heading">
-							商品説明
-						</div>
-						<div class="panel-body">
-							<%= @product.description %>
-						</div>
+					<ul>
+						<li><i class="fas fa-music"></i>商品名：<%= @product.product_name %></li>
+						<li><i class="fas fa-music"></i>アーティスト：<%= @artist.name %></li>
+						<li><i class="fas fa-music"></i>レーベル：<%= @label.label %></li>
+						<li><i class="fas fa-music"></i>ジャンル：<%= @genre.genre %></li>
+					</ul>
+					<div class="blockquote">
+						<p><span><i class="fas fa-compact-disc fa-spin"></i></span>　商品の紹介</p>
+						<p><%= @product.description %></p>
 					</div>
 				</div>
 			</div>
@@ -53,13 +36,19 @@
 					在庫：<%= @product.stock %>
 				</p>
 				<p class="price col-md-4 pull-left" style="margin-top: 10px;">
-					価格：<%= @product.price*1.08.round %>（税込）
+					<% tax_included = @product.price*1.08 %>
+					価格：<%= tax_included.to_i %>（税込）
 				</p>
 
-				<p class="btn btn-info  col-md-3 pull-left">
-					<i class="glyphicon glyphicon-thumbs-up"></i>
-					25いいね
-				</p>
+			<!-- いいね -->
+			<% if @product.likes.count == 0 %>
+				<%= @product.likes.count %> いいね
+			<% else %>
+				<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+					<%= @product.likes.count %> いいね
+			<% end %>
+			<!-- いいね -->
+
 			</div>
 		</div>
 

@@ -59,17 +59,6 @@ header{
 }
 
 
-
-
-
-
-
-.panel-body{
-	height:150px;
-	width:350px;
-	overflow: scroll;
-}
-
 .border{
 	border:thin solid black;
 }
@@ -155,7 +144,7 @@ header{
 }
 
 .circle2{
-	width: 90%;
+	width: 100%;
 	border-bottom: 2px solid #00ffff;
 	margin: 0 auto;
 }
@@ -192,6 +181,10 @@ li {
 	padding-bottom: 5px;
 }
 
+.img{
+	text-align: center;
+}
+
 .search-list-container{
 	width: 100%;
 	background-color: #FFFFDD;
@@ -199,6 +192,7 @@ li {
 .search-table{
 	margin: 40px;
 }
+
 .sale-list{
 	font-size: 30px;
 
@@ -206,3 +200,4 @@ li {
 .intro-image{
 	margin-top: 12px;
 }
+

@@ -24,9 +24,7 @@
               <div class ="col-xs-6 col-md-4">
                 <%= link_to product_path(product), class: 'new-arrival-content' do %>
                   <% if product.jacket_image_id.present? %>
-                      <% product.jacket_images.each do |image| %>
-                        <%= attachment_image_tag image, :image, :fill, 80, 80 %>
-                      <% end %>
+                    <%= attachment_image_tag  product, :jacket_image, :fill, 80, 80 %>
                   <% else %>
                     <%= image_tag 'no_image.jpg', :size => '80x80' %>
                   <% end %>
@@ -63,9 +61,7 @@
                 <div class ="col-xs-2 col-md-2">
                   <%= link_to product_path(product), class: 'new-arrival-content' do %>
                     <% if product.jacket_image_id.present? %>
-                        <% product.jacket_images.each do |image| %>
-                          <%= attachment_image_tag image, :image, :fill, 80, 80 %>
-                        <% end %>
+                      <%= attachment_image_tag  product, :jacket_image, :fill, 80, 80 %>
                     <% else %>
                       <%= image_tag 'no_image.jpg', :size => '80x80' %>
                     <% end %>

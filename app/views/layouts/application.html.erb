@@ -4,10 +4,10 @@
     <title>Ururu</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+    <script src="https://kit.fontawesome.com/adabbcc59d.js"></script>
   </head>
 
 
@@ -47,7 +47,8 @@
             <ul class="nav navbar-nav">
               <li><%= link_to "商品一覧", products_path %></li>
               <li><a href="#">カート確認</a></li>
-              <li><%= link_to "ログアウト",products_path, method: :post%></li>
+              <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+              <li><%= link_to "マイページ", user_path(current_user) %></li>
             </ul>
             <p class="search-window">
               <%= form_tag(search_list_path, enforce_utf8: false ,:method => 'get') do %>
@@ -57,6 +58,7 @@
             </p>
             <p class="navbar-text navbar-right">ようこそ<%= current_user.user_name %>さん</p>
           <% else %>
+
             <ul class="nav navbar-nav">
                <li><%= link_to "商品一覧", products_path %></li>
                <li><%= link_to "ログイン", new_user_session_path %></li>
@@ -82,5 +84,4 @@
     </footer>
   </body>
 </html>
-
 

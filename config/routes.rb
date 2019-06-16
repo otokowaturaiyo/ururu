@@ -2,10 +2,16 @@ Rails.application.routes.draw do
 
   get '/products/feature' => 'products#feature'
   get 'genres/:id' => 'genres#show', as: 'genre'
+
+
   resources :products, only:[:index, :show] do
-    resource :favorites, only: [:create, :destroy]
     resources :reviews, only: [:index, :create, :edit, :update, :destroy]
+    resources :likes, only: [:create, :destroy]
   end
+
+  resources :destinations, only:[:new, :create, :edit, :update]
+  resources :carts, only:[:create, :show, :update, :destroy]
+
   get 'search_list' => 'products#search_list'
 
   namespace :admins do
@@ -34,6 +40,9 @@ Rails.application.routes.draw do
   get '/orders/:id/confirm' => 'orders#confirm', as:'order_confirm'
   get '/orders/:id/complete' => 'orders#complete', as:'order_complete'
 
+
+  get 'users/:id/resign' => 'users#resign', as: 'user_resign'
+  patch 'users/:id/resign_confirm' => 'users#resign_confirm', as: 'resign_confirm'
 
 
 end

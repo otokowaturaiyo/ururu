@@ -1,0 +1,78 @@
+<div class="container cart">
+	<div class="col-md-offset-2 col-md-8">
+		  <!-- カートの中身がない時のパーシャル -->
+    <br>
+    <h1>ショッピングカート</h1>
+    <br>
+
+		<div class="row">
+			<div class="col-md-offset-2 col-md-8 purchase-flow">
+				<i class="fas fa-shopping-cart fa-4x"></i>
+				<i class="fas fa-arrow-right fa-2x"></i>
+				<i class="fas fa-cash-register fa-2x"></i>
+				<i class="fas fa-arrow-right fa-2x"></i>
+				<i class="far fa-check-circle fa-2x"></i>
+			</div>
+		</div>
+		<% total_price = 0 %>
+		<% total_count = 0 %>
+		<% @carts.each do |cart| %>
+		<% product = Product.find(cart.product_id) %>
+		  <div class="row">
+		    <div class="clearfix">
+		      <div class="pull-left col-md-3">
+		        <div class="product_image">
+		          <% if product.jacket_image_id.present? %>
+		            <%= attachment_image_tag  product, :jacket_image, :fill, 150, 150, class:"border" %>
+		          <% else %>
+		            <%= image_tag 'no_image.jpg', size: '150x150', class:"border" %>
+		          <% end %>
+		        </div>
+		      </div>
+		      <div class="pull-left col-md-6">
+		        <div class="product_details">
+		          <ul>
+		            <li><i class="fas fa-music"></i>商品名：<%= product.product_name %></li>
+		            <li><i class="fas fa-music"></i>アーティスト：<%= product.artist.name %></li>
+		            <li><i class="fas fa-music"></i>レーベル：<%= product.label.label %></li>
+		            <li><i class="fas fa-music"></i>ジャンル：<%= product.genre.genre %></li>
+		          </ul>
+		        </div>
+		      </div>
+		      <div class="pull-right col-md-3">
+		        <div class="product_in_cart">
+		          <div class="product_count">
+		            <%= form_for cart do |f| %>
+		            <div class="form-group">
+		              <%= f.number_field :product_count, class:"form-control" %>
+		            </div>
+		              <%= f.submit "数量を変更", class:"btn-gradient-radius update-cart" %>
+		            <% end %>
+		            <%= link_to 'カートから削除', cart_path(cart), class:"btn-gradient-radius-delete", method: :delete %>
+		          </div>
+		          <div class="subtotal_price">
+		            <% subtotal_price =  cart.product_count*cart.product_price %>
+		            <% tax_included = subtotal_price*1.08 %>
+		            <% subtotal_with_tax = tax_included.to_i %>
+		            <p>小計：<span>¥<%= subtotal_with_tax %></span></p>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		<% total_price += subtotal_with_tax %>
+		<% total_count += cart.product_count %>
+		<% end %>
+
+		<div class="row">
+		  <div class="total_price">
+		    <p>合計: <%= total_count %>点の商品  <span>¥<%= total_price %></span></p>
+		  </div>
+		</div>
+		<div class="row">
+			<div class="btn_to_order" >
+				<%= link_to '購入へ進む', "#", class:'btn-horizontal-border' %>
+			</div>
+		</div>
+	</div>
+</div>
