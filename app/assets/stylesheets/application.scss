@@ -16,6 +16,12 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
+ .clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
 header{
 	padding-bottom: 72px;
 }
@@ -68,7 +74,6 @@ header{
 	margin-top: 30px;
 }
 .ururu-back{
-	vertical-align: bottom;
 	border: inset 10px #FFF5EE;
 }
 .sale-title{
@@ -90,8 +95,8 @@ header{
 	border: inset;
 }
 .toyama-ima{
-	margin: auto 0;
 	border: inset;
+	vertical-align: center;
 }
 .glyphicon-home{
 	font-size: 40px;
@@ -187,3 +192,12 @@ li {
 .search-table{
 	margin: 40px;
 }
+
+.sale-list{
+	font-size: 30px;
+
+}
+.intro-image{
+	margin-top: 12px;
+}
+

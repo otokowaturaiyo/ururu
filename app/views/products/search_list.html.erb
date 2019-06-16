@@ -1,3 +1,4 @@
+<!--検索一覧表示ページ-->
 <div class="search-list-container">
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4">
@@ -11,7 +12,7 @@
 				<tbody>
 					<% @products.each do |product| %>
 						<tr>
-							<th class="danger"><code><%= link_to product.product_name, product %></code></th>
+							<th class="danger"><%= link_to product.product_name, product %></th>
 							<td><%= product.artist %></td>
 						</tr>
 					<% end %>

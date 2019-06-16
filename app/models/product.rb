@@ -5,6 +5,7 @@ class Product < ApplicationRecord
 	has_many :carts
 	has_many :disks, dependent: :destroy
 	has_many :likes, dependent: :destroy
+	has_many :reviews, dependent: :destroy
 
 	accepts_nested_attributes_for :disks, allow_destroy: true
 
@@ -18,4 +19,12 @@ class Product < ApplicationRecord
         Product.all
       end
     end
+
+      def likes?(user)
+        ret = false
+        if user.present?
+          ret = likes.where(user_id: user.id).exists?
+        end
+        return ret
+      end
 end
