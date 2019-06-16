@@ -9,7 +9,7 @@
 				<h3>レビュー</h3>
 				<%= form_with model: [@product,@review], url: admins_product_review_path(id: @review.id, product_id: @product.id), class: "edit-form" do |f| %>
 					<%= f.text_area :body, size: '50x10',value: @review.body %>
-					<%= f.submit %>
+					<%= f.submit "編集完了"%>
 				<% end %>
 				</div>
 			</div>

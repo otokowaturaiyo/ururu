@@ -11,9 +11,9 @@
 			</div>
 			<div class="edit-review-item">
 				<h3>レビュー</h3>
-				<%= form_with model: @review, url: admins_product_review_path(product_id: @product.id, id: @review.id), class: "edit-form" do |f| %>
+				<%= form_with model: @review, url: product_review_path(product_id: @product.id, id: @review.id), class: "edit-form" do |f| %>
 					<%= f.text_area :body, size: '50x10' %>
-					<%= f.submit %>
+					<%= f.submit  "編集完了"%>
 				<% end %>
 				</div>
 			</div>
