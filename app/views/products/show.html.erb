@@ -8,7 +8,7 @@
 			<div class="overview clearfix">
 				<div class="product_image pull-left col-md-6">
 					<% if @product.jacket_image_id.present? %>
-						<%= attachment_image_tag product, :jacket_image, :fill, 350, 350, class:"border" %>
+						<%= attachment_image_tag @product, :jacket_image, :fill, 350, 350, class:"border" %>
 					<% else %>
 						<%= image_tag 'no_image.jpg', size: '350x350', class:"border" %>
 					<% end %>
@@ -48,17 +48,25 @@
 		<!-- 商品ステータス・ -->
 		<div class="row">
 			<div class="product_status clearfix">
-				<p class="stock col-md-2 pull-left" style="margin-top: 10px;">在庫：<%= @product.stock %></p>
-				<p class="price col-md-2 pull-left" style="margin-top: 10px;">価格：<%= @product.price*1.08.round %>（税込）</p>
-				<p class="count col-md-2 pull-left">
-					<%= select_tag :個数, options_for_select((1..@product.stock).to_a) %>
+				<p class="stock col-md-2 pull-left" style="margin-top: 10px;">
+					在庫：<%= @product.stock %>
 				</p>
+				<p class="price col-md-2 pull-left" style="margin-top: 10px;">
+					<% tax_included = @product.price*1.08 %>
+					価格：<%= tax_included.to_i %>（税込）
+				</p>
+				<p class="count col-md-2 pull-left">
+					<%= form_for @cart do |f| %>
+					:個数
+					<%= f.number_field :product_count %>
+				</p>
+
 
 			<!-- いいね機能 -->
 				<% if current_user.present? %>
 					<% if @product.likes?(current_user) %>
 						<li>
-							<%= link_to product_like_path(@product), method: :delete, class: 'bounce like-btn-off' do %>
+							<%= link_to product_like_path(@product), method: :delete do %>
 							<div class="box animated bounce">
 								<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
 							</div>
@@ -67,9 +75,9 @@
 						</li>
 							<% else %>
 						<li>
-							<%= link_to  product_likes_path(@product), method: :post, class: ' like-btn-on' do %>
+							<%= link_to  product_likes_path(@product), method: :post do %>
 							<div class="box-off bounceOut">
-								<i class="fa fa-heart fa-h" aria-hidden="true" style="color: pink;"></i>
+								<i class="fa fa-heart" aria-hidden="true" style="color: pink;"></i>
 							</div>
 							<%= @product.likes.count %> いいね
 							<% end %>
@@ -88,11 +96,14 @@
 
 		<div class="row" style="margin-top: 20px; margin-bottom: 20px;">
 			<div>
-				<%= link_to "カートに入れる",
-							edit_admins_product_path(@product),
-							class:"btn btn-primary col-md-offset-2 col-md-8 glyphicon glyphicon-shopping-cart"%>
+				<!-- カートに商品情報およびユーザーIDをhidden fieldで送る -->
+				<%= f.hidden_field :product_id, value: @product.id %>
+				<%= f.hidden_field :user_id, value: current_user.id %>
+				<%= f.hidden_field :product_price, value: @product.price %>
+				<%= f.submit "カートに追加する" %>
 			</div>
 		</div>
+		<% end %>
 
 
 		<!-- レビュー --><!--レビュー機能はトラが作ります-->

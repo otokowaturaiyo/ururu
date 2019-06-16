@@ -14,5 +14,5 @@ class User < ApplicationRecord
   validates :phone_number, length: { is: 11 }
 
   has_many :likes, dependent: :destroy
+	has_many :carts, dependent: :destroy
 end
-
