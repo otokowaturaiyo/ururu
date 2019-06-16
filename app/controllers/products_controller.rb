@@ -14,7 +14,6 @@ class ProductsController < ApplicationController
   	@genre = Genre.find(@product.genre_id)
   	@label = Label.find(@product.label_id)
   	@disks = @product.disks
-
     @cart = Cart.new
 
   end
