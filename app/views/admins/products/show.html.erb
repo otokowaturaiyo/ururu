@@ -84,6 +84,7 @@
 							<td><%= review.user_id %></td>
 							<td><%= review.body %></td>
 							<td><%= link_to "編集",edit_admins_product_review_path(id: review.id, product_id: @product.id),class:"btn btn-primary" %></td>
+							<td><%= link_to "削除",admins_product_review_path(id: review.id, product_id: @product.id),class:"btn btn-danger", method: :'delete' %></td>
 						</tr>
 					</tbody>
 				<% end %>
