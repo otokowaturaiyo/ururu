@@ -6,7 +6,6 @@ class CartsController < ApplicationController
       if cart.new_record?
         cart = Cart.new(cart_params)
         cart.user_id = current_user.id
-        binding.pry
         cart.save!
       else
         updated_count = cart.product_count.to_i + params[:cart][:product_count].to_i
