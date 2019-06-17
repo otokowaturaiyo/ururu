@@ -99,5 +99,34 @@
         display: none;
     }
 
-    // 自分でカスタマイズする！
+    // カスタマイズ
 
+    .slider-container {
+        position: relative;
+    }
+    .slider {
+      display: none;
+      margin: 0 24px;
+      overflow: hidden;
+    }
+    .slider.slick-initialized {
+      display: block;
+    }
+    .slider-arrow {
+      position: absolute;
+      top: 50%;
+      height: 36px;
+      color: #FFF;
+      cursor: pointer;
+      z-index: 10;  /* 重要 */
+    }
+    .slider-prev {
+      left: 0;
+    }
+    .slider-next {
+      right: 0;
+    }
+
+    .like {
+        margin-bottom: 60px;
+    }
