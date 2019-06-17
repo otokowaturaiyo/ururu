@@ -1,0 +1,8 @@
+<%= form_with(model: [@product, Review.new]) do |form| %>
+	<div>
+		<%= form.text_area :body, size: "50x10" %>
+	</div>
+	<div class="actions">
+		<%= form.submit "投稿" %>
+	</div>
+<% end %>

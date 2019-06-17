@@ -9,11 +9,11 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find(params[:id])
-	@artist = Artist.find(@product.artist_id)
-	@genre = Genre.find(@product.genre_id)
-	@label = Label.find(@product.label_id)
-	@disks = @product.disks
+    find_product
+    @disks = @product.disks
+    @review =Review.new
+    @reviews = @product.reviews
+    @cart = Cart.new
   end
 
   def feature
@@ -31,6 +31,13 @@ class ProductsController < ApplicationController
 
   def product_params
   	params.require(:product).permit(:jacket_image_id, :product_name, :artist_id)
+  end
+
+  def find_product
+      @product = Product.find(params[:id])
+      @artist = Artist.find(@product.artist_id)
+      @genre = Genre.find(@product.genre_id)
+      @label = Label.find(@product.label_id)
   end
 
 end

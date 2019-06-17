@@ -7,23 +7,27 @@ class Admins::ProductsController < ApplicationController
     @genres = Genre.all
   end
 
-  def create_confirm
-    @product = Product.new(product_params)
-    binding.pry
-    # render 'new' if @product.invalid?
-  end
-
   def create
-
     @product = Product.new(product_params)
+    @genres = Genre.all
 
-    if params[:back]
-      render 'new'
-    elsif @product.save
-      flash[:notice] = "新規商品の登録完了しました。"
-      redirect_to admins_product_path(@product)
+    artist = Artist.find_or_initialize_by(name: params[:product][:artist_name])
+    label = Label.find_or_initialize_by(label: params[:product][:label_name])
+    if artist.new_record?
+      artist.save!
+    end
+    if label.new_record?
+      label.save!
+    end
+
+    @product.artist_id = artist.id
+    @product.label_id = label.id
+
+    if @product.save
+        flash[:notice] = "新規商品の登録完了しました。"
+        redirect_to admins_product_path(@product)
     else
-      render 'new'
+        render 'new'
     end
   end
 
@@ -65,8 +69,7 @@ class Admins::ProductsController < ApplicationController
     end
 
     def product_params
-      params.require(:product).permit(:id,
-                                      :genre_id,
+      params.require(:product).permit(:genre_id,
                                       :artist_id,
                                       :label_id,
                                       :product_name,

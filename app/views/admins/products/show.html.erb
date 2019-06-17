@@ -22,7 +22,7 @@
 						<li><i class="fas fa-music"></i>ジャンル：<%= @genre.genre %></li>
 					</ul>
 					<div class="blockquote">
-						<p><span><i class="fas fa-headphones fa-spin"></i></span>　商品の紹介</p>
+						<p><span><i class="fas fa-compact-disc fa-spin"></i></span>　商品の紹介</p>
 						<p><%= @product.description %></p>
 					</div>
 				</div>
@@ -36,13 +36,19 @@
 					在庫：<%= @product.stock %>
 				</p>
 				<p class="price col-md-4 pull-left" style="margin-top: 10px;">
-					価格：<%= @product.price*1.08.round %>（税込）
+					<% tax_included = @product.price*1.08 %>
+					価格：<%= tax_included.to_i %>（税込）
 				</p>
 
-				<p class="btn btn-info  col-md-3 pull-left">
-					<i class="glyphicon glyphicon-thumbs-up"></i>
-					25いいね
-				</p>
+			<!-- いいね -->
+			<% if @product.likes.count == 0 %>
+				<%= @product.likes.count %> いいね
+			<% else %>
+				<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+					<%= @product.likes.count %> いいね
+			<% end %>
+			<!-- いいね -->
+
 			</div>
 		</div>
 

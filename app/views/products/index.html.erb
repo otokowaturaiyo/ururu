@@ -1,5 +1,6 @@
 <div class="container-fluid background-color2">
   <div class="row LeftRow">
+   
     <!-- 左要素がグリッドに対してモバイルでは横幅いっぱい、デスクトップでは2/3を占める -->
     <div class="col-xs-12 col-md-8">
       <div class="row">
@@ -13,6 +14,7 @@
           <% end %>
         </section>
       </div>
+      
       <div class="new-arrivals-container">
         <!-- 新着画像がグリッドに対しモバイルでは横に2個、デスクトップでは横に3個表示される -->
         <div class="thumbnail-caption">
@@ -22,9 +24,7 @@
               <div class ="col-xs-6 col-md-4">
                 <%= link_to product_path(product), class: 'new-arrival-content' do %>
                   <% if product.jacket_image_id.present? %>
-                      <% product.jacket_images.each do |image| %>
-                        <%= attachment_image_tag image, :image, :fill, 80, 80 %>
-                      <% end %>
+                    <%= attachment_image_tag  product, :jacket_image, :fill, 80, 80 %>
                   <% else %>
                     <%= image_tag 'no_image.jpg', :size => '80x80' %>
                   <% end %>
@@ -40,6 +40,7 @@
         </div>
       </div>
     </div>
+    
     <!-- 右要素がグリッドに対してモバイルでは横幅いっぱい、デスクトップでは1/3を占める -->
       <div class="col-xs-12 col-md-4 genre-button">
         <div class="row">
@@ -50,6 +51,7 @@
         <% end %>
         </div>
       </div>
+      
       <div class="sidebar-recommend">
         <!-- おすすめ画像がグリッドに対しモバイルでは横に2個、デスクトップでは横に2個表示される -->
         <div class="thumbnail-caption">
@@ -59,9 +61,7 @@
                 <div class ="col-xs-2 col-md-2">
                   <%= link_to product_path(product), class: 'new-arrival-content' do %>
                     <% if product.jacket_image_id.present? %>
-                        <% product.jacket_images.each do |image| %>
-                          <%= attachment_image_tag image, :image, :fill, 80, 80 %>
-                        <% end %>
+                      <%= attachment_image_tag  product, :jacket_image, :fill, 80, 80 %>
                     <% else %>
                       <%= image_tag 'no_image.jpg', :size => '80x80' %>
                     <% end %>

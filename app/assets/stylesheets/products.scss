@@ -4,7 +4,7 @@
 
 $font-family: 'Lato', 'Noto Sans JP', '游ゴシック Medium', '游ゴシック体', 'Yu Gothic Medium', YuGothic, 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
 
-.overview{
+.cart{
   font-family: $font-family;
 }
 
@@ -136,3 +136,12 @@ ul li i {
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
   border-bottom: none;
 }
+
+// いいね
+.like-box-of {
+  display: inline-block;
+}
+.like-box {
+  display: inline-block;
+}
+

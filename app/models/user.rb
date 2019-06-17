@@ -12,7 +12,10 @@ class User < ApplicationRecord
   validates :kana_lastname, format: { with: /\A[ァ-ヶー－]+\z/ }
   validates :postal_code, length: { is: 7 }
   validates :phone_number, length: { is: 11 }
-  validates :password, length: { minimum: 6 }
 
   has_many :likes, dependent: :destroy
+
+  has_many :reviews, dependent: :destroy
+
+	has_many :carts, dependent: :destroy
 end
