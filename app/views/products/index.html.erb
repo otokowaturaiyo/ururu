@@ -1,20 +1,60 @@
-<div class="container-fluid background-color2">
+<div class="container background-color2">
+  <div class="row top-wrapper">
+    <!-- 右要素がグリッドに対してモバイルでは横幅いっぱい、デスクトップでは1/4を占める -->
+    <div class="col-xs-12 col-md-3 genre-list">
+      <h3>ジャンルから探す</h3>
+      <% @genres.each do |genre| %>
+        <div class="btn-group-vertical col-md-12 genre-button" role="group">
+          <button type="button" class="btn btn-default">
+            <%= link_to genre.genre, genre_path(genre.id) %>
+          </button>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-xs-12 col-md-9 features">
+      <div class="skippr-container">
+
+        <div class="theTarget">
+          <div class=slide-image>
+            <%= image_tag "特集遷移.png", width:'100%', height:'330px' %>
+            <%= link_to products_feature_path do %>
+              <p>HOGEHOGEOHEOGE</p>
+            <% end %>
+          </div>
+          <div class=slide-image>
+            <%= image_tag "m-1.jpg", width:'100%', height:'330px' %>
+            <%= link_to products_feature_path do %>
+              <p>HOGEHOGEOHEOGE</p>
+            <% end %>
+          </div>
+          <div class=slide-image>
+            <%= image_tag "m-2.jpg", width:'80%', height:'330px' %>
+            <%= link_to products_feature_path do %>
+              <p>HOGEHOGEOHEOGE</p>
+            <% end %>
+          </div>
+          <div class=slide-image>
+            <%= image_tag "m-3.jpg", width:'80%', height:'330px' %>
+            <%= link_to products_feature_path do %>
+              <p>HOGEHOGEOHEOGE</p>
+            <% end %>
+          </div>
+          <div class=slide-image>
+            <%= image_tag "m-4.jpg", width:'80%', height:'330px' %>
+            <%= link_to products_feature_path do %>
+              <p>HOGEHOGEOHEOGE</p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="row LeftRow">
-   
     <!-- 左要素がグリッドに対してモバイルでは横幅いっぱい、デスクトップでは2/3を占める -->
     <div class="col-xs-12 col-md-8">
-      <div class="row">
-        <div class="col-xs-6 col-md-6">
-          <%= image_tag 'ururu-pic.jpg', class: 'ururu-back', :size => '450x368' %>
-        </div>
-        <section class="col-xs-6 col-md-6 ururu-feature">
-          <%= link_to  products_feature_path do|feature| %>
-            <h2 class="feature-header">特集ページへ！！</h2>
-            <%= image_tag "特集遷移.png", :size => '300x300' %>
-          <% end %>
-        </section>
-      </div>
-      
+
       <div class="new-arrivals-container">
         <!-- 新着画像がグリッドに対しモバイルでは横に2個、デスクトップでは横に3個表示される -->
         <div class="thumbnail-caption">
@@ -40,18 +80,9 @@
         </div>
       </div>
     </div>
-    
-    <!-- 右要素がグリッドに対してモバイルでは横幅いっぱい、デスクトップでは1/3を占める -->
-      <div class="col-xs-12 col-md-4 genre-button">
-        <div class="row">
-        <% @genres.each do |genre| %>
-          <div class="btn-group-vertical col-md-offset-2 col-md-8" role="group">
-            <button type="button" class="btn btn-default"><%= link_to genre.genre, genre_path(genre.id) %></button>
-          </div>
-        <% end %>
-        </div>
-      </div>
-      
+
+
+
       <div class="sidebar-recommend">
         <!-- おすすめ画像がグリッドに対しモバイルでは横に2個、デスクトップでは横に2個表示される -->
         <div class="thumbnail-caption">
