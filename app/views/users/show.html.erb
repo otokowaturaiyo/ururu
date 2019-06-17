@@ -49,26 +49,35 @@
 		</div>
 	</div>
 	<!-- いいね -->
+
+
 	<div class="row">
-		<div class="col-lg-8 col-lg-offset-2" >
+		<div class="col-lg-8 col-lg-offset-2 carousel slide" data-ride="carousel" >
 		<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
-			<% @likes.each do |like| %>
-			<% product = Product.find(like.product_id) %>
-				<%= link_to attachment_image_tag(product, :jacket_image, :fill, 100, 100, fallback: 'no_image.jpg', size: "100x100"), product_path(product.id)%>
+			<div class="slider slider-container">
+				<% @likes.each do |like| %>
+				<% product = Product.find(like.product_id) %>
+					<%= link_to attachment_image_tag(product, :jacket_image, :fill, 200, 200, fallback: 'no_image.jpg', size: "200x200"), product_path(product.id), class: 'like-on' %>
 			<% end %>
+			</div>
 		</div>
 	</div>
 	<!-- いいね -->
+<script>
+	$(document).ready(function() {
+		$('.slider').slick({
+	  slidesToShow: 6,
+	  slidesToScroll: 1,
+	  autoplay: true,
+	  autoplaySpeed: 700,
+		prevArrow: '<div class="slider-arrow slider-prev fa fa-angle-left"></div>',
+		nextArrow: '<div class="slider-arrow slider-next fa fa-angle-right"></div>'
+	});
+  	$('.like-on').mouseover(function(){
+    	$(this).css('opacity', '.1').animate({'opacity': '1'}, 'slow');
+ 	 	});
+
+	})
 
 
-
-
-
-
-	<script>
-		$(function(){
-			$('.like-list').animate((){
-				'marginLeft': '500px'
-			});
-		})
-	</script>
+</script>
