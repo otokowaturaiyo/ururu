@@ -63,34 +63,29 @@
 
 
 		<!-- レビュー -->
-		<div class="panel panel-default">
+		<div class="panel panel-default ">
 			<div class="panel-heading">
 				購入者のレビュー
 			</div>
 			<table class="table">
-				<tbody>
-					<tr>
-						<th><%= image_tag 'no_image.jpg', size: '40x40', class:"img-circle" %></th>
-						<td>星の数</td>
-						<td>ユーザー名</td>
-						<td>レビュー内容</td>
-						<td><%= link_to "編集","#",class:"btn btn-primary" %></td>
-					</tr>
-					<tr>
-						<th><%= image_tag 'no_image.jpg', size: '40x40', class:"img-circle" %></th>
-						<td>星の数</td>
-						<td>ユーザー名</td>
-						<td>レビュー内容</td>
-						<td><%= link_to "編集","#",class:"btn btn-primary" %></td>
-					</tr>
-					<tr>
-						<th><%= image_tag 'no_image.jpg', size: '40x40', class:"img-circle" %></th>
-						<td>星の数</td>
-						<td>ユーザー名</td>
-						<td>レビュー内容</td>
-						<td><%= link_to "編集","#",class:"btn btn-primary" %></td>
-					</tr>
-				</tbody>
+				<% @product.reviews.each.with_index(1) do |review,r| %>
+					<tbody>
+						<tr class="row">
+							<th><%= r %></th>
+							<td>
+								<% if @product.jacket_image_id.present? %>
+									<%= attachment_image_tag  @product, :jacket_image, :fill, 40, 40, class:"border"%>
+								<% else %>
+									<%= image_tag 'no_image.jpg', size: '40x40', class:"img-circle" %>
+								<% end %>
+							</td>
+							<td><%= review.user_id %></td>
+							<td><%= review.body %></td>
+							<td><%= link_to "編集",edit_admins_product_review_path(id: review.id, product_id: @product.id),class:"btn btn-primary" %></td>
+							<td><%= link_to "削除",admins_product_review_path(id: review.id, product_id: @product.id),class:"btn btn-danger", method: :'delete' %></td>
+						</tr>
+					</tbody>
+				<% end %>
 			</table>
 		</div>
 

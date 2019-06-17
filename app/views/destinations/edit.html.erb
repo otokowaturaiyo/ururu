@@ -1,2 +1,51 @@
-<h1>Destinations#create</h1>
-<p>Find me in app/views/destinations/create.html.erb</p>
+<div class="row field">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-8">
+    	<h1>宛先を編集</h1>
+    </div>
+    <div class="col-xs-2"></div>
+</div>
+
+<div class="row field">
+		<div class="col-xs-3"></div>
+		<div class="col-xs-6">
+			<%= form_for(@destination) do |f|%>
+
+
+			<% if @destination.errors.any? %>
+  				<h2><%= @destination.errors.count %>error prohibited this obj from being saved:</h2>
+  					<ul><% @destination.errors.full_messages.each do |messages| %></ul>
+    					<li><%= messages %></li>
+ 				<% end %>
+			<% end %>
+
+			<div class = "field">
+				<%= f.label :氏名（漢字） %>
+				<br><%= f.text_field :name, :size=>"92", autofocus: true, autocomplete: "" %></br>
+			</div>
+
+			<div class = "field">
+				<%= f.label :電話番号　※ハイフンなしで入力してください %>
+    			<br><%= f.text_field :phone_number, :size=>"92", autofocus: true, autocomplete: "" %></br>
+    		</div>
+
+    		<div class = "field">
+				<%= f.label :郵便番号　※ハイフンなしで入力してください %>
+    			<br><input type="text" name="destination[postal_code]" size="10" maxlength="8" onKeyUp="AjaxZip3.zip2addr(this,'','destination[destination_address]','destination[destination_address]');"></br>
+    		</div>
+
+    		<div class = "field">
+				<%= f.label :住所 %>
+    			<br><input type="text" name="destination[destination_address]" size="92"><br>
+    		</div>
+
+    		<div class = "field">
+				<input class="btn btn-info" type="submit" value="宛先を変更する">
+			</div>
+			<% end %>
+		</div>
+		<div class="col-xs-3"></div>
+	</div>
+
+
+
