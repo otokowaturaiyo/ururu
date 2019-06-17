@@ -2,10 +2,15 @@ class CartsController < ApplicationController
 
   def create
     if user_signed_in?
-      @cart = Cart.new(cart_params)
-      @cart.user_id = current_user.id
-      @cart.save
-      redirect_to cart_path(@cart.user_id)
+      cart = Cart.find_or_initialize_by(product_id: params[:cart][:product_id])
+      if cart.new_record?
+        cart.save!(cart_params)
+        cart.user_id = current_user.id
+      else
+        updated_count = cart.product_count.to_i + params[:cart][:product_count].to_i
+        cart.update_attributes!(product_count: updated_count)
+      end
+      redirect_to cart_path(cart.user_id)
     else
       redirect_to new_user_session_path
     end
@@ -34,7 +39,7 @@ class CartsController < ApplicationController
   private
 
   def cart_params
-    params.require(:cart).permit(:user_id, :product_id, :product_count, :product_price)
+    params.require(:cart).permit(:product_id, :product_count, :product_price)
   end
 
 
