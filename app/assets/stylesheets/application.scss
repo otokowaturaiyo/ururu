@@ -11,11 +11,29 @@
  * It is generally better to create a new file per style scope.
  *
  *= require_tree .
+ *= require_tree ../../../vendor/assets/stylesheets/.
  *= require_self
  */
  @import "bootstrap-sprockets";
  @import "bootstrap";
 // _@import  "slick"
+
+$font-family: 'Lato', 'Noto Sans JP', '游ゴシック Medium', '游ゴシック体', 'Yu Gothic Medium', YuGothic, 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+
+*{
+  font-family: $font-family;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+li {
+	list-style: none;
+}
+
+
+
+/////////////////// ヘッダー ///////////////////
 
  .clearfix::after {
   content: "";
@@ -23,38 +41,63 @@
   clear: both;
 }
 
-header{
-	padding-bottom: 72px;
+.navbar-nav a{
+	font-size: 16px;
 }
 
-.search-window{
-	display: inline-block;
-	padding-top: 20px;
+.navbar-nav p{
+	font-size: 18px;
+  line-height: 50px;
+  margin:0;
+  color:#777;
 }
-.navbar-brand{
-	font-size: 50px;
-	padding-top: 20px;
+
+.search{
+  position: relative;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  border-radius: 4px 4px 4px 4px;
+  border-radius: 0\9;
+  box-sizing: border-box;
+  width: auto;
+  margin: 8px 0 16px;
 }
-.navbar-right{
-	font-size: 20px;
-	display: inline-block;
-	position: absolute;
-	top: 8%;
-	right: 8%;
+
+.serch-form{
+  width:600px;
+  line-height: 15px;
+  padding: 6px 10px 6px 0;
+  margin: 0;
+  height: 33px;
+  font-size: 15px;
+  color: #111;
+
 }
-.navbar-header{
-	font-size: 20px;
+
+.search-input{
+  background-color: #febd69;
+  display: inline-block;
+  height: 33px;
+  width: 66px;
+  font-size: 18px;
+  cursor: pointer;
+  outline: 0;
+  border-radius: 4px 4px 4px 4px;
 }
-.navbar-nav{
-	font-size: 16px;
-	padding-top: 20px;
+
+.top-space{
+  padding-top: 107px;
 }
+
+/////////////////// フッター ///////////////////
 
  footer{
  width: 100%;
  height: 50px;
  background-color: #E6FFE9;
  }
+
 .footer-text2{
 	text-align: center;
 }
@@ -71,8 +114,27 @@ header{
 .background-color2{
 	background-color: #EEFFFF;
 }
+
+/////////////////// 商品一覧上部 ///////////////////
+
+.top-wrapper{
+  margin: 30px 0;
+}
+
+.genre-button{
+	text-align: center;
+}
+
+
+
+
+
+
+
+
+
 .LeftRow{
-	margin-top: 30px;
+
 }
 .ururu-back{
 	border: inset 10px #FFF5EE;
@@ -158,16 +220,9 @@ header{
 	color: #3cb371;
 }
 
-li {
-	list-style: none;
-}
-.genre-button{
-	text-align: center;
-	margin-bottom: 80px;
-}
+
 .product-show{
 	background-color: #FFFFDD;
-	width: 100%;
 }
 .genre-container{
 	background-color: #FFFFDD;
@@ -201,4 +256,3 @@ li {
 .intro-image{
 	margin-top: 12px;
 }
-

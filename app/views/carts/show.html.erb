@@ -1,7 +1,6 @@
 <div class="container cart">
 	<div class="col-md-offset-2 col-md-8">
 		  <!-- カートの中身がない時のパーシャル -->
-    <br>
     <h1>ショッピングカート</h1>
     <br>
 
@@ -42,10 +41,10 @@
 		      </div>
 		      <div class="pull-right col-md-3">
 		        <div class="product_in_cart">
-		          <div class="product_count">
+		          <div>
 		            <%= form_for cart do |f| %>
 		            <div class="form-group">
-		              <%= f.number_field :product_count, class:"form-control" %>
+									<p>数量:　<%= f.number_field :product_count, class:"product_count" %></p>
 		            </div>
 		              <%= f.submit "数量を変更", class:"btn-gradient-radius update-cart" %>
 		            <% end %>
@@ -55,7 +54,7 @@
 		            <% subtotal_price =  cart.product_count*cart.product_price %>
 		            <% tax_included = subtotal_price*1.08 %>
 		            <% subtotal_with_tax = tax_included.to_i %>
-		            <p>小計：<span>¥<%= subtotal_with_tax %></span></p>
+		            <p>小計：<span>¥<%= subtotal_with_tax.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %></span></p>
 		          </div>
 		        </div>
 		      </div>
@@ -67,7 +66,7 @@
 
 		<div class="row">
 		  <div class="total_price">
-		    <p>合計: <%= total_count %>点の商品  <span>¥<%= total_price %></span></p>
+		    <p>合計: <%= total_count %>点の商品  <span>¥<%= total_price.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %></span></p>
 		  </div>
 		</div>
 		<div class="row">

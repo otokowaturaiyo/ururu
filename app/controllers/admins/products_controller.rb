@@ -41,8 +41,20 @@ class Admins::ProductsController < ApplicationController
   end
 
   def update
-    find_product
+    @product = Product.find(params[:id])
     @genres = Genre.all
+    artist = Artist.find_or_initialize_by(name: params[:product][:artist_name])
+    label = Label.find_or_initialize_by(label: params[:product][:label_name])
+    if artist.new_record?
+      artist.save!
+    end
+    if label.new_record?
+      label.save!
+    end
+
+    @product.artist_id = artist.id
+    @product.label_id = label.id
+
     if @product.update(product_params)
       flash[:notice]="更新完了しました。"
       redirect_to admins_product_path(@product)
