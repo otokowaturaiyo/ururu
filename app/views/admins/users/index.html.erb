@@ -20,15 +20,13 @@
 			<table class="table table-hover">
 				<tbody>
 					<% @users.each do |user| %>
-				<tr data-href = <% admins_user_path(user) %>>
+				<tr data-href = <%=admins_user_path(user.id) %>>
 					 	<td><%= attachment_image_tag user, :profile_image_id, :fill, 45, 45, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb", size: "45x45" %></td>
 							<td><%= user.id %></td>
 							<td></td>
 							<td></td>
 							<td><%= user.user_name %></td>
 							<td><%= user.email %></td>
-							<!-- ↓私の学習が追いついたらあとで変更する -->
-							<td><%= link_to "編集", admins_user_path(user.id), class: "btn btn-info" %></td>
 					</tr>
 				 	<% end %>
 				</tbody>
@@ -37,6 +35,17 @@
 	</div>
 </div>
 <script>
+	$(function(){
+		$('tbody tr[data-href]').addClass('clickable').click(function(){
+			window.location = $(this).attr('data-href');
+		}).find('a').hover(function(){
+			$(this).parents('tr').unbind('click');
+		},function(){
+			$(this).parents('tr').click(function(){
+				window.location = $(this).attr('data-href');
+			});
+		});
+	});
 </script>
 
 <%= paginate @users %>
