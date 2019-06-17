@@ -8,21 +8,19 @@
 						<%= flash[:notice] %>
 					</div>
 				<% end %>
-			<!-- ransackでエンドユーザーを検索できます -->
+			<!-- ransack エンドユーザーを検索できる -->
 			<%= form_tag(admins_users_path, method: :get, enforce_utf8: false) do %>
 				<div>
-				<%#= label :user_nam_cont %>
 				<%= text_field_tag :q, params[:q], placeholder: "検索" %>
 				<%= submit_tag "🔍", class: " btn glyphicon glyphicon-search" %>
 				</div>
 			<% end %>
-			<!-- ransack end -->
+			<!-- ransack -->
 				<div class="space-bottom"></div>
 			<table class="table table-hover">
 				<tbody>
 					<% @users.each do |user| %>
-				<tr>
-					<% admins_user_path(user) %>
+				<tr data-href = <% admins_user_path(user) %>>
 					 	<td><%= attachment_image_tag user, :profile_image_id, :fill, 45, 45, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb", size: "45x45" %></td>
 							<td><%= user.id %></td>
 							<td></td>
@@ -38,6 +36,8 @@
 		</div>
 	</div>
 </div>
+<script>
+</script>
 
 <%= paginate @users %>
 
