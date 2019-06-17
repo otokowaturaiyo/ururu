@@ -69,8 +69,11 @@
 							</li>
 						<% end %>
 					<% end %>
+				</div>
 			</div>
 		</div>
+		<br>
+
 		<!-- レビュー --><!--レビュー機能はトラが作ります-->
 		<div class="row review-container">
 			<% if user_signed_in? %>
@@ -87,8 +90,8 @@
 					</div>
 				</div>
 			<% else %>
-				<h3>レビュー一覧</h3>
 				<div class="col-md-6 col-md-offset-3 scroller">
+					<h3>レビュー一覧</h3>
 					<div id="reviews_area">
 						<%= render partial: 'reviews/index', locals: { reviews: @reviews } %>
 					</div>
