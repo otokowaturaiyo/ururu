@@ -4,6 +4,14 @@
 
 $font-family: 'Lato', 'Noto Sans JP', '游ゴシック Medium', '游ゴシック体', 'Yu Gothic Medium', YuGothic, 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
 
+.features{
+  height: 370px;
+}
+
+.features-text{
+  color:#FFF;
+}
+
 .skippr-container{
   height:350px;
   background-color: black;
@@ -203,4 +211,3 @@ ul li i {
 .review-container{
   margin-bottom: 50px;
 }
-
