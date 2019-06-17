@@ -14,11 +14,8 @@
 
   <body>
     <header>
-
-
       <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="nav-container-fluid">
-
+        <div class="container nav-container">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed"data-toggle="collapse"data-target="#navbar-ururu">
               <span class="sr-only">Toggle navigation</span>
@@ -26,62 +23,62 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Ururu</a>
+            <a class="navbar-logo" href="#">
+              <%= image_tag 'logo.png', size:'200x50' %>
+            </a>
           </div>
           <div class="collapse navbar-collapse" id="navbar-ururu">
-
-          <%if admin_signed_in?%>
-              <div class="admin-head">
-                <ul class="nav navbar-nav admin-nav">
+            <div class="header-left">
+              <ul class="nav navbar-nav navbar-left">
+                <% if admin_signed_in? %>
                   <li><%= link_to "管理者マイページ", admins_top_path %></li>
-                </ul>
-       <div class="ad-window">
-                <p class="search-window">
-                  <%= form_tag(search_list_path, enforce_utf8: false ,:method => 'get') do %>
-                    <%= text_field_tag :search %>
-                    <%= submit_tag '検索', :name => nil %>
+                <% elsif user_signed_in? %>
+                  <li class="nav-item">
+                    <%= link_to "商品一覧", products_path %>
+                  </li>
+                  <li class="nav-item">
+                    <%= link_to "カート", cart_path(current_user.id) %>
+                  </li>
+                  <li class="nav-item">
+                    <%= link_to "マイページ", user_path(current_user) %>
+                  </li>
+                  <li class="nav-item">
+                    <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+                  </li>
+                <% else %>
+                  <li><%= link_to "商品一覧", products_path %></li>
+                  <li><%= link_to "ログイン", new_user_session_path %></li>
+                  <li><%= link_to "新規登録", new_user_registration_path %></li>
+                <% end %>
+              </ul>
+              <div class="header-right">
+                <div class="nav navbar-nav navbar-right">
+                  <% if admin_signed_in? %>
+                    <p>管理者ログイン中</p>
+                  <% elsif user_signed_in? %>
+                    <p>ようこそ<%= current_user.user_name %>さん</p>
+                  <% else %>
+                    <p class="navbar-text navbar-right">ようこそゲストさん</p>
                   <% end %>
-                </p>
-        </div>
+                </div>
               </div>
-          <% elsif user_signed_in? %>
-            <ul class="nav navbar-nav">
-              <li><%= link_to "商品一覧", products_path %></li>
-              <li><a href="#">カート確認</a></li>
-              <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
-              <li><%= link_to "マイページ", user_path(current_user) %></li>
-            </ul>
-            <p class="search-window">
-              <%= form_tag(search_list_path, enforce_utf8: false ,:method => 'get') do %>
-                <%= text_field_tag :search %>
-                <%= submit_tag '検索', :name => nil %>
-              <% end %>
-            </p>
-            <p class="navbar-text navbar-right">ようこそ<%= current_user.user_name %>さん</p>
-          <% else %>
-
-            <ul class="nav navbar-nav">
-               <li><%= link_to "商品一覧", products_path %></li>
-               <li><%= link_to "ログイン", new_user_session_path %></li>
-            </ul>
-             <p class="search-window">
-               <%= form_tag(search_list_path, enforce_utf8: false ,:method => 'get') do %>
-                 <%= text_field_tag :search %>
-                 <%= submit_tag '検索', :name => nil %>
-               <% end %>
-             </p>
-             <div class="navbar-text navbar-right">ようこそゲストさん</div>
-          <% end %>
+              <div class="navbar-left search">
+                <%= form_tag search_list_path, enforce_utf8: false, method:'get' do %>
+                  <%= text_field_tag :search, "",class:"serch-form" %>
+                  <%= button_tag sanitize('<i class="fa fa-search"></i>'),
+                                            type: "submit", name: nil, class:'search-input' %>
+                <% end %>
+              </div>
+            </div>
           </div>
         </div>
       </nav>
     </header>
+    <div class="top-space"></div>
     <%= yield %>
-
     <footer>
       <p class="footer-text1">全国送料一律¥500</p>
       <p class="footer-text2">© Ururu.inc</p>
     </footer>
   </body>
 </html>
-
