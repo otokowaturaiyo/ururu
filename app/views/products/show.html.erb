@@ -105,22 +105,30 @@
 
 
 		<!-- レビュー --><!--レビュー機能はトラが作ります-->
-		<div class="row">
-			<div class="col-md-5">
-				<h3>レビュー投稿</h3>
-				<% if user_signed_in? %>
-					<!-- コメント入力欄を商品の詳細ページに表示するためのrender -->
-					<%= render partial: 'reviews/form', locals: { reviews: @reviews, products: @products }%>
-				<% end %>
-			</div>
-			<h3>レビュー一覧</h3>
-			<div class="col-md-7 scroller">
-				<div id="reviews_area"><!--ここのidを目印にdiv内をAjaxで書き換え-->
-					<!-- 投稿されたコメント一覧を商品の詳細ページに表示するためのrender -->
-					<%= render partial: 'reviews/index', locals: { reviews: @reviews }%>
+		<div class="row review-container">
+			<% if user_signed_in? %>
+				<div class="col-md-5">
+						<h3>レビュー投稿</h3>
+						<!-- コメント入力欄を商品の詳細ページに表示するためのrender -->
+						<%= render partial: 'reviews/form', locals: { reviews: @reviews, products: @products }%>
 				</div>
-			</div>
+				<h3>レビュー一覧</h3>
+				<div class="col-md-7 scroller">
+					<div id="reviews_area"><!--ここのidを目印にdiv内をAjaxで書き換え-->
+						<!-- 投稿されたコメント一覧を商品の詳細ページに表示するためのrender -->
+						<%= render partial: 'reviews/index', locals: { reviews: @reviews }%>
+					</div>
+				</div>
+			<% else %>
+				<h3>レビュー一覧</h3>
+				<div class="col-md-6 col-md-offset-3 scroller">
+					<div id="reviews_area">
+						<%= render partial: 'reviews/index', locals: { reviews: @reviews } %>
+					</div>
+				</div>
+			<% end %>
 		</div>
+
 
 		<!-- 収録曲 -->
 		<div class="panel panel-default">
