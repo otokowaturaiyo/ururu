@@ -1,5 +1,16 @@
 <div class="confirm-container">
 	<h1>注文内容を確認</h1>
+		<div class="row">
+			<div class="col-md-offset-2 col-md-8 purchase-flow">
+				<i class="fas fa-shopping-cart fa-2x"></i><!--カート画面-->
+				<i class="fas fa-arrow-right fa-2x"></i>
+				<i class="fas fa-cash-register fa-4x"></i><!--購入確認画面--><!--今回はここ！-->
+				<i class="fas fa-arrow-right fa-2x"></i>
+				<i class="far fa-check-circle fa-2x"></i><!--購入完了画面-->
+			</div>
+		</div>
+
+
 		<h3>お届け先</h3>
 			<div class="row">
 				<div class="col-md-4">
@@ -9,23 +20,15 @@
 				<div class="col-md-4">
 					<p>※宛先を変更できます</p>
 					<!--新しい宛先の指定-->
-					<%= link_to @destination, new_destination_path %>
+					<p><%= link_to @destination, new_destination_path %></p>
 				</div>
 				<div class="col-md-4">
 					<!--お支払い方法の選択-->
 					<p>お支払い方法</p>
 				</div>
-			<div class="row">
-				<div class="col-md-4">
-					<!--予備住所each文-->
-					<% @destination.each do |destination| %>
-						<%= destination.name %>
-						<%= destination.postal_code %>
-						<%= destination.destination_address %>
 
-				</div>
-				<!--<%= paginate @orders %>-->
-			</div>
+
+			<!--注文内容表示-->
 			<div class="order-items">
 				<div class="row">
 					<caption>ご注文内容</caption>
@@ -61,3 +64,56 @@
 			</div>
 		</div>
 </div>
+
+
+
+
+
+
+
+<% total_price = 0 %>
+<% total_count = 0 %>
+<% @carts.each do |cart| %>
+<% product = Product.find(cart.product_id) %>
+  <div class="row">
+    <div class="clearfix">
+      <div class="pull-left col-md-3">
+        <div class="product_image">
+          <% if product.jacket_image_id.present? %>
+            <%= attachment_image_tag  product, :jacket_image, :fill, 150, 150, class:"border" %>
+          <% else %>
+            <%= image_tag 'no_image.jpg', size: '150x150', class:"border" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="pull-left col-md-6">
+        <div class="product_details">
+          <ul>
+            <li><i class="fas fa-music"></i>商品名：<%= product.product_name %></li>
+            <li><i class="fas fa-music"></i>アーティスト：<%= product.artist.name %></li>
+            <li><i class="fas fa-music"></i>レーベル：<%= product.label.label %></li>
+            <li><i class="fas fa-music"></i>ジャンル：<%= product.genre.genre %></li>
+          </ul>
+        </div>
+      </div>
+      <div class="pull-right col-md-3">
+        <div class="product_in_cart">
+          <div class="subtotal_price">
+            <% subtotal_price =  cart.product_count*cart.product_price %>
+            <% tax_included = subtotal_price*1.08 %>
+            <% subtotal_with_tax = tax_included.to_i %>
+            <p>小計：<span>¥<%= subtotal_with_tax %></span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% total_price += subtotal_with_tax %>
+<% total_count += cart.product_count %>
+<% end %>
+
+	<div class="row">
+	  <div class="total_price">
+	    <p>合計: <%= total_count %>点の商品  <span>¥<%= total_price %></span></p>
+	  </div>
+	</div>
