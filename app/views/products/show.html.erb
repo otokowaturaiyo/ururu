@@ -68,29 +68,11 @@
 								<% end %>
 							</li>
 						<% end %>
-					<% else %>
-						<%= @product.likes.count %> いいね
-					<% end %>
-				</div>
 				<% else %>
 				<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
 					<%= @product.likes.count %> いいね
 				<% end %>
 			<!-- いいね -->
-
-			</div>
-		</div>
-
-		<div class="row" style="margin-top: 20px; margin-bottom: 20px;">
-			<div>
-				<!-- カートに商品情報およびユーザーIDをhidden fieldで送る -->
-				<%= f.hidden_field :product_id, value: @product.id %>
-				<%= f.hidden_field :product_price, value: @product.price %>
-				<%= f.submit "カートに追加する" %>
-				<% end %>
-			</div>
-		</div>
-
 		<!-- レビュー --><!--レビュー機能はトラが作ります-->
 		<div class="row review-container">
 			<% if user_signed_in? %>
