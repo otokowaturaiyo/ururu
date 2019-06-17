@@ -29,30 +29,54 @@
 
 
 			<!--注文内容表示-->
-			<div class="order-items">
-				<div class="row">
-					<caption>ご注文内容</caption>
-					<table>
-						<thead>
-							<tr>
-								<th class="col-md-7 col-md-offset-1">商品名</th>
-								<th class="col-md-1">注文数</th>
-								<th class="col-md-2">金額(税込)</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td><%= @product.product_name %></td>
-								<td><%= @cart.product_count %></td>
-								<td><%= @products.price * @cart.product_count %></td>
-							</tr>
-						</tbody>
-					</table>
-					<p>送料 ¥500</p>
-					<p><%= @product.product_count%>点　合計　¥</p>
-				</div>
+			<% total_price = 0 %>
+			<% total_count = 0 %>
+			<% @carts.each do |cart| %>
+			<% product = Product.find(cart.product_id) %>
+			  <div class="row">
+			    <div class="clearfix">
+			      <div class="pull-left col-md-3">
+			        <div class="product_image">
+			          <% if product.jacket_image_id.present? %>
+			            <%= attachment_image_tag  product, :jacket_image, :fill, 150, 150, class:"border" %>
+			          <% else %>
+			            <%= image_tag 'no_image.jpg', size: '150x150', class:"border" %>
+			          <% end %>
+			        </div>
+			      </div>
+			      <div class="pull-left col-md-6">
+			        <div class="product_details">
+			          <ul>
+			            <li><i class="fas fa-music"></i>商品名：<%= product.product_name %></li>
+			            <li><i class="fas fa-music"></i>アーティスト：<%= product.artist.name %></li>
+			            <li><i class="fas fa-music"></i>レーベル：<%= product.label.label %></li>
+			            <li><i class="fas fa-music"></i>ジャンル：<%= product.genre.genre %></li>
+			          </ul>
+			        </div>
+			      </div>
+			      <div class="pull-right col-md-3">
+			        <div class="product_in_cart">
+			          <div class="subtotal_price">
+			            <% subtotal_price =  cart.product_count*cart.product_price %>
+			            <% tax_included = subtotal_price*1.08 %>
+			            <% subtotal_with_tax = tax_included.to_i %>
+			            <p>小計：<span>¥<%= subtotal_with_tax %></span></p>
+			          </div>
+			        </div>
+			      </div>
+			    </div>
+			  </div>
+			<% total_price += subtotal_with_tax %>
+			<% total_count += cart.product_count %>
+			<% end %>
+
+			<div class="row">
+			  <div class="total_price">
+			    <p>合計: <%= total_count %>点の商品  <span>¥<%= total_price %></span></p>
+			  </div>
 			</div>
-			<div class="link-bottun">
+			<!--リンクボタん-->
+			<!-- <div class="link-bottun">
 				<div class="row">
 					<div class="col-md-6">
 						<%= link_to %>
@@ -61,59 +85,7 @@
 						<%= link_to %>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 </div>
 
-
-
-
-
-
-
-<% total_price = 0 %>
-<% total_count = 0 %>
-<% @carts.each do |cart| %>
-<% product = Product.find(cart.product_id) %>
-  <div class="row">
-    <div class="clearfix">
-      <div class="pull-left col-md-3">
-        <div class="product_image">
-          <% if product.jacket_image_id.present? %>
-            <%= attachment_image_tag  product, :jacket_image, :fill, 150, 150, class:"border" %>
-          <% else %>
-            <%= image_tag 'no_image.jpg', size: '150x150', class:"border" %>
-          <% end %>
-        </div>
-      </div>
-      <div class="pull-left col-md-6">
-        <div class="product_details">
-          <ul>
-            <li><i class="fas fa-music"></i>商品名：<%= product.product_name %></li>
-            <li><i class="fas fa-music"></i>アーティスト：<%= product.artist.name %></li>
-            <li><i class="fas fa-music"></i>レーベル：<%= product.label.label %></li>
-            <li><i class="fas fa-music"></i>ジャンル：<%= product.genre.genre %></li>
-          </ul>
-        </div>
-      </div>
-      <div class="pull-right col-md-3">
-        <div class="product_in_cart">
-          <div class="subtotal_price">
-            <% subtotal_price =  cart.product_count*cart.product_price %>
-            <% tax_included = subtotal_price*1.08 %>
-            <% subtotal_with_tax = tax_included.to_i %>
-            <p>小計：<span>¥<%= subtotal_with_tax %></span></p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-<% total_price += subtotal_with_tax %>
-<% total_count += cart.product_count %>
-<% end %>
-
-	<div class="row">
-	  <div class="total_price">
-	    <p>合計: <%= total_count %>点の商品  <span>¥<%= total_price %></span></p>
-	  </div>
-	</div>
