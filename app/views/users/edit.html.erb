@@ -20,14 +20,14 @@
       <div class="row sampleRow">
         <div class="col-xs-3"></div>
         <div class="col-xs-6">
-          <%= attachment_image_tag @user, :profile_image_url, :fill, 350, 350, format: 'jpeg', fallback: "no_image.jpg", size:'350x350' %>
+          <%= attachment_image_tag @user, :profile_image, :fill, 350, 350, format: 'jpeg', fallback: "no_image.jpg", size:'350x350' %>
         </div>
         <div class="col-xs-3"></div>
       </div>
       <div class="row sampleRow">
         <div class="col-xs-3"></div>
         <div class="col-xs-6">
-          <%= f.attachment_field :profile_image_url %>
+          <%= f.attachment_field :profile_image %>
         </div>
         <div class="col-xs-3"></div>
       </div>

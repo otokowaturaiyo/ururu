@@ -41,7 +41,18 @@ class UsersController < ApplicationController
 private
 
   def user_params
-        params.require(:user).permit(:kanji_lastname, :kanji_firstname, :kana_lastname, :kana_firstname, :user_name, :postal_code, :postal_address, :phone_number, :profile_image_url, :email, :password)
+        params.require(:user).permit(:kanji_lastname,
+                                     :kanji_firstname,
+                                     :kana_lastname,
+                                     :kana_firstname,
+                                     :user_name,
+                                     :postal_code,
+                                     :postal_address,
+                                     :phone_number,
+                                     :profile_image,
+                                     :email,
+                                     :password,
+                                     :password_confirmation)
   end
 
   def correct_user
@@ -55,4 +66,3 @@ private
   #       params.require(:user).permit(:password)
   # end
 end
-

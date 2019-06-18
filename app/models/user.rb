@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-	attachment :profile_image_url
+	attachment :profile_image
 	# validates :title, presence: true
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
