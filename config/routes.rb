@@ -1,17 +1,5 @@
 Rails.application.routes.draw do
 
-  get '/products/feature' => 'products#feature'
-  get 'genres/:id' => 'genres#show', as: 'genre'
-
-
-  resources :products, only:[:index, :show] do
-    resources :reviews, only: [:index, :create, :edit, :update, :destroy]
-    resources :likes, only: [:create, :destroy]
-  end
-
-  resources :destinations, only:[:new, :create, :edit, :update]
-  resources :carts, only:[:create, :show, :update, :destroy]
-  get 'search_list' => 'products#search_list'
 
   namespace :admins do
     resources :users, only: [:index, :show, :edit, :update]
@@ -22,20 +10,34 @@ Rails.application.routes.draw do
     patch 'users/:id/resign' => 'users#resign', as:'admins_user_resign'
   end
 
-
-
   devise_for :admins, controllers: {
-  	sessions: 'admins/sessions',
-  	passwords: 'admins/passwords',
-  	registrations: 'admins/registrations'
+    sessions: 'admins/sessions',
+    passwords: 'admins/passwords',
+    registrations: 'admins/registrations'
   }
   devise_for :users, controllers: {
-  	sessions: 'users/sessions',
-  	passwords: 'users/passwords',
-  	registrations: 'users/registrations'
+    sessions: 'users/sessions',
+    passwords: 'users/passwords',
+    registrations: 'users/registrations'
   }
 
+  get 'users/:id/resign' => 'users#resign', as: 'user_resign'
+  patch 'users/:id/resign_confirm' => 'users#resign_confirm', as: 'resign_confirm'
+
+
+  get '/products/feature' => 'products#feature'
+  resources :products, only:[:index, :show] do
+    resources :reviews, only: [:index, :create, :edit, :update, :destroy]
+    resources :likes, only: [:create, :destroy]
+  end
+
   resources :users, only:[:show, :edit, :update]
+
+  resources :destinations, only:[:new, :create, :edit, :update]
+  resources :carts, only:[:create, :show, :update, :destroy]
+  get 'search_list' => 'products#search_list'
+  get 'genres/:id' => 'genres#show', as: 'genre'
+
 
   get '/orders/confirm' => 'orders#confirm', as: 'order_confirm'
   post '/orders' => 'orders#create', as: 'orders'
@@ -43,8 +45,6 @@ Rails.application.routes.draw do
   resources :orders, only:[:index, :show]
 
 
-  get 'users/:id/resign' => 'users#resign', as: 'user_resign'
-  patch 'users/:id/resign_confirm' => 'users#resign_confirm', as: 'resign_confirm'
 
 
 end
