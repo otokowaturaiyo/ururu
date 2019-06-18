@@ -5,6 +5,9 @@ class Destination < ApplicationRecord
   validates :name, :destination_address, presence: true
 
 
+  belongs_to :user
+
+
 end
 
 

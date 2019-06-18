@@ -24,6 +24,7 @@ class CartsController < ApplicationController
     @carts = Cart.where(user_id: user.id)
   end
 
+
   def update
     @cart = Cart.find(params[:id])
     if @cart.update(cart_params)
@@ -38,6 +39,7 @@ class CartsController < ApplicationController
     @cart.destroy
 		redirect_to cart_path(@cart.user_id)
   end
+
 
   private
 
