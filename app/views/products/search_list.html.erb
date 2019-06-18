@@ -13,8 +13,17 @@
 					<% @products.each do |product| %>
 						<tr>
 							<th class="danger"><%= link_to product.product_name, product %></th>
-							<td><%= product.artist %></td>
+							<td><%= product.artist.name %></td>
 						</tr>
+					<% end %>
+					<% @artists.each do |artist| %>
+						<% products = Product.where(artist_id: artist.id) %>
+						<% products.each do |product| %>
+							<tr>
+								<th class="danger"><%= link_to product.product_name, product %></th>
+								<td><%= artist.name %></td>
+							</tr>
+						<% end %>
 					<% end %>
 				</tbody>
 			</table>

@@ -9,22 +9,31 @@ class Product < ApplicationRecord
 
 	accepts_nested_attributes_for :disks, allow_destroy: true
 
+	validates :product_name, presence: true, uniqueness: true
+	validates :genre_id, presence: true
+	validates :artist_id, presence: true
+	validates :label_id, presence: true
+	validates :price, presence: true
+	validates :description, presence: true
+	validates :stock, presence: true
+	validates :recommend, presence: true
+
 	attachment :jacket_image
 
 	#検索で入力された情報をモデルに探してもらう
 	def self.search(search)
-      if search
-        Product.where(['product_name LIKE ?', "%#{search}%"])
-      else
-        Product.all
-      end
+    if search
+      Product.where(['product_name LIKE ?', "%#{search}%"])
+    else
+      Product.all
     end
+  end
 
-      def likes?(user)
-        ret = false
-        if user.present?
-          ret = likes.where(user_id: user.id).exists?
-        end
-        return ret
-      end
+  def likes?(user)
+    ret = false
+    if user.present?
+      ret = likes.where(user_id: user.id).exists?
+    end
+		return ret
+  end
 end

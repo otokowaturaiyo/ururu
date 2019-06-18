@@ -10,8 +10,6 @@
     <script src="https://kit.fontawesome.com/adabbcc59d.js"></script>
      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
   </head>
-
-
   <body>
     <header>
       <nav class="navbar navbar-default navbar-fixed-top">
@@ -23,15 +21,24 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-logo" href="#">
-              <%= image_tag 'logo.png', size:'200x50' %>
-            </a>
+            <div>
+              <%= link_to image_tag 'logo.png', size:'200x50', class:"navbar-logo" %>
+            </div>
           </div>
           <div class="collapse navbar-collapse" id="navbar-ururu">
             <div class="header-left">
               <ul class="nav navbar-nav navbar-left">
                 <% if admin_signed_in? %>
-                  <li><%= link_to "管理者マイページ", admins_top_path %></li>
+                  <li>
+                    <%= link_to "管理者マイページ", admins_top_path %>
+                  </li>
+                    <%= link_to "商品一覧", admins_products_path %>
+                  <li>
+                    <%= link_to "ユーザー一覧", admins_users_path %>
+                  </li>
+                  <li>
+                    <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+                  </li>
                 <% elsif user_signed_in? %>
                   <li class="nav-item">
                     <%= link_to "商品一覧", products_path %>
@@ -56,7 +63,13 @@
                   <% if admin_signed_in? %>
                     <p>管理者ログイン中</p>
                   <% elsif user_signed_in? %>
-                    <p>ようこそ<%= current_user.user_name %>さん</p>
+                    <%= link_to user_path(current_user) do %>
+                      <p class="user-status">ようこそ<%= current_user.user_name %>さん</p>
+                      <% if current_user.profile_image_id.present? %>
+                        <%= attachment_image_tag  current_user, :profile_image,
+                                                  :fill, 50, 50, class:"user-thumbnail" %>
+                      <% end %>
+                    <% end %>
                   <% else %>
                     <p class="navbar-text navbar-right">ようこそゲストさん</p>
                   <% end %>
@@ -64,7 +77,8 @@
               </div>
               <div class="navbar-left search">
                 <%= form_tag search_list_path, enforce_utf8: false, method:'get' do %>
-                  <%= text_field_tag :search, "",class:"serch-form" %>
+                  <%= text_field_tag :search, "",class:"serch-form",
+                                      placeholder:"商品名やアーティスト名で検索" %>
                   <%= button_tag sanitize('<i class="fa fa-search"></i>'),
                                             type: "submit", name: nil, class:'search-input' %>
                 <% end %>

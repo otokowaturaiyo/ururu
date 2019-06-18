@@ -4,7 +4,9 @@ class CartsController < ApplicationController
     if user_signed_in?
       cart = Cart.find_or_initialize_by(product_id: params[:cart][:product_id])
       if cart.new_record?
+        product = Product.find(cart.product_id)
         cart = Cart.new(cart_params)
+        cart.product_price = product.price
         cart.user_id = current_user.id
         cart.save!
       else
@@ -40,7 +42,7 @@ class CartsController < ApplicationController
   private
 
   def cart_params
-    params.require(:cart).permit(:product_id, :product_count, :product_price)
+    params.require(:cart).permit(:product_id, :product_count)
   end
 
 
