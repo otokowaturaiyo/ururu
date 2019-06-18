@@ -5,7 +5,7 @@
 				<%= flash[:notice] %>
 				<h1>マイページ</h1>
 					<div class="img">
-						<%= attachment_image_tag @user, :profile_image_url, :fill, 350, 350, format: 'jpeg', fallback: "no_image.jpg", size:'350x350' %>
+						<%= attachment_image_tag @user, :profile_image, :fill, 350, 350, format: 'jpeg', fallback: "no_image.jpg", size:'350x350' %>
 					</div>
 				</div>
 			</div>
@@ -99,5 +99,7 @@ $(document).on('turbolinks:load', function() {
 	  	$('.like-on').mouseover(function(){
 	    	$(this).css('opacity', '.1').animate({'opacity': '1'}, 'slow');
  	 	});
+
 	});
 </script>
+

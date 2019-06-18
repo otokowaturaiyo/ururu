@@ -41,10 +41,9 @@
 					</div>
 					<div class="add-to-cart">
 						<%= form_with model:@cart do |f| %>
-						<p>数量:<%= f.number_field :product_count, value:1, class:"product_count" %></p>
-						<%= f.hidden_field :product_id, value: @product.id %>
-						<%= f.hidden_field :product_price, value: @product.price %>
-						<%= f.submit "カートに追加する", class:"btn-square-pop" %>
+							<p>数量:<%= f.number_field :product_count, value:1, class:"product_count" %></p>
+							<%= f.hidden_field :product_id, value: @product.id %>
+							<%= f.submit "カートに追加する", class:"btn-square-pop" %>
 						<% end %>
 					</div>
 					<!-- いいね機能 -->
@@ -58,7 +57,7 @@
 									<%= @product.likes.count %> いいね
 								<% end %>
 							</li>
-								<% else %>
+						<% else %>
 							<li>
 								<%= link_to product_likes_path(@product), method: :post do %>
 								<div class="like-box animated bounceOut">
@@ -68,10 +67,8 @@
 								<% end %>
 							</li>
 						<% end %>
-				<% else %>
-				<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
-					<%= @product.likes.count %> いいね
-				<% end %>
+
+					<% end %>
 
 				</div>
 			</div>
@@ -83,7 +80,7 @@
 				<div class="col-md-5">
 						<h3>レビュー投稿</h3>
 						<!-- コメント入力欄を商品の詳細ページに表示するためのrender -->
-						<%= render partial: 'reviews/form', locals: { reviews: @reviews, products: @products }%>
+						<%= render partial: 'reviews/form', locals: { reviews: @reviews, product: @product }%>
 				</div>
 				<h3>レビュー一覧</h3>
 				<div class="col-md-7 scroller">
@@ -116,8 +113,8 @@
 							<tbody>
 								<tr class="row">
 									<td class="song-index col-md-2"><%= s %></td>
-							    <td class="song-name col-md-8"><%= song.song %></td>
-							    <td class="song-length col-md-2"><%= song.second %></td>
+								    <td class="song-name col-md-8"><%= song.song %></td>
+								    <td class="song-length col-md-2"><%= song.second %></td>
 								</tr>
 							</tbody>
 						<% end %>

@@ -24,6 +24,7 @@ class ReviewsController < ApplicationController
 
 	def destroy
 		@review = Review.find(params[:id])
+		binding.pry
 		@review.destroy
 		redirect_to product_path(params[:product_id])
 
