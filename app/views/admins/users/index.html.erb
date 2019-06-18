@@ -1,5 +1,5 @@
 <div class="container">
-	<div class="row">
+	<div class="row ">
 		<div class="col-lg-offset-1 col-lg-10">
 			<br>
 			<br>
@@ -8,7 +8,7 @@
 						<%= flash[:notice] %>
 					</div>
 				<% end %>
-			<!-- ransack エンドユーザーを検索できる -->
+			<!-- ransack エンドユーザー検索可 -->
 			<%= form_tag(admins_users_path, method: :get, enforce_utf8: false) do %>
 				<div>
 				<%= text_field_tag :q, params[:q], placeholder: "検索" %>
@@ -21,13 +21,13 @@
 				<tbody>
 					<% @users.each do |user| %>
 				<tr data-href = <%=admins_user_path(user.id) %>>
-					 	<td><%= attachment_image_tag user, :profile_image_id, :fill, 45, 45, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb", size: "45x45" %></td>
-							<td><%= user.id %></td>
-							<td></td>
-							<td></td>
-							<td><%= user.user_name %></td>
-							<td><%= user.email %></td>
-					</tr>
+					<td><%= attachment_image_tag user, :profile_image_id, :fill, 45, 45, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb", size: "45x45" %></td>
+					<td><%= user.id %></td>
+					<td></td>
+					<td></td>
+					<td><%= user.user_name %></td>
+					<td><%= user.email %></td>
+				</tr>
 				 	<% end %>
 				</tbody>
 			</table>
