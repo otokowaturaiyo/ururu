@@ -11,7 +11,6 @@ Rails.application.routes.draw do
 
   resources :destinations, only:[:new, :create, :edit, :update]
   resources :carts, only:[:create, :show, :update, :destroy]
-
   get 'search_list' => 'products#search_list'
 
   namespace :admins do
@@ -38,9 +37,10 @@ Rails.application.routes.draw do
 
   resources :users, only:[:show, :edit, :update]
 
-  resources :orders, only:[:index, :show, :create]
-  get '/orders/:id/confirm' => 'orders#confirm', as:'order_confirm'
+  get '/orders/confirm' => 'orders#confirm', as: 'order_confirm'
+  post '/orders' => 'orders#create', as: 'orders'
   get '/orders/:id/complete' => 'orders#complete', as:'order_complete'
+  resources :orders, only:[:index, :show]
 
 
   get 'users/:id/resign' => 'users#resign', as: 'user_resign'

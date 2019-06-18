@@ -1,6 +1,6 @@
 class Order < ApplicationRecord
 
 
-	belogs_to :user
+	belongs_to :user
 	has_many :products
 end

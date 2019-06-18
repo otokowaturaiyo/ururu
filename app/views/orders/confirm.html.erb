@@ -1,6 +1,6 @@
 <div class="confirm-container">
-	<h1>注文内容を確認</h1>
-		<div class="row">
+	<div class="row">
+		<h1>注文内容を確認</h1>
 			<div class="col-md-offset-2 col-md-8 purchase-flow">
 				<i class="fas fa-shopping-cart fa-2x"></i><!--カート画面-->
 				<i class="fas fa-arrow-right fa-2x"></i>
@@ -8,84 +8,89 @@
 				<i class="fas fa-arrow-right fa-2x"></i>
 				<i class="far fa-check-circle fa-2x"></i><!--購入完了画面-->
 			</div>
-		</div>
 
-
-		<h3>お届け先</h3>
-			<div class="row">
-				<div class="col-md-4">
-					<!--目的地表示-->
-					<%= @destination.destination_address %>
-				</div>
-				<div class="col-md-4">
-					<p>※宛先を変更できます</p>
-					<!--新しい宛先の指定-->
-					<p><%= link_to @destination, new_destination_path %></p>
-				</div>
-				<div class="col-md-4">
-					<!--お支払い方法の選択-->
-					<p>お支払い方法</p>
-				</div>
-
-
-			<!--注文内容表示-->
-			<% total_price = 0 %>
-			<% total_count = 0 %>
-			<% @carts.each do |cart| %>
-			<% product = Product.find(cart.product_id) %>
-			  <div class="row">
-			    <div class="clearfix">
-			      <div class="pull-left col-md-3">
-			        <div class="product_image">
-			          <% if product.jacket_image_id.present? %>
-			            <%= attachment_image_tag  product, :jacket_image, :fill, 150, 150, class:"border" %>
-			          <% else %>
-			            <%= image_tag 'no_image.jpg', size: '150x150', class:"border" %>
-			          <% end %>
-			        </div>
-			      </div>
-			      <div class="pull-left col-md-6">
-			        <div class="product_details">
-			          <ul>
-			            <li><i class="fas fa-music"></i>商品名：<%= product.product_name %></li>
-			            <li><i class="fas fa-music"></i>アーティスト：<%= product.artist.name %></li>
-			            <li><i class="fas fa-music"></i>レーベル：<%= product.label.label %></li>
-			            <li><i class="fas fa-music"></i>ジャンル：<%= product.genre.genre %></li>
-			          </ul>
-			        </div>
-			      </div>
-			      <div class="pull-right col-md-3">
-			        <div class="product_in_cart">
-			          <div class="subtotal_price">
-			            <% subtotal_price =  cart.product_count*cart.product_price %>
-			            <% tax_included = subtotal_price*1.08 %>
-			            <% subtotal_with_tax = tax_included.to_i %>
-			            <p>小計：<span>¥<%= subtotal_with_tax %></span></p>
-			          </div>
-			        </div>
-			      </div>
-			    </div>
-			  </div>
-			<% total_price += subtotal_with_tax %>
-			<% total_count += cart.product_count %>
-			<% end %>
-
-			<div class="row">
-			  <div class="total_price">
-			    <p>合計: <%= total_count %>点の商品  <span>¥<%= total_price %></span></p>
-			  </div>
-			</div>
-			<!--リンクボタん-->
-			<!-- <div class="link-bottun">
+		<div class="col-md-8 col-md-offset-2">
+			<h3>お届け先</h3>
 				<div class="row">
-					<div class="col-md-6">
-						<%= link_to %>
+					<div class="col-md-4">
+						<!--目的地表示-->
+						<%= @destination.destination_address %>
 					</div>
-					<div class="col-md-6">
-						<%= link_to %>
+					<div class="col-md-4">
+						<p>※宛先を変更できます</p>
+						<!--新しい宛先の指定-->
+						<%= link_to new_destination_path do %><button class="btn btn-primary">別の宛先を指定する</button><% end %>
+					</div>
+					<div class="col-md-4">
+						<!--お支払い方法の選択-->
+						<p>お支払い方法</p>
 					</div>
 				</div>
-			</div> -->
+				<br>
+
+
+				<!--注文内容表示-->
+				<div class="order-item-container">
+					<% total_price = 0 %>
+					<% total_count = 0 %>
+					<table class="order-table" border=1>
+						<div class="row">
+				    	<thead>
+				    		<tr>
+				    			<th class="col-md-4">商品名</th>
+				    			<th class="col-md-4">アーティスト</th>
+				    			<th class="col-md-2">注文数</th>
+				    			<th class="col-md-2">金額(税込)</th>
+				    		</tr>
+				    	</thead>
+				    	<% @carts.each do |cart| %>
+				    	<% product = Product.find(cart.product_id) %>
+				    	<tbody>
+				    		<tr>
+				    			<td>
+				    				<div class="row">
+					    				<div class="col-md-4">
+						    				<% if product.jacket_image_id.present? %>
+									            <%= attachment_image_tag  product, :jacket_image, :fill, 30, 30, class:"border" %>
+									        <% else %>
+									            <%= image_tag 'no_image.jpg', size: '30x30', class:"border" %>
+									        <% end %>
+								        </div>
+								        <div class="col-md-8"><%= product.product_name %></div>
+							    	</div>
+							    </td>
+				    			<td><%= product.artist.name %></td>
+				    			<td><%= cart.product_count %></td>
+				    			<td><% subtotal_price =  cart.product_count*cart.product_price %>
+						            <% tax_included = subtotal_price*1.08 %>
+						            <% subtotal_with_tax = tax_included.to_i %>¥<%= subtotal_with_tax.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %>
+						        </td>
+				    		</tr>
+				    	</tbody>
+				    	<% end %>
+				    	</div>
+					</table>
+				</div>
+				<br>
+
+
+				<!--リンクボタん-->
+				<div class="link-bottun">
+					<div class="row">
+						<div class="col-md-6">
+							<%= link_to cart_path(current_user.id) do %><button class="btn btn-success">カート編集へ戻る</button><% end %>
+						</div>
+						<div class="col-md-6">
+							<%= link_to orders_path(
+							order: {
+								     user_id:current_user.id,
+								     destination:@destination.destination_address
+							       }
+								 ), method: :'post' do %><button class="btn btn-danger">注文を確定する</button><% end %>
+						</div>
+					</div>
+				</div>
 		</div>
+	</div>
 </div>
 
