@@ -35,7 +35,7 @@
 				</p>
 				<p class="price col-md-4 pull-left" style="margin-top: 10px;">
 					<% tax_included = @product.price*1.08 %>
-					価格：<%= tax_included.to_i %>（税込）
+					価格：<%= tax_included.to_i.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %>（税込）
 				</p>
 
 			<!-- いいね -->
@@ -109,7 +109,5 @@
 				</table>
 			<% end %>
 		</div>
-
-
 	</div>
 </div>

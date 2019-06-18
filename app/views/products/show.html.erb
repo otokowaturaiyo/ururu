@@ -43,7 +43,6 @@
 						<%= form_with model:@cart do |f| %>
 							<p>数量:<%= f.number_field :product_count, value:1, class:"product_count" %></p>
 							<%= f.hidden_field :product_id, value: @product.id %>
-							<%= f.hidden_field :product_price, value: @product.price %>
 							<%= f.submit "カートに追加する", class:"btn-square-pop" %>
 						<% end %>
 					</div>
@@ -80,7 +79,7 @@
 				<div class="col-md-5">
 						<h3>レビュー投稿</h3>
 						<!-- コメント入力欄を商品の詳細ページに表示するためのrender -->
-						<%= render partial: 'reviews/form', locals: { reviews: @reviews, products: @products }%>
+						<%= render partial: 'reviews/form', locals: { reviews: @reviews, product: @product }%>
 				</div>
 				<h3>レビュー一覧</h3>
 				<div class="col-md-7 scroller">

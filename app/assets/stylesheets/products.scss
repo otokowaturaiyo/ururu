@@ -5,20 +5,41 @@
 $font-family: 'Lato', 'Noto Sans JP', '游ゴシック Medium', '游ゴシック体', 'Yu Gothic Medium', YuGothic, 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
 
 .features{
-  height: 370px;
+  height: 390px;
 }
 
 .features-text{
   color:#FFF;
+  font-size: 17px;
 }
 
 .skippr-container{
-  height:350px;
-  background-color: black;
+  height:390px;
+  background-color: #000f25;
 }
 
 .slide-image{
   padding: 0 10%;
+}
+
+.new-arrivals{
+  border-right: dotted 1px rgba(#67686a, 0.8);
+}
+
+.each-item{
+  float:left;
+  height:250px;
+  a, p{
+    overflow: hidden;
+    margin-left:10%;
+    margin-bottom: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.thumbnail{
+  margin:0 auto;
 }
 
 .product_status{
@@ -210,4 +231,24 @@ ul li i {
 
 .review-container{
   margin-bottom: 50px;
+}
+
+// Indexページ
+
+.product-name{
+  margin-bottom:25px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.index-item{
+  margin-bottom:0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+th{
+  min-width: 60px;
 }

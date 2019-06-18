@@ -1,10 +1,11 @@
 class ProductsController < ApplicationController
-  PER = 6
-  PER2 =30
+  PER = 9
+  PER2 = 6
+  PER3 = 30
 
   def index
   	@products = Product.page(params[:page]).per(PER).order(created_at: :desc)
-  	@recommends = Product.where(recommend: true).order(created_at: :desc).limit(PER)
+  	@recommends = Product.where(recommend: true).order(created_at: :desc).limit(PER2)
   	@genres = Genre.all
   end
 
@@ -17,12 +18,13 @@ class ProductsController < ApplicationController
   end
 
   def feature
-  	@products = Product.page(params[:page]).per(PER).order(created_at: :desc)
+  	@products = Product.page(params[:page]).per(PER2).order(created_at: :desc)
   	@recommend = Product.where(recommend: true)
   end
 
   def search_list
   	@products = Product.search(params[:search]).page(params[:page]).per(PER2).order(created_at: :desc)
+    @artists = Artist.search(params[:search]).page(params[:page]).per(PER2).order(created_at: :desc)
   end
 
 
