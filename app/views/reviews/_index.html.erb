@@ -7,7 +7,7 @@
 			</div>
 			<div class="col-md-2 review-image">
 				<% if review.product.jacket_image_id.present? %>
-					<%= attachment_image_tag product, :jacket_image, :fill, 30, 30, class:"border"%>
+					<%= attachment_image_tag review.product, :jacket_image, :fill, 30, 30, class:"border"%>
 				<% else %>
 					<%= image_tag 'no_image.jpg', size: '30x30', class:"border" %>
 				<% end %>

@@ -232,3 +232,23 @@ ul li i {
 .review-container{
   margin-bottom: 50px;
 }
+
+// Indexページ
+
+.product-name{
+  margin-bottom:25px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.index-item{
+  margin-bottom:0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+th{
+  min-width: 60px;
+}

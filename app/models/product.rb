@@ -16,7 +16,7 @@ class Product < ApplicationRecord
 	validates :price, presence: true
 	validates :description, presence: true
 	validates :stock, presence: true
-	validates :recommend, presence: true
+	validates :recommend, inclusion: {in: [true, false]}
 
 	attachment :jacket_image
 
