@@ -1,0 +1,27 @@
+<h1>取引詳細</h1>
+
+<% @order.id %>
+
+<%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg", size:'60x60' %>
+
+<p class ="form">ユーザー名 : <%= @user.user_name %></p>
+<p class ="form">メールアドレス : <%= @user.email %></p>
+<p class ="form">電話番号 : <%= @user.phone_number %></p>
+<p class ="form">〒 : <%= @user.postal_code %></p>
+<p class ="form">住所 : <%= @user.postal_address %></p>
+
+
+<% @order_details.each do |order_detail| %>
+	<!-- CD画像 -->
+	<%= attachment_image_tag order_detail.product, :jacket_image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg", size:'60x60' %>
+	<!-- 商品名 -->
+	<%= order_detail.product.product_name %>
+	<!-- アーティスト名 -->
+	<%= order_detail.product.artist.name %>
+	<!-- 購入枚数 -->
+	<%= order_detail.product_count %>
+	<!-- 価格 -->
+	<%= order_detail.price %>
+
+<% end %>
+

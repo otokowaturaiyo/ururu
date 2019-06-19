@@ -1,0 +1,26 @@
+<h1>購入履歴</h1>
+
+
+
+<% @orders.each do |order| %>
+	<!-- ユーザー名 -->
+	<%= order.user.user_name %>
+	<!-- 購入日 -->
+	<%= order.created_at %>
+	<!-- 取引番号 -->
+	<%= order.id %>
+
+	<% order.order_details.each do |order_detail| %>
+		<!-- CDの画像 -->
+		<%= attachment_image_tag order_detail.product, :jacket_image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg", size:'60x60' %>
+		<!-- 商品名 -->
+		<%= order_detail.product.product_name %>
+		<!-- アーティスト名 -->
+		<%= order_detail.product.artist.name %>
+		<!-- 商品数量 -->
+		<%= order_detail.product_count %>
+	<% end %>
+	<%= link_to edit_admins_order_path(order) do %>
+		<button class="btn btn-info btn-lg">取引詳細</button>
+	<% end %>
+<% end %>
