@@ -1,5 +1,5 @@
 <div class="container">
-	<div class="row">
+	<div class="row ">
 		<div class="col-lg-offset-1 col-lg-10">
 			<br>
 			<br>
@@ -8,36 +8,45 @@
 						<%= flash[:notice] %>
 					</div>
 				<% end %>
-			<!-- ransackでエンドユーザーを検索できます -->
+			<!-- ransack エンドユーザー検索可 -->
 			<%= form_tag(admins_users_path, method: :get, enforce_utf8: false) do %>
 				<div>
-				<%#= label :user_nam_cont %>
 				<%= text_field_tag :q, params[:q], placeholder: "検索" %>
 				<%= submit_tag "🔍", class: " btn glyphicon glyphicon-search" %>
 				</div>
 			<% end %>
-			<!-- ransack end -->
+			<!-- ransack -->
 				<div class="space-bottom"></div>
 			<table class="table table-hover">
 				<tbody>
 					<% @users.each do |user| %>
-				<tr>
-					<% admins_user_path(user) %>
-					 	<td><%= attachment_image_tag user, :profile_image_id, :fill, 45, 45, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb", size: "45x45" %></td>
-							<td><%= user.id %></td>
-							<td></td>
-							<td></td>
-							<td><%= user.user_name %></td>
-							<td><%= user.email %></td>
-							<!-- ↓私の学習が追いついたらあとで変更する -->
-							<td><%= link_to "編集", admins_user_path(user.id), class: "btn btn-info" %></td>
-					</tr>
+				<tr data-href = <%=admins_user_path(user.id) %>>
+					<td><%= attachment_image_tag user, :profile_image_id, :fill, 45, 45, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb", size: "45x45" %></td>
+					<td><%= user.id %></td>
+					<td></td>
+					<td></td>
+					<td><%= user.user_name %></td>
+					<td><%= user.email %></td>
+				</tr>
 				 	<% end %>
 				</tbody>
 			</table>
 		</div>
 	</div>
 </div>
+<script>
+	$(function(){
+		$('tbody tr[data-href]').addClass('clickable').click(function(){
+			window.location = $(this).attr('data-href');
+		}).find('a').hover(function(){
+			$(this).parents('tr').unbind('click');
+		},function(){
+			$(this).parents('tr').click(function(){
+				window.location = $(this).attr('data-href');
+			});
+		});
+	});
+</script>
 
 <%= paginate @users %>
 
