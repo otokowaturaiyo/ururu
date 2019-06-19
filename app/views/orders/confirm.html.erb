@@ -24,6 +24,11 @@
 					<div class="col-md-4">
 						<!--お支払い方法の選択-->
 						<p>お支払い方法</p>
+						<%= form_for @order do |f| %>
+							<label><%= f.radio_button :payment_methods, "銀行振込" %>銀行振込</label>
+							<label><%= f.radio_button :payment_methods, "クレジットカード" %>クレジットカード</label>
+							<label><%= f.radio_button :payment_methods, "代引き" %>代引き</label>
+						<% end %>
 					</div>
 				</div>
 				<br>
@@ -56,7 +61,7 @@
 									            <%= image_tag 'no_image.jpg', size: '30x30', class:"border" %>
 									        <% end %>
 								        </div>
-								        <div class="col-md-8"><%= product.product_name %></div>
+								        <div class="col-md-8 order-product-name"><%= product.product_name %></div>
 							    	</div>
 							    </td>
 				    			<td><%= product.artist.name %></td>
@@ -67,12 +72,18 @@
 						        </td>
 				    		</tr>
 				    	</tbody>
+				    	<% total_price += subtotal_with_tax %>
+						<% total_count += cart.product_count %>
 				    	<% end %>
 				    	</div>
 					</table>
 				</div>
 				<br>
-
+				<p class="souryou">送料¥ 500</p>
+				<div class="grand-total">
+					<%= total_count %>点　合計　¥<%= total_price %>
+				</div>
+				<br>
 
 				<!--リンクボタん-->
 				<div class="link-bottun">
@@ -81,15 +92,11 @@
 							<%= link_to cart_path(current_user.id) do %><button class="btn btn-success">カート編集へ戻る</button><% end %>
 						</div>
 						<div class="col-md-6">
-							<%= link_to orders_path(
-							order: {
-								     user_id:current_user.id,
-								     destination:@destination.destination_address
-							       }
-								 ), method: :'post' do %><button class="btn btn-danger">注文を確定する</button><% end %>
+							<%= link_to orders_path, method: :post do %><button class="btn btn-danger">注文を確定する</button><% end %>
 						</div>
 					</div>
 				</div>
+				<br>
 		</div>
 	</div>
 </div>
