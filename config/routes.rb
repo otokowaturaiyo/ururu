@@ -7,7 +7,9 @@ Rails.application.routes.draw do
       resources :reviews, only:[:edit, :update, :destroy]
     end
     get '/top' => 'home#top'
-    patch 'users/:id/resign' => 'users#resign', as:'admins_user_resign'
+    get '/resign/index' => 'users#resign_index'
+    patch 'users/:id/resign' => 'users#resign', as:'user_resign'
+    patch 'users/:id/revival' => 'users#revival', as:'user_reviva'
   end
 
   devise_for :admins, controllers: {
@@ -23,7 +25,6 @@ Rails.application.routes.draw do
 
   get 'users/:id/resign' => 'users#resign', as: 'user_resign'
   patch 'users/:id/resign_confirm' => 'users#resign_confirm', as: 'resign_confirm'
-
 
   get '/products/feature' => 'products#feature'
   resources :products, only:[:index, :show] do

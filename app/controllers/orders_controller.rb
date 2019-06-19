@@ -8,6 +8,8 @@ class OrdersController < ApplicationController
 	def create
 		order = Order.new(order_params)
 		order.save
+		cart = Cart.where(user_id: current_user.id)
+		cart.destroy_all
 		redirect_to order_complete_path(order.id)
 	end
 
@@ -26,7 +28,6 @@ class OrdersController < ApplicationController
 	def order_params
 		params.require(:order).permit(:user_id, :destination)
 	end
-
 
 
 end

@@ -34,10 +34,6 @@ class UsersController < ApplicationController
       redirect_to products_path
     end
 
-
-
-
-
 private
 
   def user_params
@@ -61,8 +57,4 @@ private
       redirect_to user_path(current_user)
     end
   end
-
-  # def user_password_params
-  #       params.require(:user).permit(:password)
-  # end
 end

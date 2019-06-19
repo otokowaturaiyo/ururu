@@ -1,32 +1,33 @@
-<div class="row sampleRow my-back">
-		<div class="col-xs-6">
-			<div class="row sampleRow">
-				<div class="col-xs-offset-3 col-xs-6">
-				<%= flash[:notice] %>
-				<h1>マイページ</h1>
+	<h1 class="my-title"><%= @user.user_name %><span class="user-title">さんマイページ</span></h1>
+		<div class="my-flash">
+			<%= flash[:notice] %>
+		</div>
+<div class="row my-text">
+		<div class="col-lg-6">
+
+			<div class="col-lg-offset-2 col-lg-8">
+				<div class="col-md-1">
+					<%= link_to edit_user_path(@user.id) do %>
+							<button class="balloon">登録情報編集</button>
+						<% end %>
+
+					<%= link_to edit_user_path(@user.id) do %>
+					<!-- （後でパス編集） -->
+							<button class="balloon2">購入履歴</button>
+						<% end %>
+				</div>
+
+				<div class="col-lg-offset-3 col-md-6">
 					<div class="img">
-						<%= attachment_image_tag @user, :profile_image, :fill, 350, 350, format: 'jpeg', fallback: "no_image.jpg", size:'350x350' %>
+						<%= attachment_image_tag @user, :profile_image, :fill, 350, 350, format: 'jpeg', fallback: "no_image.jpg", size:'350x350', class: "img-circle pull-left profile-thumb" %>
 					</div>
 				</div>
-			</div>
+
+		</div>
+
 			<br>
-			<div class="row sampleRow">
-				<div class="col-xs-offset-3 col-xs-6">
-					<div class="mypage-touroku">
-						<%= link_to edit_user_path(@user.id) do %>
-							<button class="btn btn-info btn-lg">登録情報編集</button>
-						<% end %>
-					</div>
-				</div>
-			</div>
-			<div class="row sampleRow">
-				<div class="col-xs-offset-3 col-xs-6">
-					<div class="mypage-touroku">
-						<%= link_to edit_user_path(@user.id) do %>
-							<button class="btn btn-info btn-lg">購入履歴（後でパス編集）</button>
-						<% end %>
-					</div>
-				</div>
+<!-- 			<div class="row"> -->
+	<div class="col-md-2">
 			</div>
 		</div>
 		<br>
@@ -48,6 +49,9 @@
 	<div class="row">
 		<div class="col-lg-8 col-lg-offset-2 like carousel slide" data-ride="carousel" >
 			<button id="btn" class="fa fa-heart" style="color: red;" data-effect='rigth'></button>
+<!-- お試し -->
+			<button id="b-sub" class="fa fa-heart" style="color: blue;"></button>
+<!-- お試し -->
 			<div class="slider slider-container">
 				<% @likes.each do |like| %>
 				<% product = Product.find(like.product_id) %>
@@ -57,6 +61,8 @@
 		</div>
 	</div>
 	<!-- いいね -->
+
+	<div class="my-back"></div>
 <script>
 
 $(document).on('turbolinks:load', function() {
@@ -71,7 +77,7 @@ $(document).on('turbolinks:load', function() {
 		});
 
 
-		$('button').click(function(){
+		$('#btn').click(function(){
 
 			var effect = $('#btn').attr('data-effect');
 			if(effect == 'rigth'){
@@ -101,5 +107,13 @@ $(document).on('turbolinks:load', function() {
  	 	});
 
 	});
+// お試し
+$(function(){
+	$('.my-back').fadeOut(1000);
+	});
+	$('.b-sub').click(function(){
+		$('.b-sub').show(800);
+	});
+// お試し
 </script>
 

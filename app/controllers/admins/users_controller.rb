@@ -9,6 +9,10 @@ class Admins::UsersController < ApplicationController
 		end
 	end
 
+	def resign_index
+		@users = User.where(resignation: true)
+	end
+
 	def show
 		@user = User.find(params[:id])
 	end
@@ -36,6 +40,18 @@ class Admins::UsersController < ApplicationController
 		redirect_to admins_users_path
 	end
 
+	def revival
+		query = { user_name_cont: params[:q] }
+		@users = User.where(resignation: true).page(params[:page]).reverse_order
+		q = User.where(resignation: true).ransack(query)
+		@user = User.find(params[:id])
+		@user.update(
+			resignation: false,
+			resigned_at: Time.current
+			)
+		flash[:notice] = "ユーザーを復活させました！"
+		redirect_to admins_users_path
+end
     private
 	def users_params
 		params.require(:user).permit(:user_id, :user_name, :email, :profile_image, :kanji_firstname, :kanji_lastname, :kana_firstname, :kana_lastname, :phone_number, :postal_code, :postal_address)
