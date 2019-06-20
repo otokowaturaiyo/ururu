@@ -1,25 +1,27 @@
+	<div id="my-back"></div>
+
 	<h1 class="my-title"><%= @user.user_name %><span class="user-title">さんマイページ</span></h1>
+		<% if flash[:notice] %>
 		<div class="my-flash">
 			<%= flash[:notice] %>
 		</div>
+		<% end %>
 <div class="row my-text">
 		<div class="col-lg-6">
 
 			<div class="col-lg-offset-2 col-lg-8">
 				<div class="col-md-1">
-					<%= link_to edit_user_path(@user.id) do %>
-							<button class="balloon">登録情報編集</button>
-						<% end %>
+					<div class="col-xs-3">
+						<%= link_to '登録情報編集', edit_user_path(@user.id),class: "balloon" %>
+					</div>
 
-					<%= link_to edit_user_path(@user.id) do %>
+					<%= link_to '購入履歴', edit_user_path(@user.id), class: "balloon2" %>
 					<!-- （後でパス編集） -->
-							<button class="balloon2">購入履歴</button>
-						<% end %>
 				</div>
 
-				<div class="col-lg-offset-3 col-md-6">
+				<div class="col-lg-offset-2 col-md-8">
 					<div class="img">
-						<%= attachment_image_tag @user, :profile_image, :fill, 350, 350, format: 'jpeg', fallback: "no_image.jpg", size:'350x350', class: "img-circle pull-left profile-thumb" %>
+						<%= attachment_image_tag @user, :profile_image, :fill, 350, 350, format: 'jpeg', fallback: "no_image.jpg", size:'350x350', class: "img-circle pull-left profile-thumb my-img" %>
 					</div>
 				</div>
 
@@ -42,7 +44,7 @@
 			<p class ="form">郵便番号 : <%=@user.postal_code %></p>
 			<p class ="form">住所 : <%=@user.postal_address %></p>
 		</div>
-</div>
+<!-- <div id="my-back"></div> -->
 	<!-- いいね -->
 
 
@@ -60,9 +62,8 @@
 			</div>
 		</div>
 	</div>
+</div>
 	<!-- いいね -->
-
-	<div class="my-back"></div>
 <script>
 
 $(document).on('turbolinks:load', function() {
@@ -109,10 +110,9 @@ $(document).on('turbolinks:load', function() {
 	});
 // お試し
 $(function(){
-	$('.my-back').fadeOut(1000);
+	$('.my-back').fadeOut(4000);
 	});
 	$('.b-sub').click(function(){
-		$('.b-sub').show(800);
 	});
 // お試し
 </script>

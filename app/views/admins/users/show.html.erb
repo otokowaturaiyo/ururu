@@ -1,14 +1,15 @@
-<div class="container my-back">
+<div class="container">
 	<div class="row">
 		<div>
 			<br>
 		<div class="col-lg-3">
 			<br>
 			<br>
-
+			<% if flash[:notice] %>
 			<div class="flash">
 				<%= flash[:notice] %>
 			</div>
+			<% end %>
 			<%= attachment_image_tag @user, :profile_image_id, :fill, 200, 200, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb", size: "200x200" %>
 		</div>
 		<div class="col-lg-offset-1 col-lg-7">

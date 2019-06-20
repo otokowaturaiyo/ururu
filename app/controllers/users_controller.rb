@@ -34,6 +34,13 @@ class UsersController < ApplicationController
       redirect_to products_path
     end
 
+    # def revival_confirm
+    #   @user = User.find(params[:id])
+    #   @user.update(resignation: false)
+    #   flash[:notice] = "ようこそ！"
+    #   redirect_to products_path
+    # end
+
 private
 
   def user_params
