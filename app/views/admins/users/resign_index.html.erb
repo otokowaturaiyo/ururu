@@ -20,7 +20,7 @@
 			<table class="table table-hover">
 				<tbody>
 					<% @users.each do |user| %>
-				<tr data-href=<%=admins_user_path(user.id) %>>
+				<tr data-href = <%=admins_user_path(user.id) %>>
 					<td><%= attachment_image_tag user, :profile_image_id, :fill, 45, 45, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb", size: "45x45" %></td>
 					<td><%= user.id %></td>
 					<td></td>
@@ -48,5 +48,4 @@
 	});
 </script>
 
-<%= paginate @users %>
-
+<%#= paginate @users %>
