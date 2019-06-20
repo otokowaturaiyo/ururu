@@ -1,0 +1,48 @@
+<div class="purchase-history-container">
+	<% @order.each do |order| %>
+	<h1>取引詳細</h1>
+	<p>取引ID : <%= order.id%></p>
+	<span>発送状況 : <%= order.shipment_status %></span>
+	<div class="row">
+		<div class="col-md-8 col-md-2">
+			<div class="order-user-info">
+				<div class="row">
+					<div class="col-md-4">
+						<%= <% if order.user.profile_image_id %>
+							<%= attachment_image_tag order, :profile_image_id, :fill, 350, 350, class:"border" %>
+						<% else %>
+							<%= image_tag 'no_image.jpg', size: '350x350', class:"border" %>
+						<% end %>
+					</div>
+					<div class="col-md-8">
+						<%= order.user.user_name%>
+						<%= order.user.email %>
+						<%= order.created_at %>
+						<%= order.destination %>
+						<%= order.user.phone_number %>
+					</div>
+				</div>
+			</div>
+			<% order.order_detail.each do |detail| %>
+			<div class="order-product-info">
+				<div class="row">
+					<div class="col-md-4">
+						<% if product.jacket_image_id %>
+							<%= attachment_image_tag product, :jacket_image, :fill, 60, 60, class:"border" %>
+						<% else %>
+							<%= image_tag 'no_image.jpg', size: '60x60', class:"border" %>
+						<% end %>
+					</div>
+					<div class="col-md-8">
+						<%= detail.product.product_name%>
+						<%= detail.product.artist.name %>
+						<%= detail.product.product_count %>
+						<%= detail.product.price %>
+					</div>
+				</div>
+			</div>
+			<% end %>
+		</div>
+	</div>
+	<% end %>
+</div>
