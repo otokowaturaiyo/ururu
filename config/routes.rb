@@ -42,6 +42,7 @@ end
 
 
   get '/orders/confirm' => 'orders#confirm', as: 'order_confirm'
+  post '/orders/confirm' => 'orders#destinationupdate', as: 'order_destination'
   post '/orders' => 'orders#create', as: 'orders'
   get '/orders/:id/complete' => 'orders#complete', as:'order_complete'
   resources :orders, only:[:index, :show, :update]
