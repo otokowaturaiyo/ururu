@@ -13,14 +13,14 @@ table tr[data-href] {
 
 //user
 .my-back {
-	z-index:1;
+	z-index:1000;
 	display:none;
 	position:fixed;
 	top:0;
 	left:0;
 	width:100%;
 	height:120%;
-	background-color:rgba(0,0,0,0.75);
+	background-color:rgba(0,0,0,0.5);
 }
 .my-text .balloon ,.my-text .balloon2, .my-text p, .my-text h1, .my-text span {
 	font-family: 'Wawati SC','メイリオ',sans-serif;
@@ -41,8 +41,6 @@ table tr[data-href] {
 .balloon {
   position: relative;
   display: inline-block;
-  // margin: 0 30px 1.5em 0;
-  // padding: 0 5px;
   left: 76px;
   bottom: 20px;
   width: 90px;
@@ -54,7 +52,6 @@ table tr[data-href] {
   font-weight: bold;
   background: #febd69;
   border-radius: 50%;
-  box-sizing: border-box;
   z-index: 90;
 
 }
@@ -68,7 +65,6 @@ table tr[data-href] {
   border: 15px solid transparent;
   border-left: 15px solid #febd69;
   z-index: 100;
-  // -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
 
 }
@@ -87,9 +83,9 @@ table tr[data-href] {
 	font-weight: bold;
 	background: #ff8e9d;
 	border-radius: 50%;
-	box-sizing: border-box;
 	left: 40px;
   	bottom: 35px;
+
 }
 .balloon2:before {
 	content: "";
@@ -100,6 +96,7 @@ table tr[data-href] {
 	border: 15px solid transparent;
 	border-left: 15px solid #ff8e9d;
 	z-index: 0;
+
 }
 .my-img {
 	margin-top: 30px;

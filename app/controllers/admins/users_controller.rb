@@ -5,11 +5,14 @@ class Admins::UsersController < ApplicationController
 		@users = User.where(resignation: false).page(params[:page]).reverse_order
 		q = User.where(resignation: false).ransack(query)
 		if params[:q]
-			@users = q.result(distinct: true).page(params[:page]).reverse_order
+			@users = q.result(distinct: false).page(params[:page]).reverse_order
 		end
 	end
 
 	def resign_index
+		query = { user_name_cont: params[:q] }
+		@users = User.where(resignation: true).page(params[:page]).reverse_order
+		q = User.where(resignation: true).ransack(query)
 		@users = User.where(resignation: true)
 	end
 
@@ -41,9 +44,6 @@ class Admins::UsersController < ApplicationController
 	end
 
 	def revival
-		query = { user_name_cont: params[:q] }
-		@users = User.where(resignation: true).page(params[:page]).reverse_order
-		q = User.where(resignation: true).ransack(query)
 		@user = User.find(params[:id])
 		@user.update(
 			resignation: false,
