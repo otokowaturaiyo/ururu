@@ -31,9 +31,21 @@
 			<p class ="my-form">郵便番号 : <%=@user.postal_code %></p>
 			<p class ="my-form">住所 : <%=@user.postal_address %></p>
 		</div>
-</div>s
+</div>
 	<!-- いいね -->
 <div class="row">
+	<% if @likes.count <= 6 %>
+		<div class="power like carousel slide" data-ride="carousel" >
+			<button id="btn" class="fa fa-heart" style="color: red;" data-effect='rigth'></button>
+		<button id="b-sub" class="fa fa-heart" style="color: blue;"></button>
+		<div class="slider slider-container">
+			<% @likes.each do |like| %>
+			<% product = Product.find(like.product_id) %>
+				<%= link_to attachment_image_tag(product, :jacket_image, :fill, 280, 280, fallback: 'no_image.jpg', size: "350x350"), product_path(product.id), class: 'like-on' %>
+				<%= image_tag'm-2.jpg' , size: '300x300' %>
+			<% end %>
+		</div>
+	<% else %>
 	<div class="col-lg-8 col-lg-offset-2 like carousel slide" data-ride="carousel" >
 		<button id="btn" class="fa fa-heart" style="color: red;" data-effect='rigth'></button>
 		<button id="b-sub" class="fa fa-heart" style="color: blue;"></button>
@@ -41,8 +53,10 @@
 			<% @likes.each do |like| %>
 			<% product = Product.find(like.product_id) %>
 				<%= link_to attachment_image_tag(product, :jacket_image, :fill, 180, 180, fallback: 'no_image.jpg', size: "180x180"), product_path(product.id), class: 'like-on' %>
-		<% end %>
+			<% end %>
 		</div>
+	<% end %>
+
 	</div>
 </div>
 
@@ -50,6 +64,17 @@
 <script>
 
 $(document).on('turbolinks:load', function() {
+	var $like = <%= @likes.count %>
+	if($like <= 6 ){
+		$(".slider").not('.slick-initialized').slick({
+			slidesToShow: 2,
+			slidesToScroll: 1,
+			autoplaySpeed: 700,
+			verticalSwiping: true,
+			prevArrow: '<div class="slider-arrow slider-prev fa fa-angle-left"></div>',
+			nextArrow: '<div class="slider-arrow slider-next fa fa-angle-right"></div>',
+			})
+	}else{
 		$(".slider").not('.slick-initialized').slick({
 			slidesToShow: 6,
 			slidesToScroll: 1,
@@ -59,6 +84,9 @@ $(document).on('turbolinks:load', function() {
 			prevArrow: '<div class="slider-arrow slider-prev fa fa-angle-left"></div>',
 			nextArrow: '<div class="slider-arrow slider-next fa fa-angle-right"></div>',
 		});
+};
+
+
 
 
 		$('#btn').click(function(){
@@ -95,7 +123,7 @@ $(document).on('turbolinks:load', function() {
 		$('.my-back').click(function(){
 			$(this).fadeOut('slow');
 		});
-});
+	});
 
 </script>
 
