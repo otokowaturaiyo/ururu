@@ -1,27 +1,42 @@
 class OrdersController < ApplicationController
 
 	def confirm
-	    @destination = Destination.where(user_id: current_user.id).first
-	    @carts = Cart.where(user_id: current_user.id)
-	    @order = Order.new
-  	end
+		@order = Order.new
+		@order_details = @order.order_details.build
+		@carts = Cart.where(user_id: current_user.id)
+		@order.destination_name = current_user.user_name
+		@order.destination_postal_code = current_user.postal_code
+		@order.destination = current_user.postal_address
+		@destinations = Destination.where(user_id: current_user.id)
+  end
+
+	def destinationupdate
+		@order = Order.new(order_params)
+		@order_details = @order.order_details.build
+		@destinations = Destination.where(user_id: current_user.id)
+		@carts = Cart.where(user_id: current_user.id)
+		render action: "confirm"
+	end
 
 	def create
 		order = Order.new(order_params)
-		order.save
+		order.user_id = current_user.id
+		order.order_details.each do |od|
+			product = Product.find(od.product_id)
+			od.price = product.price
+		end
+		order.save!
 		cart = Cart.where(user_id: current_user.id)
 		cart.destroy_all
-		redirect_to order_complete_path(order.id)
+		redirect_to order_complete_path(order)
 	end
 
 	def update
 		@order = Order.find(params[:id])
-		# if @order.update(order_params)
-		# 	redirect_to
 	end
 
 	def complete
-		@order_id = params[:id]
+		@order = Order.find(params[:id])
 	end
 
 	def index
@@ -33,15 +48,23 @@ class OrdersController < ApplicationController
 
 	private
 
+<<<<<<< HEAD
 	def order_params
 		params.require(:order).permit(:user_id, :destination, :payment_methods, :shipment_status, order_details:[
 			:product_count, :price, :product_id, :order_id, :_destroy
 		])
 	end
-
-	# def order_detail_params
-	# 	params.require(:order_detail).permit()
-	# end
+=======
+		def order_params
+			params.require(:order).permit(:destination,
+										  :destination_name,
+										  :destination_postal_code,
+										  :destination_phone_number,
+										  :payment_methods,
+										  :order_details_attributes:  [:id,
+										  :product_id,
+									      :product_count])
+		end
 
 
 end
