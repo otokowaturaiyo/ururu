@@ -70,25 +70,28 @@
 			</div>
 		</div>
 		<!--お支払い方法の選択-->
-		<div class="row">
-			<div class="col-md-4">
-				<p>お支払い方法</p>
+		<%= form_with(model: @order, url: orders_path, method: :post, local: true) do |f| %>
+			<div class="row">
+				<div class="col-md-4">
+					<p>お支払い方法</p>
+					<label><%= f.radio_button :payment_methods, "銀行振込" %>銀行振込</label>
+					<label><%= f.radio_button :payment_methods, "クレジットカード" %>クレジットカード</label>
+					<label><%= f.radio_button :payment_methods, "代引き" %>代引き</label>
+				</div>
 			</div>
-		</div>
-		<div class="row order-items">
-			<%= form_with(model: @order, url: orders_path, method: :post, local: true) do |f| %>
-			<!--注文内容表示-->
-			<% total_price = 0 %>
-			<% total_count = 0 %>
-			<table class="order-table" border=1>
-				<thead>
-					<tr>
-						<th class="col-md-4">商品名</th>
-						<th class="col-md-4">アーティスト</th>
-						<th class="col-md-2">注文数</th>
-						<th class="col-md-2">金額(税込)</th>
-					</tr>
-				</thead>
+			<div class="row order-items">
+				<!--注文内容表示-->
+				<% total_price = 0 %>
+				<% total_count = 0 %>
+				<table class="order-table" border=1>
+					<thead>
+						<tr>
+							<th class="col-md-4">商品名</th>
+							<th class="col-md-4">アーティスト</th>
+							<th class="col-md-2">注文数</th>
+							<th class="col-md-2">金額(税込)</th>
+						</tr>
+					</thead>
 					<% @carts.each do |cart| %>
 						<%= f.fields_for :order_details do |od| %>
 							<%= od.hidden_field :product_id, value:"#{cart.product_id}" %>
@@ -97,16 +100,14 @@
 							<tbody>
 								<tr>
 									<td>
-										<div class="row">
-											<div class="col-md-4">
-												<% if product.jacket_image_id.present? %>
-														<%= attachment_image_tag  product, :jacket_image, :fill, 30, 30, class:"border" %>
-												<% else %>
-														<%= image_tag 'no_image.jpg', size: '30x30', class:"border" %>
-												<% end %>
-											</div>
-											<div class="col-md-8"><%= product.product_name %></div>
+										<div class="col-md-4">
+											<% if product.jacket_image_id.present? %>
+													<%= attachment_image_tag  product, :jacket_image, :fill, 30, 30, class:"border" %>
+											<% else %>
+													<%= image_tag 'no_image.jpg', size: '30x30', class:"border" %>
+											<% end %>
 										</div>
+										<div class="col-md-8"><%= product.product_name %></div>
 									</td>
 									<td><%= product.artist.name %></td>
 									<td><%= cart.product_count %></td>
@@ -117,17 +118,24 @@
 									</td>
 								</tr>
 							</tbody>
-							<% end %>
+							<% total_price += subtotal_with_tax %>
+							<% total_count += cart.product_count %>
 						<% end %>
-					</table>
+					<% end %>
+				</table>
+				<p class="souryou">送料¥ 500</p>
+				<div class="grand-total">
+					<%= total_count %>点　合計　¥<%= total_price %>
+				</div>
+
 				<%= f.hidden_field :destination, value:"#{@order.destination}" %>
 				<%= f.hidden_field :destination_name, value:"#{@order.destination_name}" %>
 				<%= f.hidden_field :destination_postal_code, value:"#{@order.destination_postal_code}" %>
 				<%= f.hidden_field :destination_phone_number, value:"#{@order.destination_phone_number}" %>
 				<%= f.submit '注文', class:"btn btn-primary" %>
 				<%= link_to 'カートに戻る', cart_path(current_user), class:"btn btn-warning" %>
-			<% end %>
-		</div>
+			</div>
+		<% end %>
 	</div>
 </div>
 

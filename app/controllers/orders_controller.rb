@@ -26,7 +26,15 @@ class OrdersController < ApplicationController
 			od.price = product.price
 		end
 		order.save!
+		cart = Cart.where(user_id: current_user.id)
+		cart.destroy_all
 		redirect_to order_complete_path(order)
+	end
+
+	def update
+		@order = Order.find(params[:id])
+		# if @order.update(order_params)
+		# 	redirect_to
 	end
 
 	def complete
@@ -34,6 +42,7 @@ class OrdersController < ApplicationController
 	end
 
 	def index
+		@orders = Order.all
 	end
 
 	def show
@@ -46,10 +55,15 @@ class OrdersController < ApplicationController
 																		:destination_name,
 																		:destination_postal_code,
 																		:destination_phone_number,
+																		:payment_methods,
 																		order_details_attributes:  [:id,
-																																:product_id])
+																																:product_id,
+																																:product_count])
 		end
 
+	# def order_detail_params
+	# 	params.require(:order_detail).permit()
+	# end
 
 
 end

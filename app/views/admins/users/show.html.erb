@@ -1,17 +1,18 @@
 <div class="container">
 	<div class="row">
+		<div>
 			<br>
 		<div class="col-lg-3">
 			<br>
 			<br>
-
+			<% if flash[:notice] %>
 			<div class="flash">
 				<%= flash[:notice] %>
 			</div>
+			<% end %>
 			<%= attachment_image_tag @user, :profile_image_id, :fill, 200, 200, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb", size: "200x200" %>
 		</div>
-		<div class="col-lg-1"></div>
-		<div class="col-lg-7">
+		<div class="col-lg-offset-1 col-lg-7">
 			<h2>ユーザー詳細</h2>
 				<p><%= @user.kanji_firstname %></p>
 				<p><%= @user.kanji_lastname %></p>
@@ -20,9 +21,12 @@
 				<p><%= @user.phone_number %></p>
 				<p><%= @user.postal_code %></p>
 				<p><%= @user.postal_address %></p>
+<% if @user.resignation == false %>
 			<%= link_to "編集", edit_admins_user_path(@user.id), class: "btn btn-info" %>
+<% else %>
+			<%= link_to "復活", admins_user_reviva_path(@user.id), method: :patch %>
+<% end %>
 		</div>
-		<div class="col-lg-1"></div>
 		</div>
 	</div>
 </div>
