@@ -45,7 +45,11 @@ end
   post '/orders/confirm' => 'orders#destinationupdate', as: 'order_destination'
   post '/orders' => 'orders#create', as: 'orders'
   get '/orders/:id/complete' => 'orders#complete', as:'order_complete'
-  resources :orders, only:[:index, :show, :update]
+  resources :orders, only:[:index, :show, :update] do
+    collection do
+      post 'pay' => 'orders#pay', as: 'pay'
+    end
+  end
 
 
 

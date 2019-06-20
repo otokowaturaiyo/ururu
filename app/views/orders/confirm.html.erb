@@ -14,7 +14,7 @@
 			<h3>お届け先</h3>
 			<p>※お届け先を変更できます</p>
 			<!--目的地表示-->
-			<div class="col-md-4">
+			<div class="col-md-4 destination">
 				<p>
 					<%= @order.destination_name %>
 				</p>
@@ -25,14 +25,12 @@
 					<%= @order.destination %>
 				</p>
 			</div>
-			<div class="col-md-offset-4 col-md-4">
-				<%= link_to new_destination_path do %>
-					<button class="btn btn-primary">宛先を追加する</button>
-				<% end %>
+			<div class="change_destination">
+				<button type="button" class="btn btn-warning">他の宛先を指定する</button>
 			</div>
 		</div>
 		<div class="row">
-			<div class="destinations">
+			<div id="destinations" class="display_none">
 				<h4>お客様のお届け先一覧</h4>
 				<div class="slideContainer">
 					<div class="slide slide-slide ">
@@ -67,16 +65,50 @@
 					<button class="prev"><i class="far fa-arrow-alt-circle-left"></i></button>
 					<button class="next"><i class="far fa-arrow-alt-circle-right"></i></button>
 				</div>
+				<div class="col-md-offset-4 col-md-4">
+					<%= link_to new_destination_path do %>
+						<button class="btn btn-primary">宛先を追加する</button>
+					<% end %>
+						<button class="btn btn-danger close_btn">閉じる</button>
+				</div>
 			</div>
 		</div>
+
+
 		<!--お支払い方法の選択-->
 		<%= form_with(model: @order, url: orders_path, method: :post, local: true) do |f| %>
 			<div class="row">
-				<div class="col-md-4">
-					<p>お支払い方法</p>
-					<label><%= f.radio_button :payment_methods, "銀行振込" %>銀行振込</label>
-					<label><%= f.radio_button :payment_methods, "クレジットカード" %>クレジットカード</label>
-					<label><%= f.radio_button :payment_methods, "代引き" %>代引き</label>
+				<div class="col-md-12">
+					<h3>お支払い方法</h3>
+					<label><%= f.radio_button :payment_methods, "クレジットカード", class:"creditCard payment_methods" %>
+						クレジットカード
+					</label>
+					<div class="cardInput display_none">
+						<script
+							type="text/javascript"
+							src="https://checkout.pay.jp/"
+							class="payjp-button"
+							data-key="pk_test_ec5e3606436c07e82c910523"
+							data-on-created="onCreated"
+							data-text="カード情報を入力"
+							data-submit-text="送信"
+							data-partial="true">
+						</script>
+					</div>
+					<label>
+						<%= f.radio_button :payment_methods, "銀行振込", class:"bankTransfer payment_methods" %>
+						銀行振込
+					</label>
+					<div class="bankDetails display_none">
+						<p>銀行名：三井住友銀行</p>
+						<p>支店名：渋谷支店</p>
+						<p>口座区分：普通</p>
+						<p>口座番号：XXX - XXXX</p>
+					</div>
+					<label>
+						<%= f.radio_button :payment_methods, "代引き", class:"cashOnDelivery payment_methods" %>
+						代引き
+					</label>
 				</div>
 			</div>
 			<div class="row order-items">
@@ -165,5 +197,25 @@
 				slideCurrent++;
 				sliding();
 				});
+
+			$('.change_destination').click(function(){
+				$('#destinations').removeClass('display_none');
+			});
+			$('.close_btn').click(function(){
+				$('#destinations').addClass('display_none');
+			});
+
+			$('.creditCard').click(function(){
+				$('.cardInput').removeClass('display_none');
+				$('.bankDetails').addClass('display_none');
+			})
+			$('.bankTransfer').click(function(){
+				$('.cardInput').addClass('display_none');
+				$('.bankDetails').removeClass('display_none');
+			});
+			$('.cashOnDelivery').click(function(){
+				$('.cardInput').addClass('display_none');
+				$('.bankDetails').addClass('display_none');
+			});
 		});
 </script>

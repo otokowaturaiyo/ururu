@@ -10,9 +10,13 @@ button{
 }
 
 // 注文確認画面
-.destinations{
+#destinations{
   margin: 20px auto;
   padding:0 15px;
+}
+
+.display_none{
+  display: none;
 }
 
 .slideContainer{
@@ -37,6 +41,16 @@ button{
 
 .slideItem{
 	width:240px;
+	height: 140px;
+  margin:5px;
+  padding:5px;
+	float: left;
+  border-radius: 15px;
+  border: solid 1px black;
+}
+
+.destination{
+  width:240px;
 	height: 140px;
   margin:5px;
   padding:5px;

@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
 
+
 	def confirm
 		@order = Order.new
 		@order_details = @order.order_details.build
@@ -18,14 +19,44 @@ class OrdersController < ApplicationController
 		render action: "confirm"
 	end
 
+	def pay
+
+	end
+
 	def create
+		##### 注文を作成　#####
 		order = Order.new(order_params)
 		order.user_id = current_user.id
+		total_price = 0
 		order.order_details.each do |od|
 			product = Product.find(od.product_id)
 			od.price = product.price
+
+			#####　合計金額の計算（クレカ決済用）　#####
+			tax_included = od.price * 1.08
+			subtotal_price = tax_included.to_i*od.product_count
+			total_price += subtotal_price
+
+			#####　在庫の削除　#####
+			updated_stock = product.stock - od.product_count
+			product.update_attributes(stock: updated_stock)
 		end
 		order.save!
+
+		#####　クレジットカード決済処理　#####
+		if order.payment_methods == "クレジットカード"
+			#####　秘密鍵はベタうちせずに環境変数なるものを使った方がいいらしい。勉強予定。　#####
+			Payjp.api_key = 'sk_test_421673bdeffac69c0df96e60'
+			customer = Payjp::Customer.create(description: 'test')
+			customer.cards.create(card: params['payjp-token'])
+			Payjp::Charge.create(
+				amount:   total_price + 500,
+				customer: customer.id,
+				currency: 'jpy'
+			)
+		end
+
+		#####　カートの削除　#####
 		cart = Cart.where(user_id: current_user.id)
 		cart.destroy_all
 		redirect_to order_complete_path(order)
@@ -46,6 +77,7 @@ class OrdersController < ApplicationController
 	def show
 	end
 
+
 	private
 
 		def order_params
@@ -58,10 +90,4 @@ class OrdersController < ApplicationController
 																																:product_id,
 																																:product_count])
 		end
-
-	# def order_detail_params
-	# 	params.require(:order_detail).permit()
-	# end
-
-
 end
