@@ -9,8 +9,11 @@
 				</div>
 				<div class="col-md-6">
 					<div class="trading-number">
-						お取引番号<br>
-						<%= @order_id %>
+						<p>お取引番号:<%= @order.id %></p>
+						<p>お届け先:</p>
+						<p><%= @order.destination_name %></p>
+						<p><%= @order.destination_postal_code %></p>
+						<p><%= @order.destination %></p>
 					</div>
 				</div>
 			</div>
@@ -21,4 +24,3 @@
 		</div>
 	</div>
 </div>
-

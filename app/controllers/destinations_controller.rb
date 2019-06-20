@@ -11,12 +11,12 @@ class DestinationsController < ApplicationController
 
   def create
     @destination = Destination.new(destination_params)
-    @user = current_user
+    @destination.user_id = current_user.id
     if @destination.save
        flash[:notice] = "新しい宛先を登録しました！"
-       redirect_to user_path(@user.id)
+       redirect_to order_confirm_path
     else
-       render :'/destinations/new'
+       render 'new'
     end
   end
 
@@ -29,9 +29,9 @@ class DestinationsController < ApplicationController
     @user = current_user
     if @destination.update(destination_params)
        flash[:notice] = "宛先を編集しました！"
-       redirect_to user_path(@user.id)
+       redirect_to order_confirm_path
     else
-       render :'/destinations/edit'
+       render 'edit'
     end
   end
 
