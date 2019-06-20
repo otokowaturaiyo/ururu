@@ -1,6 +1,7 @@
-<div class="confirm-container">
-	<div class="row">
-		<h1>注文内容を確認</h1>
+<div class="container order-confirm">
+	<div class="col-md-offset-2 col-md-8">
+		<h1>ご注文内容の確認</h1>
+		<div class="row">
 			<div class="col-md-offset-2 col-md-8 purchase-flow">
 				<i class="fas fa-shopping-cart fa-2x"></i><!--カート画面-->
 				<i class="fas fa-arrow-right fa-2x"></i>
@@ -8,89 +9,153 @@
 				<i class="fas fa-arrow-right fa-2x"></i>
 				<i class="far fa-check-circle fa-2x"></i><!--購入完了画面-->
 			</div>
-
-		<div class="col-md-8 col-md-offset-2">
+		</div>
+		<div class="row">
 			<h3>お届け先</h3>
-				<div class="row">
-					<div class="col-md-4">
-						<!--目的地表示-->
-						<%= @destination.destination_address %>
+			<p>※お届け先を変更できます</p>
+			<!--目的地表示-->
+			<div class="col-md-4">
+				<p>
+					<%= @order.destination_name %>
+				</p>
+				<p>
+					<%= @order.destination_postal_code %>
+				</p>
+				<p>
+					<%= @order.destination %>
+				</p>
+			</div>
+			<div class="col-md-offset-4 col-md-4">
+				<%= link_to new_destination_path do %>
+					<button class="btn btn-primary">宛先を追加する</button>
+				<% end %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="destinations">
+				<h4>お客様のお届け先一覧</h4>
+				<div class="slideContainer">
+					<div class="slide">
+						<div class="slideSet">
+							<% @destinations.each do |destination| %>
+								<%= form_with(model:@order, url: order_destination_path, local: true)  do |d| %>
+									<div class="slideItem">
+										<p>
+											<%= destination.name %>
+											<%= d.hidden_field :destination_name, value:"#{destination.name}" %>
+										</p>
+										<p>
+											<%= destination.postal_code %>
+											<%= d.hidden_field :destination_postal_code, value:"#{destination.postal_code}" %>
+										</p>
+										<p>
+											<%= destination.destination_address %>
+											<%= d.hidden_field :destination, value:"#{destination.destination_address}" %>
+										</p>
+										<div class="col-md-4 edit-destination">
+											<%= link_to '編集', edit_destination_path(destination), class:"btn btn-warning" %>
+										</div>
+										<%= d.hidden_field :destination_phone_number, value:"#{destination.phone_number}" %>
+										<div class="col-md-8 select-destination">
+											<%= d.submit "この住所を使う", class:"btn btn-success" %>
+										</div>
+									</div>
+								<% end %>
+							<% end %>
+						</div>
 					</div>
-					<div class="col-md-4">
-						<p>※宛先を変更できます</p>
-						<!--新しい宛先の指定-->
-						<%= link_to new_destination_path do %><button class="btn btn-primary">別の宛先を指定する</button><% end %>
-					</div>
-					<div class="col-md-4">
-						<!--お支払い方法の選択-->
-						<p>お支払い方法</p>
-					</div>
+					<button class="prev"><i class="far fa-arrow-alt-circle-left"></i></button>
+					<button class="next"><i class="far fa-arrow-alt-circle-right"></i></button>
 				</div>
-				<br>
-
-
-				<!--注文内容表示-->
-				<div class="order-item-container">
-					<% total_price = 0 %>
-					<% total_count = 0 %>
-					<table class="order-table" border=1>
-						<div class="row">
-				    	<thead>
-				    		<tr>
-				    			<th class="col-md-4">商品名</th>
-				    			<th class="col-md-4">アーティスト</th>
-				    			<th class="col-md-2">注文数</th>
-				    			<th class="col-md-2">金額(税込)</th>
-				    		</tr>
-				    	</thead>
-				    	<% @carts.each do |cart| %>
-				    	<% product = Product.find(cart.product_id) %>
-				    	<tbody>
-				    		<tr>
-				    			<td>
-				    				<div class="row">
-					    				<div class="col-md-4">
-						    				<% if product.jacket_image_id.present? %>
-									            <%= attachment_image_tag  product, :jacket_image, :fill, 30, 30, class:"border" %>
-									        <% else %>
-									            <%= image_tag 'no_image.jpg', size: '30x30', class:"border" %>
-									        <% end %>
-								        </div>
-								        <div class="col-md-8"><%= product.product_name %></div>
-							    	</div>
-							    </td>
-				    			<td><%= product.artist.name %></td>
-				    			<td><%= cart.product_count %></td>
-				    			<td><% subtotal_price =  cart.product_count*cart.product_price %>
-						            <% tax_included = subtotal_price*1.08 %>
-						            <% subtotal_with_tax = tax_included.to_i %>¥<%= subtotal_with_tax.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %>
-						        </td>
-				    		</tr>
-				    	</tbody>
-				    	<% end %>
-				    	</div>
+			</div>
+		</div>
+		<!--お支払い方法の選択-->
+		<div class="row">
+			<div class="col-md-4">
+				<p>お支払い方法</p>
+			</div>
+		</div>
+		<div class="row order-items">
+			<%= form_with(model: @order, url: orders_path, method: :post, local: true) do |f| %>
+			<!--注文内容表示-->
+			<% total_price = 0 %>
+			<% total_count = 0 %>
+			<table class="order-table" border=1>
+				<thead>
+					<tr>
+						<th class="col-md-4">商品名</th>
+						<th class="col-md-4">アーティスト</th>
+						<th class="col-md-2">注文数</th>
+						<th class="col-md-2">金額(税込)</th>
+					</tr>
+				</thead>
+					<% @carts.each do |cart| %>
+						<%= f.fields_for :order_details do |od| %>
+							<%= od.hidden_field :product_id, value:"#{cart.product_id}" %>
+							<%= od.hidden_field :product_count, value:"#{cart.product_count}" %>
+							<% product = Product.find(cart.product_id) %>
+							<tbody>
+								<tr>
+									<td>
+										<div class="row">
+											<div class="col-md-4">
+												<% if product.jacket_image_id.present? %>
+														<%= attachment_image_tag  product, :jacket_image, :fill, 30, 30, class:"border" %>
+												<% else %>
+														<%= image_tag 'no_image.jpg', size: '30x30', class:"border" %>
+												<% end %>
+											</div>
+											<div class="col-md-8"><%= product.product_name %></div>
+										</div>
+									</td>
+									<td><%= product.artist.name %></td>
+									<td><%= cart.product_count %></td>
+									<td><% subtotal_price =  cart.product_count*cart.product_price %>
+											<% tax_included = subtotal_price*1.08 %>
+											<% subtotal_with_tax = tax_included.to_i %>
+											¥<%= subtotal_with_tax.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %>
+									</td>
+								</tr>
+							</tbody>
+							<% end %>
+						<% end %>
 					</table>
-				</div>
-				<br>
-
-
-				<!--リンクボタん-->
-				<div class="link-bottun">
-					<div class="row">
-						<div class="col-md-6">
-							<%= link_to cart_path(current_user.id) do %><button class="btn btn-success">カート編集へ戻る</button><% end %>
-						</div>
-						<div class="col-md-6">
-							<%= link_to orders_path(
-							order: {
-								     user_id:current_user.id,
-								     destination:@destination.destination_address
-							       }
-								 ), method: :'post' do %><button class="btn btn-danger">注文を確定する</button><% end %>
-						</div>
-					</div>
-				</div>
+				<%= f.hidden_field :destination, value:"#{@order.destination}" %>
+				<%= f.hidden_field :destination_name, value:"#{@order.destination_name}" %>
+				<%= f.hidden_field :destination_postal_code, value:"#{@order.destination_postal_code}" %>
+				<%= f.hidden_field :destination_phone_number, value:"#{@order.destination_phone_number}" %>
+				<%= f.submit '注文', class:"btn btn-primary" %>
+				<%= link_to 'カートに戻る', cart_path(current_user), class:"btn btn-warning" %>
+			<% end %>
 		</div>
 	</div>
 </div>
 
+<script>
+	$("document").ready(function() {
+		var slideWidth = $('.slideItem').outerWidth(true);
+		var slideNum = $('.slideItem').length;
+		var slideSetWidth = slideWidth * slideNum;
+		$('.slideSet').css('width', slideSetWidth);
+
+		var slideCurrent = 0;
+		var sliding = function(){
+			if(slideCurrent < 0){
+				slideCurrent = slideNum - 3;
+			} else if(slideCurrent > slideNum - 3 ){
+				slideCurrent = 0;
+			}
+			$('.slideSet').stop().animate({
+		  	left: slideCurrent * -slideWidth
+			});
+		}
+			$('.prev').click(function(){
+				slideCurrent--;
+				sliding();
+				});
+			$('.next').click(function(){
+				slideCurrent++;
+				sliding();
+				});
+		});
+</script>
