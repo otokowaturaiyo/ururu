@@ -25,11 +25,12 @@ button{
 
 .slide{
 	width: 750px;
-	height: 150px;
 	overflow: hidden;
 	position: relative;
 }
-
+.slide-slide{
+  height: 150px;
+}
 .slideSet{
 	position: absolute;
 }
