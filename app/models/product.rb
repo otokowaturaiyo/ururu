@@ -2,16 +2,15 @@ class Product < ApplicationRecord
 	belongs_to :genre
 	belongs_to :artist
 	belongs_to :label
-	# belongs_to :order_detail
 	has_many :carts
 	has_many :disks, dependent: :destroy
 	has_many :likes, dependent: :destroy
 	has_many :reviews, dependent: :destroy
+	has_many :order_details
 
 	accepts_nested_attributes_for :disks, allow_destroy: true
 
 	validates :product_name, presence: true
-	# validates :product_name,  uniqueness: true
 	validates :genre_id, presence: true
 	validates :artist_id, presence: true
 	validates :label_id, presence: true

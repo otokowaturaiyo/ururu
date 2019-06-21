@@ -64,8 +64,6 @@ class OrdersController < ApplicationController
 
 	def update
 		@order = Order.find(params[:id])
-		# if @order.update(order_params)
-		# 	redirect_to
 	end
 
 	def complete
@@ -73,23 +71,64 @@ class OrdersController < ApplicationController
 	end
 
 	def index
-		@orders = Order.all
+		#必要な情報は@order-historiesにまとめる
+		user_orders = current_user.orders
+		@order_histories = user_orders.each_with_object([]) do |user_order, array|
+			first_order_detail = user_order&.order_details&.first
+			next if first_order_detail.blank?
+			first_order_product = Product.find(first_order_detail.product_id)
+			array << {
+				jacket_image_id: first_order_product.jacket_image_id,
+				product_name: first_order_product.product_name,
+				artist_name: first_order_product.artist.name,
+				product_count: first_order_detail.product_count,
+				product_price: first_order_detail.price,
+				shipment_status: user_order.shipment_status,
+				created_at: user_order.created_at,
+				order_destination: user_order.destination,
+				order_id: user_order.id
+			}
+		end
 	end
 
 	def show
+		#繰り返し処理が必要=>@order-history,繰り返し処理が不要=>@order
+		@order = Order.find(params[:id])
+		order_details = @order.order_details
+		@total_price = 0
+		@order_history = order_details.each_with_object([]) do |order_detail, array|
+			order_product = order_detail.product
+			array << {
+				product_name: order_product.product_name,
+				jacket_image: order_product.jacket_image_id,
+				artist_name: order_product.artist.name,
+				count: order_detail.product_count,
+				price: order_detail.price
+			}
+		end
+		# 合計金額の計算(取引詳細)
+		@order_sub = []
+		@order_history.each do |od|
+			@subtotal = od[:price] * od[:count]
+			@order_sub += [@subtotal]
+			@total_price += @subtotal
+		end
 	end
 
 
 	private
 
+
 		def order_params
 			params.require(:order).permit(:destination,
-																		:destination_name,
-																		:destination_postal_code,
-																		:destination_phone_number,
-																		:payment_methods,
-																		order_details_attributes:  [:id,
-																																:product_id,
-																																:product_count])
+										  :destination_name,
+										  :destination_postal_code,
+										  :destination_phone_number,
+										  :payment_methods,
+										  :shipment_status,
+										   order_details_attributes:  [:id,
+										  :product_id,
+									      :product_count])
 		end
+
 end
