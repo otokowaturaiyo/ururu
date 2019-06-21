@@ -25,7 +25,6 @@
 			<br>
 			
 			<div class="order-product-info">
-				<% total_price = 0 %>
 				<% @order_history.each do |od| %>
 					<div class="row purchase-record">
 						<div class="col-md-4">
@@ -39,14 +38,12 @@
 							<p>商品名 : <%= od[:product_name] %></p>
 							<p>アーティスト名 : <%= od[:artist_name] %></p>
 							<p>購入枚数 : <%= od[:count] %></p>
-							<% subtotal = od[:price] * od[:count] %>
-							<p>小計 : <%= subtotal %></p>
-							<% total_price += subtotal %>
+							 <p>小計 : <%= @order_sub %></p>
 						</div>
 					</div>
 				<% end %>
 				<br>
-				<p class="total-price">合計 : ¥<%= total_price %></p>
+				<p class="total-price">合計 : ¥<%= @total_price %></p>
 			</div>
 		</div>
 	</div>
