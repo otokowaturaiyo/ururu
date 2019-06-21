@@ -31,6 +31,20 @@ li {
 	list-style: none;
 }
 
+// 背景
+.bg-img {
+  background: url('blue-back.jpg');
+  height: 100%;
+  width: 100%;
+  background-position: center;
+  background-size: 125%;
+  padding: 100px;
+}
+
+.background-color2{
+	background-color: rgba(238,255,255,0.7);
+	height: 20%;
+}
 
 
 /////////////////// ヘッダー ///////////////////
@@ -120,15 +134,7 @@ li {
 .background-color1{
 	background-color: #FFCC00;
 }
-.background-color2{
-	background-color: #EEFFFF;
-}
-
 /////////////////// 商品一覧上部 ///////////////////
-
-.top-wrapper{
-  margin: 30px 0;
-}
 
 .genre-button{
 	text-align: center;
