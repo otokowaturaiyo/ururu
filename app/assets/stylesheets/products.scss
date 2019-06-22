@@ -6,11 +6,35 @@ $font-family: 'Lato', 'Noto Sans JP', '游ゴシック Medium', '游ゴシック
 
 .features{
   height: 390px;
+  margin-left: 50px;
 }
 
 .features-text{
   color:#FFF;
-  font-size: 17px;
+  font-size: 12px;
+}
+
+.top-wrapper{
+  margin: 80px 0;
+}
+
+.genre-list {
+  margin-left: 60px;
+}
+.g-title{
+  text-align: center;
+  font-size: 14px;
+  display: inline-block;
+  padding: 8px 60px;
+  margin: 33px 0 0 15px;
+  text-decoration: none;
+  background: #699db3;
+  border-radius: 3px;
+  font-weight: bold;
+  color: #dddde5;
+}
+.bg-img a{
+  color: #28789a;
 }
 
 .skippr-container{
@@ -19,7 +43,7 @@ $font-family: 'Lato', 'Noto Sans JP', '游ゴシック Medium', '游ゴシック
 }
 
 .slide-image{
-  padding: 0 10%;
+  padding: 2% 10% 0;
 }
 
 .new-arrivals{
@@ -252,3 +276,4 @@ ul li i {
 th{
   min-width: 60px;
 }
+

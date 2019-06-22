@@ -1,21 +1,21 @@
 <div class="order-history-container">
-	<h1>購入履歴</h1>
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
+	<div class="bg">
+		<div class="col-md-8 col-md-offset-2 order-t">
 			<table class="histroy-table" border=1>
-				<div class="row">
-				<% @order_histories.each do |od| %>
+					<div class="col-lg-12 order-table">
+					<h1 class="ord-h">購入履歴</h1>
+					<% @order_histories.each do |od| %>
 					<!--表の上段-->
 					<thead>
-						<tr>
-							<th class="col-md-3">購入日 : <%= od[:created_at] %></th>
-							<th class="col-md-5">お届け先 : <%= od[:order_destination] %></th>
-							<th class="col-md-4">取引番号 : <%= od[:order_id] %></th>
+						<tr data-href=<%= order_path(od[:order_id]) %>>
+							<th>購入日 : <%= od[:created_at] %></th>
+							<th>お届け先 : <%= od[:order_destination] %></th>
+							<th>取引番号 : <%= od[:order_id] %></th>
 						</tr>
 					</thead>
 					<!--表の下段-->
 					<tbody>
-						<tr>
+						<tr data-href=<%= order_path(od[:order_id]) %>>
 							<td>
 								<% if od[:jacket_image_id] %>
 									<%= attachment_image_tag od, :jacket_image, :fill, 60, 60, class:"border" %>
@@ -32,14 +32,15 @@
 							<td>
 								<p>発送状況 : <%= od[:shipment_status] %></p>
 							</td>
-							<td><%= link_to "詳細へ", order_path(od[:order_id]), class:"btn btn-primary" %></td>
 						</tr>
 					</tbody>
 				<% end %>
-				</div>
 			</table>
+			<div class=table-f></div>
+			</div>
+			<div class="order-bg"></div>
 		</div>
 	</div>
 </div>
 
-
+<%=render 'admins/table' %>

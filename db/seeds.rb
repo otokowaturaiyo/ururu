@@ -41,11 +41,6 @@ admin.save!
 end
 
 
-
-
-
-
-
 # ジャンルシード
 
 Genre.create!(genre: "JPOP")
@@ -104,8 +99,4 @@ end
 				song: name,
 				second: number)
 end
-
-
-
-
 
