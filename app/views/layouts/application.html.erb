@@ -45,7 +45,7 @@
                     <%= link_to "商品一覧", products_path %>
                   </li>
                   <li class="nav-item">
-                    <%= link_to "カート", cart_path(current_user.id) %>
+                    <%= link_to "カート", current_cart %>
                   </li>
                   <li class="nav-item">
                     <%= link_to "マイページ", user_path(current_user) %>
@@ -55,6 +55,7 @@
                   </li>
                 <% else %>
                   <li><%= link_to "商品一覧", products_path %></li>
+                  <li><%= link_to "カート", current_cart %></li>
                   <li><%= link_to "ログイン", new_user_session_path %></li>
                   <li><%= link_to "新規登録", new_user_registration_path %></li>
                 <% end %>
