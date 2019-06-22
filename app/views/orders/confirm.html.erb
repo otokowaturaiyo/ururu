@@ -1,6 +1,6 @@
 <div class="container order-confirm">
-	<div class="col-md-offset-2 col-md-8">
-		<h1>ご注文内容の確認</h1>
+	<div class="col-md-offset-2 col-md-8 order-confirm-frame">
+		<h1 class="order-confirmation">ご注文内容の確認</h1>
 		<div class="row">
 			<div class="col-md-offset-2 col-md-8 purchase-flow">
 				<i class="fas fa-shopping-cart fa-2x"></i><!--カート画面-->
@@ -32,38 +32,40 @@
 		<div class="row">
 			<div id="destinations" class="display_none">
 				<h4>お客様のお届け先一覧</h4>
-				<div class="slideContainer">
-					<div class="slide slide-slide ">
-						<div class="slideSet">
-							<% @destinations.each do |destination| %>
-								<%= form_with(model:@order, url: order_destination_path, local: true)  do |d| %>
-									<div class="slideItem">
-										<p>
-											<%= destination.name %>
-											<%= d.hidden_field :destination_name, value:"#{destination.name}" %>
-										</p>
-										<p>
-											<%= destination.postal_code %>
-											<%= d.hidden_field :destination_postal_code, value:"#{destination.postal_code}" %>
-										</p>
-										<p>
-											<%= destination.destination_address %>
-											<%= d.hidden_field :destination, value:"#{destination.destination_address}" %>
-										</p>
-										<div class="col-md-4 edit-destination">
-											<%= link_to '編集', edit_destination_path(destination), class:"btn btn-warning" %>
+				<div class="row">
+					<div class="slideContainer">
+						<div class="slide slide-slide ">
+							<div class="slideSet">
+								<% @destinations.each do |destination| %>
+									<%= form_with(model:@order, url: order_destination_path, local: true)  do |d| %>
+										<div class="slideItem">
+											<p>
+												<%= destination.name %>
+												<%= d.hidden_field :destination_name, value:"#{destination.name}" %>
+											</p>
+											<p>
+												<%= destination.postal_code %>
+												<%= d.hidden_field :destination_postal_code, value:"#{destination.postal_code}" %>
+											</p>
+											<p>
+												<%= destination.destination_address %>
+												<%= d.hidden_field :destination, value:"#{destination.destination_address}" %>
+											</p>
+											<div class="col-md-4 edit-destination">
+												<%= link_to '編集', edit_destination_path(destination), class:"btn btn-warning" %>
+											</div>
+											<%= d.hidden_field :destination_phone_number, value:"#{destination.phone_number}" %>
+											<div class="col-md-8 select-destination">
+												<%= d.submit "この住所を使う", class:"btn btn-success" %>
+											</div>
 										</div>
-										<%= d.hidden_field :destination_phone_number, value:"#{destination.phone_number}" %>
-										<div class="col-md-8 select-destination">
-											<%= d.submit "この住所を使う", class:"btn btn-success" %>
-										</div>
-									</div>
+									<% end %>
 								<% end %>
-							<% end %>
+							</div>
 						</div>
+						<button class="prev"><i class="far fa-arrow-alt-circle-left"></i></button>
+						<button class="next"><i class="far fa-arrow-alt-circle-right"></i></button>
 					</div>
-					<button class="prev"><i class="far fa-arrow-alt-circle-left"></i></button>
-					<button class="next"><i class="far fa-arrow-alt-circle-right"></i></button>
 				</div>
 				<div class="col-md-offset-4 col-md-4">
 					<%= link_to new_destination_path do %>
@@ -77,7 +79,7 @@
 
 		<!--お支払い方法の選択-->
 		<%= form_with(model: @order, url: orders_path, method: :post, local: true) do |f| %>
-			<div class="row">
+			<div class="row payment-select">
 				<div class="col-md-12">
 					<h3>お支払い方法</h3>
 					<label><%= f.radio_button :payment_methods, "クレジットカード", class:"creditCard payment_methods" %>
@@ -111,7 +113,7 @@
 					</label>
 				</div>
 			</div>
-			<div class="row order-items">
+			<div class="row">
 				<!--注文内容表示-->
 				<% total_price = 0 %>
 				<% total_count = 0 %>
@@ -157,15 +159,18 @@
 				</table>
 				<p class="souryou">送料¥ 500</p>
 				<div class="grand-total">
-					<%= total_count %>点　合計　¥<%= total_price %>
+					[ <%= total_count %>点　合計　¥<%= total_price + 500 %> ]
 				</div>
-
+				<br>
+				<div class="order-submit">
 				<%= f.hidden_field :destination, value:"#{@order.destination}" %>
 				<%= f.hidden_field :destination_name, value:"#{@order.destination_name}" %>
 				<%= f.hidden_field :destination_postal_code, value:"#{@order.destination_postal_code}" %>
 				<%= f.hidden_field :destination_phone_number, value:"#{@order.destination_phone_number}" %>
 				<%= f.submit '注文', class:"btn btn-primary" %>
 				<%= link_to 'カートに戻る', cart_path(current_user), class:"btn btn-warning" %>
+				</div>
+				<br>
 			</div>
 		<% end %>
 	</div>

@@ -36,7 +36,9 @@ button{
   height: 150px;
 }
 .slideSet{
+  width: 100px;
 	position: absolute;
+  background-color: rgba(240,215,150,0.7);
 }
 
 .slideItem{
@@ -57,6 +59,7 @@ button{
 	float: left;
   border-radius: 15px;
   border: solid 1px black;
+  background-color: rgba(240,215,150,0.7);
 }
 
 .prev{
@@ -64,6 +67,7 @@ button{
   position: absolute;
   top:30%;
   left:-50px;
+  color:#FF6600;
 }
 
 .next{
@@ -71,6 +75,7 @@ button{
   position: absolute;
   top:30%;
   right:-50px;
+  color:#FF6600;
 }
 
 // 注文完了画面
@@ -99,7 +104,8 @@ button{
 	width: 30%;
 	margin: 0 auto;
 	text-align: center;
-	border: ridge 5px #ff0000;
+	border: solid 1px #000077;
+  background-color: rgba(240,215,150,0.7);
 }
 
 .histroy-table{
@@ -107,7 +113,8 @@ button{
   background-color: rgba(255,255,255,0.7);
 }
 
-.order-product-info{
+.payment-select{
+  text-align: center;
 }
 
 
@@ -156,7 +163,9 @@ button{
   background-size: cover;
 }
 .order-table{
- margin: 0 1px;
+ margin: 0 auto;
+ background-color: rgba(240,215,150,0.7);
+ text-align: center;
 }
 
 .order-t {
@@ -179,3 +188,21 @@ padding: 2px;
 .myimg{
   margin:140px 70px 50px 120px;
 }
+
+.order-confirm{
+  background-image: image-url("ururu-confirm.jpg");
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  color: #000000;
+}
+
+.order-confirm-frame{
+  background-color: rgba(225,225,225,0.8);
+}
+
+
+.order-submit{
+  text-align: center;
+}
+

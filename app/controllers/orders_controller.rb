@@ -89,7 +89,7 @@ class OrdersController < ApplicationController
 				#ここまで本当はいらない
 				first_order_product = Product.find(first_order_detail.product_id)
 				array << {
-					jacket_image_id: first_order_product.jacket_image_id,
+					jacket_image: first_order_product.jacket_image_id,
 					product_name: first_order_product.product_name,
 					artist_name: first_order_product.artist.name,
 					product_count: first_order_detail.product_count,
