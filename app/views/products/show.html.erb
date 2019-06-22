@@ -40,7 +40,7 @@
 						<% end %>
 					</div>
 					<div class="add-to-cart">
-						<%= form_with model:@cart do |f| %>
+						<%= form_with model:@cart_item, url:add_item_path, local:true do |f| %>
 							<p>数量:<%= f.number_field :product_count, value:1, class:"product_count" %></p>
 							<%= f.hidden_field :product_id, value: @product.id %>
 							<%= f.submit "カートに追加する", class:"btn-square-pop" %>

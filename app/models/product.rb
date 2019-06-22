@@ -2,7 +2,7 @@ class Product < ApplicationRecord
 	belongs_to :genre
 	belongs_to :artist
 	belongs_to :label
-	has_many :carts
+	has_many :cart_items
 	has_many :disks, dependent: :destroy
 	has_many :likes, dependent: :destroy
 	has_many :reviews, dependent: :destroy
