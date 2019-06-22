@@ -33,7 +33,7 @@
 			<div id="destinations" class="display_none">
 				<h4>お客様のお届け先一覧</h4>
 				<div class="slideContainer">
-					<div class="slide">
+					<div class="slide slide-slide ">
 						<div class="slideSet">
 							<% @destinations.each do |destination| %>
 								<%= form_with(model:@order, url: order_destination_path, local: true)  do |d| %>

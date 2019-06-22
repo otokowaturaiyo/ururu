@@ -1,3 +1,17 @@
 // Place all the styles related to the genres controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.genres-bg{
+	background: linear-gradient(90deg, rgba(20, 68, 148, 0.2), rgba(20, 55, 90, 0.9)) , url('cd-bg.jpg');
+	height: auto;
+	width:100%;
+	min-height:  2580px;
+	background-position: center;
+}
+.g-back{
+	background-color: rgba(225, 225, 2250, 0.4)
+}
+.g-h{
+	margin: 40px 80px 0;
+	color: #fff;
+}

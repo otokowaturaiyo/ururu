@@ -1,10 +1,11 @@
+<div class="bg-img">
 <div class="container background-color2">
   <div class="row top-wrapper">
     <!-- 右要素がグリッドに対してモバイルでは横幅いっぱい、デスクトップでは1/4を占める -->
 
     <!-- ジャンルの一覧。ジャンルの数・種類は基本的には変更しない。  -->
     <div class="col-xs-12 col-md-3 genre-list">
-      <h3>ジャンルから探す</h3>
+      <h3 class="g-title">ジャンルから探す</h3>
       <% @genres.each do |genre| %>
         <div class="btn-group-vertical col-md-12 genre-button" role="group">
           <button type="button" class="btn btn-default">
@@ -15,7 +16,7 @@
     </div>
 
     <!-- 特集の部分。ただし、実質的に中身なし。本気で作るならfeaturesのmodelを作る必要あり。 -->
-    <div class="col-xs-12 col-md-9 features">
+    <div class="col-xs-12 col-md-7 features">
       <div class="skippr-container">
         <div class="theTarget">
           <div class=slide-image>
@@ -99,8 +100,6 @@
         <%= paginate @products %>
       </div>
     </div>
-
-
     <div class="col-xs-12 col-md-4 pull-right sidebar-recommend">
       <!-- おすすめ画像がグリッドに対しモバイルでは横に2個、デスクトップでは横に2個表示される -->
       <h3>店長のおすすめ</h3>
@@ -122,9 +121,9 @@
     </div>
   </div>
 </div>
-
+</div>
 <script>
-  $("document").on('turbolinks:load',function() {
+  $(document).on('turbolinks:load', function() {
     $(".theTarget").skippr();
   });
 
@@ -140,4 +139,5 @@
       keyboardOnAlways : true,
       hidePrevious : false
   });
+
 </script>

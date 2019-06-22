@@ -29,11 +29,12 @@ button{
 
 .slide{
 	width: 750px;
-	height: 150px;
 	overflow: hidden;
 	position: relative;
 }
-
+.slide-slide{
+  height: 150px;
+}
 .slideSet{
 	position: absolute;
 }
@@ -74,19 +75,19 @@ button{
 
 // 注文完了画面
 .thanks-message{
-	font-size: 40px
+	font-size: 40px;
 }
 
 .complete-message{
-	font-size: 40px
+	font-size: 40px;
 }
 
 .glyphicon-user{
-	font-size: 40px
+	font-size: 40px;
 }
 
 .trading-number{
-	font-size: 15px
+	font-size: 15px;
 }
 
 .souryou{
@@ -103,6 +104,7 @@ button{
 
 .histroy-table{
   text-align: center;
+  background-color: rgba(255,255,255,0.7);
 }
 
 .order-product-info{
@@ -112,9 +114,68 @@ button{
 .total-price{
   text-align: center;
   margin: 0 auto;
-  border: inset 5px #b22222;
-  width: 30%
+  border: inset 5px #ffca00;
+  width: 30%;
+  background: rgba(255,255,255,0.8);
 }
 .purchase-record{
   border: solid 1px #000000;
+  background: rgba(255,255,255,0.7);
+}
+
+.ord-h{
+  color: #fff;
+  opacity: 0.7;
+}
+
+.ord-p{
+  background-color: rgba(255,255,255,0.7);
+  padding: 60px 40px;
+  border-radius: 45%;
+  position: relative;
+  z-index: 100;
+  text-align: center;
+}
+.ord-p::before{
+  content: "";
+  position: absolute;
+  z-index: 120;
+  border: 15px solid transparent;
+  margin-top: -15px;
+  bottom: 29px;
+  left: 23px;
+  border-left: 15px solid rgba(255,255,255,0.7);
+  transform: rotate(8deg);
+  }
+
+.order-bg {
+  background: linear-gradient(90deg, rgba(20, 68, 148, 0.4), rgba(20, 55, 90, 0.9)) ,url('mike.jpg');
+  width: 100%;
+  min-height: 900px;
+  background-position: center;
+  background-size: cover;
+}
+.order-table{
+ margin: 0 1px;
+}
+
+.order-t {
+  margin-top: 60px;
+}
+
+.ord-t{
+padding: 2px;
+}
+
+//show.html.erb
+
+.ordes-backk{
+  background: linear-gradient(90deg, rgba(20, 68, 148, 0.2), rgba(20, 55, 90, 0.9)), url('eliska.jpg');
+  width: 100%;
+  min-height: 900px;
+  background-position: center;
+  background-size: cover;
+}
+.myimg{
+  margin:140px 70px 50px 120px;
 }

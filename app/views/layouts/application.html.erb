@@ -13,7 +13,9 @@
 
   <body>
     <header>
+
       <nav class=" my-blacknavbar navbar-default navbar-fixed-top">
+        <div class="my-back"></div>
         <div class="container nav-container">
           <div class="navbar-header ">
             <button type="button" class="navbar-toggle collapsed"data-toggle="collapse"data-target="#navbar-ururu">
@@ -33,7 +35,9 @@
                   <li>
                     <%= link_to "管理者マイページ", admins_top_path %>
                   </li>
+                  <li>
                     <%= link_to "商品一覧", admins_products_path %>
+                  </li>
                   <li>
                     <%= link_to "ユーザー一覧", admins_users_path %>
                   </li>
@@ -89,6 +93,7 @@
           </div>
         </div>
       </nav>
+
     </header>
     <div class="top-space"></div>
     <%= yield %>

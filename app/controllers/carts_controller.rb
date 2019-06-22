@@ -6,7 +6,6 @@ class CartsController < ApplicationController
   end
 
   def add_item
-    binding.pry
     cart_item = current_cart.cart_items&.find_or_initialize_by(product_id: params[:product_id])
     if cart_item.new_record?
       product = Product.find(cart_item.product_id)
