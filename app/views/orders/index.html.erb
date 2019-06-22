@@ -1,46 +1,46 @@
 <div class="order-history-container">
-	<h1>注文履歴</h1>
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-			<table class="histroy-table">
-				<div class="row">
-				<% @orders.each do |order| %>
-				<% first_order_detail = Product.find(order.order_details.first) %>
-				<% product = Product.find(first_order_detail.product_id) %>
+	<div class="bg">
+		<div class="col-md-8 col-md-offset-2 order-t">
+			<table class="histroy-table" border=1>
+					<div class="col-lg-12 order-table">
+					<h1 class="ord-h">購入履歴</h1>
+					<% @order_histories.each do |od| %>
 					<!--表の上段-->
 					<thead>
-						<tr>
-							<th class="col-md-3">購入日<%= order.created_at %></th>
-							<th class="col-md-5">お届け先<%= order.destination %></th>
-							<th class="col-md-4">取引番号<%= order.id %>></th>
+						<tr data-href=<%= order_path(od[:order_id]) %>>
+							<th>購入日 : <%= od[:created_at] %></th>
+							<th>お届け先 : <%= od[:order_destination] %></th>
+							<th>取引番号 : <%= od[:order_id] %></th>
 						</tr>
 					</thead>
 					<!--表の下段-->
 					<tbody>
-						<tr>
+						<tr data-href=<%= order_path(od[:order_id]) %>>
 							<td>
-								<% if product.jacket_image_id %>
-									<%= attachment_image_tag product, :jacket_image, :fill, 60, 60, class:"border" %>
+								<% if od[:jacket_image_id] %>
+									<%= attachment_image_tag od, :jacket_image, :fill, 60, 60, class:"border" %>
 								<% else %>
 									<%= image_tag 'no_image.jpg', size: '60x60', class:"border" %>
 								<% end %>
 							</td>
 							<td>
-								<p><%= product.product_name%></p>
-								<p><%= product.artist.name %></p>
-								<p><%= first_order_detail.product_count %></p>
-								<p><%= product.price %></p>
+								<p>商品名 : <%= od[:product_name] %></p>
+								<p>アーティスト名 : <%= od[:artist_name] %></p>
+								<p>個数 : <%= od[:product_count] %></p>
+								<p>価格 : <%= od[:product_price] %></p>
 							</td>
 							<td>
-								<p><%= order_detail.order.shipment_status %></p>
+								<p>発送状況 : <%= od[:shipment_status] %></p>
 							</td>
 						</tr>
 					</tbody>
 				<% end %>
-				</div>
 			</table>
+			<div class=table-f></div>
+			</div>
+			<div class="order-bg"></div>
 		</div>
 	</div>
 </div>
 
-
+<%=render 'admins/table' %>

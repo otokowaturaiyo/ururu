@@ -11,7 +11,7 @@
 				<div class="col-xs-3">
 					<%= link_to '登録情報編集', edit_user_path(@user.id),class: "balloon1 ba" %>
 				</div>
-					<%= link_to '購入履歴', order_confirm_path, class: "balloon2 ba" %>
+					<%= link_to '購入履歴',  orders_path, class: "balloon2 ba" %>
 					<!-- （後でパス編集） -->
 			</div>
 			<div class="col-lg-offset-2 col-md-8">
@@ -41,8 +41,8 @@
 		<div class="slider slider-container">
 			<% @likes.each do |like| %>
 			<% product = Product.find(like.product_id) %>
-				<%= image_tag'm-2.jpg' , size: '300x300' %>
-				<%= link_to attachment_image_tag(product, :jacket_image, :fill, 240, 240, fallback: 'no_image.jpg', size: "340x340"), product_path(product.id), class: 'like-on' %>
+				<%= image_tag'owner-a.png' , size: '340x340', class: 'owner' %>
+				<%= link_to attachment_image_tag(product, :jacket_image, :fill, 340, 340, fallback: 'no_image.jpg', size: "340x340"), product_path(product.id), class: 'like-on' %>
 			<% end %>
 		</div>
 	<% else %>
@@ -67,8 +67,8 @@ $(document).on('turbolinks:load', function() {
 	var $like = <%= @likes.count %>
 	if($like <= 6 ){
 		$(".slider").not('.slick-initialized').slick({
-			slidesToShow: 1,
-			slidesToScroll: 1,
+			slidesToShow: 2,
+			slidesToScroll: 2,
 			autoplaySpeed: 700,
 			verticalSwiping: true,
 			prevArrow: '<div class="slider-arrow slider-prev fa fa-angle-left"></div>',
