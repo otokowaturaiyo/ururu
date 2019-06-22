@@ -5,7 +5,8 @@
 .background {
 	background-image: url("owner.png");
 	position: absolute;
-	height: 780px;
+	min-height: 800px;
+	height: auto;
 	width: 100%;
 	opacity: 0.2;
 
