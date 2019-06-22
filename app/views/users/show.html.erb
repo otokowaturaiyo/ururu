@@ -52,6 +52,8 @@
 	</div>
 </div>
 
+<canvas class="m-background"></canvas>
+
 	<!-- いいね -->
 <script>
 
@@ -115,6 +117,18 @@ $(document).on('turbolinks:load', function() {
 		$('.my-back').click(function(){
 			$(this).fadeOut('slow');
 		});
+
+		window.onload = function() {
+  		Particles.init({
+    	selector: '.m-background',
+    	maxParticles: 100,
+    	sizeVariations: 8,
+    	speed: 0.9,
+    	color: '#3ba9e0'
+
+
+  });
+};
 
 
 	});
