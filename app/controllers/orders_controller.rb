@@ -1,26 +1,27 @@
 class OrdersController < ApplicationController
+	before_action :authenticate_user!
 
 
 	def confirm
-		@order = Order.new
-		@order_details = @order.order_details.build
-		@carts = Cart.where(user_id: current_user.id)
-		@order.destination_name = current_user.user_name
-		@order.destination_postal_code = current_user.postal_code
-		@order.destination = current_user.postal_address
-		@destinations = Destination.where(user_id: current_user.id)
+		if user_signed_in?
+			@order = Order.new
+			@order_details = @order.order_details.build
+			@cart_items = current_cart.cart_items
+			@order.destination_name = current_user.user_name
+			@order.destination_postal_code = current_user.postal_code
+			@order.destination = current_user.postal_address
+			@destinations = Destination.where(user_id: current_user.id)
+		else
+			redirect_to new_user_session_path
+		end
   end
 
 	def destinationupdate
 		@order = Order.new(order_params)
 		@order_details = @order.order_details.build
 		@destinations = Destination.where(user_id: current_user.id)
-		@carts = Cart.where(user_id: current_user.id)
+		@cart_items = current_cart.cart_items
 		render action: "confirm"
-	end
-
-	def pay
-
 	end
 
 	def create
@@ -57,8 +58,8 @@ class OrdersController < ApplicationController
 		end
 
 		#####　カートの削除　#####
-		cart = Cart.where(user_id: current_user.id)
-		cart.destroy_all
+		cart_items = current_cart.cart_items
+		cart_items.destroy_all
 		redirect_to order_complete_path(order)
 	end
 
@@ -121,14 +122,14 @@ class OrdersController < ApplicationController
 
 		def order_params
 			params.require(:order).permit(:destination,
-										  :destination_name,
-										  :destination_postal_code,
-										  :destination_phone_number,
-										  :payment_methods,
-										  :shipment_status,
-										   order_details_attributes:  [:id,
-										  :product_id,
-									      :product_count])
+										  							:destination_name,
+										  							:destination_postal_code,
+										  							:destination_phone_number,
+										  							:payment_methods,
+										  							:shipment_status,
+										   							order_details_attributes:  [:id,
+										  																					:product_id,
+									      																				:product_count])
 		end
 
 end
