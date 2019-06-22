@@ -29,16 +29,17 @@
 					<div class="row purchase-record">
 						<div class="col-md-4">
 							<% if  od[:jacket_image] %>
-								<%= attachment_image_tag od, :jacket_image, :fill, 120, 120, class:"border" %>
+								<%= attachment_image_tag od, :jacket_image, :fill, 150, 150, class:"border" %>
 							<% else %>
-								<%= image_tag 'no_image.jpg', size: '120x120', class:"border" %>
+								<%= image_tag 'no_image.jpg', size: '150x150', class:"border" %>
 							<% end %>
 						</div>
 						<div class="col-md-8">
 							<p>商品名 : <%= od[:product_name] %></p>
 							<p>アーティスト名 : <%= od[:artist_name] %></p>
+							<p>価格 : <%= od[:price] %></p>
 							<p>購入枚数 : <%= od[:count] %></p>
-							 <p>小計 : <%= @order_sub %></p>
+							 <p>小計 : <%= od[:price] * od[:count] %></p>
 						</div>
 					</div>
 				<% end %>

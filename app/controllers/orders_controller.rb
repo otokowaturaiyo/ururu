@@ -107,10 +107,8 @@ class OrdersController < ApplicationController
 			}
 		end
 		# 合計金額の計算(取引詳細)
-		@order_sub = []
 		@order_history.each do |od|
 			@subtotal = od[:price] * od[:count]
-			@order_sub += [@subtotal]
 			@total_price += @subtotal
 		end
 	end
