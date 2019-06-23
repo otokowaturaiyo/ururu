@@ -57,8 +57,19 @@
 	<!-- いいね -->
 <script>
 
-$(document).on('turbolinks:load', function() {
-	var $like = <%= @likes.count %>
+
+	document.addEventListener('turbolinks:load', function() {
+		Particles.init({
+	selector: '.m-background',
+	maxParticles: 100,
+	sizeVariations: 8,
+	speed: 0.4,
+	color: '#3ba9e0',
+	  	});
+	});
+
+	$(document).on('turbolinks:load', function() {
+	var $like = <%= @likes.count %>;
 	if($like <= 6 ){
 		$(".slider").not('.slick-initialized').slick({
 			slidesToShow: 2,
@@ -67,7 +78,7 @@ $(document).on('turbolinks:load', function() {
 			verticalSwiping: true,
 			prevArrow: '<div class="slider-arrow slider-prev fa fa-angle-left"></div>',
 			nextArrow: '<div class="slider-arrow slider-next fa fa-angle-right"></div>',
-			})
+			});
 	}else{
 		$(".slider").not('.slick-initialized').slick({
 			slidesToShow: 6,
@@ -78,7 +89,7 @@ $(document).on('turbolinks:load', function() {
 			prevArrow: '<div class="slider-arrow slider-prev fa fa-angle-left"></div>',
 			nextArrow: '<div class="slider-arrow slider-next fa fa-angle-right"></div>',
 		});
-};
+	};
 
 
 
@@ -118,20 +129,12 @@ $(document).on('turbolinks:load', function() {
 			$(this).fadeOut('slow');
 		});
 
-		window.onload = function() {
-  		Particles.init({
-    	selector: '.m-background',
-    	maxParticles: 100,
-    	sizeVariations: 8,
-    	speed: 0.9,
-    	color: '#3ba9e0'
-
-
-  });
-};
-
-
+		$(function(){
+	$('#sample').raindrops();
+});
 	});
 
-</script>
 
+
+
+</script>

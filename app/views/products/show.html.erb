@@ -1,19 +1,19 @@
-<div class="container">
-	<div class="product-show">
+	<div class="pro-bg">
+		<div class="container product-show">
 		<br>
-		<h1>商品詳細</h1>
+		<h1 class="pro-h">商品詳細</h1>
 		<br>
 		<!-- 商品の概要説明 -->
 		<div class="row">
 			<div class="overview clearfix">
-				<div class="product_image pull-left col-md-4">
+				<div class="product_image col-md-4">
 					<% if @product.jacket_image_id.present? %>
 						<%= attachment_image_tag  @product, :jacket_image, :fill, 350, 350, class:"border" %>
 					<% else %>
 						<%= image_tag 'no_image.jpg', size: '350x350', class:"border" %>
 					<% end %>
 				</div>
-				<div class="product_details pull-left col-md-5">
+				<div class="product_details col-md-4">
 					<ul>
 						<li><i class="fas fa-music"></i>商品名：<%= @product.product_name %></li>
 						<li><i class="fas fa-music"></i>アーティスト：<%= @artist.name %></li>
@@ -26,7 +26,7 @@
 					</div>
 				</div>
 				<!-- 商品ステータス -->
-				<div class="product_status pull-left col-md-2">
+				<div class="product_status col-md-2">
 					<div class=price>
 						<% tax_included = @product.price*1.08 %>
 						<p>価格：¥<%= tax_included.to_i.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %>（税込）</p>
@@ -78,13 +78,13 @@
 		<!-- レビュー --><!--レビュー機能はトラが作ります-->
 		<div class="row review-container">
 			<% if user_signed_in? %>
-				<div class="col-md-5">
+				<div class=" col-md-offset-1 col-md-4">
 						<h3>レビュー投稿</h3>
 						<!-- コメント入力欄を商品の詳細ページに表示するためのrender -->
 						<%= render partial: 'reviews/form', locals: { reviews: @reviews, product: @product }%>
 				</div>
 				<h3>レビュー一覧</h3>
-				<div class="col-md-7 scroller">
+				<div class="col-md-6 scroller">
 					<div id="reviews_area"><!--ここのidを目印にdiv内をAjaxで書き換え-->
 						<!-- 投稿されたコメント一覧を商品の詳細ページに表示するためのrender -->
 						<%= render partial: 'reviews/index', locals: { reviews: @reviews }%>
@@ -124,6 +124,5 @@
 			</div>
 		</div>
 	</div>
-</div>
-	<div class="pro-bg"></div>
+	</div>
 </div>
