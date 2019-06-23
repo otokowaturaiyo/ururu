@@ -38,8 +38,9 @@
 						<div class="col-md-8">
 							<p>商品名 : <%= od[:product_name] %></p>
 							<p>アーティスト名 : <%= od[:artist_name] %></p>
+							<p>価格 : <%= od[:price] %></p>
 							<p>購入枚数 : <%= od[:count] %></p>
-							 <p>小計 : <%= @order_sub %></p>
+							 <p>小計 : <%= od[:price] * od[:count] %></p>
 						</div>
 					</div>
 				<% end %>
