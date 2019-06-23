@@ -46,9 +46,8 @@ class OrdersController < ApplicationController
 	end
 
 	def index
-		#必要な情報は@order-historiesにまとめる
-		user_orders = current_user.orders
-		@order_histories = build_order_histories(user_orders)
+		@orders = Order.where(user_id: current_user.id).order(created_at: :desc)
+		@orders = Order.page(params[:page]).per(5)
 	end
 
 	def show
@@ -82,27 +81,6 @@ class OrdersController < ApplicationController
 		end
 
 
-		def build_order_histories(user_orders)
-			@order_histories = user_orders.each_with_object([]) do |user_order, array|
-				#ここから本当はいらない
-				next if user_order.order_details.blank?
-				first_order_detail = user_order.order_details.first
-				first_order_product = first_order_detail.product
-				next if first_order_product.nil?
-				#ここまで本当はいらない
-				array << {
-					jacket_image: first_order_product.jacket_image_id,
-					product_name: first_order_product.product_name,
-					artist_name: first_order_product.artist.name,
-					product_count: first_order_detail.product_count,
-					product_price: first_order_detail.price,
-					shipment_status: user_order.shipment_status,
-					created_at: user_order.created_at,
-					order_destination: user_order.destination,
-					order_id: user_order.id
-				}
-			end
-		end
 
 		def build_order_history(order_details)
 			order_details.each_with_object([]) do |order_detail, array|
