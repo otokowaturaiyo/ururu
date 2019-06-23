@@ -75,13 +75,14 @@ class OrdersController < ApplicationController
 		#必要な情報は@order-historiesにまとめる
 		user_orders = current_user.orders
 		@order_histories = user_orders.each_with_object([]) do |user_order, array|
-			first_order_detail = user_order&.order_details&.first
-			next if first_order_detail.blank?
-			first_order_product = Product.find(first_order_detail.product_id)
+			next if user_order.order_details.blank?
+			first_order_detail = user_order.order_details.first
+			first_order_product = first_order_detail.product
+			next if first_order_product.nil?
 			array << {
-				jacket_image_id: first_order_product.jacket_image_id,
+				jacket_image: first_order_product.jacket_image_id,
 				product_name: first_order_product.product_name,
-				artist_name: first_order_product.artist.name,
+				artist_name: first_order_product.artist&.name,
 				product_count: first_order_detail.product_count,
 				product_price: first_order_detail.price,
 				shipment_status: user_order.shipment_status,
@@ -89,7 +90,7 @@ class OrdersController < ApplicationController
 				order_destination: user_order.destination,
 				order_id: user_order.id
 			}
-		end
+			end
 	end
 
 	def show
