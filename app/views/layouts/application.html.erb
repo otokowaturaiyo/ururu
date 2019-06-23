@@ -99,8 +99,40 @@
     <div class="top-space"></div>
     <%= yield %>
     <footer>
-      <p class="footer-text1 ">全国送料一律¥500</p>
-      <p class="footer-text2">© Ururu.inc</p>
+      <div class="footer-container">
+        <div class="row">
+          <div class="col-md-3">
+            <div>
+              全国送料一律¥500<br>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div>
+              採用情報：<br>
+                •正社員：時給1800円、週休三日、通勤費用10000円/月まで負担<br>
+                  その他手当付き<br>
+                •フリーター、アルバイト:時給1000円、通勤費用10000円/月まで負担<br>
+                  週三日、一日3時間からシフトを組める！<br><br>
+                *その他要望聞きます。
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div>
+              返品交換は受け付けません、ご了承ください。<br>
+              ご意見•要望は以下のメールアドレスまでアクセスしてください！<br>
+              E-mail <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>  ururu@gmail.com<br>
+              住所 : 長野県播刈市やすらぎ町8-4-3
+            </div>
+          </div>
+          <div class="col-md-3">
+           <div>
+              全国の皆さんにうるっとくる感動をお届けします。<br>
+              <%= link_to "詳しくはこちら", products_feature_path %><br><br>
+              © Ururu.inc<br>
+           </div>
+          </div>
+        </div>
+      </div>
     </footer>
      <script src="path/to/particles.min.js"></script>
   </body>
