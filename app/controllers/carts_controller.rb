@@ -6,19 +6,18 @@ class CartsController < ApplicationController
   end
 
   def add_item
-    cart_item = current_cart.cart_items&.find_or_initialize_by(product_id: params[:product_id])
+    cart_item = current_cart.cart_items&.find_or_initialize_by(product_id: params[:cart_item][:product_id])
     if cart_item.new_record?
       product = Product.find(cart_item.product_id)
       cart_item = current_cart.cart_items.build(cart_params)
       cart_item.product_price = product.price
       cart_item.save!
     else
-      updated_count = cart_item.product_count.to_i + params[:cart][:product_count].to_i
+      updated_count = cart_item.product_count.to_i + params[:cart_item][:product_count].to_i
       cart_item.update_attributes!(product_count: updated_count)
     end
     redirect_to current_cart
   end
-
 
   def update
     @cart_item = current_cart.cart_items.find(params[:id])
@@ -39,9 +38,7 @@ class CartsController < ApplicationController
     end
 
     def cart_params
-      params.permit(:product_id, :product_count)
+      params.require(:cart_item).permit(:product_id, :product_count)
     end
-
-
 
 end

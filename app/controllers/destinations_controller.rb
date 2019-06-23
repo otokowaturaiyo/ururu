@@ -1,6 +1,5 @@
 class DestinationsController < ApplicationController
-
-  #before_action :authenticate_destination!
+  before_action :authenticate_destination!
 
 
   def new

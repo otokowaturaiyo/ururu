@@ -1,26 +1,14 @@
 class OrdersController < ApplicationController
 	before_action :authenticate_user!
-
+	before_action :setup_order!, only: [:confirm, :destination_update]
+	before_action :setup_destination!, only: [:confirm]
 
 	def confirm
-		if user_signed_in?
-			@order = Order.new
-			@order_details = @order.order_details.build
-			@cart_items = current_cart.cart_items
-			@order.destination_name = current_user.user_name
-			@order.destination_postal_code = current_user.postal_code
-			@order.destination = current_user.postal_address
-			@destinations = Destination.where(user_id: current_user.id)
-		else
-			redirect_to new_user_session_path
-		end
+		@order = Order.new
   end
 
-	def destinationupdate
+	def destination_update
 		@order = Order.new(order_params)
-		@order_details = @order.order_details.build
-		@destinations = Destination.where(user_id: current_user.id)
-		@cart_items = current_cart.cart_items
 		render action: "confirm"
 	end
 
@@ -131,6 +119,21 @@ class OrdersController < ApplicationController
 										   							order_details_attributes:  [:id,
 										  																					:product_id,
 									      																				:product_count])
+		end
+
+		def setup_order!
+			@order_details = @order.order_details.build
+			@cart_items = current_cart.cart_items
+			@destinations = Destination.where(user_id: current_user.id)
+		end
+
+		def setup_destination!
+			original_destination = Destination.new(user_id: current_user.id)
+			original_destination.name = current_user.user_name
+			original_destination.postal_code = current_user.postal_code
+			original_destination.destination_address = current_user.postal_address
+			original_destination.phone_number = current_user.phone_number
+			original_destination.save!
 		end
 
 end

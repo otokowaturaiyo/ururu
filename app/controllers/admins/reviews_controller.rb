@@ -20,7 +20,7 @@ class Admins::ReviewsController < ApplicationController
 
 	private
 	def review_params
-        params.require(:review).permit(:user_id, :product_id, :star, :body)
-    end
+    params.require(:review).permit(:user_id, :product_id, :star, :body)
+  end
 
 end

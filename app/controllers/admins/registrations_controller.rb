@@ -62,9 +62,9 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   # end
   private
   def login_check
-  unless admin_signed_in?
-    redirect_to new_user_session_path
+    unless admin_signed_in?
+      redirect_to new_user_session_path
+    end
   end
-end
 
 end

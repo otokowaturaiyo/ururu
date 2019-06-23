@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
   before_action :authenticate_user!
   before_action :correct_user, only: [:show, :edit, :update]
 
@@ -61,6 +60,7 @@ private
   def correct_user
     user = User.find(params[:id])
     if current_user != user
+      flash[:warning] = "権限がありません。"
       redirect_to user_path(current_user)
     end
   end

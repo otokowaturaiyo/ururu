@@ -1,11 +1,13 @@
 class LikesController < ApplicationController
-	# before_action :authenticate_user!, :authenticate_admin!
+	before_action :authenticate_user!
+
 	def create
 		product = Product.find(params[:product_id])
 		likes = current_user.likes.new(product_id: product.id)
 		likes.save
 		redirect_to product_path(product.id)
 	end
+	
 	def destroy
 		product = Product.find(params[:product_id])
 		likes = current_user.likes.find_by(product_id: product.id)
@@ -13,6 +15,3 @@ class LikesController < ApplicationController
 		redirect_to product_path(product.id)
 	end
 end
-
-
-
