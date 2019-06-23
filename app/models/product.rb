@@ -2,7 +2,7 @@ class Product < ApplicationRecord
 	belongs_to :genre
 	belongs_to :artist
 	belongs_to :label
-	has_many :carts
+	has_many :cart_items
 	has_many :disks, dependent: :destroy
 	has_many :likes, dependent: :destroy
 	has_many :reviews, dependent: :destroy
@@ -20,6 +20,11 @@ class Product < ApplicationRecord
 	validates :recommend, inclusion: {in: [true, false]}
 
 	attachment :jacket_image
+
+	#ユーザーがレビューをすでに投稿していたら、それ以上の投稿を制限する
+	def reviewed_by?(user)
+		reviews.where(user_id: user.id).exists?
+	end
 
 	#検索で入力された情報をモデルに探してもらう
 	def self.search(search)

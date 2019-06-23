@@ -16,8 +16,8 @@
 
 		<% total_price = 0 %>
 		<% total_count = 0 %>
-		<% @carts.each do |cart| %>
-		<% product = Product.find(cart.product_id) %>
+		<% @cart_items.each do |item| %>
+		<% product = Product.find(item.product_id) %>
 		  <div class="row">
 		    <div class="clearfix">
 		      <div class="pull-left col-md-3">
@@ -42,16 +42,16 @@
 		      <div class="pull-right col-md-3">
 		        <div class="product_in_cart">
 		          <div>
-		            <%= form_for cart do |f| %>
+		            <%= form_with model:item, url:cart_path(item) ,local:true  do |f| %>
 		            <div class="form-group">
 									<p>数量:　<%= f.number_field :product_count, class:"product_count" %></p>
 		            </div>
 		              <%= f.submit "数量を変更", class:"btn-gradient-radius update-cart" %>
 		            <% end %>
-		            <%= link_to 'カートから削除', cart_path(cart), class:"btn-gradient-radius-delete", method: :delete %>
+		            <%= link_to 'カートから削除', cart_path(item), class:"btn-gradient-radius-delete", method: :delete %>
 		          </div>
 		          <div class="subtotal_price">
-		            <% subtotal_price =  cart.product_count*cart.product_price %>
+		            <% subtotal_price =  item.product_count*item.product_price %>
 		            <% tax_included = subtotal_price*1.08 %>
 		            <% subtotal_with_tax = tax_included.to_i %>
 		            <p>小計：<span>¥<%= subtotal_with_tax.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %></span></p>
@@ -61,7 +61,7 @@
 		    </div>
 		  </div>
 		<% total_price += subtotal_with_tax %>
-		<% total_count += cart.product_count %>
+		<% total_count += item.product_count %>
 		<% end %>
 
 		<div class="row">

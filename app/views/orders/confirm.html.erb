@@ -63,8 +63,8 @@
 								<% end %>
 							</div>
 						</div>
-						<button class="prev"><i class="far fa-arrow-alt-circle-left"></i></button>
-						<button class="next"><i class="far fa-arrow-alt-circle-right"></i></button>
+						<button class="prevDest"><i class="far fa-arrow-alt-circle-left"></i></button>
+						<button class="nextDest"><i class="far fa-arrow-alt-circle-right"></i></button>
 					</div>
 				</div>
 				<div class="col-md-offset-4 col-md-4">
@@ -126,11 +126,11 @@
 							<th class="col-md-2">金額(税込)</th>
 						</tr>
 					</thead>
-					<% @carts.each do |cart| %>
+					<% @cart_items.each do |item| %>
 						<%= f.fields_for :order_details do |od| %>
-							<%= od.hidden_field :product_id, value:"#{cart.product_id}" %>
-							<%= od.hidden_field :product_count, value:"#{cart.product_count}" %>
-							<% product = Product.find(cart.product_id) %>
+							<%= od.hidden_field :product_id, value:"#{item.product_id}" %>
+							<%= od.hidden_field :product_count, value:"#{item.product_count}" %>
+							<% product = Product.find(item.product_id) %>
 							<tbody>
 								<tr>
 									<td>
@@ -144,16 +144,17 @@
 										<div class="col-md-8"><%= product.product_name %></div>
 									</td>
 									<td><%= product.artist.name %></td>
-									<td><%= cart.product_count %></td>
-									<td><% subtotal_price =  cart.product_count*cart.product_price %>
-											<% tax_included = subtotal_price*1.08 %>
-											<% subtotal_with_tax = tax_included.to_i %>
-											¥<%= subtotal_with_tax.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %>
+									<td><%= item.product_count %></td>
+									<td>
+										<% subtotal_price =  item.product_count*item.product_price %>
+										<% tax_included = subtotal_price*1.08 %>
+										<% subtotal_with_tax = tax_included.to_i %>
+										¥<%= subtotal_with_tax.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %>
 									</td>
 								</tr>
 							</tbody>
 							<% total_price += subtotal_with_tax %>
-							<% total_count += cart.product_count %>
+							<% total_count += item.product_count %>
 						<% end %>
 					<% end %>
 				</table>
@@ -163,12 +164,12 @@
 				</div>
 				<br>
 				<div class="order-submit">
-				<%= f.hidden_field :destination, value:"#{@order.destination}" %>
-				<%= f.hidden_field :destination_name, value:"#{@order.destination_name}" %>
-				<%= f.hidden_field :destination_postal_code, value:"#{@order.destination_postal_code}" %>
-				<%= f.hidden_field :destination_phone_number, value:"#{@order.destination_phone_number}" %>
-				<%= f.submit '注文', class:"btn btn-primary" %>
-				<%= link_to 'カートに戻る', cart_path(current_user), class:"btn btn-warning" %>
+					<%= f.hidden_field :destination, value:"#{@order.destination}" %>
+					<%= f.hidden_field :destination_name, value:"#{@order.destination_name}" %>
+					<%= f.hidden_field :destination_postal_code, value:"#{@order.destination_postal_code}" %>
+					<%= f.hidden_field :destination_phone_number, value:"#{@order.destination_phone_number}" %>
+					<%= f.submit '注文', class:"btn btn-primary" %>
+					<%= link_to 'カートに戻る', current_cart, class:"btn btn-warning" %>
 				</div>
 				<br>
 			</div>
@@ -194,11 +195,11 @@
 		  	left: slideCurrent * -slideWidth
 			});
 		}
-			$('.prev').click(function(){
+			$('.prevDest').click(function(){
 				slideCurrent--;
 				sliding();
 				});
-			$('.next').click(function(){
+			$('.nextDest').click(function(){
 				slideCurrent++;
 				sliding();
 				});

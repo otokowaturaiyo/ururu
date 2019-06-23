@@ -1,4 +1,5 @@
-<div class="container product-show">
+<div class="container">
+	<div class="product-show">
 		<br>
 		<h1>商品詳細</h1>
 		<br>
@@ -40,7 +41,7 @@
 						<% end %>
 					</div>
 					<div class="add-to-cart">
-						<%= form_with model:@cart do |f| %>
+						<%= form_with model:@cart_item, url:add_item_path, local:true do |f| %>
 							<p>数量:<%= f.number_field :product_count, value:1, class:"product_count" %></p>
 							<%= f.hidden_field :product_id, value: @product.id %>
 							<%= f.submit "カートに追加する", class:"btn-square-pop" %>
@@ -74,21 +75,30 @@
 			</div>
 		</div>
 		<br>
-		<!-- レビュー --><!--レビュー機能はトラが作ります-->
+		<!-- レビュー -->
 		<div class="row review-container">
 			<% if user_signed_in? %>
-				<div class="col-md-5">
-						<h3>レビュー投稿</h3>
-						<!-- コメント入力欄を商品の詳細ページに表示するためのrender -->
-						<%= render partial: 'reviews/form', locals: { reviews: @reviews, product: @product }%>
-				</div>
-				<h3>レビュー一覧</h3>
-				<div class="col-md-7 scroller">
-					<div id="reviews_area"><!--ここのidを目印にdiv内をAjaxで書き換え-->
-						<!-- 投稿されたコメント一覧を商品の詳細ページに表示するためのrender -->
-						<%= render partial: 'reviews/index', locals: { reviews: @reviews }%>
+				<% if @product.reviewed_by?(current_user) %>
+					<div class="col-md-6 col-md-offset-3 scroller">
+						<h3>レビュー一覧</h3>
+						<div id="reviews_area">
+							<%= render partial: 'reviews/index', locals: { reviews: @reviews } %>
+						</div>
 					</div>
-				</div>
+				<% else %>
+					<div class="col-md-5">
+							<h3>レビュー投稿</h3>
+							<!-- コメント入力欄を商品の詳細ページに表示するためのrender -->
+							<%= render partial: 'reviews/form', locals: { reviews: @reviews, product: @product }%>
+					</div>
+					<h3>レビュー一覧</h3>
+					<div class="col-md-7 scroller">
+						<div id="reviews_area"><!--ここのidを目印にdiv内をAjaxで書き換え-->
+							<!-- 投稿されたコメント一覧を商品の詳細ページに表示するためのrender -->
+							<%= render partial: 'reviews/index', locals: { reviews: @reviews }%>
+						</div>
+					</div>
+				<% end %>
 			<% else %>
 				<div class="col-md-6 col-md-offset-3 scroller">
 					<h3>レビュー一覧</h3>
@@ -123,4 +133,6 @@
 			</div>
 		</div>
 	</div>
+</div>
+	<div class="pro-bg"></div>
 </div>

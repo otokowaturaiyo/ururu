@@ -36,7 +36,8 @@ end
   resources :users, only:[:show, :edit, :update]
 
   resources :destinations, only:[:new, :create, :edit, :update]
-  resources :carts, only:[:create, :show, :update, :destroy]
+  resources :carts, only:[:show, :update, :destroy]
+  post 'add_item' => 'carts#add_item', as:'add_item'
   get 'search_list' => 'products#search_list'
   get 'genres/:id' => 'genres#show', as: 'genre'
 
