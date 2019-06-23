@@ -85,10 +85,11 @@ class OrdersController < ApplicationController
 		def build_order_histories(user_orders)
 			@order_histories = user_orders.each_with_object([]) do |user_order, array|
 				#ここから本当はいらない
-				first_order_detail = user_order&.order_details&.first
-				next if first_order_detail.blank?
+				next if user_order.order_details.blank?
+				first_order_detail = user_order.order_details.first
+				first_order_product = first_order_detail.product
+				next if first_order_product.nil?
 				#ここまで本当はいらない
-				first_order_product = Product.find(first_order_detail.product_id)
 				array << {
 					jacket_image: first_order_product.jacket_image_id,
 					product_name: first_order_product.product_name,
