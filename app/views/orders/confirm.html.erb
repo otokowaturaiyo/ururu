@@ -5,7 +5,7 @@
 			<div class="col-md-offset-2 col-md-8 purchase-flow">
 				<i class="fas fa-shopping-cart fa-2x"></i><!--カート画面-->
 				<i class="fas fa-arrow-right fa-2x"></i>
-				<i class="fas fa-cash-register fa-4x"></i><!--購入確認画面--><!--今回はここ！-->
+				<i class="fas fa-cash-register fa-4x"></i><!--購入確認画面-->
 				<i class="fas fa-arrow-right fa-2x"></i>
 				<i class="far fa-check-circle fa-2x"></i><!--購入完了画面-->
 			</div>
@@ -15,15 +15,9 @@
 			<p>※お届け先を変更できます</p>
 			<!--目的地表示-->
 			<div class="col-md-4 destination">
-				<p>
-					<%= @order.destination_name %>
-				</p>
-				<p>
-					<%= @order.destination_postal_code %>
-				</p>
-				<p>
-					<%= @order.destination %>
-				</p>
+				<p><%= @order.destination_name %></p>
+				<p><%= @order.destination_postal_code %></p>
+				<p><%= @order.destination %></p>
 			</div>
 			<div class="change_destination">
 				<button type="button" class="btn btn-warning">他の宛先を指定する</button>
@@ -71,7 +65,7 @@
 					<%= link_to new_destination_path do %>
 						<button class="btn btn-primary">宛先を追加する</button>
 					<% end %>
-						<button class="btn btn-danger close_btn">閉じる</button>
+					<button class="btn btn-danger close_btn">閉じる</button>
 				</div>
 			</div>
 		</div>
@@ -115,8 +109,6 @@
 			</div>
 			<div class="row">
 				<!--注文内容表示-->
-				<% total_price = 0 %>
-				<% total_count = 0 %>
 				<table class="order-table" border=1>
 					<thead>
 						<tr>
@@ -126,41 +118,36 @@
 							<th class="col-md-2">金額(税込)</th>
 						</tr>
 					</thead>
-					<% @cart_items.each do |item| %>
+					<% @items.each do |item| %>
 						<%= f.fields_for :order_details do |od| %>
-							<%= od.hidden_field :product_id, value:"#{item.product_id}" %>
-							<%= od.hidden_field :product_count, value:"#{item.product_count}" %>
-							<% product = Product.find(item.product_id) %>
-							<tbody>
-								<tr>
-									<td>
-										<div class="col-md-4">
-											<% if product.jacket_image_id.present? %>
-													<%= attachment_image_tag  product, :jacket_image, :fill, 30, 30, class:"border" %>
-											<% else %>
-													<%= image_tag 'no_image.jpg', size: '30x30', class:"border" %>
-											<% end %>
-										</div>
-										<div class="col-md-8"><%= product.product_name %></div>
-									</td>
-									<td><%= product.artist.name %></td>
-									<td><%= item.product_count %></td>
-									<td>
-										<% subtotal_price =  item.product_count*item.product_price %>
-										<% tax_included = subtotal_price*1.08 %>
-										<% subtotal_with_tax = tax_included.to_i %>
-										¥<%= subtotal_with_tax.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %>
-									</td>
-								</tr>
-							</tbody>
-							<% total_price += subtotal_with_tax %>
-							<% total_count += item.product_count %>
+							<%= od.hidden_field :product_id, value:"#{item[:product_id]}" %>
+							<%= od.hidden_field :product_count, value:"#{item[:count]}" %>
+								<tbody>
+									<tr>
+										<td>
+											<div class="col-md-4">
+												<%= attachment_image_tag Product.find(item[:product_id]),
+													:jacket_image, :fill, 30, 30,
+													fallback:"no_image.jpg", size: '30x30',
+													class: "border" %>
+											</div>
+											<div class="col-md-8">
+												<%= item[:product_name] %>
+											</div>
+										</td>
+										<td><%= item[:artist] %></td>
+										<td><%= item[:count] %></td>
+										<td>
+											¥<%= item[:subtotal].to_i.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %>
+										</td>
+									</tr>
+								</tbody>
 						<% end %>
 					<% end %>
 				</table>
 				<p class="souryou">送料¥ 500</p>
 				<div class="grand-total">
-					[ <%= total_count %>点　合計　¥<%= total_price + 500 %> ]
+					[ <%= @total_count %>点　合計　¥<%= @total_price_with_fee %> ]
 				</div>
 				<br>
 				<div class="order-submit">

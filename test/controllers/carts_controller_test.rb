@@ -15,5 +15,4 @@ class CartsControllerTest < ActionDispatch::IntegrationTest
     get carts_destroy_url
     assert_response :success
   end
-
 end

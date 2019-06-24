@@ -1,7 +1,6 @@
 class ProductsController < ApplicationController
   PER = 9
   PER2 = 6
-  PER3 = 30
 
   def index
   	@products = Product.page(params[:page]).per(PER).order(created_at: :desc)

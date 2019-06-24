@@ -1,22 +1,20 @@
 class DestinationsController < ApplicationController
-
-  #before_action :authenticate_destination!
-
+  before_action :authenticate_user!
 
   def new
-  	@destination = Destination.new
-    #下の記述はいらないかも
-  	@user = current_user
+    @destination = Destination.new
+    # 下の記述はいらないかも
+    @user = current_user
   end
 
   def create
     @destination = Destination.new(destination_params)
     @destination.user_id = current_user.id
     if @destination.save
-       flash[:notice] = "新しい宛先を登録しました！"
-       redirect_to order_confirm_path
+      flash[:notice] = "新しい宛先を登録しました！"
+      redirect_to order_confirm_path
     else
-       render 'new'
+      render 'new'
     end
   end
 
@@ -28,18 +26,16 @@ class DestinationsController < ApplicationController
     @destination = Destination.find(params[:id])
     @user = current_user
     if @destination.update(destination_params)
-       flash[:notice] = "宛先を編集しました！"
-       redirect_to order_confirm_path
+      flash[:notice] = "宛先を編集しました！"
+      redirect_to order_confirm_path
     else
-       render 'edit'
+      render 'edit'
     end
   end
-
 
   private
 
   def destination_params
     params.require(:destination).permit(:name, :phone_number, :postal_code, :destination_address)
   end
-
 end

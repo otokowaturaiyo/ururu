@@ -1,6 +1,6 @@
 <div class="container cart">
 	<div class="col-md-offset-2 col-md-8">
-		  <!-- カートの中身がない時のパーシャル -->
+
     <h1>ショッピングカート</h1>
     <br>
 
@@ -14,68 +14,66 @@
 			</div>
 		</div>
 
-		<% total_price = 0 %>
-		<% total_count = 0 %>
-		<% @cart_items.each do |item| %>
-		<% product = Product.find(item.product_id) %>
-		  <div class="row">
-		    <div class="clearfix">
-		      <div class="pull-left col-md-3">
-		        <div class="product_image">
-		          <% if product.jacket_image_id.present? %>
-		            <%= attachment_image_tag  product, :jacket_image, :fill, 150, 150, class:"border" %>
-		          <% else %>
-		            <%= image_tag 'no_image.jpg', size: '150x150', class:"border" %>
-		          <% end %>
-		        </div>
+		<% if current_cart.cart_items.present? %>
+		  <div class="row clearfix">
+				<% @items.each do |item| %>
+		  	<div class="pull-left col-md-3">
+		    	<div class="product_image">
+		      	<%= attachment_image_tag Product.find(item[:product_id]),
+																		 :jacket_image, :fill, 150, 150,
+																		 	fallback: "no_image.jpg", size: '150x150',
+																			class:"border"
+						%>
 		      </div>
-		      <div class="pull-left col-md-6">
-		        <div class="product_details">
-		          <ul>
-		            <li><i class="fas fa-music"></i>商品名：<%= product.product_name %></li>
-		            <li><i class="fas fa-music"></i>アーティスト：<%= product.artist.name %></li>
-		            <li><i class="fas fa-music"></i>レーベル：<%= product.label.label %></li>
-		            <li><i class="fas fa-music"></i>ジャンル：<%= product.genre.genre %></li>
-		          </ul>
-		        </div>
-		      </div>
-		      <div class="pull-right col-md-3">
-		        <div class="product_in_cart">
-		          <div>
-		            <%= form_with model:item, url:cart_path(item) ,local:true  do |f| %>
-		            <div class="form-group">
-									<p>数量:　<%= f.number_field :product_count, class:"product_count" %></p>
+		   	</div>
+		    <div class="pull-left col-md-6">
+		   		<div class="product_details">
+			    	<ul>
+			      	<li><i class="fas fa-music"></i>商品名：<%= item[:product_name] %></li>
+			        <li><i class="fas fa-music"></i>アーティスト：<%= item[:artist] %></li>
+			        <li><i class="fas fa-music"></i>レーベル：<%= item[:label] %></li>
+			        <li><i class="fas fa-music"></i>ジャンル：<%= item[:genre] %></li>
+			       </ul>
+		    	</div>
+		    </div>
+		    <div class="pull-right col-md-3">
+		    	<div class="product_in_cart">
+		      	<div>
+		        	<%= form_with model:current_cart.cart_items, url:cart_path(item[:id]) ,local:true, method: :patch  do |f| %>
+		          	<div class="form-group">
+									<p>数量:　<%= f.number_field :product_count, class:"product_count", value:"#{item[:count]}" %></p>
 		            </div>
 		              <%= f.submit "数量を変更", class:"btn-gradient-radius update-cart" %>
-		            <% end %>
-		            <%= link_to 'カートから削除', cart_path(item), class:"btn-gradient-radius-delete", method: :delete %>
-		          </div>
-		          <div class="subtotal_price">
-		            <% subtotal_price =  item.product_count*item.product_price %>
-		            <% tax_included = subtotal_price*1.08 %>
-		            <% subtotal_with_tax = tax_included.to_i %>
-		            <p>小計：<span>¥<%= subtotal_with_tax.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %></span></p>
-		          </div>
+		          <% end %>
+		          <%= link_to 'カートから削除', cart_path(item[:id]), class:"btn-gradient-radius-delete", method: :delete %>
+		        </div>
+		        <div class="subtotal_price">
+		        	<p>小計：<span>¥<%= item[:subtotal].to_i.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %></span></p>
 		        </div>
 		      </div>
 		    </div>
+				<% end %>
 		  </div>
-		<% total_price += subtotal_with_tax %>
-		<% total_count += item.product_count %>
+			<div class="row">
+			  <div class="total_price">
+			    <p>合計: <%= @total_count %>点の商品  <span>¥<%= @total_price_with_fee %></span></p>
+			  </div>
+			</div>
+			<div class="row">
+				<div class="keep-shopping">
+					<%= link_to '買い物を続ける', products_path, class:'btn_to_shopping' %>
+				</div>
+				<div class="proceed-to-order">
+					<%= link_to '購入へ進む', order_confirm_path, class:'btn_to_order' %>
+				</div>
+			</div>
+		<% else %>
+			<h3>お客様のカートには何もまだ入っていません。</h3>
+			<div class="row">
+				<div class="keep-shopping">
+					<%= link_to '商品一覧に戻る', products_path, class:'btn_to_shopping' %>
+				</div>
+			</div>
 		<% end %>
-
-		<div class="row">
-		  <div class="total_price">
-		    <p>合計: <%= total_count %>点の商品  <span>¥<%= total_price.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %></span></p>
-		  </div>
-		</div>
-		<div class="row">
-			<div class="keep-shopping">
-				<%= link_to '買い物を続ける', products_path, class:'btn_to_shopping' %>
-			</div>
-			<div class="proceed-to-order">
-				<%= link_to '購入へ進む', order_confirm_path, class:'btn_to_order' %>
-			</div>
-		</div>
 	</div>
 </div>

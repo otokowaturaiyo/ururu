@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :products, only:[:new, :create, :index, :show, :edit, :update] do
     resources :reviews, only:[:edit, :update, :destroy]
     end
+    resources :orders, only: [:index, :edit, :update]
     get '/top' => 'home#top'
     get '/resign/index' => 'users#resign_index'
     patch '/:id/resign' => 'users#resign', as:'user_resign'
@@ -22,11 +23,12 @@ Rails.application.routes.draw do
     passwords: 'users/passwords',
     registrations: 'users/registrations'
   }
-namespace :user do
-  get '/:id/resign' => 'users#resign', as: 'resign'
-  patch '/:id/resign_confirm' => 'users#resign_confirm', as: 'resign_confirm'
-  patch '/:id/resign_confirm' => 'users#revival_confirm', as:'revival_confirm'
-end
+  namespace :user do
+    get '/:id/resign' => 'users#resign', as: 'resign'
+    patch '/:id/resign_confirm' => 'users#resign_confirm', as: 'resign_confirm'
+    patch '/:id/resign_confirm' => 'users#revival_confirm', as:'revival_confirm'
+  end
+
   get '/products/feature' => 'products#feature'
     resources :products, only:[:index, :show] do
     resources :reviews, only: [:index, :create, :edit, :update, :destroy]
@@ -43,7 +45,7 @@ end
 
 
   get '/orders/confirm' => 'orders#confirm', as: 'order_confirm'
-  post '/orders/confirm' => 'orders#destinationupdate', as: 'order_destination'
+  post '/orders/confirm' => 'orders#destination_update', as: 'order_destination'
   post '/orders' => 'orders#create', as: 'orders'
   get '/orders/:id/complete' => 'orders#complete', as:'order_complete'
   resources :orders, only:[:index, :show, :update] do
