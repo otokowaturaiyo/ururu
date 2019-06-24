@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :create_original_destination!, only: [:confirm]
+  before_action :not_confirming, only: [:confirm]
 
   def confirm
     @order = Order.new(
@@ -95,4 +96,14 @@ class OrdersController < ApplicationController
       @original_destination.save!
     end
   end
+
+  #カートにアイテムがない状態で購入確認画面に行けないようにする
+  def not_confirming
+    unless current_cart.cart_items.present?
+      flash[:error] = "※商品をカートに入れてください"
+      redirect_to products_path
+    end
+  end
+
+
 end
