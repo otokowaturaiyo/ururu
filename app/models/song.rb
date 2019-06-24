@@ -1,5 +1,5 @@
 class Song < ApplicationRecord
-	belongs_to :disk
+  belongs_to :disk
 
-	validates :song, presence: true
+  validates :song, presence: true
 end

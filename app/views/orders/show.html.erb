@@ -18,7 +18,7 @@
 						<p>E-mail : <%= current_user.email %></p>
 						<p>電話番号 : <%= current_user.phone_number %></p>
 						<p>発送状況 : <%= @order.shipment_status %></p>
-						<p>取引ID : <%=  @order.id %></p>
+						<p>取引番号 : <%= "#{current_user.id} - #{@order.id}"%></p>
 						<p>購入日 : <%=  @order.created_at %></p>
 						<p>お届け先 : <%=  @order.destination %></p>
 					</div>
@@ -26,26 +26,26 @@
 			</div>
 			<br>
 			<div class="order-product-info">
-				<% @order_history.each do |od| %>
+				<% @items.each do |item| %>
 					<div class="row purchase-record">
 						<div class="col-md-4">
-							<% if  od[:jacket_image] %>
-								<%= attachment_image_tag od, :jacket_image, :fill, 100, 100, class:"border" %>
+							<% if item[:image] %>
+								<%= attachment_image_tag Product.find(item[:product_id]), :jacket_image, :fill, 100, 100, class: "border" %>
 							<% else %>
 								<%= image_tag 'no_image.jpg', size: '100x100', class:"border" %>
 							<% end %>
 						</div>
 						<div class="col-md-8">
-							<p>商品名 : <%= od[:product_name] %></p>
-							<p>アーティスト名 : <%= od[:artist_name] %></p>
-							<p>価格 : <%= od[:price] %></p>
-							<p>購入枚数 : <%= od[:count] %></p>
-							 <p>小計 : <%= od[:price] * od[:count] %></p>
+							<p>商品名 : <%= item[:product_name] %></p>
+							<p>アーティスト名 : <%= item[:artist_name] %></p>
+							<p>価格 : <%= item[:price] %></p>
+							<p>購入枚数 : <%= item[:count] %></p>
+							<p>小計 : ¥<%= item[:subtotal].to_i .to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,')%></p>
 						</div>
 					</div>
 				<% end %>
 				<br>
-				<p class="total-price">合計 : ¥<%= @total_price %></p>
+				<p class="total-price">合計 : ¥<%= @total %></p>
 
 			</div>
 		</div>
@@ -53,4 +53,3 @@
 	</div>
 
 </div>
-

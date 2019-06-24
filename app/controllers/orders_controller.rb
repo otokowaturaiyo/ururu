@@ -1,120 +1,97 @@
 class OrdersController < ApplicationController
-	before_action :authenticate_user!
+  before_action :authenticate_user!
+  before_action :create_original_destination!, only: [:confirm]
 
-
-	def confirm
-		if user_signed_in?
-			@order = Order.new
-			@order_details = @order.order_details.build
-			@cart_items = current_cart.cart_items
-			@order.destination_name = current_user.user_name
-			@order.destination_postal_code = current_user.postal_code
-			@order.destination = current_user.postal_address
-			@destinations = Destination.where(user_id: current_user.id)
-		else
-			redirect_to new_user_session_path
-		end
+  def confirm
+    @order = Order.new(
+      destination: @original_destination.destination_address,
+      destination_name: @original_destination.name,
+      destination_postal_code: @original_destination.postal_code,
+      destination_phone_number: @original_destination.phone_number
+    )
+    setup_order!
+    retrieve_products_info(current_cart.cart_items)
+    total_count(@items)
+    fee_included(@items, :subtotal)
   end
 
-	def destinationupdate
-		@order = Order.new(order_params)
-		@order_details = @order.order_details.build
-		@destinations = Destination.where(user_id: current_user.id)
-		@cart_items = current_cart.cart_items
-		render action: "confirm"
-	end
+  def destination_update
+    @order = Order.new(order_params)
+    setup_order!
+    retrieve_products_info(current_cart.cart_items)
+    total_count(@items)
+    fee_included(@items, :subtotal)
+    render action: "confirm"
+  end
 
-	def create
-		##### 注文を作成　#####
-		order = Order.new(order_params)
-		order.user_id = current_user.id
-		order.create_order(params['payjp-token'])
-		order.save!
+  def create
+    order = Order.new(order_params)
+    order.user_id = current_user.id
+    order.order_details.each do |o|
+      o.price = o.product.price
+    end
+    if order.save
+      f = fee_included(order.order_details)
+      if order.payment_methods == "クレジットカード"
+        payjp(params['payjp-token'], f)
+      end
+      current_cart.cart_items.destroy_all
+      redirect_to order_complete_path(order)
+    else
+      redirect_to order_confirm_path
+    end
+  end
 
-		#####　カートの削除　#####
-		cart_items = current_cart.cart_items
-		cart_items.destroy_all
-		redirect_to order_complete_path(order)
-	end
+  def update
+    @order = Order.find(params[:id])
+  end
 
-	def update
-		@order = Order.find(params[:id])
-	end
+  def complete
+    @order = Order.find(params[:id])
+  end
 
-	def complete
-		@order = Order.find(params[:id])
-	end
+  def index
+    @orders = Order.where(user_id: current_user.id).page(params[:page]).per(5).order(created_at: :desc)
+    items = @orders.map { |o| o.order_details.first }
+    retrieve_products_info(items)
+  end
 
-	def index
-		#必要な情報は@order-historiesにまとめる
-		user_orders = current_user.orders
-		@order_histories = build_order_histories(user_orders)
-	end
+  def show
+    @order = Order.find(params[:id])
+    retrieve_products_info(@order.order_details)
+    @total = fee_included(@order.order_details).to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,')
+  end
 
-	def show
-		#繰り返し処理が必要=>@order-history,繰り返し処理が不要=>@order
-		@order = Order.find(params[:id])
-		order_details = @order.order_details
-		@total_price = 0
-		@order_history = build_order_history(order_details)
+  private
 
-		# 合計金額の計算(取引詳細) <= ここモデルにまとめられそう
-		@order_history.each do |od|
-			@subtotal = od[:price] * od[:count]
-			@total_price += @subtotal
-		end
-	end
+  def order_params
+    params.require(:order).permit(:destination,
+                                  :destination_name,
+                                  :destination_postal_code,
+                                  :destination_phone_number,
+                                  :payment_methods,
+                                  :shipment_status,
+                                  order_details_attributes: [:id,
+                                                             :product_id,
+                                                             :product_count])
+  end
 
+  def setup_order!
+    @order_details = @order.order_details.build
+    @cart_items = current_cart.cart_items
+    @destinations = Destination.where(user_id: current_user.id)
+  end
 
-	private
-
-
-		def order_params
-			params.require(:order).permit(  :destination,
-				  							:destination_name,
-				  							:destination_postal_code,
-				  							:destination_phone_number,
-				  							:payment_methods,
-				  							:shipment_status,
-				   							order_details_attributes:  [:id,
-																		:product_id,
-																		:product_count])
-		end
-
-
-		def build_order_histories(user_orders)
-			@order_histories = user_orders.each_with_object([]) do |user_order, array|
-				#ここから本当はいらない
-				next if user_order.order_details.blank?
-				first_order_detail = user_order.order_details.first
-				first_order_product = first_order_detail.product
-				next if first_order_product.nil?
-				#ここまで本当はいらない
-				array << {
-					jacket_image: first_order_product.jacket_image_id,
-					product_name: first_order_product.product_name,
-					artist_name: first_order_product.artist.name,
-					product_count: first_order_detail.product_count,
-					product_price: first_order_detail.price,
-					shipment_status: user_order.shipment_status,
-					created_at: user_order.created_at,
-					order_destination: user_order.destination,
-					order_id: user_order.id
-				}
-			end
-		end
-
-		def build_order_history(order_details)
-			order_details.each_with_object([]) do |order_detail, array|
-			  order_product = order_detail.product
-			  array << {
-				product_name: order_product.product_name,
-				jacket_image: order_product.jacket_image_id,
-				artist_name: order_product.artist.name,
-				count: order_detail.product_count,
-				price: order_detail.price
-			  }
-			end
-		end
-
+  def create_original_destination!
+    @original_destination = Destination.find_or_initialize_by(
+      user_id: current_user.id,
+      name: current_user.user_name,
+      postal_code: current_user.postal_code,
+      destination_address: current_user.postal_address,
+      phone_number: current_user.phone_number
+    )
+    if @original_destination.new_record?
+      @original_destination.save!
+    end
+  end
 end
