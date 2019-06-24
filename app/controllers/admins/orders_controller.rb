@@ -1,19 +1,23 @@
 class Admins::OrdersController < ApplicationController
+	before_action :authenticate_admin!
+	PER = 10
+
+
 	def index
-		@orders = Order.all
+		@orders = Order.page(params[:page]).per(PER)
 	end
 
 	def edit
 		@order = Order.find(params[:id])
-		@user = User.find(params[:id])
-		@order_details = OrderDetail.all
+		@user = User.find(@order.user_id)
+		@order_details = OrderDetail.where(order: @order)
 	end
 
-	def upgate
+	def update
 		@order = Order.find(params[:id])
 		if @order.update(order_params)
 		   flash[:notice] = "更新完了！"
-		   redirect_to edit_admins_product_order_path(@order.id)
+		   redirect_to edit_admins_order_path(@order.id)
 		else
 		   render :edit
 		end
@@ -21,6 +25,7 @@ class Admins::OrdersController < ApplicationController
 
 	private
 	def order_params
-		params.require(:order).permit(:shipment_status)
+		params.require(:@order).permit(:shipment_status)
 	end
 end
+

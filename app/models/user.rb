@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+
+
+
 	attachment :profile_image
 	# validates :title, presence: true
   # Include default devise modules. Others available are:

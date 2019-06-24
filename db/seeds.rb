@@ -10,9 +10,9 @@
 
 
 
-# 管理者シード
-# admin = Admin.new(:email => 'hogehoge@hoge.com', :password => 'hugahuga')
-# admin.save!
+#管理者シード
+admin = Admin.new(:email => 'hogehoge@hoge.com', :password => 'hugahuga')
+admin.save!
 
 
 # ユーザーシード

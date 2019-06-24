@@ -29,12 +29,13 @@ class UsersController < ApplicationController
 
     def resign_confirm
       @user = User.find(params[:id])
-      @user.update(resignation: true)
+      @user.update(
+        resignation: true,
+        resigned_at: Time.current
+        )
       flash[:notice] = "退会しました。"
       redirect_to products_path
     end
-
-
 
 
 

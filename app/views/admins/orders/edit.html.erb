@@ -1,27 +1,114 @@
-<h1>取引詳細</h1>
-
-<% @order.id %>
-
-<%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg", size:'60x60' %>
-
-<p class ="form">ユーザー名 : <%= @user.user_name %></p>
-<p class ="form">メールアドレス : <%= @user.email %></p>
-<p class ="form">電話番号 : <%= @user.phone_number %></p>
-<p class ="form">〒 : <%= @user.postal_code %></p>
-<p class ="form">住所 : <%= @user.postal_address %></p>
+<div class="row sampleRow">
+	<div class="col-xs-2"></div>
+	<div class="col-xs-8">
+		<h1>取引詳細</h1>
+	</div>
+	<div class="col-xs-2"></div>
+</div>
 
 
+
+
+<div class="row sampleRow">
+	<div class="col-xs-2"></div>
+	<div class="col-xs-8">
+		<div class="row sampleRow">
+			<div class="col-xs-2">
+				<p>取引番号 : <%= @order.id %></p>
+			</div>
+		<div class="col-xs-6"></div>
+		<div class="col-xs-4">
+			<%= form_for :@order, url: admins_order_path(@order), method: :patch do |f| %>
+
+    			<%= f.label :出荷状況, value: "#{@order.shipment_status}" %><br>
+    			<% if @order.shipment_status == "発送準備中" %>
+  					<%= f.select :shipment_status, [["#{@order.shipment_status}", "#{@order.shipment_status}"], ["発送中", "発送中"], ["発送済み", "発送済み"]],class:"form-control" %>
+  				<% elsif @order.shipment_status == "発送中" %>
+  					<%= f.select :shipment_status, [["#{@order.shipment_status}", "#{@order.shipment_status}"], ["発送準備中", "発送準備中"],["発送済み", "発送済み"]],class:"form-control" %>
+  				<% else %>
+  					<%= f.select :shipment_status, [["#{@order.shipment_status}", "#{@order.shipment_status}"], ["発送準備中", "発送準備中"],["発送中", "発送中"]],class:"form-control" %>
+  				<% end %>
+
+    			<%= f.submit '更新', class: "btn btn-info" %>
+    		<% end %>
+		</div>
+	</div>
+	</div>
+	<div class="col-xs-2"></div>
+</div>
+
+
+
+
+<div class="row sampleRow">
+	<div class="col-xs-2"></div>
+	<div class="col-xs-8">
+		<div class = "admins_order_detail">
+		<div class="row sampleRow">
+		<div class="col-xs-5">
+			<%= attachment_image_tag @user, :profile_image, :fill, 200, 200, format: 'jpeg', fallback: "no_image.jpg", size:'200x200' %>
+		</div>
+		<div class="col-xs-2"></div>
+		<div class="col-xs-5">
+			<p class ="form">ユーザー名 : <%= @user.user_name %></p>
+			<p class ="form">メールアドレス : <%= @user.email %></p>
+			<p class ="form">電話番号 : <%= @user.phone_number %></p>
+			<p class ="form">〒 : <%= @user.postal_code %></p>
+			<p class ="form">住所 : <%= @user.postal_address %></p>
+		</div>
+		</div>
+	</div>
+	</div>
+	<div class="col-xs-2"></div>
+</div>
+
+
+
+
+
+
+
+<% total_count = 0 %>
+<% total_price = 0 %>
 <% @order_details.each do |order_detail| %>
-	<!-- CD画像 -->
-	<%= attachment_image_tag order_detail.product, :jacket_image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg", size:'60x60' %>
-	<!-- 商品名 -->
-	<%= order_detail.product.product_name %>
-	<!-- アーティスト名 -->
-	<%= order_detail.product.artist.name %>
-	<!-- 購入枚数 -->
-	<%= order_detail.product_count %>
-	<!-- 価格 -->
-	<%= order_detail.price %>
+<div class="row sampleRow">
+	<div class="col-xs-2"></div>
+	<div class="col-xs-8">
+		<div class = "admins_order_detail_product">
+		<div class="row sampleRow">
+		<div class="col-xs-5">
+			<!-- CD画像 -->
+			<%= attachment_image_tag order_detail.product, :jacket_image, :fill, 150, 150, format: 'jpeg', fallback: "no_image.jpg", size:'150x150' %>
+		</div>
+		<div class="col-xs-2"></div>
+		<div class="col-xs-5">
+			<!-- 商品名 -->
+			<p>商品名 :<%= order_detail.product.product_name %></p>
+			<!-- アーティスト名 -->
+			<p>アーティスト名 :<%= order_detail.product.artist.name %></p>
+			<!-- 購入枚数 -->
+			<p>購入枚数 :<%= order_detail.product_count %>点</p>
+			<!-- 価格 -->
+			<p>価格 :￥<%= number_with_delimiter(order_detail.price) %></p>
+			<!-- 合計価格 -->
+			<% sub_total_price = order_detail.product_count * order_detail.price %>
+			<% total_count = total_count + order_detail.product_count %>
+			<% total_price = total_price + sub_total_price %>
+		</div>
+		</div>
+		</div>
+	</div>
+	<div class="col-xs-2"></div>
+</div>
 
 <% end %>
 
+
+<div class="row sampleRow">
+	<div class="col-xs-2"></div>
+	<div class="col-xs-7"></div>
+	<div class="col-xs-3">
+		<p class = "admins_order_detail_total"><%= total_count %> 点</p>
+		<p class = "admins_order_detail_total">合計 : ￥<%= number_with_delimiter(total_price) %>
+	</div>
+</div>

@@ -4,6 +4,5 @@
 <h1>本当に退会してもよろしいですか？</h1>
 
 
-<%= link_to "はい", resign_confirm_path, method: :patch %>
-
-
+<%= link_to "はい", resign_confirm_path(@user.id), method: :patch, class: "btn btn-danger" %>
+<%= link_to "いいえ",edit_user_path(@user.id), class: "btn btn-info" %>
