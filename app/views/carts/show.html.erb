@@ -15,10 +15,10 @@
 		</div>
 
 		<% if current_cart.cart_items.present? %>
-		  <% @items.each do |item| %>
+		<% @items.each do |item| %>
 		  <div class="row clearfix">
 		  	<div class="pull-left col-md-3">
-		    	<div class="product_image">
+		    	<div>
 		      	<%= attachment_image_tag Product.find(item[:product_id]),
 																		 :jacket_image, :fill, 150, 150,
 																		 	fallback: "no_image.jpg", size: '150x150',

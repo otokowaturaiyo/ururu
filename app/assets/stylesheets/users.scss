@@ -76,14 +76,12 @@ table tr[data-href] {
 .balloon1 {
 	margin: 0 auto;
 	position: absolute;
-	z-index:1000;
 	left: 90px;
     bottom: 220px;
 }
 .balloon2{
 	margin: 0 auto;
 	position: absolute;
-	z-index:1000;
 	left: 188px;
     bottom: 220px;
 }
@@ -106,4 +104,21 @@ table tr[data-href] {
   top: 0;
   left: 0;
   z-index: 0;
+}
+.my-link{
+	width: 200px;
+	height: 100px;
+	z-index: 30000;
+	position: absolute;
+    bottom: 120px;
+    left: 60px;
+    a{
+    	position: absolute;
+    	top: 0;
+    }
+}
+.relative{
+	width: 200px;
+	height: 100px;
+	position: relative;
 }
