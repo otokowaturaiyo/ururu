@@ -2,32 +2,37 @@
 	<% reviews.each do |review| %>
 		<div class="review-record clearfix">
 			<% unless review.id.nil? %>
-			<div class="col-md-2">
-				<p><%= review.user.user_name %></p>
-			</div>
-			<div class="col-md-2 review-image">
-				<% if review.product.jacket_image_id.present? %>
-					<%= attachment_image_tag review.product, :jacket_image, :fill, 30, 30, class:"border"%>
-				<% else %>
-					<%= image_tag 'no_image.jpg', size: '30x30', class:"border" %>
-				<% end %>
-			</div>
-			<div class="col-md-5">
-				<%= review.body %>
-			</div>
 			<div class="col-md-3">
-				<div class="row">
-	 			<% if review.user == current_user %>
-	 				<div class="col-md-6">
-						<p class="btn btn-info"><%= link_to '編集', edit_product_review_path(product_id: review.product_id,id: review.id) %></p>
-					</div>
-					<div class="col-md-6">
-						<p class="btn btn-warning"><%= link_to '削除', product_review_path(product_id: review.product_id,id: review.id), method: :delete %>
-						</p>
-					</div>
-				<% end %>
+				<p><%= review.user.user_name %></p>
+				<div id="star_<%= review.id %>" >
+					<script>
+						$('#star_<%= review.id %>').raty({
+							space: false,
+							size: 36,
+							readOnly: true,
+							starOff:  '<%= asset_path('star-off.png') %>',
+					  	starOn : '<%= asset_path('star-on.png') %>',
+							score: '<%= review.star %>'
+						});
+					</script>
 				</div>
 			</div>
+			<div class="col-md-7">
+				<%= review.body %>
+			</div>
+			<% if review.user == current_user %>
+				<div class="col-md-1">
+					<%= link_to '編集',
+							edit_product_review_path(product_id: review.product_id,id: review.id),
+							class:"btn btn-warning btn-xs" %>
+				</div>
+				<div class="col-md-1">
+					<%= link_to '削除',
+							product_review_path(product_id: review.product_id,id: review.id),
+							class:"btn btn-danger btn-xs",
+							method: :delete %>
+				</div>
+			<% end %>
 			<% end %>
 		</div>
 	<% end %>

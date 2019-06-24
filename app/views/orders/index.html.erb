@@ -7,7 +7,7 @@
 					<% @order_histories.each do |od| %>
 					<!--表の上段-->
 					<thead>
-						<tr data-href=<%= order_path(od[:order_id]) %>>
+						<tr data-href= <%= order_path(od[:order_id]) %>>
 							<th>購入日 : <%= od[:created_at] %></th>
 							<th>お届け先 : <%= od[:order_destination] %></th>
 							<th>取引番号 : <%= od[:order_id] %></th>

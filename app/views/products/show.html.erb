@@ -75,21 +75,30 @@
 			</div>
 		</div>
 		<br>
-		<!-- レビュー --><!--レビュー機能はトラが作ります-->
+		<!-- レビュー -->
 		<div class="row review-container">
 			<% if user_signed_in? %>
-				<div class=" col-md-offset-1 col-md-4">
-						<h3>レビュー投稿</h3>
-						<!-- コメント入力欄を商品の詳細ページに表示するためのrender -->
-						<%= render partial: 'reviews/form', locals: { reviews: @reviews, product: @product }%>
-				</div>
-				<h3>レビュー一覧</h3>
-				<div class="col-md-6 scroller">
-					<div id="reviews_area"><!--ここのidを目印にdiv内をAjaxで書き換え-->
-						<!-- 投稿されたコメント一覧を商品の詳細ページに表示するためのrender -->
-						<%= render partial: 'reviews/index', locals: { reviews: @reviews }%>
+				<% if @product.reviewed_by?(current_user) %>
+					<div class="col-md-6 col-md-offset-3 scroller">
+						<h3>レビュー一覧</h3>
+						<div id="reviews_area">
+							<%= render partial: 'reviews/index', locals: { reviews: @reviews } %>
+						</div>
 					</div>
-				</div>
+				<% else %>
+					<div class="col-xs-offset-1 col-md-4">
+							<h3>レビュー投稿</h3>
+							<!-- コメント入力欄を商品の詳細ページに表示するためのrender -->
+							<%= render partial: 'reviews/form', locals: { reviews: @reviews, product: @product }%>
+					</div>
+					<h3>レビュー一覧</h3>
+					<div class="col-md-6 scroller">
+						<div id="reviews_area"><!--ここのidを目印にdiv内をAjaxで書き換え-->
+							<!-- 投稿されたコメント一覧を商品の詳細ページに表示するためのrender -->
+							<%= render partial: 'reviews/index', locals: { reviews: @reviews }%>
+						</div>
+					</div>
+				<% end %>
 			<% else %>
 				<div class="col-md-6 col-md-offset-3 scroller">
 					<h3>レビュー一覧</h3>

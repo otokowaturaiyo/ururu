@@ -1,8 +1,20 @@
-<%= form_with(model: [@product, Review.new]) do |form| %>
+<%= form_with(model: [@product, Review.new]) do |f| %>
+	<div id="star">
+		<%= f.label :rate,'評価 ', class:'col-form-label' %>
+		<%= f.hidden_field :star, id: :review_star %>
+	</div>
+	<script>
+		$('#star').raty({
+			size: 36,
+			starOff:  '<%= asset_path('star-off.png') %>',
+	  	starOn : '<%= asset_path('star-on.png') %>',
+			scoreName: 'review[star]',
+		});
+	</script>
 	<div>
-		<%= form.text_area :body, size: "50x10" %>
+		<%= f.text_area :body, size: "50x10" %>
 	</div>
 	<div class="actions">
-		<%= form.submit "投稿", class: 'btn btn-info' %>
+		<%= f.submit "投稿", class: 'btn btn-info' %>
 	</div>
 <% end %>

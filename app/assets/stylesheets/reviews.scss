@@ -13,6 +13,10 @@
 }
 .review-record{
 	 word-break:break-all;
+   border-bottom: dashed 1px #333;
+}
+.review-record:last-child{
+  border-bottom:none;
 }
 .edit-icon{
 	text-align: center;
@@ -30,8 +34,4 @@
   font-size: 40px;
   text-align: center;
   border: inset 10px #ff0000;
-}
-.reviw-edi{
-  background: url();
-  height:auto;
 }

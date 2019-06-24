@@ -21,6 +21,11 @@ class Product < ApplicationRecord
 
 	attachment :jacket_image
 
+	#ユーザーがレビューをすでに投稿していたら、それ以上の投稿を制限する
+	def reviewed_by?(user)
+		reviews.where(user_id: user.id).exists?
+	end
+
 	#検索で入力された情報をモデルに探してもらう
 	def self.search(search)
     if search
