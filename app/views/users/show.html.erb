@@ -19,8 +19,12 @@
 			<p>住所 : <%=@user.postal_address %></p>
 		</div>
 	<div class='my-link animated bounce'>
+		<div class="relative"
+		>
 	<%= link_to '登録情報編集', edit_user_path(@user.id),class: "balloon1 ba" %>
 	<%= link_to '購入履歴',  orders_path, class: "balloon2 ba" %>
+		</div>
+
 	</div>
 	<!-- いいね -->
 <div class="row">
@@ -128,10 +132,6 @@
 		$('.my-back').click(function(){
 			$(this).fadeOut('slow');
 		});
-
-		$(function(){
-	$('#sample').raindrops();
-});
 	});
 
 
