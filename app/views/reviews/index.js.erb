@@ -1,2 +1,4 @@
+$(".review-index").remove()
 $("#reviews_area").html("<%= j(render 'index', { reviews: @review.product.reviews }) %>")
 $("textarea").val('')
+$(".scroller").css({margin:"0 auto", float: "none"})
