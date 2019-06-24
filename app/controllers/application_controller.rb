@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
     end
 
     def total_price(items, subtotal)
-      @total_price = items.sum { |hash| hash[subtotal] }.to_i.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,')
+      @total_price = items.sum { |hash| hash[:subtotal] }.to_i.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,')
     end
 
     def fee_included(items, subtotal)
