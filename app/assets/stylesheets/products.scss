@@ -6,35 +6,11 @@ $font-family: 'Lato', 'Noto Sans JP', '游ゴシック Medium', '游ゴシック
 
 .features{
   height: 390px;
-  margin-left: 50px;
 }
 
 .features-text{
   color:#FFF;
-  font-size: 12px;
-}
-
-.top-wrapper{
-  margin: 80px 0;
-}
-
-.genre-list {
-  margin-left: 60px;
-}
-.g-title{
-  text-align: center;
-  font-size: 14px;
-  display: inline-block;
-  padding: 8px 60px;
-  margin: 33px 0 0 15px;
-  text-decoration: none;
-  background: #699db3;
-  border-radius: 3px;
-  font-weight: bold;
-  color: #dddde5;
-}
-.bg-img a{
-  color: #28789a;
+  font-size: 17px;
 }
 
 .skippr-container{
@@ -43,7 +19,7 @@ $font-family: 'Lato', 'Noto Sans JP', '游ゴシック Medium', '游ゴシック
 }
 
 .slide-image{
-  padding: 2% 10% 0;
+  padding: 0 10%;
 }
 
 .new-arrivals{
@@ -72,6 +48,7 @@ $font-family: 'Lato', 'Noto Sans JP', '游ゴシック Medium', '游ゴシック
   border-bottom: solid #0653b9;
   border-radius: 10px;
   padding: 15px;
+  margin: 0;
 }
 
 .stock{
@@ -83,7 +60,7 @@ $font-family: 'Lato', 'Noto Sans JP', '游ゴシック Medium', '游ゴシック
 }
 
 .plenty-stocks{
-  color: #0cac34;
+  color: #00bcd4;
 }
 
 .limited-stocks{
@@ -100,9 +77,9 @@ $font-family: 'Lato', 'Noto Sans JP', '游ゴシック Medium', '游ゴシック
   padding: 0.25em 0.5em;
   text-decoration: none;
   color: #FFF;
-  background: #fd9535;/*背景色*/
-  border-bottom: solid 2px #d27d00;/*少し濃い目の色に*/
-  border-radius: 4px;/*角の丸み*/
+  background: #3ba9e0;
+  border-bottom: solid 2px #606367;
+  border-radius: 4px;
   box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
   font-weight: bold;
 }
@@ -126,9 +103,12 @@ $font-family: 'Lato', 'Noto Sans JP', '游ゴシック Medium', '游ゴシック
   background: #f1f8ff;/*バーの色*/
   line-height: 1.5;
   padding: 0.5em;
-  margin-bottom: 4px;
+  margin: 2px 4px 0 2px;
   border-left : solid 35px #0653b9;/*先の色＝アイコン裏の色*/
   list-style-type: none!important;
+}
+.product_details ul li:first-of-type {
+  margin-top: 10px;
 }
 
 ul li i {
@@ -172,16 +152,16 @@ ul li i {
 }
 
 .song{
-	margin-bottom: 3px;
+  margin-bottom: 3px;
 }
 
 .s-delete{
-	height:34px;
-	line-height:34px;
+  height:34px;
+  line-height:34px;
 }
 
 .add-disk{
-	margin-top:10px;
+  margin-top:10px;
 }
 
 .song-list-lable{
@@ -198,8 +178,8 @@ ul li i {
     border: solid 3px #0653b9;
     border: solid 3px #0653b9;
     height:200px;
-  	width:100%;
-  	overflow: scroll;
+    width:100%;
+    overflow: scroll;
 }
 
 .blockquote i{
@@ -255,6 +235,7 @@ ul li i {
 
 .review-container{
   margin-bottom: 50px;
+
 }
 
 // Indexページ
@@ -273,18 +254,28 @@ ul li i {
   white-space: nowrap;
 }
 
+.pro-h{
+  background: linear-gradient(transparent 80%, #5494a9 70%);
+  width: 20%;
+  text-align: center;
+}
+
 th{
   min-width: 60px;
 }
-
-// .pro-bg{
-//   background: linear-gradient(90deg, rgba(20, 68, 148, 0.4), rgba(20, 55, 90, 0.9)) , url('cdcd.jpg');
-//   height: auto;
-//   min-height: 500px;
-// }
-
 .product-show{
-  background-color: rgba(225,225,225,0.3);
+  background-color: rgba(225,225,225,0.8);
 }
 
+.pro-bg{
+  background: linear-gradient(90deg, rgba(20, 68, 148, 0.4), rgba(33, 47, 62, 0.8)) , url('cdcd.jpg');
+  height: auto;
+  min-height: 100vh;
+  background-position: center;
+  background-size: cover;
+}
 
+.product_image {
+  margin: 10px 0 0 80px;
+  padding:0;
+}

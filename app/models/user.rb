@@ -11,7 +11,7 @@ class User < ApplicationRecord
 
   validates :kanji_lastname, format: { with: /\A[ぁ-んァ-ン一-龥]/ }
   validates :kanji_firstname, format: { with: /\A[ぁ-んァ-ン一-龥]/ }
-  validates :kana_lastname, format: { with: /\A[ァ-ヶー－]+\z/ }
+  validates :kana_firstname, format: { with: /\A[ァ-ヶー－]+\z/ }
   validates :kana_lastname, format: { with: /\A[ァ-ヶー－]+\z/ }
   validates :postal_code, length: { is: 7 }
   validates :phone_number, length: { is: 11 }

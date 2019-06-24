@@ -1,33 +1,57 @@
 <div class="complete-container">
-	<div class="row">
-		<div class="col-md-4 col-md-offset-4">
-			<p class="thanks-message">ありがとうございました</p>
-			<p class="complete-message">購入完了しました！</p>
-			<div class="row">
-				<div class="col-md-6">
-					<p class="glyphicon glyphicon-user"></p>
-				</div>
-				<div class="col-md-6">
-					<div class="trading-number">
-						<p>お取引番号:<%= @order.id %></p>
-						<p>お届け先:</p>
-						<p><%= @order.destination_name %></p>
-						<p><%= @order.destination_postal_code %></p>
-						<p><%= @order.destination %></p>
-					</div>
-				</div>
+	<div class='row'>
+		<div class="col-lg-offset-5">
+			<div class="serif">
+				<br>
+				<br>
+				<p class="complete-message"><span>ありがとうございました</span></p>
+				<p class="complete-message"><span>購入完了しました！</span></p>
 			</div>
-			<p>
-				<%= link_to products_path do %>
-				<button class="btn btn-primary">商品一覧ページへ戻る</button>
+			<div class="to-message">
+				<h4>お取引番号: <%= @order.id %></h4>
+				<h4>お届け先</h4>
+				<p><%= @order.destination_name %></p>
+				<p><%= @order.destination_postal_code %></p>
+				<p><%= @order.destination %></p>
+			</div>
+			<p><%= link_to products_path do %>
+					<button class="btn btn-primary">商品一覧ページへ戻る</button>
 				<% end %>
 			</p>
-			<% unless @order.payment_methods == "クレジットカード" %>
-				<div class="ship-info">
-					ご入金の確認が取れ次第、発送いたします。<br>
-					ただし、代引きのお客様は直ちに出荷準備いたします。
-				</div>
+			<% if  @order.payment_methods == "銀行振込" %>
+				<p class="complete-message">
+						<span>ご入金の確認が取れ次第、発送いたします。</span>
+				<p>
 			<% end %>
+			<br>
+			<br>
 		</div>
 	</div>
 </div>
+
+<script>
+var DELAY_SPEED = 100;
+var FADE_SPEED = 500;
+var str = [];
+
+$(document).on('turbolinks:load', function() {
+    $('.complete-message > span').each(function(i){
+        $(this).css('opacity','1');
+        str[i] = $(this).text();
+        $(this).text('');
+        var no = i;
+        var self = this;
+        var interval = setInterval(function(){
+            if(no == 0 || $('.complete-message > span').eq(no - 1).children('span:last').css('opacity') == 1){
+                clearInterval(interval);
+                for (var j = 0; j < str[no].length; j++) {
+                    $(self).append('<span>'+str[no].substr(j, 1)+'</span>');
+                    $(self).children('span:last').delay(DELAY_SPEED * j).animate({opacity:'1'}, FADE_SPEED);
+                }
+            }
+        }, 50);
+    });
+});
+
+
+</script>

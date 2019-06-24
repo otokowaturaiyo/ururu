@@ -79,20 +79,9 @@ button{
 }
 
 // 注文完了画面
-.thanks-message{
-	font-size: 40px;
-}
-
-.complete-message{
-	font-size: 40px;
-}
 
 .glyphicon-user{
 	font-size: 40px;
-}
-
-.trading-number{
-	font-size: 15px;
 }
 
 .souryou{
@@ -159,6 +148,7 @@ button{
   background: linear-gradient(90deg, rgba(20, 68, 148, 0.4), rgba(20, 55, 90, 0.9)) ,url('mike.jpg');
   width: 100%;
   min-height: 900px;
+  height: 180vh;
   background-position: center;
   background-size: cover;
 }
@@ -205,4 +195,12 @@ padding: 2px;
 .order-submit{
   text-align: center;
 }
+
+
+//complete.html.erb
+.complete-message span{
+   opacity: 0;
+   font-size:12px;
+}
+
 
