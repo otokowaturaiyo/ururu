@@ -1,0 +1,54 @@
+<div class="row sampleRow">
+	<div class="col-xs-2"></div>
+	<div class="col-xs-8">
+		<h1>購入履歴</h1>
+	</div>
+	<div class="col-xs-2"></div>
+</div>
+
+
+
+
+<div class="row sampleRow">
+		<div class="col-xs-2"></div>
+		<div class="col-xs-8">
+			<% @orders.each do |order| %>
+				<table class="table">
+					<thead>
+						<tr class = "admins_order_index">
+							<th>取引番号</th>
+							<th>ユーザー名</th>
+							<th>購入日</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><%= order.id %></td>
+							<td><%= order.user.user_name %></td>
+							<td><%= order.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+						</tr>
+					</tbody>
+				</table>
+
+
+			<div class="row sampleRow">
+				<div class="col-xs-3">
+					<% od = order.order_details.first %>
+					<%= attachment_image_tag od.product, :jacket_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:'100x100' %>
+				</div>
+				<div class="col-xs-5"></div>
+				<div class="col-xs-4">
+					<p>商品名 : <%= od.product.product_name %></p>
+					<p>アーティスト名 : <%= od.product.artist.name %></p>
+					<p>商品数量 : <%= od.product_count %>点</p>
+					<%= link_to edit_admins_order_path(order) do %>
+						<button class="btn btn-info btn-lg">取引詳細</button>
+					<% end %>
+				</div>
+			</div>
+			<% end %>
+		</div>
+		<div class="col-xs-2"></div>
+</div>
+
+<%= paginate @orders %>

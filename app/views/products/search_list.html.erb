@@ -12,8 +12,7 @@
 
 			<!-- アーティスト名での検索結果 -->
 			<% @artists.each do |artist| %>
-				<% products = Product.where(artist_id: artist.id) %>
-				<% products.each do |product| %>
+				<% artist.products.includes(:label).each do |product| %>
 					<tbody>
 						<td>
 							<%= link_to product_path(product) do %>
