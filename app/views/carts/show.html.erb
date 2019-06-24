@@ -44,7 +44,7 @@
 									<p>数量:　<%= f.number_field :product_count, class:"product_count", value:"#{item[:count]}" %></p>
 		            </div>
 		              <%= f.submit "数量を変更", class:"btn-gradient-radius update-cart" %>
-		          <% end %>
+		          	<% end %>
 		          <%= link_to 'カートから削除', cart_path(item[:id]), class:"btn-gradient-radius-delete", method: :delete %>
 		        </div>
 		        <div class="subtotal_price">
