@@ -106,11 +106,10 @@
       <% @recommends.each do |product| %>
         <div class ="col-xs-6 each-item">
           <%= link_to product_path(product) do %>
-            <% if product.jacket_image_id.present? %>
-              <%= attachment_image_tag  product, :jacket_image, :fill, 120, 120, class:"thumbnail" %>
-            <% else %>
-              <%= image_tag 'no_image.jpg', :size => '120x120', class:"thumbnail" %>
-            <% end %>
+            <%= attachment_image_tag  product,
+             :jacket_image, :fill, 120, 120,
+             fallback: "no_image.jpg", size:'120x120',
+             class:"thumbnail" %>
             <p><%= product.product_name %></p>
           <% end %>
           <p><%= product.artist.name %></p>

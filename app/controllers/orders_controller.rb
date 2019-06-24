@@ -27,11 +27,9 @@ class OrdersController < ApplicationController
   def create
     order = Order.new(order_params)
     order.user_id = current_user.id
-    order.order_details.each do |o|
-      o.price = o.product.price
-    end
     if order.save
-      f = fee_included(order.order_details)
+      retrieve_products_info(order.order_details)
+      f = fee_included(@items, :subtotal)
       if order.payment_methods == "クレジットカード"
         payjp(params['payjp-token'], f)
       end
@@ -59,7 +57,7 @@ class OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     retrieve_products_info(@order.order_details)
-    @total = fee_included(@order.order_details).to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,')
+    fee_included(@items, :subtotal)
   end
 
   private
