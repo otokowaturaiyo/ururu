@@ -18,7 +18,7 @@
  @import "bootstrap";
 // _@import  "slick"
 
-$font-family: 'Lato', 'Noto Sans JP', '游ゴシック Medium', '游ゴシック体', 'Yu Gothic Medium', YuGothic, 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+$font-family:  'Noteworthy','HanziPen SC','Lato', 'Noto Sans JP', '游ゴシック Medium', '游ゴシック体', 'Yu Gothic Medium', YuGothic, 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
 
 *{
   font-family: $font-family;
@@ -128,7 +128,6 @@ li {
 
 .border{
 	border:thin solid black;
-	margin-top: 10px;
 }
 
 
@@ -254,4 +253,23 @@ li {
 }
 .intro-image{
 	margin-top: 12px;
+}
+
+
+
+/////////////////// 管理者取引履歴・詳細 ///////////////////
+
+
+.admins_order_detail_product{
+	border-top: 2px solid #c0c0c0;
+	padding: 10px 0;
+}
+
+
+.admins_order_index{
+	height: 60px;
+}
+
+.admins_order_detail_total{
+	font-size: 22px;
 }

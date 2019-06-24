@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  before_action :resignation_user?, only:[:index]
+
   before_action :setup_products, only: [:index, :show, :feature, :search_list]
   PER = 9
   PER2 = 6

@@ -17,9 +17,8 @@
 		<% if current_cart.cart_items.present? %>
 		<% @items.each do |item| %>
 		  <div class="row clearfix">
-
 		  	<div class="pull-left col-md-3">
-		    	<div class="product_image">
+		    	<div>
 		      	<%= attachment_image_tag Product.find(item[:product_id]),
 																		 :jacket_image, :fill, 150, 150,
 																		 	fallback: "no_image.jpg", size: '150x150',
@@ -53,12 +52,11 @@
 		        </div>
 		      </div>
 		    </div>
-
 		  </div>
-			<% end %>
+		  <% end %>
 			<div class="row">
 			  <div class="total_price">
-			    <p>合計: <%= @total_count %>点の商品  <span>¥<%= @total_price_with_fee %></span></p>
+			    <p>合計: <%= @total_count %>点の商品  <span>¥<%= @total_price_with_fee.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %></span></p>
 			  </div>
 			</div>
 			<div class="row">

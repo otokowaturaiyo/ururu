@@ -34,25 +34,34 @@ class ApplicationController < ActionController::Base
         order_destination: o&.destination,
         order_id: o&.id
       }
+       end
     end
 
+	def resignation_user?
+		if user_signed_in?
+			if current_user.resignation == true
+				sign_out(current_user)
+			end
+		end
+	end
+
     def total_price(items, subtotal)
-      @total_price = items.sum { |hash| hash[:subtotal] }.to_i.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,')
+      @total_price = items.sum { |hash| hash[:subtotal] }.to_i
     end
+
 
     def fee_included(items, subtotal)
       total_price = items.sum { |hash| hash[subtotal] }.to_i
       fee_included = total_price + 500
-      @total_price_with_fee = fee_included.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,')
+      @total_price_with_fee = fee_included
     end
 
     def total_count(items)
       @total_count = items.sum { |hash| hash[:count] }
     end
-  end
+
 
   def payjp(payjp_token, amount)
-    # ####　秘密鍵はベタうちせずに環境変数なるものを使った方がいいらしい。勉強予定。　#####
     Payjp.api_key = 'sk_test_421673bdeffac69c0df96e60'
     customer = Payjp::Customer.create(description: 'test')
     customer.cards.create(card: payjp_token)
