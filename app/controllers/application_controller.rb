@@ -36,9 +36,18 @@ class ApplicationController < ActionController::Base
       }
     end
 
+	def resignation_user?
+		if user_signed_in?
+			if current_user.resignation == true
+				sign_out(current_user)
+			end
+		end
+	end
+
     def total_price(items, subtotal)
       @total_price = items.sum { |hash| hash[subtotal] }.to_i.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,')
     end
+
 
     def fee_included(items, subtotal)
       total_price = items.sum { |hash| hash[subtotal] }.to_i
