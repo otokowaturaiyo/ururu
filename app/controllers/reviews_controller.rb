@@ -1,40 +1,38 @@
 class ReviewsController < ApplicationController
-	def index
-	end
+  before_action :authenticate_user!
 
-	def create
-		 @product = Product.find(params[:product_id])
-		 @review = @product.reviews.build(review_params)
-		 @review.user_id = current_user.id
-		 @review.save
-		 render :index
-	end
+  def index
+  end
 
-	def edit
-		@product = Product.find(params[:product_id])
-		@review = Review.find(params[:id])
-	end
+  def create
+    @product = Product.find(params[:product_id])
+    @review = @product.reviews.build(review_params)
+    @review.user_id = current_user.id
+    @review.save
+    render :index
+  end
 
-	def update
-		product = Product.find(params[:product_id])
-		review = Review.find(params[:id])
-		review.update(review_params)
-		redirect_to product_path(product.id)
-	end
+  def edit
+    @product = Product.find(params[:product_id])
+    @review = Review.find(params[:id])
+  end
 
-	def destroy
-		@review = Review.find(params[:id])
-		binding.pry
-		@review.destroy
-		redirect_to product_path(params[:product_id])
+  def update
+    product = Product.find(params[:product_id])
+    review = Review.find(params[:id])
+    review.update(review_params)
+    redirect_to product_path(product.id)
+  end
 
-	end
+  def destroy
+    @review = Review.find(params[:id])
+    @review.destroy
+    redirect_to product_path(params[:product_id])
+  end
 
+  private
 
-	private
-
-    def review_params
-        params.require(:review).permit(:user_id, :product_id, :star, :body)
-    end
-
+  def review_params
+    params.require(:review).permit(:user_id, :product_id, :star, :body)
+  end
 end

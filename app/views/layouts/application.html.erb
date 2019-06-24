@@ -8,12 +8,15 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
     <script src="https://kit.fontawesome.com/adabbcc59d.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.min.js"></script>
      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
   </head>
 
-  <body class="my-back">
+  <body class="user-f">
     <header>
+
       <nav class=" my-blacknavbar navbar-default navbar-fixed-top">
+        <div class="my-back"></div>
         <div class="container nav-container">
           <div class="navbar-header ">
             <button type="button" class="navbar-toggle collapsed"data-toggle="collapse"data-target="#navbar-ururu">
@@ -33,7 +36,9 @@
                   <li>
                     <%= link_to "管理者マイページ", admins_top_path %>
                   </li>
+                  <li>
                     <%= link_to "商品一覧", admins_products_path %>
+                  </li>
                   <li>
                     <%= link_to "ユーザー一覧", admins_users_path %>
                   </li>
@@ -45,7 +50,7 @@
                     <%= link_to "商品一覧", products_path %>
                   </li>
                   <li class="nav-item">
-                    <%= link_to "カート", cart_path(current_user.id) %>
+                    <%= link_to "カート", current_cart %>
                   </li>
                   <li class="nav-item">
                     <%= link_to "マイページ", user_path(current_user) %>
@@ -55,6 +60,7 @@
                   </li>
                 <% else %>
                   <li><%= link_to "商品一覧", products_path %></li>
+                  <li><%= link_to "カート", current_cart %></li>
                   <li><%= link_to "ログイン", new_user_session_path %></li>
                   <li><%= link_to "新規登録", new_user_registration_path %></li>
                 <% end %>
@@ -88,6 +94,7 @@
           </div>
         </div>
       </nav>
+
     </header>
     <div class="top-space"></div>
     <%= yield %>
@@ -95,5 +102,6 @@
       <p class="footer-text1 ">全国送料一律¥500</p>
       <p class="footer-text2">© Ururu.inc</p>
     </footer>
+     <script src="path/to/particles.min.js"></script>
   </body>
 </html>

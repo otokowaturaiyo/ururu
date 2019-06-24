@@ -1,0 +1,48 @@
+<div class="order-history-container">
+	<div class="bg">
+		<div class="col-md-8 col-md-offset-2 order-t">
+			<table class="histroy-table order-table" border=1>
+				<h1 class="ord-h">購入履歴</h1>
+				<% @items.each do |item| %>
+				<!--表の上段-->
+				<thead>
+					<tr data-href=<%= order_path(item[:order_id]) %>>
+						<th>購入日 : <%= item[:created_at] %></th>
+						<th>お届け先 : <%= item[:order_destination] %></th>
+						<th>取引番号 : <%= "#{current_user.id} - #{item[:order_id]}" %></th>
+					</tr>
+				</thead>
+				<!--表の下段-->
+				<tbody>
+					<tr data-href=<%= order_path(item[:order_id]) %>>
+						<td>
+							<% if item[:image] %>
+								<%= attachment_image_tag Product.find(item[:product_id]), :jacket_image, :fill, 60, 60, class: "border" %>
+							<% else %>
+								<%= image_tag 'no_image.jpg', size: '60x60', class:"border" %>
+							<% end %>
+						</td>
+						<td>
+							<p>商品名 : <%= item[:product_name] %></p>
+							<p>アーティスト名 : <%= item[:artist_name] %></p>
+							<p>個数 : <%= item[:count] %></p>
+							<p>価格 : <%= item[:price] %></p>
+						</td>
+						<td>
+							<p>発送状況 : <%= item[:shipment_status] %></p>
+						</td>
+					</tr>
+				</tbody>
+				<% end %>
+			</table>
+			<div class=table-f></div>
+			</div>
+		<div class="order-bg"></div>
+		<div class="col-md-3 col-md-offset-4">
+			<%= paginate @orders %>
+		</div>
+	</div>
+</div>
+
+
+<%=render 'admins/table' %>

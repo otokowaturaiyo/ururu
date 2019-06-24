@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Admins::RegistrationsController < Devise::RegistrationsController
   before_action :authenticate_admin!
   before_action :login_check
@@ -61,10 +62,10 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
   private
-  def login_check
-  unless admin_signed_in?
-    redirect_to new_user_session_path
-  end
-end
 
+  def login_check
+    unless admin_signed_in?
+      redirect_to new_user_session_path
+    end
+  end
 end

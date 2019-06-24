@@ -1,4 +1,5 @@
-<div class="container product-show">
+<div class="container">
+	<div class="product-show">
 		<br>
 		<h1>商品詳細</h1>
 		<br>
@@ -6,18 +7,18 @@
 		<div class="row">
 			<div class="overview clearfix">
 				<div class="product_image pull-left col-md-4">
-					<% if @product.jacket_image_id.present? %>
-						<%= attachment_image_tag  @product, :jacket_image, :fill, 350, 350, class:"border" %>
-					<% else %>
-						<%= image_tag 'no_image.jpg', size: '350x350', class:"border" %>
-					<% end %>
+					<%= attachment_image_tag  @product,
+						:jacket_image, :fill, 350, 350,
+						fallback: "no_image.jpg", size: '350x350',
+						class:"border"
+					%>
 				</div>
 				<div class="product_details pull-left col-md-5">
 					<ul>
 						<li><i class="fas fa-music"></i>商品名：<%= @product.product_name %></li>
-						<li><i class="fas fa-music"></i>アーティスト：<%= @artist.name %></li>
-						<li><i class="fas fa-music"></i>レーベル：<%= @label.label %></li>
-						<li><i class="fas fa-music"></i>ジャンル：<%= @genre.genre %></li>
+						<li><i class="fas fa-music"></i>アーティスト：<%= @product.artist.name %></li>
+						<li><i class="fas fa-music"></i>レーベル：<%= @product.label.label %></li>
+						<li><i class="fas fa-music"></i>ジャンル：<%= @product.genre.genre %></li>
 					</ul>
 					<div class="blockquote">
 						<p><span><i class="fas fa-compact-disc fa-spin"></i></span>　商品の紹介</p>
@@ -27,8 +28,7 @@
 				<!-- 商品ステータス -->
 				<div class="product_status pull-left col-md-2">
 					<div class=price>
-						<% tax_included = @product.price*1.08 %>
-						<p>価格：¥<%= tax_included.to_i.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %>（税込）</p>
+						<p>価格：¥<%= @tax_included.to_i.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %>（税込）</p>
 					</div>
 					<div class="stock">
 						<% if @product.stock >= 20 %>
@@ -40,7 +40,7 @@
 						<% end %>
 					</div>
 					<div class="add-to-cart">
-						<%= form_with model:@cart do |f| %>
+						<%= form_with model:CartItem, url:add_item_path, local:true do |f| %>
 							<p>数量:<%= f.number_field :product_count, value:1, class:"product_count" %></p>
 							<%= f.hidden_field :product_id, value: @product.id %>
 							<%= f.submit "カートに追加する", class:"btn-square-pop" %>
@@ -74,21 +74,30 @@
 			</div>
 		</div>
 		<br>
-		<!-- レビュー --><!--レビュー機能はトラが作ります-->
+		<!-- レビュー -->
 		<div class="row review-container">
 			<% if user_signed_in? %>
-				<div class="col-md-5">
-						<h3>レビュー投稿</h3>
-						<!-- コメント入力欄を商品の詳細ページに表示するためのrender -->
-						<%= render partial: 'reviews/form', locals: { reviews: @reviews, product: @product }%>
-				</div>
-				<h3>レビュー一覧</h3>
-				<div class="col-md-7 scroller">
-					<div id="reviews_area"><!--ここのidを目印にdiv内をAjaxで書き換え-->
-						<!-- 投稿されたコメント一覧を商品の詳細ページに表示するためのrender -->
-						<%= render partial: 'reviews/index', locals: { reviews: @reviews }%>
+				<% if @product.reviewed_by?(current_user) %>
+					<div class="col-md-6 col-md-offset-3 scroller">
+						<h3>レビュー一覧</h3>
+						<div id="reviews_area">
+							<%= render partial: 'reviews/index', locals: { reviews: @reviews } %>
+						</div>
 					</div>
-				</div>
+				<% else %>
+					<div class="col-md-5">
+							<h3>レビュー投稿</h3>
+							<!-- コメント入力欄を商品の詳細ページに表示するためのrender -->
+							<%= render partial: 'reviews/form', locals: { reviews: @reviews, product: @product }%>
+					</div>
+					<h3>レビュー一覧</h3>
+					<div class="col-md-7 scroller">
+						<div id="reviews_area"><!--ここのidを目印にdiv内をAjaxで書き換え-->
+							<!-- 投稿されたコメント一覧を商品の詳細ページに表示するためのrender -->
+							<%= render partial: 'reviews/index', locals: { reviews: @reviews }%>
+						</div>
+					</div>
+				<% end %>
 			<% else %>
 				<div class="col-md-6 col-md-offset-3 scroller">
 					<h3>レビュー一覧</h3>
@@ -103,18 +112,17 @@
 		<!-- 収録曲 -->
 		<div class="row">
 			<div class="panel panel-default col-md-offset-3 col-md-6">
-				<% @disks.each.with_index(1) do |disk, d|%>
+				<% @product.disks.each.with_index(1) do |disk, d|%>
 					<div class="panel-heading">
 						収録曲 - Disc<%= d %>
 					</div>
 					<table class="table songs-table">
-						<% songs = Song.where(disk_id: disk.id) %>
-						<% songs.each.with_index(1) do |song, s| %>
+						<% disk.songs.each.with_index(1) do |song, s| %>
 							<tbody>
 								<tr class="row">
 									<td class="song-index col-md-2"><%= s %></td>
-								    <td class="song-name col-md-8"><%= song.song %></td>
-								    <td class="song-length col-md-2"><%= song.second %></td>
+								  <td class="song-name col-md-8"><%= song.song %></td>
+								  <td class="song-length col-md-2"><%= song.second %></td>
 								</tr>
 							</tbody>
 						<% end %>
@@ -123,4 +131,6 @@
 			</div>
 		</div>
 	</div>
+</div>
+	<div class="pro-bg"></div>
 </div>

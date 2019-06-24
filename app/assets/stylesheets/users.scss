@@ -3,14 +3,104 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 // adminuser
+.user-f {
+	font-family: 'Wawati SC','メイリオ',sans-serif;
+}
+
 table tr[data-href] {
 	cursor: pointer;
 }
 
-// .my-back {
-// 	width:100%;
-// 	height:100%;
-// 	background-color:#000000;
-// 	opacity:0.3;
-// 	z-index:1;
-// }
+.user-title {
+	font-size: 25px;
+	}
+
+//user
+.my-back {
+	z-index:1000;
+	display:none;
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	height:120%;
+	background-color:rgba(0,0,0,0.8);
+}
+
+.like.carousel.slide {
+	z-index: 1500;
+}
+
+.my-text h1{
+	margin: 0 auto;
+	background-color: rgb(105, 157, 179);
+}
+.my-title{
+	text-align: center;
+	margin: 30px 0 55px;
+	padding: 20px;
+}
+.my-flash{
+	text-align: center;
+	padding: none;
+}
+
+.my-form{
+	width: 100%;
+	height: auto;
+	padding: 3px;
+	text-align:center;
+	margin: 0 auto;
+	background: rgba(105, 157, 179,0.3);
+	padding: 20px 0;
+	position: relative;
+}
+
+.my-img {
+	z-index: 0;
+}
+
+.ba{
+	width: 90px;
+  	height: 90px;
+	display: inline-block;
+	z-index: 100;
+	line-height: 90px;
+	text-align: center;
+	color: #FFF;
+	font-size: 13px;
+	font-weight: bold;
+	border-radius: 50%;
+}
+
+.balloon1 {
+	background: #febd69;
+	margin: 0 auto;
+	position: absolute;
+	z-index:1000;
+	left: 40px;
+    top: 180px;
+}
+.balloon2  {
+	background: #699db3;
+}
+.power {
+	margin: 0 auto;
+
+}
+.profile{
+	margin: 0 auto;
+	width: 20%;
+	min-height: 400px;
+}
+.owner {
+	z-index:0;
+}
+
+.m-background {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}

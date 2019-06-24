@@ -1,9 +1,9 @@
 class User < ApplicationRecord
 
 
-
 	attachment :profile_image
 	# validates :title, presence: true
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -17,11 +17,7 @@ class User < ApplicationRecord
   validates :phone_number, length: { is: 11 }
 
   has_many :likes, dependent: :destroy
-
   has_many :reviews, dependent: :destroy
-
-	has_many :carts, dependent: :destroy
-
   has_many :destinations, dependent: :destroy
 
   has_many :orders, dependent: :destroy

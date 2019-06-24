@@ -1,65 +1,74 @@
-<div class="row sampleRow my-back">
-		<div class="col-xs-6">
-			<div class="row sampleRow">
-				<div class="col-xs-offset-3 col-xs-6">
-				<%= flash[:notice] %>
-				<h1>マイページ</h1>
-					<div class="img">
-						<%= attachment_image_tag @user, :profile_image, :fill, 350, 350, format: 'jpeg', fallback: "no_image.jpg", size:'350x350' %>
-					</div>
-				</div>
-			</div>
-			<br>
-			<div class="row sampleRow">
-				<div class="col-xs-offset-3 col-xs-6">
-					<div class="mypage-touroku">
-						<%= link_to edit_user_path(@user.id) do %>
-							<button class="btn btn-info btn-lg">登録情報編集</button>
-						<% end %>
-					</div>
-				</div>
-			</div>
-			<div class="row sampleRow">
-				<div class="col-xs-offset-3 col-xs-6">
-					<div class="mypage-touroku">
-						<%= link_to edit_user_path(@user.id) do %>
-							<button class="btn btn-info btn-lg">購入履歴（後でパス編集）</button>
-						<% end %>
-					</div>
-				</div>
-			</div>
+<h1 class="my-title"><%= @user.user_name %><span class="user-title">さんマイページ</span></h1>
+	<% if flash[:notice] %>
+		<div class="my-flash">
+			<%= flash[:notice] %>
 		</div>
-		<br>
-		<br>
-	<div class="mypage">
-		<div class="col-xs-6">
-			<p class ="form">氏名（漢字） : <%=@user.kanji_lastname %><%=@user.kanji_firstname %></p>
-			<p class ="form">氏名（カナ） : <%=@user.kana_lastname %><%=@user.kana_firstname %></p>
-			<p class ="form">ユーザー名 : <%=@user.user_name %></p>
-			<p class ="form">メールアドレス : <%=@user.email %></p>
-			<p class ="form">電話番号 : <%=@user.phone_number %></p>
-			<p class ="form">郵便番号 : <%=@user.postal_code %></p>
-			<p class ="form">住所 : <%=@user.postal_address %></p>
-		</div>
+	<% end %>
+<div class="profile">
+	<%= attachment_image_tag @user, :profile_image, :fill, 300, 300, format: 'jpeg', fallback: "no_image.jpg", size:'300x300', class: "img-circle profile-thumb my-img" %>
+
 </div>
-	<!-- いいね -->
 
-
-	<div class="row">
-		<div class="col-lg-8 col-lg-offset-2 like carousel slide" data-ride="carousel" >
-			<button id="btn" class="fa fa-heart" style="color: red;" data-effect='rigth'></button>
-			<div class="slider slider-container">
-				<% @likes.each do |like| %>
-				<% product = Product.find(like.product_id) %>
-					<%= link_to attachment_image_tag(product, :jacket_image, :fill, 180, 180, fallback: 'no_image.jpg', size: "180x180"), product_path(product.id), class: 'like-on' %>
-			<% end %>
-			</div>
+		<div class="my-form">
+			<p>氏名（漢字） : <%=@user.kanji_lastname %><%=@user.kanji_firstname %></p>
+			<p>氏名（カナ） : <%=@user.kana_lastname %><%=@user.kana_firstname %></p>
+			<p>ユーザー名 : <%=@user.user_name %></p>
+			<p>メールアドレス : <%=@user.email %></p>
+			<p>電話番号 : <%=@user.phone_number %></p>
+			<p>郵便番号 : <%=@user.postal_code %></p>
+			<p>住所 : <%=@user.postal_address %></p>
 		</div>
+	<div class='my-link'>
+	<%= link_to '登録情報編集', edit_user_path(@user.id),class: "balloon1 ba" %>
+	<%= link_to '購入履歴',  orders_path, class: "balloon2 ba" %>
 	</div>
+	<!-- いいね -->
+<div class="row">
+	<div class="col-lg-12">
+		<% if @likes.count <= 6 %>
+			<div class="power like carousel slide" data-ride="carousel" >
+				<button id="btn" class="fa fa-heart" style="color: red;" data-effect='rigth'></button>
+				<button id="b-sub" class="fa fa-heart" style="color: #699db3;"></button>
+				<div class="slider slider-container">
+					<% @likes.each do |like| %>
+					<% product = Product.find(like.product_id) %>
+						<%= image_tag'owner-a.png' , size: '340x340', class: 'owner' %>
+						<%= link_to attachment_image_tag(product, :jacket_image, :fill, 340, 340, fallback: 'no_image.jpg', size: "340x340"), product_path(product.id), class: 'like-on' %>
+					<% end %>
+				</div>
+			</div>
+		<% else %>
+			<div class="col-lg-8 col-lg-offset-2 like carousel slide" data-ride="carousel" >
+				<button id="btn" class="fa fa-heart" style="color: red;" data-effect='rigth'></button>
+				<button id="b-sub" class="fa fa-heart" style="color: #699db3;"></button>
+				<div class="slider slider-container">
+					<% @likes.each do |like| %>
+					<% product = Product.find(like.product_id) %>
+						<%= link_to attachment_image_tag(product, :jacket_image, :fill, 180, 180, fallback: 'no_image.jpg', size: "180x180"), product_path(product.id), class: 'like-on' %>
+					<% end %>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>
+
+<canvas class="m-background"></canvas>
+
 	<!-- いいね -->
 <script>
 
 $(document).on('turbolinks:load', function() {
+	var $like = <%= @likes.count %>
+	if($like <= 6 ){
+		$(".slider").not('.slick-initialized').slick({
+			slidesToShow: 2,
+			slidesToScroll: 2,
+			autoplaySpeed: 700,
+			verticalSwiping: true,
+			prevArrow: '<div class="slider-arrow slider-prev fa fa-angle-left"></div>',
+			nextArrow: '<div class="slider-arrow slider-next fa fa-angle-right"></div>',
+			})
+	}else{
 		$(".slider").not('.slick-initialized').slick({
 			slidesToShow: 6,
 			slidesToScroll: 1,
@@ -69,9 +78,12 @@ $(document).on('turbolinks:load', function() {
 			prevArrow: '<div class="slider-arrow slider-prev fa fa-angle-left"></div>',
 			nextArrow: '<div class="slider-arrow slider-next fa fa-angle-right"></div>',
 		});
+};
 
 
-		$('button').click(function(){
+
+
+		$('#btn').click(function(){
 
 			var effect = $('#btn').attr('data-effect');
 			if(effect == 'rigth'){
@@ -95,11 +107,30 @@ $(document).on('turbolinks:load', function() {
 				});
 			}
 		});
-
 	  	$('.like-on').mouseover(function(){
 	    	$(this).css('opacity', '.1').animate({'opacity': '1'}, 'slow');
  	 	});
 
-	});
-</script>
+		$('#b-sub').click(function(){
+		$('.my-back').fadeIn('slow');
+		});
+		$('.my-back').click(function(){
+			$(this).fadeOut('slow');
+		});
 
+		window.onload = function() {
+  		Particles.init({
+    	selector: '.m-background',
+    	maxParticles: 100,
+    	sizeVariations: 8,
+    	speed: 0.9,
+    	color: '#3ba9e0'
+
+
+  });
+};
+
+
+	});
+
+</script>

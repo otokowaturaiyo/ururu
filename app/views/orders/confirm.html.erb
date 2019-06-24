@@ -1,96 +1,214 @@
-<div class="confirm-container">
-	<div class="row">
-		<h1>注文内容を確認</h1>
+<div class="container order-confirm">
+	<div class="col-md-offset-2 col-md-8 order-confirm-frame">
+		<h1 class="order-confirmation">ご注文内容の確認</h1>
+		<div class="row">
 			<div class="col-md-offset-2 col-md-8 purchase-flow">
 				<i class="fas fa-shopping-cart fa-2x"></i><!--カート画面-->
 				<i class="fas fa-arrow-right fa-2x"></i>
-				<i class="fas fa-cash-register fa-4x"></i><!--購入確認画面--><!--今回はここ！-->
+				<i class="fas fa-cash-register fa-4x"></i><!--購入確認画面-->
 				<i class="fas fa-arrow-right fa-2x"></i>
 				<i class="far fa-check-circle fa-2x"></i><!--購入完了画面-->
 			</div>
-
-		<div class="col-md-8 col-md-offset-2">
-			<h3>お届け先</h3>
-				<div class="row">
-					<div class="col-md-4">
-						<!--目的地表示-->
-						<%= @destination.destination_address %>
-					</div>
-					<div class="col-md-4">
-						<p>※宛先を変更できます</p>
-						<!--新しい宛先の指定-->
-						<%= link_to new_destination_path do %><button class="btn btn-primary">別の宛先を指定する</button><% end %>
-					</div>
-					<div class="col-md-4">
-						<!--お支払い方法の選択-->
-						<p>お支払い方法</p>
-					</div>
-				</div>
-				<br>
-
-
-				<!--注文内容表示-->
-				<div class="order-item-container">
-					<% total_price = 0 %>
-					<% total_count = 0 %>
-					<table class="order-table" border=1>
-						<div class="row">
-				    	<thead>
-				    		<tr>
-				    			<th class="col-md-4">商品名</th>
-				    			<th class="col-md-4">アーティスト</th>
-				    			<th class="col-md-2">注文数</th>
-				    			<th class="col-md-2">金額(税込)</th>
-				    		</tr>
-				    	</thead>
-				    	<% @carts.each do |cart| %>
-				    	<% product = Product.find(cart.product_id) %>
-				    	<tbody>
-				    		<tr>
-				    			<td>
-				    				<div class="row">
-					    				<div class="col-md-4">
-						    				<% if product.jacket_image_id.present? %>
-									            <%= attachment_image_tag  product, :jacket_image, :fill, 30, 30, class:"border" %>
-									        <% else %>
-									            <%= image_tag 'no_image.jpg', size: '30x30', class:"border" %>
-									        <% end %>
-								        </div>
-								        <div class="col-md-8"><%= product.product_name %></div>
-							    	</div>
-							    </td>
-				    			<td><%= product.artist.name %></td>
-				    			<td><%= cart.product_count %></td>
-				    			<td><% subtotal_price =  cart.product_count*cart.product_price %>
-						            <% tax_included = subtotal_price*1.08 %>
-						            <% subtotal_with_tax = tax_included.to_i %>¥<%= subtotal_with_tax.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %>
-						        </td>
-				    		</tr>
-				    	</tbody>
-				    	<% end %>
-				    	</div>
-					</table>
-				</div>
-				<br>
-
-
-				<!--リンクボタん-->
-				<div class="link-bottun">
-					<div class="row">
-						<div class="col-md-6">
-							<%= link_to cart_path(current_user.id) do %><button class="btn btn-success">カート編集へ戻る</button><% end %>
-						</div>
-						<div class="col-md-6">
-							<%= link_to orders_path(
-							order: {
-								     user_id:current_user.id,
-								     destination:@destination.destination_address
-							       }
-								 ), method: :'post' do %><button class="btn btn-danger">注文を確定する</button><% end %>
-						</div>
-					</div>
-				</div>
 		</div>
+		<div class="row">
+			<h3>お届け先</h3>
+			<p>※お届け先を変更できます</p>
+			<!--目的地表示-->
+			<div class="col-md-4 destination">
+				<p><%= @order.destination_name %></p>
+				<p><%= @order.destination_postal_code %></p>
+				<p><%= @order.destination %></p>
+			</div>
+			<div class="change_destination">
+				<button type="button" class="btn btn-warning">他の宛先を指定する</button>
+			</div>
+		</div>
+		<div class="row">
+			<div id="destinations" class="display_none">
+				<h4>お客様のお届け先一覧</h4>
+				<div class="row">
+					<div class="slideContainer">
+						<div class="slide slide-slide ">
+							<div class="slideSet">
+								<% @destinations.each do |destination| %>
+									<%= form_with(model:@order, url: order_destination_path, local: true)  do |d| %>
+										<div class="slideItem">
+											<p>
+												<%= destination.name %>
+												<%= d.hidden_field :destination_name, value:"#{destination.name}" %>
+											</p>
+											<p>
+												<%= destination.postal_code %>
+												<%= d.hidden_field :destination_postal_code, value:"#{destination.postal_code}" %>
+											</p>
+											<p>
+												<%= destination.destination_address %>
+												<%= d.hidden_field :destination, value:"#{destination.destination_address}" %>
+											</p>
+											<div class="col-md-4 edit-destination">
+												<%= link_to '編集', edit_destination_path(destination), class:"btn btn-warning" %>
+											</div>
+											<%= d.hidden_field :destination_phone_number, value:"#{destination.phone_number}" %>
+											<div class="col-md-8 select-destination">
+												<%= d.submit "この住所を使う", class:"btn btn-success" %>
+											</div>
+										</div>
+									<% end %>
+								<% end %>
+							</div>
+						</div>
+						<button class="prevDest"><i class="far fa-arrow-alt-circle-left"></i></button>
+						<button class="nextDest"><i class="far fa-arrow-alt-circle-right"></i></button>
+					</div>
+				</div>
+				<div class="col-md-offset-4 col-md-4">
+					<%= link_to new_destination_path do %>
+						<button class="btn btn-primary">宛先を追加する</button>
+					<% end %>
+					<button class="btn btn-danger close_btn">閉じる</button>
+				</div>
+			</div>
+		</div>
+
+
+		<!--お支払い方法の選択-->
+		<%= form_with(model: @order, url: orders_path, method: :post, local: true) do |f| %>
+			<div class="row payment-select">
+				<div class="col-md-12">
+					<h3>お支払い方法</h3>
+					<label><%= f.radio_button :payment_methods, "クレジットカード", class:"creditCard payment_methods" %>
+						クレジットカード
+					</label>
+					<div class="cardInput display_none">
+						<script
+							type="text/javascript"
+							src="https://checkout.pay.jp/"
+							class="payjp-button"
+							data-key="pk_test_ec5e3606436c07e82c910523"
+							data-on-created="onCreated"
+							data-text="カード情報を入力"
+							data-submit-text="送信"
+							data-partial="true">
+						</script>
+					</div>
+					<label>
+						<%= f.radio_button :payment_methods, "銀行振込", class:"bankTransfer payment_methods" %>
+						銀行振込
+					</label>
+					<div class="bankDetails display_none">
+						<p>銀行名：三井住友銀行</p>
+						<p>支店名：渋谷支店</p>
+						<p>口座区分：普通</p>
+						<p>口座番号：XXX - XXXX</p>
+					</div>
+					<label>
+						<%= f.radio_button :payment_methods, "代引き", class:"cashOnDelivery payment_methods" %>
+						代引き
+					</label>
+				</div>
+			</div>
+			<div class="row">
+				<!--注文内容表示-->
+				<table class="order-table" border=1>
+					<thead>
+						<tr>
+							<th class="col-md-4">商品名</th>
+							<th class="col-md-4">アーティスト</th>
+							<th class="col-md-2">注文数</th>
+							<th class="col-md-2">金額(税込)</th>
+						</tr>
+					</thead>
+					<% @items.each do |item| %>
+						<%= f.fields_for :order_details do |od| %>
+							<%= od.hidden_field :product_id, value:"#{item[:product_id]}" %>
+							<%= od.hidden_field :product_count, value:"#{item[:count]}" %>
+								<tbody>
+									<tr>
+										<td>
+											<div class="col-md-4">
+												<%= attachment_image_tag Product.find(item[:product_id]),
+													:jacket_image, :fill, 30, 30,
+													fallback:"no_image.jpg", size: '30x30',
+													class: "border" %>
+											</div>
+											<div class="col-md-8">
+												<%= item[:product_name] %>
+											</div>
+										</td>
+										<td><%= item[:artist] %></td>
+										<td><%= item[:count] %></td>
+										<td>
+											¥<%= item[:subtotal].to_i.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %>
+										</td>
+									</tr>
+								</tbody>
+						<% end %>
+					<% end %>
+				</table>
+				<p class="souryou">送料¥ 500</p>
+				<div class="grand-total">
+					[ <%= @total_count %>点　合計　¥<%= @total_price_with_fee %> ]
+				</div>
+				<br>
+				<div class="order-submit">
+					<%= f.hidden_field :destination, value:"#{@order.destination}" %>
+					<%= f.hidden_field :destination_name, value:"#{@order.destination_name}" %>
+					<%= f.hidden_field :destination_postal_code, value:"#{@order.destination_postal_code}" %>
+					<%= f.hidden_field :destination_phone_number, value:"#{@order.destination_phone_number}" %>
+					<%= f.submit '注文', class:"btn btn-primary" %>
+					<%= link_to 'カートに戻る', current_cart, class:"btn btn-warning" %>
+				</div>
+				<br>
+			</div>
+		<% end %>
 	</div>
 </div>
 
+<script>
+	$("document").ready(function() {
+		var slideWidth = $('.slideItem').outerWidth(true);
+		var slideNum = $('.slideItem').length;
+		var slideSetWidth = slideWidth * slideNum;
+		$('.slideSet').css('width', slideSetWidth);
+
+		var slideCurrent = 0;
+		var sliding = function(){
+			if(slideCurrent < 0){
+				slideCurrent = slideNum - 3;
+			} else if(slideCurrent > slideNum - 3 ){
+				slideCurrent = 0;
+			}
+			$('.slideSet').stop().animate({
+		  	left: slideCurrent * -slideWidth
+			});
+		}
+			$('.prevDest').click(function(){
+				slideCurrent--;
+				sliding();
+				});
+			$('.nextDest').click(function(){
+				slideCurrent++;
+				sliding();
+				});
+
+			$('.change_destination').click(function(){
+				$('#destinations').removeClass('display_none');
+			});
+			$('.close_btn').click(function(){
+				$('#destinations').addClass('display_none');
+			});
+
+			$('.creditCard').click(function(){
+				$('.cardInput').removeClass('display_none');
+				$('.bankDetails').addClass('display_none');
+			})
+			$('.bankTransfer').click(function(){
+				$('.cardInput').addClass('display_none');
+				$('.bankDetails').removeClass('display_none');
+			});
+			$('.cashOnDelivery').click(function(){
+				$('.cardInput').addClass('display_none');
+				$('.bankDetails').addClass('display_none');
+			});
+		});
+</script>
