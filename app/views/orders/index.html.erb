@@ -1,5 +1,5 @@
 <div class="order-history-container">
-	<div class="bg">
+	<div class="order-bg">
 		<div class="col-md-8 col-md-offset-2 order-t">
 			<table class="histroy-table order-table" border=1>
 				<h1 class="ord-h">購入履歴</h1>
@@ -35,11 +35,10 @@
 				</tbody>
 				<% end %>
 			</table>
-			<div class=table-f></div>
-			</div>
-		<div class="order-bg"></div>
-		<div class="col-md-3 col-md-offset-4">
+			<div class="page-rireki">
 			<%= paginate @orders %>
+			</div>
+			<div class=table-f></div>
 		</div>
 	</div>
 </div>
