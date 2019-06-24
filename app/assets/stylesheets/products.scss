@@ -7,6 +7,39 @@ $font-family: 'Lato', 'Noto Sans JP', '游ゴシック Medium', '游ゴシック
 .features{
   height: 390px;
 }
+.feat{
+  margin-top: 80px;
+  margin-left: 20px;
+}
+.ge-li {
+  margin-left: 80px;
+  margin-top: 40px;
+}
+.feat-hight{
+  margin-bottom: 50px;
+}
+
+.product-h{
+
+  background: #699db3;
+  border-radius: 3px;
+  font-weight: bold;
+  color: #dddde5;
+  width: 220px;;
+}
+
+.g-title{
+  text-align: center;
+  font-size: 14px;
+  display: inline-block;
+  padding: 8px 59px;
+  margin: 70px 0 0 15px;
+  text-decoration: none;
+  background: #699db3;
+  border-radius: 3px;
+  font-weight: bold;
+  color: #dddde5;
+}
 
 .features-text{
   color:#FFF;
@@ -24,6 +57,7 @@ $font-family: 'Lato', 'Noto Sans JP', '游ゴシック Medium', '游ゴシック
 
 .new-arrivals{
   border-right: dotted 1px rgba(#67686a, 0.8);
+  margin-bottom: 20px;
 }
 
 .each-item{
