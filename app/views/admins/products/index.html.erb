@@ -10,35 +10,38 @@
 				<th></th>
 				<th>在庫</th>
 				<th></th>
+				<th></th>
 			</thead>
 			<tbody>
 			<% @products.each do |product| %>
-				<tr data-href=<%= edit_admins_product_path(product) %>>
-						<td><%= product.id %></td>
-						<td>
-							<% if product.jacket_image_id.present? %>
-	              <%= attachment_image_tag  product, :jacket_image, :fill, 120, 120, class:"thumbnail" %>
-	            <% else %>
-	              <%= image_tag 'no_image.jpg', size:'120x120', class:"thumbnail" %>
-	            <% end %>
-						</td>
-						<td>
-							<p class="product-name"><%= product.product_name %></p>
-							<p class="index-item">アーティスト：<%= product.artist.name %></p>
-							<p class="index-item">レーベル：<%= product.label.label %></p>
-							<p class="index-item">価格：¥<%= product.price.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %>（税抜）</p>
-						</td>
-						<td>
-							<% if product.stock >20 %>
-								<p class="plenty-stocks"><%= product.stock %></p>
-							<% elsif product.stock > 0 && product.stock < 20 %>
-								<p class="limited-stocks"><%= product.stock %></p>
-							<% else %>
-								<p class="soldout"><%= product.stock %></p>
-							<% end %>
-						</td>
-					</tr>
-				</tbody>
+				<tr>
+					<td><%= product.id %></td>
+					<td>
+						<% if product.jacket_image_id.present? %>
+			              <%= attachment_image_tag  product, :jacket_image, :fill, 120, 120, class:"thumbnail" %>
+			            <% else %>
+			              <%= image_tag 'no_image.jpg', size:'120x120', class:"thumbnail" %>
+			            <% end %>
+					</td>
+					<td>
+						<p class="product-name"><%= product.product_name %></p>
+						<p class="index-item">アーティスト：<%= product.artist.name %></p>
+						<p class="index-item">レーベル：<%= product.label.label %></p>
+						<p class="index-item">価格：¥<%= product.price.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %>（税抜）</p>
+					</td>
+					<td>
+						<% if product.stock >20 %>
+							<p class="plenty-stocks"><%= product.stock %></p>
+						<% elsif product.stock > 0 && product.stock < 20 %>
+							<p class="limited-stocks"><%= product.stock %></p>
+						<% else %>
+							<p class="soldout"><%= product.stock %></p>
+						<% end %>
+					</td>
+					<td><%= link_to "詳細", admins_product_path(product), class:"btn btn-primary" %></td>
+					<td><%= link_to "編集", edit_admins_product_path(product), class:"btn btn-warning" %></td>
+				</tr>
+			</tbody>
 			<% end %>
 			<%= paginate @products, class: "paginate" %>
 		</table>
