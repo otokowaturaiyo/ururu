@@ -1,131 +1,129 @@
-<div>
-  <div class="bg-img">
-  <% if flash[:error] %>
-    <p class="flash-nil-cart-item"><%= flash[:error] %></p>
-  <% end %>
-  <div class="container background-color2">
-    <div class="row top-wrapper">
-      <!-- 右要素がグリッドに対してモバイルでは横幅いっぱい、デスクトップでは1/4を占める -->
+<div class="bg-img">
+<% if flash[:error] %>
+  <p class="flash-nil-cart-item"><%= flash[:error] %></p>
+<% end %>
+<div class="container background-color2">
+  <div class="row top-wrapper">
+    <!-- 右要素がグリッドに対してモバイルでは横幅いっぱい、デスクトップでは1/4を占める -->
 
-      <!-- ジャンルの一覧。ジャンルの数・種類は基本的には変更しない。  -->
-      <div class="col-xs-12 col-md-3 genre-list">
-        <h3 class="g-title">ジャンルから探す</h3>
-        <% @genres.each do |genre| %>
-          <div class="btn-group-vertical col-md-12 genre-button" role="group">
-            <button type="button" class="btn btn-default">
-              <%= link_to genre.genre, genre_path(genre.id) %>
-            </button>
+    <!-- ジャンルの一覧。ジャンルの数・種類は基本的には変更しない。  -->
+    <div class="col-xs-12 col-md-3 genre-list">
+      <h3 class="g-title">ジャンルから探す</h3>
+      <% @genres.each do |genre| %>
+        <div class="btn-group-vertical col-md-12 genre-button" role="group">
+          <button type="button" class="btn btn-default">
+            <%= link_to genre.genre, genre_path(genre.id) %>
+          </button>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- 特集の部分。ただし、実質的に中身なし。本気で作るならfeaturesのmodelを作る必要あり。 -->
+    <div class="col-xs-12 col-md-7 features">
+      <div class="skippr-container">
+        <div class="theTarget">
+          <div class=slide-image>
+            <%= link_to products_feature_path do %>
+              <%= image_tag "sale.png", width:'100%', height:'340px' %>
+              <div class="features-text">
+                <p>
+                  特集の情報を入れられます。テキストテキストテキストテキストテキストテキスト
+                  テキストテキストテキストテキストテキストテキストテキストテキストテキスト
+                </p>
+              </div>
+            <% end %>
           </div>
-        <% end %>
-      </div>
-
-      <!-- 特集の部分。ただし、実質的に中身なし。本気で作るならfeaturesのmodelを作る必要あり。 -->
-      <div class="col-xs-12 col-md-7 features">
-        <div class="skippr-container">
-          <div class="theTarget">
-            <div class=slide-image>
-              <%= link_to products_feature_path do %>
-                <%= image_tag "sale.png", width:'100%', height:'340px' %>
-                <div class="features-text">
-                  <p>
-                    特集の情報を入れられます。テキストテキストテキストテキストテキストテキスト
-                    テキストテキストテキストテキストテキストテキストテキストテキストテキスト
-                  </p>
-                </div>
-              <% end %>
-            </div>
-            <div class=slide-image>
-              <%= link_to products_feature_path do %>
-                <%= image_tag "m-1.jpg", width:'100%', height:'340px' %>
-                <div class="features-text">
-                  <p>
-                    UVERworld、7月10日リリースのライヴ映像作品アートワーク公開。完全生産限定盤の特典詳細も発表
-                  </p>
-                </div>
-              <% end %>
-            </div>
-            <div class=slide-image>
-              <%= link_to products_feature_path do %>
-                <%= image_tag "m-2.jpg", width:'100%', height:'340px' %>
-                <div class="features-text">
-                  <p>
-                    ずっと真夜中でいいのに。、セカンド・ミニ・アルバム『今は今で誓いは笑みで』6月12日発売
-                  </p>
-                </div>
-              <% end %>
-            </div>
-            <div class=slide-image>
-              <%= link_to products_feature_path do %>
-                <%= image_tag "m-3.jpg", width:'100%', height:'340px' %>
-                <div class="features-text">
-                  <p>
-                    Official髭男dism、プロデューサーに蔦谷好位置を迎えた「熱闘甲子園」テーマ・ソング“
-                    宿命”MVティーザー映像公開。新アー写も
-                  </p>
-                </div>
-              <% end %>
-            </div>
-            <div class=slide-image>
-              <%= link_to products_feature_path do %>
-                <%= image_tag "m-4.jpg", width:'100%', height:'340px' %>
-                <div class="features-text">
-                  <p>
-                    ゆず、新曲“SEIMEI”が日本生命新CMタイアップ・ソングに決定
-                  </p>
-                </div>
-              <% end %>
-            </div>
+          <div class=slide-image>
+            <%= link_to products_feature_path do %>
+              <%= image_tag "m-1.jpg", width:'100%', height:'340px' %>
+              <div class="features-text">
+                <p>
+                  UVERworld、7月10日リリースのライヴ映像作品アートワーク公開。完全生産限定盤の特典詳細も発表
+                </p>
+              </div>
+            <% end %>
+          </div>
+          <div class=slide-image>
+            <%= link_to products_feature_path do %>
+              <%= image_tag "m-2.jpg", width:'100%', height:'340px' %>
+              <div class="features-text">
+                <p>
+                  ずっと真夜中でいいのに。、セカンド・ミニ・アルバム『今は今で誓いは笑みで』6月12日発売
+                </p>
+              </div>
+            <% end %>
+          </div>
+          <div class=slide-image>
+            <%= link_to products_feature_path do %>
+              <%= image_tag "m-3.jpg", width:'100%', height:'340px' %>
+              <div class="features-text">
+                <p>
+                  Official髭男dism、プロデューサーに蔦谷好位置を迎えた「熱闘甲子園」テーマ・ソング“
+                  宿命”MVティーザー映像公開。新アー写も
+                </p>
+              </div>
+            <% end %>
+          </div>
+          <div class=slide-image>
+            <%= link_to products_feature_path do %>
+              <%= image_tag "m-4.jpg", width:'100%', height:'340px' %>
+              <div class="features-text">
+                <p>
+                  ゆず、新曲“SEIMEI”が日本生命新CMタイアップ・ソングに決定
+                </p>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="row contents-wrapper">
-      <!-- 左要素がグリッドに対してモバイルでは横幅いっぱい、デスクトップでは2/3を占める -->
-      <div class="col-xs-12 col-md-8 pull-left new-arrivals">
-          <!-- 新着画像がグリッドに対しモバイルでは横に2個、デスクトップでは横に3個表示される -->
-        <h3>新着商品</h3>
-        <% @products.each do |product| %>
-          <div class ="col-xs-6 col-md-4 each-item">
-            <%= link_to product_path(product) do %>
-              <% if product.jacket_image_id.present? %>
-                <%= attachment_image_tag  product, :jacket_image, :fill, 120, 120, class:"thumbnail" %>
-              <% else %>
-                <%= image_tag 'no_image.jpg', size:'120x120', class:"thumbnail" %>
-              <% end %>
-              <p><%= product.product_name %></p>
+  <div class="row contents-wrapper">
+    <!-- 左要素がグリッドに対してモバイルでは横幅いっぱい、デスクトップでは2/3を占める -->
+    <div class="col-xs-12 col-md-8 pull-left new-arrivals">
+        <!-- 新着画像がグリッドに対しモバイルでは横に2個、デスクトップでは横に3個表示される -->
+      <h3>新着商品</h3>
+      <% @products.each do |product| %>
+        <div class ="col-xs-6 col-md-4 each-item">
+          <%= link_to product_path(product) do %>
+            <% if product.jacket_image_id.present? %>
+              <%= attachment_image_tag  product, :jacket_image, :fill, 120, 120, class:"thumbnail" %>
+            <% else %>
+              <%= image_tag 'no_image.jpg', size:'120x120', class:"thumbnail" %>
             <% end %>
-            <p><%= product.artist.name %></p>
-            <% price = product.price*1.08 %>
-            <p>価格 | ¥<%= price.to_i.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %></p>
-          </div>
-        <% end %>
-        <div class="col-md-3 col-md-offset-4">
-          <%= paginate @products %>
+            <p><%= product.product_name %></p>
+          <% end %>
+          <p><%= product.artist.name %></p>
+          <% price = product.price*1.08 %>
+          <p>価格 | ¥<%= price.to_i.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %></p>
         </div>
-      </div>
-      <div class="col-xs-12 col-md-4 pull-right sidebar-recommend">
-        <!-- おすすめ画像がグリッドに対しモバイルでは横に2個、デスクトップでは横に2個表示される -->
-        <h3>店長のおすすめ</h3>
-        <% @recommends.each do |product| %>
-          <div class ="col-xs-6 each-item">
-            <%= link_to product_path(product) do %>
-              <% if product.jacket_image_id.present? %>
-                <%= attachment_image_tag  product, :jacket_image, :fill, 120, 120, class:"thumbnail" %>
-              <% else %>
-                <%= image_tag 'no_image.jpg', :size => '120x120', class:"thumbnail" %>
-              <% end %>
-              <p><%= product.product_name %></p>
-            <% end %>
-            <p><%= product.artist.name %></p>
-            <% price = product.price*1.08 %>
-            <p>価格 | ¥<%= price.to_i.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %></p>
-          </div>
-        <% end %>
+      <% end %>
+      <div class="col-md-3 col-md-offset-4">
+        <%= paginate @products %>
       </div>
     </div>
+    <div class="col-xs-12 col-md-4 pull-right sidebar-recommend">
+      <!-- おすすめ画像がグリッドに対しモバイルでは横に2個、デスクトップでは横に2個表示される -->
+      <h3>店長のおすすめ</h3>
+      <% @recommends.each do |product| %>
+        <div class ="col-xs-6 each-item">
+          <%= link_to product_path(product) do %>
+            <% if product.jacket_image_id.present? %>
+              <%= attachment_image_tag  product, :jacket_image, :fill, 120, 120, class:"thumbnail" %>
+            <% else %>
+              <%= image_tag 'no_image.jpg', :size => '120x120', class:"thumbnail" %>
+            <% end %>
+            <p><%= product.product_name %></p>
+          <% end %>
+          <p><%= product.artist.name %></p>
+          <% price = product.price*1.08 %>
+          <p>価格 | ¥<%= price.to_i.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %></p>
+        </div>
+      <% end %>
+    </div>
   </div>
-  </div>
+</div>
 </div>
 <script>
   $(document).on('turbolinks:load', function() {
