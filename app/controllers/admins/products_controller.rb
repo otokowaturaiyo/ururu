@@ -1,5 +1,4 @@
 class Admins::ProductsController < ApplicationController
-
   def new
     @product = Product.new
     @disk = @product.disks.build
@@ -24,15 +23,15 @@ class Admins::ProductsController < ApplicationController
     @product.label_id = label.id
 
     if @product.save
-        flash[:notice] = "新規商品の登録完了しました。"
-        redirect_to admins_product_path(@product)
+      flash[:notice] = "新規商品の登録完了しました。"
+      redirect_to admins_product_path(@product)
     else
-        render 'new'
+      render 'new'
     end
   end
 
   def index
-    @products = Product.page(params[:page]).order(created_at: :desc)
+    @products = Product.includes(:artist, :label, :genre).page(params[:page]).order(created_at: :desc)
   end
 
   def edit
@@ -56,7 +55,7 @@ class Admins::ProductsController < ApplicationController
     @product.label_id = label.id
 
     if @product.update(product_params)
-      flash[:notice]="更新完了しました。"
+      flash[:notice] = "更新完了しました。"
       redirect_to admins_product_path(@product)
     else
       render 'edit'
@@ -67,38 +66,35 @@ class Admins::ProductsController < ApplicationController
     find_product
   end
 
-
   private
 
+  # ジャンル等まとめて商品情報を引っ張ってくる
+  def find_product
+    @product = Product.find(params[:id])
+    @disks = Disk.where(product_id: @product.id)
+    @artist = Artist.find(@product.artist_id)
+    @genre = Genre.find(@product.genre_id)
+    @label = Label.find(@product.label_id)
+  end
 
-    # ジャンル等まとめて商品情報を引っ張ってくる
-    def find_product
-      @product = Product.find(params[:id])
-      @disks = Disk.where(product_id: @product.id)
-      @artist = Artist.find(@product.artist_id)
-      @genre = Genre.find(@product.genre_id)
-      @label = Label.find(@product.label_id)
-    end
-
-    def product_params
-      params.require(:product).permit(:genre_id,
-                                      :artist_id,
-                                      :label_id,
-                                      :product_name,
-                                      :price,
-                                      :description,
-                                      :jacket_image,
-                                      :stock,
-                                      :recommend,
-                                      :status,
-                                      disks_attributes:  [:id,
-                                                          :product_id,
-                                                          :_destroy,
-                                                          songs_attributes: [:id,
-                                                                             :disks_id,
-                                                                             :song,
-                                                                             :second,
-                                                                             :_destroy]])
-    end
-
+  def product_params
+    params.require(:product).permit(:genre_id,
+                                    :artist_id,
+                                    :label_id,
+                                    :product_name,
+                                    :price,
+                                    :description,
+                                    :jacket_image,
+                                    :stock,
+                                    :recommend,
+                                    :status,
+                                    disks_attributes: [:id,
+                                                       :product_id,
+                                                       :_destroy,
+                                                       songs_attributes: [:id,
+                                                                          :disks_id,
+                                                                          :song,
+                                                                          :second,
+                                                                          :_destroy]])
+  end
 end

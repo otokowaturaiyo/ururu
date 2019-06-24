@@ -1,8 +1,10 @@
 class CartsController < ApplicationController
-  before_action :setup_cart_item!, only: [:update_item, :delete_item]
+  before_action :setup_cart_item!, only: [:update, :destroy]
 
   def show
-    @cart_items = current_cart.cart_items
+    retrieve_products_info(current_cart.cart_items)
+    total_count(@items)
+    fee_included(@items, :subtotal)
   end
 
   def add_item
@@ -20,25 +22,22 @@ class CartsController < ApplicationController
   end
 
   def update
-    @cart_item = current_cart.cart_items.find(params[:id])
     @cart_item.update(cart_params)
     redirect_to current_cart
   end
 
   def destroy
-    @cart_item = current_cart.cart_items.find(params[:id])
     @cart_item.destroy
     redirect_to current_cart
   end
 
   private
 
-    def setup_cart_item!
-      @cart_item = current_cart.cart_items.find(params[:id])
-    end
+  def setup_cart_item!
+    @cart_item = current_cart.cart_items.find(params[:id])
+  end
 
-    def cart_params
-      params.require(:cart_item).permit(:product_id, :product_count)
-    end
-
+  def cart_params
+    params.require(:cart_item).permit(:product_id, :product_count)
+  end
 end
