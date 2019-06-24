@@ -17,7 +17,11 @@
 					</div>
 				</div>
 			</div>
-			<p><%= link_to products_path do %><button class="btn btn-primary">商品一覧ページへ戻る</button><% end %></p>
+			<p>
+				<%= link_to products_path do %>
+				<button class="btn btn-primary">商品一覧ページへ戻る</button>
+				<% end %>
+			</p>
 			<% unless @order.payment_methods == "クレジットカード" %>
 				<div class="ship-info">
 					ご入金の確認が取れ次第、発送いたします。<br>

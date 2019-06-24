@@ -19,6 +19,7 @@ class ApplicationController < ActionController::Base
       p = item.product
       o = item.try(:order)
       array << {
+        id: item.id,
         product_id: p.id,
         product_name: p.product_name,
         image: p.jacket_image_id,
