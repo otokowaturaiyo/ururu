@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  root 'products#index'
 
   namespace :admins do
     resources :users, only: [:index, :show, :edit, :update]
@@ -30,7 +31,7 @@ Rails.application.routes.draw do
   end
 
   get '/products/feature' => 'products#feature'
-    resources :products, only:[:index, :show] do
+    resources :products, only:[:show] do
     resources :reviews, only: [:index, :create, :edit, :update, :destroy]
     resources :likes, only: [:create, :destroy]
   end

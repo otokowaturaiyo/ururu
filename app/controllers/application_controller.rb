@@ -45,6 +45,12 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
+    def login_check
+    unless admin_signed_in?
+      redirect_to root_path
+    end
+  end
+
     def total_price(items, subtotal)
       @total_price = items.sum { |hash| hash[:subtotal] }.to_i
     end
@@ -100,7 +106,7 @@ class ApplicationController < ActionController::Base
     if resource.is_a?(Admin)
       new_admin_session_path
     else
-      products_path
+      root_path
     end
   end
 end

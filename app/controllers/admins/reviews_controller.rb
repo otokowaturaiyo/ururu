@@ -1,4 +1,6 @@
 class Admins::ReviewsController < ApplicationController
+  befor_action :login_check
+
   def edit
     @product = Product.find(params[:product_id])
     @review = Review.find(params[:id])
@@ -23,4 +25,5 @@ class Admins::ReviewsController < ApplicationController
   def review_params
     params.require(:review).permit(:user_id, :product_id, :star, :body)
   end
+
 end
