@@ -86,13 +86,13 @@
 					</div>
 				<% else %>
 					<div class="product-review">
-						<div class="review-index col-md-5">
+						<div class="review-index rev col-md-4">
 							<h3>レビュー投稿</h3>
 							<!-- コメント入力欄を商品の詳細ページに表示するためのrender -->
 							<%= render partial: 'reviews/form', locals: { reviews: @reviews, product: @product }%>
 						</div>
 					</div>
-					<h3>レビュー一覧</h3>
+					<h3 class= "rev-s">レビュー一覧</h3>
 					<div class="col-md-6 scroller">
 						<div id="reviews_area"><!--ここのidを目印にdiv内をAjaxで書き換え-->
 							<!-- 投稿されたコメント一覧を商品の詳細ページに表示するためのrender -->

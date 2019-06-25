@@ -33,8 +33,8 @@ class UsersController < ApplicationController
         resignation: true,
         resigned_at: Time.current
         )
-      flash[:notice] = "退会しました。"
-      redirect_to products_path
+      flash[:danger] = "退会しました。"
+      redirect_to root_path
     end
 
 

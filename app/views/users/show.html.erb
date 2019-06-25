@@ -1,9 +1,4 @@
 <h1 class="my-title"><%= @user.user_name %><span class="user-title">さんマイページ</span></h1>
-	<% if flash[:notice] %>
-		<div class="my-flash">
-			<%= flash[:notice] %>
-		</div>
-	<% end %>
 <div class="profile">
 	<%= attachment_image_tag @user, :profile_image, :fill, 300, 300, format: 'jpeg', fallback: "no_image.jpg", size:'300x300', class: "img-circle profile-thumb my-img" %>
 
@@ -26,6 +21,8 @@
 		</div>
 
 	</div>
+	<br>
+	<br>
 	<!-- いいね -->
 <div class="row">
 	<div class="col-lg-12">
@@ -61,7 +58,6 @@
 	<!-- いいね -->
 <script>
 
-
 	document.addEventListener('turbolinks:load', function() {
 		Particles.init({
 	selector: '.m-background',
@@ -78,7 +74,6 @@
 		$(".slider").not('.slick-initialized').slick({
 			slidesToShow: 2,
 			slidesToScroll: 2,
-			autoplaySpeed: 700,
 			verticalSwiping: true,
 			prevArrow: '<div class="slider-arrow slider-prev fa fa-angle-left"></div>',
 			nextArrow: '<div class="slider-arrow slider-next fa fa-angle-right"></div>',
