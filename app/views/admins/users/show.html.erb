@@ -5,7 +5,10 @@
 		<div class="col-lg-offset-2 col-lg-2">
 			<br>
 			<br>
-			<%= attachment_image_tag @user, :profile_image_id, :fill, 200, 200, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb", size: "200x200" %>
+			<%= attachment_image_tag @user,
+			:profile_image,	:fill, 200, 200,
+			 fallback: "no_image.jpg", size: "200x200",
+			 class: "img-circle pull-left profile-thumb" %>
 		</div>
 		<div class="col-lg-offset-1 col-lg-7">
 			<h2>ユーザー詳細</h2>
