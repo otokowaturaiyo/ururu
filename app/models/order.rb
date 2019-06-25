@@ -37,5 +37,4 @@ class Order < ApplicationRecord
       product.update_attributes(stock: updated_stock)
     end
   end
-
 end

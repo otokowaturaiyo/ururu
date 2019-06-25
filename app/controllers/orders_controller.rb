@@ -50,12 +50,12 @@ class OrdersController < ApplicationController
 
   def index
     @orders = current_user.orders.includes(order_details: [product: [:artist, :label, :genre]]).page(params[:page]).per(5).order(created_at: :desc)
-    first_order_details = @orders.map{|o| o.order_details.first}
+    first_order_details = @orders.map { |o| o.order_details.first }
     retrieve_products_info(first_order_details)
   end
 
   def show
-    @order= Order.includes(:order_details).find(params[:id])
+    @order = Order.includes(:order_details).find(params[:id])
     @order_details = @order.order_details.page(params[:page]).per(5)
     retrieve_products_info(@order_details)
     fee_included(@items, :subtotal)
