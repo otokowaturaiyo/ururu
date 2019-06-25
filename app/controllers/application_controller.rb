@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
         label: p.label.label,
         genre: p.genre.genre,
         count: item.product_count,
-        price: p.price,
+        price: p.price * 1.08,
         subtotal: item.product_count * p.price * 1.08,
         shipment_status: o&.shipment_status,
         created_at: o&.created_at,
