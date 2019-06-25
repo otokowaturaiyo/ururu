@@ -13,10 +13,10 @@ $font-family: 'Lato', 'Noto Sans JP', '游ゴシック Medium', '游ゴシック
 }
 .ge-li {
   margin-left: 80px;
-  margin-top: 40px;
+  margin-top: 30px;
 }
 .feat-hight{
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
 .product-h{
@@ -258,7 +258,6 @@ ul li i {
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
   border-bottom: none;
 }
-
 // いいね
 .like-box-of {
   display: inline-block;
@@ -270,6 +269,13 @@ ul li i {
 .review-container{
   margin-bottom: 50px;
 
+}
+.rev{
+  margin-left:88px;
+}
+
+.rev-s{
+  margin-top: 45px;
 }
 
 // Indexページ
@@ -312,4 +318,12 @@ th{
 .product_image {
   margin: 10px 0 0 80px;
   padding:0;
+}
+
+.urururu{
+  font-size:76px;
+  color: #699db3;
+   animation-duration: 2s;
+   padding: 20px 50px 0;
+
 }

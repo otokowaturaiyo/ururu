@@ -1,4 +1,5 @@
 class Admins::UsersController < ApplicationController
+  # befor_action :login_check
   before_action :authenticate_admin!
   def index
     query = { user_name_cont: params[:q] }
@@ -42,7 +43,7 @@ class Admins::UsersController < ApplicationController
       resignation: true,
       resigned_at: Time.current
     )
-    flash[:notice] = "ユーザーをブロックしました！"
+    flash[:danger] = "ユーザーをブロックしました！"
     redirect_to admins_users_path
   end
 
@@ -52,12 +53,11 @@ class Admins::UsersController < ApplicationController
       resignation: false,
       resigned_at: Time.current
     )
-    flash[:notice] = "ユーザーを復活させました！"
+    flash[:warning] = "ユーザーを復活させました！"
     redirect_to admins_users_path
 end
 
   private
-
   def users_params
     params.require(:user).permit(:user_id, :user_name, :email, :profile_image, :kanji_firstname, :kanji_lastname, :kana_firstname, :kana_lastname, :phone_number, :postal_code, :postal_address)
   end

@@ -2,7 +2,7 @@
 <div class="container background-color2">
   <div class="row top-wrapper">
     <!-- 右要素がグリッドに対してモバイルでは横幅いっぱい、デスクトップでは1/4を占める -->
-
+    <h1 class="urururu animated fadeInDownBig">Ururu</h1>
     <!-- ジャンルの一覧。ジャンルの数・種類は基本的には変更しない。  -->
     <div class="col-xs-12 col-md-3 genre-list ge-li">
       <h3 class="g-title">ジャンルから探す</h3>
@@ -125,7 +125,6 @@
 <script>
   $(document).on('turbolinks:load', function() {
     $(".theTarget").skippr();
-  });
 
     $(".theTarget").skippr({
       transition : 'slide',
@@ -137,7 +136,8 @@
       autoPlay : false,
       autoPlayDuration : 5000,
       keyboardOnAlways : true,
-      hidePrevious : false
+      hidePrevious : false,
+  });
   });
 
 </script>
