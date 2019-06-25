@@ -43,6 +43,15 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
+  describe 'ユーザーのアップデート' do
+    context 'ユーザーのアップデートができているか'
+    before do
+    pacth :update, params: {id: '1'}
+  end
+
+
+  end
+
 
 
 end
