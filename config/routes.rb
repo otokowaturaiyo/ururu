@@ -24,11 +24,6 @@ Rails.application.routes.draw do
     passwords: 'users/passwords',
     registrations: 'users/registrations'
   }
-  namespace :user do
-    get '/:id/resign' => 'users#resign', as: 'resign'
-    patch '/:id/resign_confirm' => 'users#resign_confirm', as: 'resign_confirm'
-    patch '/:id/resign_confirm' => 'users#revival_confirm', as:'revival_confirm'
-  end
 
   get '/products/feature' => 'products#feature'
     resources :products, only:[:show] do
@@ -37,6 +32,8 @@ Rails.application.routes.draw do
   end
 
   resources :users, only:[:show, :edit, :update]
+  get 'users/:id/resign' => 'users#resign', as: 'resign'
+  patch 'users/:id/resign_confirm' => 'users#resign_confirm', as: 'resign_confirm'
 
   resources :destinations, only:[:new, :create, :edit, :update]
   resources :carts, only:[:show, :update, :destroy]
