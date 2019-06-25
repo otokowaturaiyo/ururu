@@ -105,19 +105,19 @@
         <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
       </div>
 
-      <div class="row sampleRow">
-        <div class="col-xs-5"></div>
-        <div class="col-xs-2">
-          <div class="actions">
+      <div class="row field">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-3">
             <input class="btn btn-info" type="submit" value="編集完了">
-          </div>
-
-          <%= link_to resign_path(@user.id) do %>
-              <button class="btn btn-info btn-lg">退会する</button>
-            <% end %>
-
         </div>
-        <div class="col-xs-5"></div>
+        <div class="col-xs-2"></div>
+        <div class="col-xs-3">
+          <%= link_to user_resign_path(@user.id) do %>
+            <button class="btn btn-info">退会する</button>
+          <% end %>
+          </div>
+        </div>
+        <div class="col-xs-2"></div>
       </div>
 <% end %>
   </div>

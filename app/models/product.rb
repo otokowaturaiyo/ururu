@@ -16,7 +16,7 @@ class Product < ApplicationRecord
   validates :label_id, presence: true
   validates :price, presence: true
   validates :description, presence: true
-  validates :stock, presence: true
+  validates :stock, presence: true , format: { with: /\A[0-9]+\z/ }
   validates :recommend, inclusion: { in: [true, false] }
 
   attachment :jacket_image

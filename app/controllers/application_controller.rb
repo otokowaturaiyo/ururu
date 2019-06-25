@@ -34,8 +34,9 @@ class ApplicationController < ActionController::Base
         order_destination: o&.destination,
         order_id: o&.id
       }
+
     end
-    end
+  end
 
   def resignation_user?
     if user_signed_in?
@@ -76,7 +77,7 @@ end
     )
   end
 
-  private
+private
 
   def storable_location?
     request.get? && is_navigational_format? && !devise_controller? && !request.xhr?
@@ -108,3 +109,5 @@ end
     end
   end
 end
+
+
