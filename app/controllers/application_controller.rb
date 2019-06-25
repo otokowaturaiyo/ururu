@@ -35,6 +35,7 @@ class ApplicationController < ActionController::Base
         order_id: o&.id
       }
     end
+  end
 
 	def resignation_user?
 		if user_signed_in?
@@ -58,7 +59,6 @@ class ApplicationController < ActionController::Base
     def total_count(items)
       @total_count = items.sum { |hash| hash[:count] }
     end
-  end
 
   def payjp(payjp_token, amount)
     # ####　秘密鍵はベタうちせずに環境変数なるものを使った方がいいらしい。勉強予定。　#####
@@ -104,3 +104,5 @@ class ApplicationController < ActionController::Base
     end
   end
 end
+
+
