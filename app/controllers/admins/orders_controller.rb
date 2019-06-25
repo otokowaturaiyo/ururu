@@ -1,5 +1,5 @@
 class Admins::OrdersController < ApplicationController
-  befor_action :login_check
+  before_action :login_check
   PER = 10
 
   def index

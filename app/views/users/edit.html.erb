@@ -20,7 +20,7 @@
       <div class="row sampleRow">
         <div class="col-xs-3"></div>
         <div class="col-xs-6">
-          <%= attachment_image_tag @user, :profile_image, :fill, 350, 350, format: 'jpeg', fallback: "no_image.jpg", size:'350x350' %>
+          <%= attachment_image_tag @user, :profile_image, :fill, 350, 350, format: 'jpeg', fallback: "no_image.jpg", size:'350x350', class: 'img-circle profile-thumb my-img edit-img' %>
         </div>
         <div class="col-xs-3"></div>
       </div>
@@ -112,7 +112,7 @@
         </div>
         <div class="col-xs-2"></div>
         <div class="col-xs-3">
-          <%= link_to user_resign_path(@user.id) do %>
+          <%= link_to resign_path(@user.id) do %>
             <button class="btn btn-info">退会する</button>
           <% end %>
           </div>
