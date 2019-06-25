@@ -1,5 +1,5 @@
 class Admins::OrdersController < ApplicationController
-	before_action :authenticate_admin!
+	befor_action :login_check
 	PER = 10
 
 
@@ -23,7 +23,7 @@ class Admins::OrdersController < ApplicationController
 		end
 	end
 
-	private
+private
 	def order_params
 		params.require(:@order).permit(:shipment_status)
 	end

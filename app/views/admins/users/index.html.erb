@@ -3,11 +3,6 @@
 		<div class="col-lg-offset-1 col-lg-10">
 			<br>
 			<br>
-				<% if flash[:notice] %>
-					<div class="flash">
-						<%= flash[:notice] %>
-					</div>
-				<% end %>
 			<!-- ransack エンドユーザー検索可 -->
 			<%= form_tag(admins_users_path, method: :get, enforce_utf8: false) do %>
 				<div>

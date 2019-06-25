@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Admins::RegistrationsController < Devise::RegistrationsController
-  before_action :authenticate_admin!
   before_action :login_check
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
@@ -61,11 +60,4 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
-  private
-
-  def login_check
-    unless admin_signed_in?
-      redirect_to new_user_session_path
-    end
-  end
 end
