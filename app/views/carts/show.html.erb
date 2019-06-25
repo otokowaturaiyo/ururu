@@ -57,12 +57,12 @@
 		  <% end %>
 			<div class="row">
 			  <div class="total_price">
-			    <p>合計: <%= @total_count %>点の商品  <span>¥<%= @total_price_with_fee %></span></p>
+			    <p>合計: <%= @total_count %>点の商品  <span>¥<%= @total_price_with_fee.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %></span></p>
 			  </div>
 			</div>
 			<div class="row">
 				<div class="keep-shopping">
-					<%= link_to '買い物を続ける', products_path, class:'btn_to_shopping' %>
+					<%= link_to '買い物を続ける', root_path, class:'btn_to_shopping' %>
 				</div>
 				<div class="proceed-to-order">
 					<%= link_to '購入へ進む', order_confirm_path, class:'btn_to_order' %>
@@ -72,7 +72,7 @@
 			<h3>お客様のカートには何もまだ入っていません。</h3>
 			<div class="row">
 				<div class="keep-shopping">
-					<%= link_to '商品一覧に戻る', products_path, class:'btn_to_shopping' %>
+					<%= link_to '商品一覧に戻る', root_path, class:'btn_to_shopping' %>
 				</div>
 			</div>
 		<% end %>

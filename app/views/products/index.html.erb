@@ -5,9 +5,9 @@
 <div class="container background-color2">
   <div class="row top-wrapper">
     <!-- 右要素がグリッドに対してモバイルでは横幅いっぱい、デスクトップでは1/4を占める -->
-
+    <h1 class="urururu animated fadeInDownBig">Ururu</h1>
     <!-- ジャンルの一覧。ジャンルの数・種類は基本的には変更しない。  -->
-    <div class="col-xs-12 col-md-3 genre-list">
+    <div class="col-xs-12 col-md-3 genre-list ge-li">
       <h3 class="g-title">ジャンルから探す</h3>
       <% @genres.each do |genre| %>
         <div class="btn-group-vertical col-md-12 genre-button" role="group">
@@ -19,7 +19,7 @@
     </div>
 
     <!-- 特集の部分。ただし、実質的に中身なし。本気で作るならfeaturesのmodelを作る必要あり。 -->
-    <div class="col-xs-12 col-md-7 features">
+    <div class="col-xs-12 col-md-7 features feat feat-hight">
       <div class="skippr-container">
         <div class="theTarget">
           <div class=slide-image>
@@ -84,7 +84,7 @@
     <!-- 左要素がグリッドに対してモバイルでは横幅いっぱい、デスクトップでは2/3を占める -->
     <div class="col-xs-12 col-md-8 pull-left new-arrivals">
         <!-- 新着画像がグリッドに対しモバイルでは横に2個、デスクトップでは横に3個表示される -->
-      <h3>新着商品</h3>
+      <h3 class="product-h">新着商品</h3>
       <% @products.each do |product| %>
         <div class ="col-xs-6 col-md-4 each-item">
           <%= link_to product_path(product) do %>
@@ -106,15 +106,14 @@
     </div>
     <div class="col-xs-12 col-md-4 pull-right sidebar-recommend">
       <!-- おすすめ画像がグリッドに対しモバイルでは横に2個、デスクトップでは横に2個表示される -->
-      <h3>店長のおすすめ</h3>
+      <h3 class="product-h">店長のおすすめ</h3>
       <% @recommends.each do |product| %>
         <div class ="col-xs-6 each-item">
           <%= link_to product_path(product) do %>
-            <% if product.jacket_image_id.present? %>
-              <%= attachment_image_tag  product, :jacket_image, :fill, 120, 120, class:"thumbnail" %>
-            <% else %>
-              <%= image_tag 'no_image.jpg', :size => '120x120', class:"thumbnail" %>
-            <% end %>
+            <%= attachment_image_tag  product,
+             :jacket_image, :fill, 120, 120,
+             fallback: "no_image.jpg", size:'120x120',
+             class:"thumbnail" %>
             <p><%= product.product_name %></p>
           <% end %>
           <p><%= product.artist.name %></p>
@@ -129,7 +128,6 @@
 <script>
   $(document).on('turbolinks:load', function() {
     $(".theTarget").skippr();
-  });
 
     $(".theTarget").skippr({
       transition : 'slide',
@@ -141,7 +139,8 @@
       autoPlay : false,
       autoPlayDuration : 5000,
       keyboardOnAlways : true,
-      hidePrevious : false
+      hidePrevious : false,
+  });
   });
 
 </script>

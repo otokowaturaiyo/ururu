@@ -1,4 +1,5 @@
 class Admins::ProductsController < ApplicationController
+  before_action :login_check
   def new
     @product = Product.new
     @disk = @product.disks.build

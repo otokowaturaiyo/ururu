@@ -16,15 +16,14 @@
 				<tbody>
 					<tr data-href=<%= order_path(item[:order_id]) %>>
 						<td>
-							<% if item[:image] %>
-								<%= attachment_image_tag Product.find(item[:product_id]), :jacket_image, :fill, 60, 60, class: "border" %>
-							<% else %>
-								<%= image_tag 'no_image.jpg', size: '60x60', class:"border" %>
-							<% end %>
+							<%= attachment_image_tag Product.find(item[:product_id]),
+									:jacket_image, :fill, 60, 60,
+									fallback: "no_image.jpg", size: '60x60',
+									class: "border" %>
 						</td>
 						<td>
 							<p>商品名 : <%= item[:product_name] %></p>
-							<p>アーティスト名 : <%= item[:artist_name] %></p>
+							<p>アーティスト名 : <%= item[:artist] %></p>
 							<p>個数 : <%= item[:count] %></p>
 							<p>価格 : <%= item[:price] %></p>
 						</td>

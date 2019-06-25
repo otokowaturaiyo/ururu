@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :resignation_user?, only:[:index]
+  before_action :resignation_user?, only: [:index]
 
   before_action :setup_products, only: [:index, :show, :feature, :search_list]
   PER = 9
@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
 
   def show
     @product = @all_products.find(params[:id])
-    @tax_included = @product.price*1.08
+    @tax_included = @product.price * 1.08
     @review = Review.new
     @reviews = @product.reviews
   end

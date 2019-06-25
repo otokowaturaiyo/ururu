@@ -24,12 +24,12 @@
 				<div class="col-md-1">
 					<%= link_to '編集',
 							edit_product_review_path(product_id: review.product_id,id: review.id),
-							class:"btn btn-warning btn-xs" %>
+							class:"btn btn-info btn-xs" %>
 				</div>
 				<div class="col-md-1">
 					<%= link_to '削除',
 							product_review_path(product_id: review.product_id,id: review.id),
-							class:"btn btn-danger btn-xs",
+							class:"btn btn-warning btn-xs",
 							method: :delete %>
 				</div>
 			<% end %>

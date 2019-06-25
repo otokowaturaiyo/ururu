@@ -27,39 +27,43 @@ class ApplicationController < ActionController::Base
         label: p.label.label,
         genre: p.genre.genre,
         count: item.product_count,
-        price: p.price,
+        price: p.price * 1.08,
         subtotal: item.product_count * p.price * 1.08,
         shipment_status: o&.shipment_status,
         created_at: o&.created_at,
         order_destination: o&.destination,
         order_id: o&.id
       }
-       end
+    end
     end
 
-	def resignation_user?
-		if user_signed_in?
-			if current_user.resignation == true
-				sign_out(current_user)
-			end
-		end
-	end
-
-    def total_price(items, subtotal)
-      @total_price = items.sum { |hash| hash[subtotal] }.to_i.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,')
+  def resignation_user?
+    if user_signed_in?
+      if current_user.resignation == true
+        sign_out(current_user)
+      end
     end
+  end
 
-
-    def fee_included(items, subtotal)
-      total_price = items.sum { |hash| hash[subtotal] }.to_i
-      fee_included = total_price + 500
-      @total_price_with_fee = fee_included.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,')
+  def login_check
+    unless admin_signed_in?
+      redirect_to root_path
     end
+end
 
-    def total_count(items)
-      @total_count = items.sum { |hash| hash[:count] }
-    end
- 
+  def total_price(items, subtotal)
+    @total_price = items.sum { |hash| hash[:subtotal] }.to_i
+  end
+
+  def fee_included(items, subtotal)
+    total_price = items.sum { |hash| hash[subtotal] }.to_i
+    fee_included = total_price + 500
+    @total_price_with_fee = fee_included
+  end
+
+  def total_count(items)
+    @total_count = items.sum { |hash| hash[:count] }
+  end
 
   def payjp(payjp_token, amount)
     Payjp.api_key = 'sk_test_421673bdeffac69c0df96e60'
@@ -100,7 +104,7 @@ class ApplicationController < ActionController::Base
     if resource.is_a?(Admin)
       new_admin_session_path
     else
-      products_path
+      root_path
     end
   end
 end

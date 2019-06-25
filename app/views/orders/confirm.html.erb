@@ -147,7 +147,7 @@
 				</table>
 				<p class="souryou">送料¥ 500</p>
 				<div class="grand-total">
-					[ <%= @total_count %>点　合計　¥<%= @total_price_with_fee %> ]
+					[ <%= @total_count %>点　合計　¥<%= @total_price_with_fee.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %> ]
 				</div>
 				<br>
 				<div class="order-submit">
