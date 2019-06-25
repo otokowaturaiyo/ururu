@@ -1,5 +1,5 @@
 class Admins::ReviewsController < ApplicationController
-  befor_action :login_check
+  before_action :login_check
 
   def edit
     @product = Product.find(params[:product_id])
