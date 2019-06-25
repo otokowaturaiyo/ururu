@@ -5,14 +5,14 @@
 		<!-- 商品の概要説明 -->
 		<div class="row">
 			<div class="overview clearfix">
-				<div class="product_image pull-left col-md-6">
+				<div class="product_image pull-left col-md-4">
 					<% if @product.jacket_image_id.present? %>
 						<%= attachment_image_tag  @product, :jacket_image, :fill, 350, 350, class:"border" %>
 					<% else %>
 						<%= image_tag 'no_image.jpg', size: '350x350', class:"border" %>
 					<% end %>
 				</div>
-				<div class="product_details pull-right col-md-6">
+				<div class="product_details pull-right col-md-4 col-md-offset-1">
 					<ul>
 						<li><i class="fas fa-music"></i>商品名：<%= @product.product_name %></li>
 						<li><i class="fas fa-music"></i>アーティスト：<%= @artist.name %></li>
@@ -72,14 +72,21 @@
 					<tbody>
 						<tr class="row">
 							<th><%= r %></th>
-							<td>
-								<% if @product.jacket_image_id.present? %>
-									<%= attachment_image_tag  @product, :jacket_image, :fill, 40, 40, class:"border"%>
-								<% else %>
-									<%= image_tag 'no_image.jpg', size: '40x40', class:"img-circle" %>
-								<% end %>
-							</td>
 							<td><%= review.user_id %></td>
+							<td>
+								<div id="star_<%= review.id %>" >
+									<script>
+										$('#star_<%= review.id %>').raty({
+											space: false,
+											size: 36,
+											readOnly: true,
+											starOff:  '<%= asset_path('star-off.png') %>',
+									  	starOn : '<%= asset_path('star-on.png') %>',
+											score: '<%= review.star %>'
+										});
+									</script>
+								</div>
+							</td>
 							<td><%= review.body %></td>
 							<td><%= link_to "編集",edit_admins_product_review_path(id: review.id, product_id: @product.id),class:"btn btn-primary" %></td>
 							<td><%= link_to "削除",admins_product_review_path(id: review.id, product_id: @product.id),class:"btn btn-danger", method: :'delete' %></td>
