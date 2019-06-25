@@ -3,13 +3,11 @@ class Admins::OrdersController < ApplicationController
   PER = 10
 
   def index
-    @orders = Order.page(params[:page]).per(PER)
+    @orders = Order.includes(order_details: [product: [:artist, :label, :genre]]).page(params[:page]).per(PER)
   end
 
   def edit
     @order = Order.find(params[:id])
-    @user = User.find(@order.user_id)
-    @order_details = OrderDetail.where(order: @order)
   end
 
   def update
