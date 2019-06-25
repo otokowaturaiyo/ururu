@@ -1,5 +1,4 @@
 class Product < ApplicationRecord
-
   belongs_to :genre
   belongs_to :artist
   belongs_to :label
@@ -8,7 +7,6 @@ class Product < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :order_details
-
 
   accepts_nested_attributes_for :disks, allow_destroy: true
 

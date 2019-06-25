@@ -22,25 +22,21 @@ class UsersController < ApplicationController
     end
   end
 
+  def resign
+    @user = User.find(params[:id])
+  end
 
-    def resign
-      @user = User.find(params[:id])
-    end
+  def resign_confirm
+    @user = User.find(params[:id])
+    @user.update(
+      resignation: true,
+      resigned_at: Time.current
+    )
+    flash[:danger] = "退会しました。"
+    redirect_to root_path
+  end
 
-    def resign_confirm
-      @user = User.find(params[:id])
-      @user.update(
-        resignation: true,
-        resigned_at: Time.current
-        )
-      flash[:danger] = "退会しました。"
-      redirect_to root_path
-    end
-
-
-
-private
-
+  private
 
   def user_params
     params.require(:user).permit(:kanji_lastname,

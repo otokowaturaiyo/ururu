@@ -6,11 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-
-
-
-
-#管理者シード
+# 管理者シード
 
 admin = Admin.new(:email => 'hogehoge@hoge.com', :password => 'hugahuga')
 admin.save!
