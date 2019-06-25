@@ -28,12 +28,15 @@ class OrdersController < ApplicationController
   def create
     order = Order.new(order_params)
     order.user_id = current_user.id
+    set_price(order)
+    set_shipment_status(order)
     retrieve_products_info(order.order_details)
     if order.save
       f = fee_included(@items, :subtotal).to_i
       if order.payment_methods == "クレジットカード"
         payjp(params['payjp-token'], f)
       end
+      delete_stocks(orders)
       current_cart.cart_items.destroy_all
       redirect_to order_complete_path(order)
     else
@@ -100,6 +103,29 @@ class OrdersController < ApplicationController
     unless current_cart.cart_items.present?
       flash[:error] = "※商品をカートに入れてください"
       redirect_to root_path
+
+    end
+  end
+
+  def set_price(order)
+    order.order_details.each do |o|
+      o.price = o.product.price
+    end
+  end
+
+  def set_shipment_status(order)
+    if order.payment_methods == "クレジットカード" || order.payment_methods == "代引き"
+      order.shipment_status = "発送準備中"
+    elsif order.payment_methods == "銀行振込"
+      order.shipment_status = "入金待ち"
+    end
+  end
+
+  def delete_stocks(order)
+    order.order_details.each do |o|
+        product = Product.find(o.product_id)
+        updated_stock = product.stock - o.product_count
+        product.update_attributes(stock: updated_stock)
     end
   end
 

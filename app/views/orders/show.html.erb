@@ -7,11 +7,10 @@
 			<div class="order-user-info">
 				<div class="row">
 					<div class="col-md-6">
-						<% if  current_user.profile_image_id %>
-							<%= attachment_image_tag current_user, :profile_image, :fill, 350, 350, class: "img-circle pull-left profile-thumb myimg" %>
-						<% else %>
-							<%= image_tag 'no_image.jpg', size: '350x350', class: "img-circle pull-left profile-thumb myimg" %>
-						<% end %>
+						<%= attachment_image_tag current_user,
+							:profile_image, :fill, 350, 350,
+							fallback: "no_image.jpg", size: '350x350',
+							class: "img-circle pull-left profile-thumb myimg" %>
 					</div>
 					<div class="col-md-3 ord-p">
 						<p>ユーザー名 : <%= current_user.user_name %></p>
@@ -29,11 +28,10 @@
 				<% @items.each do |item| %>
 					<div class="row purchase-record">
 						<div class="col-md-3 ord-show-img">
-							<% if item[:image] %>
-								<%= attachment_image_tag Product.find(item[:product_id]), :jacket_image, :fill, 100, 100, class: "border" %>
-							<% else %>
-								<%= image_tag 'no_image.jpg', size: '100x100', class:"border" %>
-							<% end %>
+							<%= attachment_image_tag Product.find(item[:product_id]),
+							:jacket_image, :fill, 100, 100,
+							fallback: "no_image.jpg", size: '100x100',
+							class: "img-circle pull-left profile-thumb myimg" %>
 						</div>
 						<div class="col-md-6">
 							<p>商品名 : <%= item[:product_name] %></p>
