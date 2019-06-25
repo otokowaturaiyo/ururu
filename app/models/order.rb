@@ -13,7 +13,8 @@ class Order < ApplicationRecord
   validates :destination_phone_number, presence: true
 
   before_validation :set_price
-  after_save :delete_stocks, :set_shipment_status
+  after_save :delete_stocks
+  before_save :set_shipment_status
 
   def set_price
     self.order_details.each do |o|

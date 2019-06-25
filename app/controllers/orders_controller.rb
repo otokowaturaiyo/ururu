@@ -99,7 +99,7 @@ class OrdersController < ApplicationController
   def not_confirming
     unless current_cart.cart_items.present?
       flash[:error] = "※商品をカートに入れてください"
-      redirect_to products_path
+      redirect_to root_path
     end
   end
 
