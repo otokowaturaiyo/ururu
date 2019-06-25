@@ -97,18 +97,17 @@
 
     </header>
     <div class="top-space"></div>
-<% if flash[:notice] || flash[:danger] || flash[:warning]%>
-  <div class="notice">
-    <%= flash[:notice] %>
-  </div>
-  <div class="danger">
-      <%= flash[:danger] %>
-  </div>
-  <div class="warning">
-      <%= flash[:warning] %>
-  </div>
-<% end %>
-    </div>
+    <% if flash[:notice] || flash[:danger] || flash[:warning]%>
+      <div class="notice">
+        <%= flash[:notice] %>
+      </div>
+      <div class="danger">
+          <%= flash[:danger] %>
+      </div>
+      <div class="warning">
+          <%= flash[:warning] %>
+      </div>
+    <% end %>
     <%= yield %>
     <footer>
       <div class="footer-container">

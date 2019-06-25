@@ -2,7 +2,7 @@
 <div class="col-lg-offset-2 col-lg-8">
 	<h1 class="ord-h">取引詳細</h1>
 </div>
-	<div class="row">
+	<div class="row ordes-backk">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="order-user-info">
 				<div class="row">
@@ -38,17 +38,20 @@
 						<div class="col-md-6">
 							<p>商品名 : <%= item[:product_name] %></p>
 							<p>アーティスト名 : <%= item[:artist_name] %></p>
-							<p>価格 : <%= item[:price] %></p>
+							<p>価格 : ¥<%= item[:price].to_i.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %></p>
 							<p>購入枚数 : <%= item[:count] %></p>
-							<p>小計 : ¥<%= item[:subtotal].to_i .to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,')%></p>
+							<p>小計 : ¥<%= item[:subtotal].to_i.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,')%></p>
 						</div>
 					</div>
 				<% end %>
 				<br>
-				<p class="total-price">合計 : ¥<%= @total %></p>
-
+				<p class="total-price">
+					合計 : ¥<%= @total_price_with_fee.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %>(送料込み)
+				</p>
+			</div>
+			<div class="page-rireki">
+				<%= paginate @order_details %>
 			</div>
 		</div>
-		<div class="ordes-backk"></div>
 	</div>
 </div>

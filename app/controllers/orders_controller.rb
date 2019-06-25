@@ -27,12 +27,9 @@ class OrdersController < ApplicationController
   def create
     order = Order.new(order_params)
     order.user_id = current_user.id
-    order.order_details.each do |o|
-      o.price = o.product.price
-    end
+    retrieve_products_info(order.order_details)
     if order.save
-      retrieve_products_info(order.order_details)
-      f = fee_included(@items, :subtotal)
+      f = fee_included(@items, :subtotal).to_i
       if order.payment_methods == "クレジットカード"
         payjp(params['payjp-token'], f)
       end
@@ -52,14 +49,15 @@ class OrdersController < ApplicationController
   end
 
   def index
-    @orders = Order.where(user_id: current_user.id).page(params[:page]).per(5).order(created_at: :desc)
-    items = @orders.map { |o| o.order_details.first }
-    retrieve_products_info(items)
+    @orders = current_user.orders.includes(order_details: [product: [:artist, :label, :genre]]).page(params[:page]).per(5).order(created_at: :desc)
+    first_order_details = @orders.map { |o| o.order_details.first }
+    retrieve_products_info(first_order_details)
   end
 
   def show
-    @order = Order.find(params[:id])
-    retrieve_products_info(@order.order_details)
+    @order = Order.includes(:order_details).find(params[:id])
+    @order_details = @order.order_details.page(params[:page]).per(5)
+    retrieve_products_info(@order_details)
     fee_included(@items, :subtotal)
   end
 
@@ -79,7 +77,7 @@ class OrdersController < ApplicationController
 
   def setup_order!
     @order_details = @order.order_details.build
-    @cart_items = current_cart.cart_items
+    @cart_items = current_cart.cart_items.includes(product: [:artist, :label, :genre])
     @destinations = Destination.where(user_id: current_user.id)
   end
 

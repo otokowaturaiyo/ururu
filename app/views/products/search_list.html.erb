@@ -16,18 +16,18 @@
 					<tbody>
 						<td>
 							<%= link_to product_path(product) do %>
-								<% if product.jacket_image_id.present? %>
-									<%= attachment_image_tag  product, :jacket_image, :fill, 120, 120, class:"thumbnail" %>
-								<% else %>
-									<%= image_tag 'no_image.jpg', size:'120x120', class:"thumbnail" %>
-								<% end %>
+								<%= attachment_image_tag  product,
+		             :jacket_image, :fill, 120, 120,
+		             fallback: "no_image.jpg", size:'120x120',
+		             class:"thumbnail" %>
 							<% end %>
 						</td>
 						<td>
 							<p class="product-name"><%= product.product_name %></p>
 							<p class="index-item">アーティスト：<%= artist.name %></p>
 							<p class="index-item">レーベル：<%= product.label.label %></p>
-							<p class="index-item">価格：¥<%= product.price.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %>（税抜）</p>
+							<% tax_included = product.price*1.08 %>
+							<p class="index-item">価格：¥<%= tax_included.to_i.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %>（税込）</p>
 						</td>
 						<td>
 							<% if product.stock >20 %>
@@ -59,7 +59,8 @@
 						<p class="product-name"><%= product.product_name %></p>
 						<p class="index-item">アーティスト：<%= product.artist.name %></p>
 						<p class="index-item">レーベル：<%= product.label.label %></p>
-						<p class="index-item">価格：¥<%= product.price.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %>（税抜）</p>
+						<% tax_included = product.price*1.08 %>
+						<p class="index-item">価格：¥<%= tax_included.to_i.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %>（税込）</p>
 					</td>
 					<td>
 						<% if product.stock >20 %>

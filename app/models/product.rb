@@ -1,5 +1,4 @@
 class Product < ApplicationRecord
-
   belongs_to :genre
   belongs_to :artist
   belongs_to :label
@@ -9,7 +8,6 @@ class Product < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :order_details
 
-
   accepts_nested_attributes_for :disks, allow_destroy: true
 
   validates :product_name, presence: true
@@ -18,7 +16,7 @@ class Product < ApplicationRecord
   validates :label_id, presence: true
   validates :price, presence: true
   validates :description, presence: true
-  validates :stock, presence: true
+  validates :stock, presence: true , format: { with: /\A[0-9]+\z/ }
   validates :recommend, inclusion: { in: [true, false] }
 
   attachment :jacket_image
