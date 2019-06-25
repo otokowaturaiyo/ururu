@@ -37,7 +37,7 @@
 						</div>
 						<div class="col-md-6">
 							<p>商品名 : <%= item[:product_name] %></p>
-							<p>アーティスト名 : <%= item[:artist_name] %></p>
+							<p>アーティスト名 : <%= item[:artist] %></p>
 							<p>価格 : ¥<%= item[:price].to_i.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %></p>
 							<p>購入枚数 : <%= item[:count] %></p>
 							<p>小計 : ¥<%= item[:subtotal].to_i.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,')%></p>
