@@ -34,7 +34,6 @@ class ApplicationController < ActionController::Base
         order_destination: o&.destination,
         order_id: o&.id
       }
-       end
     end
   end
 
@@ -73,7 +72,7 @@ class ApplicationController < ActionController::Base
     )
   end
 
-  private
+private
 
   def storable_location?
     request.get? && is_navigational_format? && !devise_controller? && !request.xhr?
