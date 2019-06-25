@@ -8,6 +8,18 @@
 			<div class="edit-review-item">
 				<h3>レビュー</h3>
 				<%= form_with model: [@product,@review], url: admins_product_review_path(id: @review.id, product_id: @product.id), class: "edit-form" do |f| %>
+				<div id="star">
+					<%= f.label :rate,'評価 ', class:'col-form-label' %>
+					<%= f.hidden_field :star, id: :review_star %>
+				</div>
+				<script>
+					$('#star').raty({
+						size: 36,
+						starOff:  '<%= asset_path('star-off.png') %>',
+				  	starOn : '<%= asset_path('star-on.png') %>',
+						scoreName: 'review[star]',
+					});
+				</script>
 					<%= f.text_area :body, size: '50x10',value: @review.body %>
 					<%= f.submit "編集完了"%>
 				<% end %>
