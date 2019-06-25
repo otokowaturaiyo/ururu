@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   root 'products#index'
 
-  namespace :admins do
+    namespace :admins do
     resources :users, only: [:index, :show, :edit, :update]
     resources :products, only:[:new, :create, :index, :show, :edit, :update] do
     resources :reviews, only:[:edit, :update, :destroy]
@@ -25,9 +25,9 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
   namespace :user do
-    get '/:id/resign' => 'users#resign', as: 'resign'
-    patch '/:id/resign_confirm' => 'users#resign_confirm', as: 'resign_confirm'
-    patch '/:id/resign_confirm' => 'users#revival_confirm', as:'revival_confirm'
+    get 'users/:id/resign' => 'users#resign', as: 'resign'
+    patch 'users/:id/resign_confirm' => 'users#resign_confirm', as: 'resign_confirm'
+    patch 'users/:id/resign_confirm' => 'users#revival_confirm', as:'revival_confirm'
   end
 
   get '/products/feature' => 'products#feature'

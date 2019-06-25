@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
         order_id: o&.id
       }
     end
-    end
+  end
 
   def resignation_user?
     if user_signed_in?
@@ -49,7 +49,7 @@ class ApplicationController < ActionController::Base
     unless admin_signed_in?
       redirect_to root_path
     end
-end
+  end
 
   def total_price(items, subtotal)
     @total_price = items.sum { |hash| hash[:subtotal] }.to_i

@@ -31,12 +31,12 @@
 						<p>価格：¥<%= @tax_included.to_i.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %>（税込）</p>
 					</div>
 					<div class="stock">
-						<% if @product.stock >= 20 %>
-							<p class="plenty-stocks">在庫あり</p>
+						<% if @product.stock == 0 %>
+							<p class="soldout">SOLD OUT</p>
 						<% elsif @product.stock > 0 && @product.stock < 20 %>
 							<p class="limited-stocks">残り<%= @product.stock %>点。ご注文はお早めに。</p>
-						<% else %>
-							<p class="soldout">SOLD OUT</p>
+						<% else @product.stock >= 20 %>
+							<p class="plenty-stocks">在庫あり</p>
 						<% end %>
 					</div>
 					<div class="add-to-cart">
