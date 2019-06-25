@@ -20,8 +20,8 @@ admin.save!
   Faker::Config.locale = :ja
   kanji_firstname = Faker::Name.first_name
   kanji_lastname = Faker::Name.last_name
-  kana_firstname = Faker::Name.first_name
-  kana_lastname = Faker::Name.last_name
+  # kana_firstname = Faker::Name.first_name
+  # kana_lastname = Faker::Name.last_name
   user_name = Faker::Games::Pokemon.name
   email = Faker::Internet.email
   postal_address = Faker::Address.full_address
@@ -29,8 +29,8 @@ admin.save!
 
   User.create!(kanji_firstname: kanji_firstname,
                kanji_lastname: kanji_lastname,
-               kana_firstname: kana_firstname,
-               kana_lastname: kana_lastname,
+               kana_firstname: 'コウイチ',
+               kana_lastname: 'サノ',
                user_name: user_name,
                email: email,
                phone_number: random.rand(10000000000..99999999999),

@@ -1,23 +1,25 @@
 <div class="edit-container">
+	<div class="reviw-edi">
 	<h1>レビューを編集</h1>
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4">
 			<div class="edit-icon">
 				<% if @product.jacket_image_id.present? %>
-					<%= attachment_image_tag product, :jacket_image, :fill, 200, 200, class:"border" %>
+					<%= attachment_image_tag product, :jacket_image, :fill, 360, 360, class:"border" %>
 				<% else %>
-					<%= image_tag 'no_image.jpg', size: '200x200', class:"border" %>
+					<%= image_tag 'no_image.jpg', size: '360x360', class:"border" %>
 				<% end %>
 			</div>
 			<div class="edit-review-item">
 				<h3>レビュー</h3>
 				<%= form_with model: @review, url: product_review_path(product_id: @product.id, id: @review.id), class: "edit-form" do |f| %>
 					<%= f.text_area :body, size: '50x10' %>
-					<%= f.submit  "編集完了"%>
+					<%= f.submit  "編集完了", class: 'btn btn-info'%>
 				<% end %>
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 </div>
 

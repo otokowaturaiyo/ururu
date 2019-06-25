@@ -1,7 +1,7 @@
-<div class="container">
-	<div class="product-show">
+	<div class="pro-bg">
+		<div class="container product-show">
 		<br>
-		<h1>商品詳細</h1>
+		<h1 class="pro-h">商品詳細</h1>
 		<br>
 		<!-- 商品の概要説明 -->
 		<div class="row">
@@ -13,7 +13,7 @@
 						class:"border"
 					%>
 				</div>
-				<div class="product_details pull-left col-md-5">
+				<div class="product_details col-md-4">
 					<ul>
 						<li><i class="fas fa-music"></i>商品名：<%= @product.product_name %></li>
 						<li><i class="fas fa-music"></i>アーティスト：<%= @product.artist.name %></li>
@@ -26,7 +26,7 @@
 					</div>
 				</div>
 				<!-- 商品ステータス -->
-				<div class="product_status pull-left col-md-2">
+				<div class="product_status col-md-2">
 					<div class=price>
 						<p>価格：¥<%= @tax_included.to_i.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %>（税込）</p>
 					</div>
@@ -85,13 +85,15 @@
 						</div>
 					</div>
 				<% else %>
-					<div class="col-md-5">
+					<div class="product-review">
+						<div class="review-index col-md-5">
 							<h3>レビュー投稿</h3>
 							<!-- コメント入力欄を商品の詳細ページに表示するためのrender -->
 							<%= render partial: 'reviews/form', locals: { reviews: @reviews, product: @product }%>
+						</div>
 					</div>
 					<h3>レビュー一覧</h3>
-					<div class="col-md-7 scroller">
+					<div class="col-md-6 scroller">
 						<div id="reviews_area"><!--ここのidを目印にdiv内をAjaxで書き換え-->
 							<!-- 投稿されたコメント一覧を商品の詳細ページに表示するためのrender -->
 							<%= render partial: 'reviews/index', locals: { reviews: @reviews }%>
@@ -99,7 +101,7 @@
 					</div>
 				<% end %>
 			<% else %>
-				<div class="col-md-6 col-md-offset-3 scroller">
+				<div class="col-md-6 col-md-offset-3 scroller review-scroller">
 					<h3>レビュー一覧</h3>
 					<div id="reviews_area">
 						<%= render partial: 'reviews/index', locals: { reviews: @reviews } %>
@@ -131,6 +133,5 @@
 			</div>
 		</div>
 	</div>
-</div>
-	<div class="pro-bg"></div>
+	</div>
 </div>

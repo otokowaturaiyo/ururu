@@ -34,6 +34,7 @@ class ApplicationController < ActionController::Base
         order_destination: o&.destination,
         order_id: o&.id
       }
+       end
     end
   end
 
@@ -60,8 +61,8 @@ class ApplicationController < ActionController::Base
       @total_count = items.sum { |hash| hash[:count] }
     end
 
+
   def payjp(payjp_token, amount)
-    # ####　秘密鍵はベタうちせずに環境変数なるものを使った方がいいらしい。勉強予定。　#####
     Payjp.api_key = 'sk_test_421673bdeffac69c0df96e60'
     customer = Payjp::Customer.create(description: 'test')
     customer.cards.create(card: payjp_token)
