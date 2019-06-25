@@ -42,7 +42,7 @@
 														<%= f.hidden_field :product_id, value: @product.id %>
 														<%= f.submit "カートに追加する", class:"btn-square-pop" %>
 														<% end %>
-						<% else @product.stock >= 20 %>
+						<% else %>
 						<p class="plenty-stocks">在庫あり</p>
 													<div class="add-to-cart">
 														<%= form_with model:CartItem, url:add_item_path, local:true do |f| %>
