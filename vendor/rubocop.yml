@@ -1,0 +1,15 @@
+AllCops:
+  # RuboCop の適用対象からファイルを除外する設定
+  Exclude:
+    - 'vendor/**/*'
+    - 'config/**/*'
+    - 'bin/*'
+    - 'tmp/**/*'
+    - 'db/schema.rb'
+  # ターゲットの Ruby バージョンをセットする
+  TargetRubyVersion: 2.5
+  # デフォルトの全ての Cops を無効にする
+  DisabledByDefault: true
+# Layout Cops のみ有効にする
+Layout:
+  Enabled: true
