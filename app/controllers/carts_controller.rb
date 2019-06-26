@@ -10,6 +10,7 @@ class CartsController < ApplicationController
   def add_item
     cart_item = current_cart.cart_items&.find_or_initialize_by(product_id: params[:cart_item][:product_id])
     if cart_item.new_record?
+      #binding.pry
       product = Product.find(cart_item.product_id)
       cart_item = current_cart.cart_items.build(cart_params)
       cart_item.product_price = product.price
@@ -23,6 +24,7 @@ class CartsController < ApplicationController
 
   def update
     @cart_item.update(cart_params)
+    #binding.pry
     redirect_to current_cart
   end
 

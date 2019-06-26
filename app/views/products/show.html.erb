@@ -35,21 +35,25 @@
 						<% if @product.stock == 0 %>
 							<p class="soldout">SOLD OUT</p>
 						<% elsif @product.stock > 0 && @product.stock < 20 %>
-													<p class="limited-stocks">残り<%= @product.stock %>点。ご注文はお早めに。</p>
-													<div class="add-to-cart">
-														<%= form_with model:CartItem, url:add_item_path, local:true do |f| %>
-														<p>数量:<%= f.number_field :product_count, value:1, class:"product_count" %></p>
-														<%= f.hidden_field :product_id, value: @product.id %>
-														<%= f.submit "カートに追加する", class:"btn-square-pop" %>
-														<% end %>
+							<p class="limited-stocks">残り<%= @product.stock %>点。ご注文はお早めに。</p>
+								<div class="add-to-cart">
+									<%= form_with model:CartItem, url:add_item_path, local:true do |f| %>
+									<%= f.label :product_count, "数量" %>
+									<%= f.select :product_count, product_array_maker(@product) %>
+									<%= f.hidden_field :product_id, value: @product.id %>
+									<%= f.submit "カートに追加する", class:"btn-square-pop" %>
+									<% end %>
+								</div>
 						<% else %>
 						<p class="plenty-stocks">在庫あり</p>
-													<div class="add-to-cart">
-														<%= form_with model:CartItem, url:add_item_path, local:true do |f| %>
-														<p>数量:<%= f.number_field :product_count, value:1, class:"product_count" %></p>
-														<%= f.hidden_field :product_id, value: @product.id %>
-														<%= f.submit "カートに追加する", class:"btn-square-pop" %>
-														<% end %>
+								<div class="add-to-cart">
+									<%= form_with model:CartItem, url:add_item_path, local:true do |f| %>
+									<%= f.label :product_count, "数量" %>
+									<%= f.select :product_count, product_array_maker(@product) %>
+									<%= f.hidden_field :product_id, value: @product.id %>
+									<%= f.submit "カートに追加する", class:"btn-square-pop" %>
+									<% end %>
+								</div>
 						<% end %>
 					</div>
 					<!-- いいね機能 -->
