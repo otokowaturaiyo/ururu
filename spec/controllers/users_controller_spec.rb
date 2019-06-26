@@ -15,7 +15,7 @@ RSpec.describe UsersController, type: :controller do
         @user2 = FactoryBot.create(:user)
         sign_in @user1
       end
-      context '自分のマイページに行く場合' do
+      context '自分のマイページに行rspec spec/controllersく場合' do
         before do
           get :show, params: {id: '1'}
         end
