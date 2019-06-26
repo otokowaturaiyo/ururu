@@ -36,7 +36,7 @@ class OrdersController < ApplicationController
       if order.payment_methods == "クレジットカード"
         payjp(params['payjp-token'], f)
       end
-      delete_stocks(orders)
+      delete_stocks(order)
       current_cart.cart_items.destroy_all
       redirect_to order_complete_path(order)
     else

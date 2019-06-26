@@ -67,7 +67,7 @@ end
   end
 
   def payjp(payjp_token, amount)
-    Payjp.api_key = 'sk_test_421673bdeffac69c0df96e60'
+    Payjp.api_key = ENV['PAYJP_KEYS']
     customer = Payjp::Customer.create(description: 'test')
     customer.cards.create(card: payjp_token)
     Payjp::Charge.create(
@@ -109,5 +109,3 @@ private
     end
   end
 end
-
-
