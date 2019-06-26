@@ -99,3 +99,4 @@ class Admins::ProductsController < ApplicationController
                                                                           :_destroy]])
   end
 end
+
