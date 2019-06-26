@@ -109,6 +109,7 @@ class OrdersController < ApplicationController
     unless current_cart.cart_items.present?
       flash[:error] = "※商品をカートに入れてください"
       redirect_to root_path
+
     end
   end
 
@@ -127,7 +128,7 @@ class OrdersController < ApplicationController
   end
 
   def delete_stocks(order)
-      order.order_details.each do |o|
+    order.order_details.each do |o|
         product = Product.find(o.product_id)
         updated_stock = product.stock - o.product_count
         product.update_attributes(stock: updated_stock)
