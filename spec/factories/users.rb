@@ -10,5 +10,6 @@ FactoryBot.define do
     postal_code {"1234567"}
     postal_address {"東京"}
     password {"password"}
+    password_confirmation {'password'}
   end
 end
