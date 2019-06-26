@@ -9,14 +9,14 @@ RSpec.describe ReviewsController, type: :controller do
   end
     describe 'レビューの編集' do
       before do
-        @product1 = FactroyBot.create(:product)
+        @product = FactroyBot.create(:product)
         @user1 = FactoryBot.create(:user)
           @user2 = FactoryBot.create(:user)
-          sign_in @user1
+        sign_in @user1
       end
 
-    end
-      context 'ログインしていない場合' do
+
+    context 'ログインしていない場合' do
        it 'レビューの編集ページに行けないようになっている' do
         expect(page).to have_no_buttoun
       end
@@ -26,23 +26,24 @@ RSpec.describe ReviewsController, type: :controller do
         @product1 = FactroyBot.create(:product)
         @user1 = FactoryBot.create(:user)
           @user2 = FactoryBot.create(:user)
-          sign_in @user1
+        sign_in @user1
       end
         it '正しく表示されているか' do
           expect(response.status).to eq 200
         end
-        context 'レビューを編集できる' do
+        it 'レビューを編集できる' do
           expect(response).to redirect_to edit_product_review_path(@product1)
         end
-        context 'レビューの更新ができる' do
+        it 'レビューの更新ができる' do
           befor do
-            pacth :update, product_review_path(@product1)
+            pacth :update, product_review_path(@product)
           end
         end
-        context 'レビューの削除ができる' do
+        it 'レビューの削除ができる' do
           expext(click_buttun).to eq 'destroy'
         end
       end
+    end
 end
 
 
