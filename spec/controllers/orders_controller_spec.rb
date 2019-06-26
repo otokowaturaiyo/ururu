@@ -4,3 +4,6 @@ RSpec.describe OrdersController, type: :controller do
 		before do
 		end
 		context 'confirm/order画面が示される' do
+		end
+	end
+end
