@@ -31,16 +31,22 @@ class OrdersController < ApplicationController
     set_price(order)
     set_shipment_status(order)
     retrieve_products_info(order.order_details)
-    if order.save
-      f = fee_included(@items, :subtotal).to_i
-      if order.payment_methods == "クレジットカード"
-        payjp(params['payjp-token'], f)
-      end
-      delete_stocks(order)
-      current_cart.cart_items.destroy_all
-      redirect_to order_complete_path(order)
-    else
+    f = fee_included(@items, :subtotal).to_i
+    if f > 10_000_000 && order.payment_methods == "クレジットカード"
       redirect_to order_confirm_path
+      flash[:danger]="入力内容に誤りがあります。"
+    else
+      if order.save
+        if order.payment_methods == "クレジットカード"
+          payjp(params['payjp-token'], f)
+        end
+        delete_stocks(order)
+        current_cart.cart_items.destroy_all
+        redirect_to order_complete_path(order)
+      else
+        redirect_to order_confirm_path
+        flash[:danger]="入力内容に誤りがあります。"
+      end
     end
   end
 
