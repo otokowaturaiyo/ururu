@@ -42,7 +42,8 @@
 		      	<div>
 		        	<%= form_with model:current_cart.cart_items, url:cart_path(item[:id]) ,local:true, method: :patch  do |f| %>
 		          	<div class="form-group">
-									<p>数量:　<%= f.number_field :product_count, class:"product_count", value:"#{item[:count]}" %></p>
+						<%= f.label :product_count, "数量" %>
+						<%= f.select :product_count, product_array_maker(Product.find(item[:product_id])), selected:"#{item[:count]}" %>
 		            </div>
 		              <%= f.submit "数量を変更", class:"btn-gradient-radius update-cart" %>
 		          	<% end %>
