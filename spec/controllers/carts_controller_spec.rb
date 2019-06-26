@@ -1,38 +1,37 @@
 require 'rails_helper'
 
-RSpec.feature "Cart_items", type: :feature do
+RSpec.describe CartsController, type: :controller do
   # pending "add some scenarios (or delete) #{__FILE__}"
-  background do
+  before do
   	@user1 = FactoryBot.create(:user)
-  	# @product1 = FactoryBot.create(:product)
+  	@product1 = FactoryBot.create(:product)
   	@cart1 = FactoryBot.create(:cart)
   end
 
-	feature 'showページ' do
+	describe 'showページ' do
 		context 'カートページが表示される' do
-			background do
+			before do
 				get :show, params: { id: @cart1.id }
 			end
-			scenario 'リクエストは200 OKとなること' do
+			it 'リクエストは200 OKとなること' do
 		       expect(response.status).to eq 200
 		    end
 		end
-		# context 'カートに商品がある場合' do
-		# 	background do
-		# 		@cart_item = FactoryBot.create(:cart_item)
-		# 	end
-		# 	scenario '商品情報が正しく表示される' do
-		# 		expect(page).to have_content @cart_item1.product.jacket_image_id
-		# 		expect(page).to have_content @cart_item1.product.product_name
-		# 		expect(page).to have_content @cart_item1.product.artist_id
-		# 		expect(page).to have_content @cart_item1.product.label_id
-		# 		expect(page).to have_content @cart_item1.product.genre_id
-		# 		expect(page).to have_content @cart_item1.total_count
-		# 		expect(page).to have_content @cart_item1.subtotal
-		# 		expect(page).to have_content @cart_item1.total_price
-		# 		end
-		# 	end
-		# end
+		context 'カートに商品の表示' do
+			before do
+				@cart_item1 = FactoryBot.create(:cart_item)
+			end
+			it '商品情報が正しく表示される' do
+				expect(page).to have_content @cart_item1.product.jacket_image_id
+				expect(page).to have_content @cart_item1.product.product_name
+				expect(page).to have_content @cart_item1.product.artist_id
+				expect(page).to have_content @cart_item1.product.label_id
+				expect(page).to have_content @cart_item1.product.genre_id
+				expect(page).to have_content @cart_item1.total_count
+				expect(page).to have_content @cart_item1.subtotal
+				expect(page).to have_content @cart_item1.total_price
+			end
+		end
 		# context 'カートに追加した商品がもともとカートに無い時' do
 		# 	background do
 
@@ -66,4 +65,3 @@ RSpec.feature "Cart_items", type: :feature do
 		# 	end
 	end
 end
-
