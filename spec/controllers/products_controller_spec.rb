@@ -9,6 +9,7 @@ RSpec.describe ProductsController, type: :controller do
     it 'リクエストは200 OKとなること' do
       expect(response.status).to eq 200
     end
+
     # it '商品一覧が表示されること' do
     #   expect().to match_array @products
     # end
@@ -65,7 +66,6 @@ RSpec.describe ProductsController, type: :controller do
     end
     it "" do
 
-    end
   end
-
+  end
 end

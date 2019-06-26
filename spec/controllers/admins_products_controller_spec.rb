@@ -8,6 +8,7 @@ RSpec.describe Admins::ProductsController, type: :controller do
     before do
       login(@user1)
     end
+  end
 
 #newアクション
     describe '新規商品追加ページ' do
@@ -56,7 +57,4 @@ RSpec.describe Admins::ProductsController, type: :controller do
         end
       end
     end
-
-
-
 end

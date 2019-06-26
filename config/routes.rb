@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show, :edit, :update]
     resources :products, only:[:new, :create, :index, :show, :edit, :update] do
     resources :reviews, only:[:edit, :update, :destroy]
-    end
+  end
     resources :orders, only: [:index, :edit, :update]
     get '/top' => 'home#top'
     get '/resign/index' => 'users#resign_index'
