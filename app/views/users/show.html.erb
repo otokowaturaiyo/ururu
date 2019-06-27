@@ -45,7 +45,7 @@
 				<div class="slider slider-container">
 					<% @likes.each do |like| %>
 					<% product = Product.find(like.product_id) %>
-						<%= link_to attachment_image_tag(product, :jacket_image, :fill, 180, 180, fallback: 'no_image.jpg', size: "180x180"), product_path(product.id), class: 'like-on' %>
+						<%= link_to attachment_image_tag(product, :jacket_image, :fill, 174, 174, fallback: 'no_image.jpg', size: "174x174"), product_path(product.id), class: 'like-on' %>
 					<% end %>
 				</div>
 			</div>
