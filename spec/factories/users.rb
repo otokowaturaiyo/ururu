@@ -12,3 +12,11 @@ FactoryBot.define do
     password {"password"}
   end
 end
+
+
+FactoryBot.define do
+  factory :admins_user do
+    sequence(:email) {|n|"hoge#{n}@hoge.com"}
+    encrypted_password {"password"}
+  end
+end
