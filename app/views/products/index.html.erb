@@ -127,11 +127,9 @@
 </div>
 <script>
   $(document).on('turbolinks:load', function() {
-    $(".theTarget").skippr();
-
     $(".theTarget").skippr({
       transition : 'slide',
-      speed : 500,
+      speed : 200,
       easing : 'linear',
       navType : 'block',
       childrenElementType : 'div',
@@ -140,7 +138,7 @@
       autoPlayDuration : 5000,
       keyboardOnAlways : true,
       hidePrevious : false,
-  });
+    });
   });
 
 </script>
