@@ -60,14 +60,14 @@ table tr[data-href] {
 }
 
 .ba{
-	width: 90px;
-  	height: 90px;
+	width: 120px;
+	height: 120px;
 	display: inline-block;
 	z-index: 100;
-	line-height: 90px;
+	line-height: 110px;
 	text-align: center;
 	color: #FFF;
-	font-size: 13px;
+	font-size: 17px;
 	font-weight: bold;
 	border-radius: 50%;
 	background: rgba(105, 157, 179,0.3);
@@ -76,7 +76,7 @@ table tr[data-href] {
 .balloon1 {
 	margin: 0 auto;
 	position: absolute;
-	left: 90px;
+	left: 50px;
   bottom: 220px;
 }
 .balloon2{
