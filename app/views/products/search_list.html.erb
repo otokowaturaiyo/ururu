@@ -9,18 +9,16 @@
 				<th></th>
 				<th>在庫</th>
 			</thead>
-
 			<!-- アーティスト名での検索結果 -->
 			<% @artists.each do |artist| %>
 				<% artist.products.includes(:label).each do |product| %>
 					<tbody>
+						<tr data-href=<%= product_path(product) %>>
 						<td>
-							<%= link_to product_path(product) do %>
 								<%= attachment_image_tag  product,
 		             :jacket_image, :fill, 120, 120,
 		             fallback: "no_image.jpg", size:'120x120',
 		             class:"thumbnail" %>
-							<% end %>
 						</td>
 						<td>
 							<p class="product-name"><%= product.product_name %></p>
@@ -38,6 +36,7 @@
 								<p class="soldout">SOLDOUT</p>
 							<% end %>
 						</td>
+					</tr>
 					</tbody>
 				<% end %>
 			<% end %>
@@ -46,14 +45,13 @@
 			<!-- 商品名での検索結果 -->
 			<% @products.each do |product| %>
 				<tbody>
+					<tr data-href=<%= product_path(product) %>>
 					<td>
-						<%= link_to product_path(product) do %>
 							<% if product.jacket_image_id.present? %>
 								<%= attachment_image_tag  product, :jacket_image, :fill, 120, 120, class:"thumbnail" %>
 							<% else %>
 								<%= image_tag 'no_image.jpg', size:'120x120', class:"thumbnail" %>
 							<% end %>
-						<% end %>
 					</td>
 					<td>
 						<p class="product-name"><%= product.product_name %></p>
@@ -74,6 +72,8 @@
 				</tbody>
 			<% end %>
 			<%= paginate @products, class: "paginate" %>
+		</tr>
 		</table>
 	</div>
 </div>
+<%= render 'admins/table' %>
