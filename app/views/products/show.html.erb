@@ -31,7 +31,6 @@
 						<p>価格：¥<%= @tax_included.to_i.to_s.gsub(/(\d)(?=\d{3}+$)/, '\\1,') %>（税込）</p>
 					</div>
 					<div class="stock">
-
 						<% if @product.stock == 0 %>
 							<p class="soldout">SOLD OUT</p>
 						<% elsif @product.stock > 0 && @product.stock < 20 %>
