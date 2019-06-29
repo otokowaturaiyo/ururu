@@ -10,9 +10,6 @@ RSpec.describe CartsController, type: :request do
 
 	describe 'showページ' do
 		context 'カートページが表示される' do
-			before do
-				get :show, params: { id: @cart1.id }
-			end
 			it 'リクエストは200 OKとなること' do
 		       expect(response.status).to eq 200
 		    end
